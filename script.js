@@ -25,3 +25,13 @@ form.addEventListener('submit', e => { e.preventDefault(); successMsg.style.disp
 const menuToggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('nav');
 menuToggle.addEventListener('click', () => { nav.querySelector('ul').classList.toggle('show'); });
+
+// Efecto parallax suave en las imágenes de Talleres
+const galleryImages = document.querySelectorAll('.talleres .grid img');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset;
+    galleryImages.forEach((img, i) => {
+        img.style.transform = `translateY(${scrollTop * 0.05 * (i+1)}px)`; 
+    });
+});

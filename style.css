@@ -14,11 +14,19 @@ nav ul li a.active { color: #e1306c; }
 .section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4rem 2rem; text-align: center; opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
 .section.visible { opacity: 1; transform: translateY(0); }
 
-/* Hero */
-.hero { background: linear-gradient(135deg, #ffb347, #ffcc33); color: #fff; position: relative; }
-.hero h1 { font-size: 3rem; margin-bottom: 2rem; }
-.arrow-down { font-size: 2.5rem; color: #fff; text-decoration: none; animation: bounce 2s infinite; }
-@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(10px); } 60% { transform: translateY(5px); } }
+.hero {
+    background: url('images/bkg.jpeg') no-repeat center center/cover;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    animation: bgMove 60s linear infinite;
+}
+
+@keyframes bgMove {
+    0% { background-position: center top; }
+    50% { background-position: center bottom; }
+    100% { background-position: center top; }
+}
 
 .about { background: #f5f5f5; }
 .talleres { background: #fff; }
