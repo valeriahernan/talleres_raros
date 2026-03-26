@@ -1,6 +1,6 @@
 {
-    "workbench.colorTheme": "Dark+",
+    "workbench.colorTheme": "Visual Studio Dark",
     "workbench.preferredDarkColorTheme": "Visual Studio Dark",
-    "workbench.preferredHighContrastLightColorTheme": "Dark Modern",
-    "workbench.preferredLightColorTheme": "Solarized Dark"
+    "workbench.preferredHighContrastLightColorTheme": "Visual Studio Dark",
+    "workbench.preferredLightColorTheme": "Visual Studio Dark"
 }
