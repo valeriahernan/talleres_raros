@@ -1,3 +1,14 @@
+/* Fuente oficial Flavors */
+@font-face {
+    font-family: 'Flavors';
+    src: url('fonts/Flavors-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, .logo {
+    font-family: 'Flavors', cursive;
+}
 /* Reset y tipografía */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Source Code Pro', monospace; }
 body { scroll-behavior: smooth; }
