@@ -1,10 +1,10 @@
 /* Reset y tipografía */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Source Code Pro', monospace; }
 body { scroll-behavior: smooth; }
 
 /* Header fijo */
 header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-header .logo { font-weight: bold; font-size: 1.2rem; }
+header .logo { font-family: 'Flavors', cursive; font-weight: 400; font-size: 1.5rem; }
 nav ul { display: flex; gap: 1.5rem; list-style: none; }
 nav ul li a { text-decoration: none; color: #111; font-weight: bold; transition: color 0.3s; }
 nav ul li a.active { color: #e1306c; }
@@ -14,19 +14,23 @@ nav ul li a.active { color: #e1306c; }
 .section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4rem 2rem; text-align: center; opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
 .section.visible { opacity: 1; transform: translateY(0); }
 
+/* Hero */
 .hero {
+    font-family: 'Flavors', cursive;
     background: url('images/bkg.jpeg') no-repeat center center/cover;
     color: #fff;
     position: relative;
     overflow: hidden;
     animation: bgMove 60s linear infinite;
 }
-
 @keyframes bgMove {
     0% { background-position: center top; }
     50% { background-position: center bottom; }
     100% { background-position: center top; }
 }
+.hero h1 { font-size: 3rem; margin-bottom: 2rem; }
+.arrow-down { font-size: 2.5rem; color: #fff; text-decoration: none; animation: bounce 2s infinite; }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(10px); } 60% { transform: translateY(5px); } }
 
 .about { background: #f5f5f5; }
 .talleres { background: #fff; }
@@ -34,24 +38,33 @@ nav ul li a.active { color: #e1306c; }
 .registro { background: #fff; }
 .contacto { background: linear-gradient(135deg, #ff758c, #ff7eb3); color: #fff; }
 
-.section h2 { font-size: 2rem; margin-bottom: 1rem; }
+.section h2 { font-family: 'Flavors', cursive; font-size: 2rem; margin-bottom: 1rem; }
 .section p { font-size: 1rem; max-width: 500px; }
 
 /* Galería */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; width: 100%; max-width: 600px; margin-top: 1.5rem; }
 .grid img { width: 100%; border-radius: 10px; transition: transform 0.3s ease; }
-.grid img:hover { transform: scale(1.05); }
 
-/* Formulario */
+/* Botones y microinteracciones */
+button, .instagram-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button { background: #e1306c; color: #fff; }
+button:hover, .instagram-btn:hover { transform: scale(1.05); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+button:active, .instagram-btn:active { transform: scale(0.98); box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+
 form { display: flex; flex-direction: column; gap: 0.8rem; max-width: 300px; width: 100%; }
-input, button { padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; }
-button { background: #e1306c; color: #fff; border: none; cursor: pointer; font-weight: bold; transition: opacity 0.3s; }
-button:hover { opacity: 0.9; }
+input { padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; }
 .success-msg { display: none; margin-top: 0.5rem; color: green; }
 
 /* Botón Instagram */
-.instagram-btn { display: inline-block; padding: 0.8rem 1.5rem; background-color: #e1306c; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: opacity 0.3s ease; }
-.instagram-btn:hover { opacity: 0.9; }
+.instagram-btn { display: inline-block; background-color: #e1306c; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; padding: 0.8rem 1.5rem; }
 
 /* Footer */
 footer { text-align: center; padding: 2rem; background-color: #111; color: #fff; }
