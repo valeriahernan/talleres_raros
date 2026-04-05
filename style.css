@@ -19,14 +19,23 @@ html {
 }
 
 body {
-
-    cursor: url("cursors/studio.cur"), auto;
     font-family: 'Source Code Pro', monospace;
     background: #ffffff;
     color: #111;
     line-height: 1.6;
 }
 
+/* Ocultar cursor normal solo en pantallas con mouse */
+@media (pointer: fine) {
+    body,
+    a,
+    button,
+    input,
+    .gallery-item,
+    #menu-toggle {
+        cursor: none;
+    }
+}
 
 /* Header fijo */
 header {
@@ -78,7 +87,6 @@ nav ul li a.active {
 #menu-toggle {
     display: none;
     font-size: 2rem;
-    cursor: pointer;
     color: #111;
     background: none;
     border: none;
@@ -163,6 +171,24 @@ nav ul li a.active {
     color: #111;
 }
 
+.talleres {
+    background: #ffffff;
+}
+
+.convocatorias {
+    background: #f2efea;
+}
+
+.registro {
+    background: #ffffff;
+}
+
+.contacto {
+    background: linear-gradient(135deg, #d94a7a, #f28ab2);
+    color: #fff;
+}
+
+/* Acerca de */
 .about-content {
     width: 100%;
     max-width: 1000px;
@@ -211,22 +237,6 @@ nav ul li a.active {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
 }
-.talleres {
-    background: #ffffff;
-}
-
-.convocatorias {
-    background: #f2efea;
-}
-
-.registro {
-    background: #ffffff;
-}
-
-.contacto {
-    background: linear-gradient(135deg, #d94a7a, #f28ab2);
-    color: #fff;
-}
 
 /* Títulos y texto */
 .section h2 {
@@ -266,18 +276,121 @@ nav ul li a.active {
     filter: contrast(1.03);
 }
 
-.cursor {
-    width: 32px;
-    height: 32px;
-    background: url("cursors/studio.cur") no-repeat center;
-    background-size: contain;
-    border-radius: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 10000;
-    transform: translate(-50%, -50%);
+/* Cursor animado */
+@media (pointer: fine) {
+    .cursor {
+        width: 32px;
+        height: 32px;
+        background: url("cursors/studio.cur") no-repeat center;
+        background-size: contain;
+        border-radius: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease;
+    }
+
+    .cursor-follower {
+        width: 44px;
+        height: 44px;
+        border: 1px solid #111;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            width 0.22s ease,
+            height 0.22s ease,
+            background 0.22s ease,
+            border-color 0.22s ease,
+            transform 0.14s ease,
+            opacity 0.2s ease;
+        mix-blend-mode: difference;
+    }
+
+    .cursor-text {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #111;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        user-select: none;
+        white-space: nowrap;
+    }
+
+    .cursor-follower.hover {
+        width: 68px;
+        height: 68px;
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .cursor.hero-mode {
+        filter: brightness(10);
+    }
+
+    .cursor-follower.hero-mode {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cursor-follower.hero-mode .cursor-text {
+        color: #fff;
+    }
+
+    .cursor-follower.gallery-mode {
+        width: 88px;
+        height: 88px;
+        background: rgba(255, 255, 255, 0.08);
+        border-width: 1.5px;
+    }
+
+    .cursor-follower.gallery-mode .cursor-text {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .cursor-follower.magnetic {
+        width: 76px;
+        height: 76px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .cursor-follower.glitch {
+        animation: cursorGlitch 0.18s linear 2;
+    }
+
+    @keyframes cursorGlitch {
+        0% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
+        20% {
+            transform: translate(-50%, -50%) translate(-2px, 1px) scale(1.03);
+        }
+        40% {
+            transform: translate(-50%, -50%) translate(2px, -1px) scale(0.98);
+        }
+        60% {
+            transform: translate(-50%, -50%) translate(-1px, 2px) scale(1.02);
+        }
+        80% {
+            transform: translate(-50%, -50%) translate(1px, -2px) scale(0.99);
+        }
+        100% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
+    }
 }
 
 /* Formulario */
@@ -313,7 +426,6 @@ button,
     border-radius: 8px;
     border: none;
     font-weight: 700;
-    cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
@@ -325,7 +437,6 @@ button {
 
 button:hover,
 .instagram-btn:hover {
-    transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
 }
 
@@ -404,6 +515,14 @@ footer {
     .grid {
         grid-template-columns: 1fr 1fr;
         max-width: 100%;
+    }
+
+    .about-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .about-text-block p {
+        text-align: left;
     }
 }
 
