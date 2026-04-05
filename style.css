@@ -494,43 +494,37 @@ nav ul li a.active img {
 }
 
 /* =========================
-   SOCIAL CONTACTO
+   SOCIAL CONTACTO (SIN CAJA)
 ========================= */
 .contacto .social-icons {
     display: flex;
     justify-content: center;
-    gap: 0.9rem;
-    margin-top: 1.2rem;
+    gap: 1.4rem;
+    margin-top: 1.5rem;
     flex-wrap: wrap;
 }
 
 .contacto .social-icons img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    background: #fff;
-    padding: 4px;
-    border: 2px solid #66a2ca;
-    box-shadow: 3px 3px 0 #e18af0;
-    transform: rotate(-6deg);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 70px;      /* tamaño grande */
+    height: auto;
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    transform: rotate(-4deg);
+    transition: 
+        transform .2s ease,
+        filter .2s ease;
 }
 
-.contacto .social-icons a:nth-child(2) img {
-    transform: rotate(5deg);
-}
-
-.contacto .social-icons a:nth-child(3) img {
-    transform: rotate(-3deg);
-}
-
-.contacto .social-icons a:nth-child(4) img {
-    transform: rotate(6deg);
-}
+/* rotaciones collage */
+.contacto .social-icons a:nth-child(2) img { transform: rotate(5deg); }
+.contacto .social-icons a:nth-child(3) img { transform: rotate(-3deg); }
+.contacto .social-icons a:nth-child(4) img { transform: rotate(6deg); }
 
 .contacto .social-icons img:hover {
-    transform: rotate(0deg) scale(1.08);
-    box-shadow: 5px 5px 0 #e18af0;
+    transform: rotate(0deg) scale(1.1);
+    filter: brightness(1.05);
 }
 
 /* =========================
