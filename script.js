@@ -1,32 +1,48 @@
 // =========================
-// FADE-IN AL HACER SCROLL
+// SELECTORES BASE
 // =========================
 const sections = document.querySelectorAll(".section");
+const navLinks = document.querySelectorAll(".nav-link");
+const form = document.getElementById("subscribe-form");
+const successMsg = document.getElementById("success-msg");
+const menuToggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav");
+const navList = nav ? nav.querySelector("ul") : null;
+const galleryImages = document.querySelectorAll(".gallery-item");
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        }
-    });
-}, { threshold: 0.12 });
+const cursor = document.querySelector(".cursor");
+const follower = document.querySelector(".cursor-follower");
+const cursorText = document.querySelector(".cursor-text");
 
-sections.forEach((section) => observer.observe(section));
+// =========================
+// FADE-IN AL HACER SCROLL
+// =========================
+if (sections.length) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.12 });
 
+    sections.forEach((section) => observer.observe(section));
+}
 
 // =========================
 // MENÚ: SECCIÓN ACTIVA
 // =========================
-const navLinks = document.querySelectorAll(".nav-link");
-
-window.addEventListener("scroll", () => {
+function updateActiveSection() {
     let current = "";
 
     sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 120;
+        const sectionTop = section.offsetTop - 140;
         const sectionHeight = section.offsetHeight;
 
-        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+        if (
+            window.scrollY >= sectionTop &&
+            window.scrollY < sectionTop + sectionHeight
+        ) {
             current = section.getAttribute("id");
         }
     });
@@ -37,35 +53,30 @@ window.addEventListener("scroll", () => {
             link.classList.add("active");
         }
     });
-});
+}
 
+window.addEventListener("scroll", updateActiveSection);
+window.addEventListener("load", updateActiveSection);
 
 // =========================
 // FORMULARIO SUSCRIPCIÓN
 // =========================
-const form = document.getElementById("subscribe-form");
-const successMsg = document.getElementById("success-msg");
-
 if (form && successMsg) {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         successMsg.style.display = "block";
         form.reset();
 
-        setTimeout(() => {
+        clearTimeout(window.successMsgTimeout);
+        window.successMsgTimeout = setTimeout(() => {
             successMsg.style.display = "none";
         }, 3000);
     });
 }
 
-
 // =========================
 // TOGGLE MENÚ MÓVIL
 // =========================
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav");
-const navList = nav ? nav.querySelector("ul") : null;
-
 if (menuToggle && navList) {
     menuToggle.addEventListener("click", () => {
         navList.classList.toggle("show");
@@ -76,31 +87,55 @@ if (menuToggle && navList) {
             navList.classList.remove("show");
         });
     });
-}
 
+    document.addEventListener("click", (e) => {
+        const clickedInsideNav = nav.contains(e.target);
+        const clickedMenuButton = menuToggle.contains(e.target);
+
+        if (!clickedInsideNav && !clickedMenuButton) {
+            navList.classList.remove("show");
+        }
+    });
+}
 
 // =========================
 // PARALLAX SUAVE GALERÍA
+// sin romper rotaciones del CSS
 // =========================
-const galleryImages = document.querySelectorAll(".gallery-item");
+if (galleryImages.length) {
+    galleryImages.forEach((img) => {
+        const computedTransform = window.getComputedStyle(img).transform;
 
-window.addEventListener("scroll", () => {
-    const scrollTop = window.pageYOffset;
-
-    galleryImages.forEach((img, i) => {
-        const speed = 0.01 + (i * 0.0025);
-        img.style.transform = `translateY(${scrollTop * speed}px)`;
+        if (computedTransform && computedTransform !== "none") {
+            img.dataset.baseTransform = computedTransform;
+        } else {
+            img.dataset.baseTransform = "";
+        }
     });
-});
 
+    function updateGalleryParallax() {
+        const scrollTop = window.scrollY;
+
+        galleryImages.forEach((img, i) => {
+            const speed = 0.008 + (i * 0.0015);
+            const y = scrollTop * speed;
+            const base = img.dataset.baseTransform || "";
+
+            if (base) {
+                img.style.transform = `${base} translateY(${y}px)`;
+            } else {
+                img.style.transform = `translateY(${y}px)`;
+            }
+        });
+    }
+
+    window.addEventListener("scroll", updateGalleryParallax);
+    window.addEventListener("load", updateGalleryParallax);
+}
 
 // =========================
 // CURSOR ANIMADO
 // =========================
-const cursor = document.querySelector(".cursor");
-const follower = document.querySelector(".cursor-follower");
-const cursorText = document.querySelector(".cursor-text");
-
 if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -177,8 +212,8 @@ if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
             const itemCenterX = rect.left + rect.width / 2;
             const itemCenterY = rect.top + rect.height / 2;
 
-            const deltaX = (e.clientX - itemCenterX) * 0.15;
-            const deltaY = (e.clientY - itemCenterY) * 0.15;
+            const deltaX = (e.clientX - itemCenterX) * 0.12;
+            const deltaY = (e.clientY - itemCenterY) * 0.12;
 
             item.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
             follower.classList.add("magnetic");
