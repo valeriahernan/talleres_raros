@@ -121,18 +121,18 @@ nav ul li a {
     padding: 2.25rem 2.65rem; /* reduce altura */
     line-height: 1;
 }
-/*
+
 .nav-icon {
-  /*   width: px;      /* tamaño pequeño */
-   /*  height: 100px;     /* altura fija */
-    /* object-fit: cover; /* recorta la imagen */
-   /*  display: block;
-   /*  border: 1.5px solid #66a2ca;
-   /*  box-shadow: 1px 1px 0 #e18af0;
-   /*  padding: 1px;
-   /*  flex-shrink: 0;
+     width: px;      /* tamaño pequeño */
+     height: 100px;     /* altura fija */
+    object-fit: cover; /* recorta la imagen */
+     display: block;
+     border: 1.5px solid #66a2ca;
+     box-shadow: 1px 1px 0 #e18af0;
+     padding: 1px;
+    flex-shrink: 0;
 }
-*/
+
 
 nav ul li a:hover,
 nav ul li a.active {
