@@ -28,11 +28,6 @@ body {
 }
 
 
-
-
-
-
-
 /* Header fijo */
 header {
     position: fixed;
@@ -165,8 +160,57 @@ nav ul li a.active {
 /* Fondos de secciones */
 .about {
     background: #f7f4ef;
+    color: #111;
 }
 
+.about-content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-intro {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.about-text-block {
+    max-width: 850px;
+    margin: 0 auto 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.about-text-block p {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.about-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.about-gallery img {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.about-gallery img:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+}
 .talleres {
     background: #ffffff;
 }
