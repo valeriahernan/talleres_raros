@@ -123,7 +123,7 @@ nav ul li a {
 }
 
 .nav-icon {
-     width: px;      /* tamaño pequeño */
+     width: 40px;      /* tamaño pequeño */
      height: 30px;     /* altura fija */
     object-fit: cover; /* recorta la imagen */
      display: block;
