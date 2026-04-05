@@ -137,31 +137,89 @@ if (galleryImages.length) {
 // CURSOR ANIMADO
 // =========================
 if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    let followerX = mouseX;
-    let followerY = mouseY;
-
     document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        const x = e.clientX;
+        const y = e.clientY;
 
-        cursor.style.left = `${mouseX}px`;
-        cursor.style.top = `${mouseY}px`;
+        cursor.style.left = `${x}px`;
+        cursor.style.top = `${y}px`;
+
+        follower.style.left = `${x}px`;
+        follower.style.top = `${y}px`;
     });
 
-    function animateCursor() {
-        followerX += (mouseX - followerX) * 0.14;
-        followerY += (mouseY - followerY) * 0.14;
+    // Hover general en links y botones
+    document.querySelectorAll("a, button, #menu-toggle").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+            follower.classList.add("hover");
+        });
 
-        follower.style.left = `${followerX}px`;
-        follower.style.top = `${followerY}px`;
+        el.addEventListener("mouseleave", () => {
+            follower.classList.remove("hover");
+        });
+    });
 
-        requestAnimationFrame(animateCursor);
+    // Hero mode
+    const hero = document.querySelector(".hero");
+
+    if (hero) {
+        hero.addEventListener("mouseenter", () => {
+            cursor.classList.add("hero-mode");
+            follower.classList.add("hero-mode");
+        });
+
+        hero.addEventListener("mouseleave", () => {
+            cursor.classList.remove("hero-mode");
+            follower.classList.remove("hero-mode");
+        });
     }
 
-    animateCursor();
+    // Galería + VIEW
+    document.querySelectorAll(".gallery-item").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+            follower.classList.add("gallery-mode");
+            if (cursorText) cursorText.textContent = "VIEW";
+        });
+
+        item.addEventListener("mouseleave", () => {
+            follower.classList.remove("gallery-mode");
+            if (cursorText) cursorText.textContent = "";
+        });
+    });
+
+    // Efecto magnético más suave
+    const magneticItems = document.querySelectorAll("a, button, .instagram-btn, #menu-toggle");
+
+    magneticItems.forEach((item) => {
+        item.addEventListener("mousemove", (e) => {
+            const rect = item.getBoundingClientRect();
+            const itemCenterX = rect.left + rect.width / 2;
+            const itemCenterY = rect.top + rect.height / 2;
+
+            const deltaX = (e.clientX - itemCenterX) * 0.08;
+            const deltaY = (e.clientY - itemCenterY) * 0.08;
+
+            item.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            follower.classList.add("magnetic");
+        });
+
+        item.addEventListener("mouseleave", () => {
+            item.style.transform = "";
+            follower.classList.remove("magnetic");
+        });
+    });
+
+    // Ocultar cursor al salir de la ventana
+    document.addEventListener("mouseleave", () => {
+        cursor.style.opacity = "0";
+        follower.style.opacity = "0";
+    });
+
+    document.addEventListener("mouseenter", () => {
+        cursor.style.opacity = "1";
+        follower.style.opacity = "1";
+    });
+}
 
     // Hover general en links y botones
     document.querySelectorAll("a, button, #menu-toggle").forEach((el) => {
@@ -246,4 +304,3 @@ if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
         cursor.style.opacity = "1";
         follower.style.opacity = "1";
     });
-}
