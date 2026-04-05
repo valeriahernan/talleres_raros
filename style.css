@@ -1,36 +1,206 @@
-
+/* Fuente IntraNet_Outline para títulos */
 @font-face {
-  font-family: "HighTower";
-  src: url("./fonts/high-tower.woff2") format("woff2");
+    font-family: 'IntraNet_Outline';
+    src: url('fonts/IntraNet_Outline.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
+/* Reset y tipografía general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Code Pro', monospace;
+}
 body {
-  margin:0;
-  font-family:"HighTower", serif;
-  background: radial-gradient(circle,#7ed6e6,#e7f1f4);
-  color:#4f7c8c;
+    scroll-behavior: smooth;
 }
 
+/* Header fijo */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+header .logo {
+    font-family: 'IntraNet_Outline';
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+nav ul li a.active { color: #e1306c; }
+#menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Secciones */
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero con parallax suave y animación */
 .hero {
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+    font-family: 'IntraNet_Outline';
+    background: url('images/bkg.jpeg') no-repeat center center/cover;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    animation: bgMove 60s linear infinite;
 }
-
+@keyframes bgMove {
+    0% { background-position: center top; }
+    50% { background-position: center bottom; }
+    100% { background-position: center top; }
+}
 .hero h1 {
-  font-size:3rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.arrow-down {
+    font-size: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(10px); }
+    60% { transform: translateY(5px); }
 }
 
-.gallery {
-  padding:40px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
+/* Secciones colores de fondo */
+.about { background: #f5f5f5; }
+.talleres { background: #fff; }
+.convocatorias { background: #f0f0f0; }
+.registro { background: #fff; }
+.contacto { background: linear-gradient(135deg, #ff758c, #ff7eb3); color: #fff; }
+
+/* Titulos y texto */
+.section h2 { font-family: 'IntraNet_Outline'; font-size: 2rem; margin-bottom: 1rem; }
+.section p { font-size: 1rem; max-width: 500px; }
+
+/* Galería con microparallax */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 1.5rem;
+}
+.grid img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.grid img:hover {
+    transform: scale(1.05) translateY(-5px); /* Microparallax al pasar el mouse */
 }
 
-.gallery img {
-  width:100%;
-  border-radius:20px;
+/* Botones y microinteracciones */
+button, .instagram-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button { background: #e1306c; color: #fff; }
+button:hover, .instagram-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+button:active, .instagram-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 300px;
+    width: 100%;
+}
+input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.success-msg { display: none; margin-top: 0.5rem; color: green; }
+
+/* Botón Instagram */
+.instagram-btn {
+    display: inline-block;
+    background-color: #e1306c;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #111;
+    color: #fff;
+}
+
+/* Media queries responsive */
+@media(max-width: 768px){
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(255,255,255,0.95);
+        width: 200px;
+        display: none;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    nav ul.show { display: flex; }
+    #menu-toggle { display: block; }
+    .hero h1 { font-size: 2.2rem; }
+    .section h2 { font-size: 1.8rem; }
+    .section p { font-size: 0.95rem; }
 }
