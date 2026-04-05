@@ -124,7 +124,7 @@ nav ul li a {
 
 .nav-icon {
      width: px;      /* tamaño pequeño */
-     height: 100px;     /* altura fija */
+     height: 30px;     /* altura fija */
     object-fit: cover; /* recorta la imagen */
      display: block;
      border: 1.5px solid #66a2ca;
