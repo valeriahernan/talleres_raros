@@ -115,16 +115,22 @@ nav ul {
 }
 
 nav ul li a {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.86);
-    color: #1d1b19;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border: 2px solid #66a2ca;
-    border-radius: 999px;
-    padding: 0.38rem 0.8rem;
-    box-shadow: 2px 2px 0 #e18af0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.65rem; /* reduce altura */
+    line-height: 1;
+}
+
+.nav-icon {
+    width: 16px;      /* tamaño pequeño */
+    height: 16px;     /* altura fija */
+    object-fit: cover; /* recorta la imagen */
+    display: block;
+    border: 1.5px solid #66a2ca;
+    box-shadow: 1px 1px 0 #e18af0;
+    padding: 1px;
+    flex-shrink: 0;
 }
 
 nav ul li a:hover,
