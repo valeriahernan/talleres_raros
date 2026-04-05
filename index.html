@@ -3,18 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Talleres Raros: talleres creativos, convocatorias y actividades artísticas.">
     <title>Talleres Raros</title>
-
-    <!-- Fuentes -->
-    <!-- IntraNet_Outline para títulos -->
-    <style>
-    @font-face {
-        font-family: 'IntraNet_Outline';
-        src: url('fonts/IntraNet_Outline.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-    }
-    </style>
 
     <!-- Source Code Pro para texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,75 +16,96 @@
 </head>
 <body>
 
-    <header id="header">
-        <div class="logo">TALLERES RAROS</div>
-        <nav id="nav">
-            <ul>
-                <li><a href="#acerca" class="nav-link">ACERCA DE</a></li>
-                <li><a href="#talleres" class="nav-link">TALLERES</a></li>
-                <li><a href="#convocatorias" class="nav-link">CONVOCATORIAS</a></li>
-                <li><a href="#registro" class="nav-link">REGISTRO</a></li>
-                <li><a href="#contacto" class="nav-link">CONTACTO</a></li>
-            </ul>
-        </nav>
-        <div id="menu-toggle">&#9776;</div>
-    </header>
+<header id="header">
+    <div class="logo">TALLERES RAROS</div>
 
-    <section id="home" class="section hero fade-in">
-        <h1>TALLERES RAROS</h1>
-        <a href="#acerca" class="arrow-down">&#8595;</a>
-    </section>
+    <nav id="nav" aria-label="Menú principal">
+        <ul>
+            <li><a href="#acerca" class="nav-link">ACERCA DE</a></li>
+            <li><a href="#talleres" class="nav-link">TALLERES</a></li>
+            <li><a href="#convocatorias" class="nav-link">CONVOCATORIAS</a></li>
+            <li><a href="#registro" class="nav-link">REGISTRO</a></li>
+            <li><a href="#contacto" class="nav-link">CONTACTO</a></li>
+        </ul>
+    </nav>
 
-    <section id="acerca" class="section about fade-in">
-        <h2>ACERCA DE</h2>
-        <p>
-            Talleres Raros nace de la pasión por la creatividad y la experimentación artística. 
-            Cada taller es un espacio para explorar nuevas formas de arte, aprender y compartir experiencias únicas.
-        </p>
-    </section>
+    <button id="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+</header>
 
-    <section id="talleres" class="section talleres fade-in">
-        <h2>TALLERES</h2>
-        <div class="grid">
-            <img src="images/d1.png" alt="Taller 1">
-            <img src="images/d2.png" alt="Taller 2">
-            <img src="images/d3.png" alt="Taller 3">
-            <img src="images/d4.png" alt="Taller 4">
-            <img src="images/d5.png" alt="Taller 5">
-            <img src="images/d6.png" alt="Taller 5">
-            <img src="images/d7.png" alt="Taller 5">
-            <img src="images/d8.png" alt="Taller 5">
-            <img src="images/d9.png" alt="Taller 5">
-        </div>
-    </section>
+<main>
 
-    <section id="convocatorias" class="section convocatorias fade-in">
-        <h2>CONVOCATORIAS</h2>
-        <p>Aquí podrás encontrar nuestras próximas convocatorias, proyectos y actividades abiertas al público.</p>
-    </section>
+<section id="home" class="section hero">
+    <h1>TALLERES RAROS</h1>
+    <a href="#acerca" class="arrow-down" aria-label="Ir a acerca">&#8595;</a>
+</section>
 
-    <section id="registro" class="section registro fade-in">
-        <h2>REGISTRO</h2>
-        <p>Suscríbete para recibir información sobre talleres y novedades:</p>
-        <form id="subscribe-form">
-            <input type="text" placeholder="Nombre" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <button type="submit">Suscríbete</button>
-        </form>
-        <p id="success-msg" class="success-msg">¡Gracias por suscribirte!</p>
-    </section>
+<section id="acerca" class="section about">
+    <h2>ACERCA DE</h2>
+    <p>
+        Talleres Raros nace de la pasión por la creatividad y la experimentación artística.
+        Cada taller es un espacio para explorar nuevas formas de arte, aprender y compartir
+        experiencias únicas.
+    </p>
+</section>
 
-    <section id="contacto" class="section contacto fade-in">
-        <h2>CONTACTO</h2>
-        <p>Síguenos en Instagram para estar al día:</p>
-        <a class="instagram-btn" href="https://www.instagram.com/talleresraros/" target="_blank">Instagram</a>
-    </section>
+<section id="talleres" class="section talleres">
+    <h2>TALLERES</h2>
+    <div class="grid">
+        <img src="images/d1.png" alt="Taller 1">
+        <img src="images/d2.png" alt="Taller 2">
+        <img src="images/d3.png" alt="Taller 3">
+        <img src="images/d4.png" alt="Taller 4">
+        <img src="images/d5.png" alt="Taller 5">
+        <img src="images/d6.png" alt="Taller 6">
+        <img src="images/d7.png" alt="Taller 7">
+        <img src="images/d8.png" alt="Taller 8">
+        <img src="images/d9.png" alt="Taller 9">
+    </div>
+</section>
 
-    <footer>
-        <p>© 2026 Talleres Raros. Todos los derechos reservados.</p>
-    </footer>
+<section id="convocatorias" class="section convocatorias">
+    <h2>CONVOCATORIAS</h2>
+    <p>
+        Aquí podrás encontrar nuestras próximas convocatorias, proyectos y
+        actividades abiertas al público.
+    </p>
+</section>
 
-    <!-- JS -->
-    <script src="script.js"></script>
+<section id="registro" class="section registro">
+    <h2>REGISTRO</h2>
+    <p>Suscríbete para recibir información sobre talleres y novedades:</p>
+
+    <form id="subscribe-form">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <button type="submit">Suscríbete</button>
+    </form>
+
+    <p id="success-msg" class="success-msg">
+        ¡Gracias por suscribirte!
+    </p>
+</section>
+
+<section id="contacto" class="section contacto">
+    <h2>CONTACTO</h2>
+    <p>Síguenos en Instagram para estar al día:</p>
+
+    <a
+        class="instagram-btn"
+        href="https://www.instagram.com/talleresraros/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Instagram
+    </a>
+</section>
+
+</main>
+
+<footer>
+    <p>© 2026 Talleres Raros. Todos los derechos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
