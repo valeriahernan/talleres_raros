@@ -494,7 +494,7 @@ nav ul li a.active img {
 }
 
 /* =========================
-   SOCIAL CONTACTO (SIN CAJA)
+   SOCIAL CONTACTO (PNG LIMPIOS)
 ========================= */
 .contacto .social-icons {
     display: flex;
@@ -504,17 +504,22 @@ nav ul li a.active img {
     flex-wrap: wrap;
 }
 
+.contacto .social-icons a {
+    display: inline-block;
+}
+
 .contacto .social-icons img {
-    width: 70px;      /* tamaño grande */
+    width: 80px;
     height: auto;
-    background: none;
-    padding: 0;
-    border: none;
-    box-shadow: none;
+
+    /* forzar quitar cualquier estilo heredado */
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+
     transform: rotate(-4deg);
-    transition: 
-        transform .2s ease,
-        filter .2s ease;
+    transition: transform .2s ease;
 }
 
 /* rotaciones collage */
@@ -523,8 +528,7 @@ nav ul li a.active img {
 .contacto .social-icons a:nth-child(4) img { transform: rotate(6deg); }
 
 .contacto .social-icons img:hover {
-    transform: rotate(0deg) scale(1.1);
-    filter: brightness(1.05);
+    transform: rotate(0deg) scale(1.12);
 }
 
 /* =========================
