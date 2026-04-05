@@ -122,26 +122,48 @@ nav ul li a {
 }
 
 /* imagen dentro del link */
+/* ===== MENU STICKERS ===== */
+nav ul li a {
+    padding: 0.35rem 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 nav ul li a img {
-    width: 70px;      /* ajusta aquí */
+    width: 78px;        /* tamaño sticker */
     height: auto;
     display: block;
+    background: #fff;
+    padding: 3px;
+    border: 2px solid #66a2ca;
+    box-shadow: 3px 3px 0 #e18af0;
+    transform: rotate(-5deg);
+    transition: 
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-/* versión más compacta */
-@media (max-width: 980px) {
+/* rotaciones distintas para look collage */
+nav ul li:nth-child(2) a img { transform: rotate(4deg); }
+nav ul li:nth-child(3) a img { transform: rotate(-3deg); }
+nav ul li:nth-child(4) a img { transform: rotate(5deg); }
+nav ul li:nth-child(5) a img { transform: rotate(-4deg); }
+
+/* hover */
+nav ul li a:hover img {
+    transform: rotate(0deg) scale(1.06);
+    box-shadow: 5px 5px 0 #e18af0;
+}
+
+/* móvil un poco más pequeños */
+@media (max-width: 768px) {
     nav ul li a img {
-        width: 55px;
+        width: 60px;
     }
-}
-
-
-nav ul li a:hover,
-nav ul li a.active {
-    background: rgba(255, 255, 255, 0.96);
-    transform: translateY(-2px) rotate(-1deg);
-    box-shadow: 4px 4px 0 #e18af0;
-    opacity: 1;
 }
 
 #menu-toggle {
