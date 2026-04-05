@@ -118,7 +118,7 @@ nav ul li a {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 5rem 4rem; /* reduce altura */
+    padding: 2rem 1rem; /* reduce altura */
     line-height: 1;
 }
 /*
