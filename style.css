@@ -470,23 +470,7 @@ nav ul li a:hover img {
     background: transparent;
 }
 
-.contacto {
-    background:
-        linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
-        url("images/bkg.jpg") center center / cover no-repeat;
-}
 
-.convocatorias p,
-.registro p,
-.contacto p {
-    max-width: 700px;
-}
-
-.registro p,
-.contacto p,
-.convocatorias p {
-    margin-bottom: 0.6rem;
-}
 /* ===== SOCIAL CONTACTO ===== */
 .contacto .social-icons {
     display: flex;
@@ -516,6 +500,18 @@ nav ul li a:hover img {
 .contacto .social-icons img:hover {
     transform: rotate(0deg) scale(1.08);
     box-shadow: 5px 5px 0 #e18af0;
+}
+
+.convocatorias p,
+.registro p,
+.contacto p {
+    max-width: 700px;
+}
+
+.registro p,
+.contacto p,
+.convocatorias p {
+    margin-bottom: 0.6rem;
 }
 /* =========================
    FORMULARIO
