@@ -487,7 +487,36 @@ nav ul li a:hover img {
 .convocatorias p {
     margin-bottom: 0.6rem;
 }
+/* ===== SOCIAL CONTACTO ===== */
+.contacto .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
 
+.contacto .social-icons img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    background: #fff;
+    padding: 4px;
+    border: 2px solid #66a2ca;
+    box-shadow: 3px 3px 0 #e18af0;
+    transform: rotate(-6deg);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* rotaciones collage */
+.contacto .social-icons a:nth-child(2) img { transform: rotate(5deg); }
+.contacto .social-icons a:nth-child(3) img { transform: rotate(-3deg); }
+.contacto .social-icons a:nth-child(4) img { transform: rotate(6deg); }
+
+.contacto .social-icons img:hover {
+    transform: rotate(0deg) scale(1.08);
+    box-shadow: 5px 5px 0 #e18af0;
+}
 /* =========================
    FORMULARIO
 ========================= */
