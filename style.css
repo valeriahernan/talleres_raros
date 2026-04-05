@@ -19,11 +19,19 @@ html {
 }
 
 body {
+
+    cursor: url("cursors/studio.cur"), auto;
     font-family: 'Source Code Pro', monospace;
     background: #ffffff;
     color: #111;
     line-height: 1.6;
 }
+
+
+
+
+
+
 
 /* Header fijo */
 header {
@@ -213,6 +221,20 @@ nav ul li a.active {
     transform: scale(1.04) translateY(-6px);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
     filter: contrast(1.03);
+}
+
+.cursor {
+    width: 32px;
+    height: 32px;
+    background: url("cursors/studio.cur") no-repeat center;
+    background-size: contain;
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
 }
 
 /* Formulario */
