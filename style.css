@@ -100,7 +100,7 @@ header {
 }
 
 .headerlogo img {
-    width: 160px;
+    width: 300px;
     height: auto;
     display: block;
 }
@@ -320,7 +320,7 @@ nav ul li a.active img {
 
 .float-img {
     position: absolute;
-    width: 45px;
+    width: 65px;
     opacity: 0.8;
     animation: floatHero 18s ease-in-out infinite;
 }
@@ -922,7 +922,7 @@ footer {
     }
 
     .headerlogo img {
-        width: 100px;
+        width: 140px;
     }
 
     .hero-copy h1 {
