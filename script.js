@@ -304,3 +304,27 @@ if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
         cursor.style.opacity = "1";
         follower.style.opacity = "1";
     });
+
+///asciii efecto
+
+    const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const chars = "10"; // Or any ASCII set
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Creates the trail effect
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0F0"; // Rain color
+  ctx.font = fontSize + "px monospace";
+
+  drops.forEach((y, i) => {
+    const text = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(text, i * fontSize, y * fontSize);
+    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  });
+}
+setInterval(draw, 33);
