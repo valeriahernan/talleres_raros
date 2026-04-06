@@ -902,46 +902,112 @@ footer {
     }
 }
 
-@media (max-width: 560px) {
-    .hero {
-        padding-top: 4.4rem;
+@media (max-width: 768px) {
+    header {
+        padding: 0.9rem 1rem;
+        align-items: center;
     }
 
     .headerlogo img {
-        width: 100px;
+        width: 170px;
+        height: auto;
     }
 
-    .hero-copy h1 {
-        font-size: clamp(3rem, 15vw, 4.8rem);
+    nav {
+        position: relative;
     }
 
-    .hero-title img {
-        max-width: 280px;
+    #menu-toggle {
+        display: block;
+        border: 2px solid #66a2ca;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1d1b19;
+        border-radius: 12px;
+        padding: 0.3rem 0.75rem;
+        font-size: 1.35rem;
+        line-height: 1;
+        box-shadow: 2px 2px 0 #e18af0;
     }
 
-    .float-img {
-        width: 38px;
+    nav ul {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        width: min(78vw, 260px);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+        padding: 0.9rem;
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+            url("images/bkg2.jpg") center center / cover no-repeat;
+        border: 2px solid #66a2ca;
+        border-radius: 18px;
+        box-shadow: 4px 4px 0 #e18af0;
     }
 
-    .hero-collage {
-        min-height: 280px;
+    nav ul.show {
+        display: flex;
     }
 
-    .hero-sticker {
-        width: 150px;
+    nav ul li {
+        width: 100%;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
+    nav ul li a {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.7rem 0.8rem;
+        border: 1.5px dashed transparent;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.45);
     }
 
-    .hero-copy p,
-    .about-intro {
-        font-size: 0.94rem;
+    nav ul li a img {
+        display: none;
     }
 
-    .contacto .social-icons img {
-        width: 80px;
-        height: 80px;
+    nav ul li a span {
+        display: block;
+        font-family: 'HighTower', serif;
+        font-size: 1.2rem;
+        line-height: 1;
+        color: #1d1b19;
+        letter-spacing: 0.02em;
+        text-transform: none;
+        transform: none;
+        opacity: 1;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.9);
+        border-color: #66a2ca;
+    }
+
+    nav ul li a:hover span,
+    nav ul li a.active span {
+        color: #e18af0;
+    }
+
+    .nav-convocatoria {
+        background: rgba(225, 138, 240, 0.08);
+    }
+
+    .nav-convocatoria span {
+        font-size: 1.28rem;
+    }
+
+    .section {
+        padding: 3.5rem 1rem;
+    }
+
+    .about-gallery {
+        flex-direction: column;
+        align-items: center;
     }
 }
