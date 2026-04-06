@@ -96,59 +96,17 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .headerlogo img {
-    width: 90px;   /* ajusta tamaño */
+    width: 90px;
     height: auto;
     display: block;
 }
 
-.hero {
-    position: relative;
-    overflow: hidden; /* importante */
-}
-
-/* contenedor */
-.floating-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* imágenes */
-.float-img {
-    position: absolute;
-    width: 40px;
-    opacity: 0.85;
-    animation: floatX linear infinite;
-}
-
-/* posiciones */
-.f1 { top: 2%; animation-duration: 30s; }
-.f2 { top: 50%; animation-duration: 36s; }
-.f3 { top: 35%; animation-duration: 28s; }
-
-/* animación horizontal */
-@keyframes floatX {
-    from {
-        transform: translateX(-140px) rotate(-8deg);
-    }
-    to {
-        transform: translateX(calc(100% + 140px)) rotate(8deg);
-    }
-}
 nav {
     position: relative;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    align-items: center;
 }
 
 /* =========================
@@ -170,24 +128,31 @@ nav ul li a {
 }
 
 nav ul li a img {
-    width: 110px;        /* tamaño grande */
+    width: 110px;
     height: auto;
-
-    /* quitar fondo y bordes */
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
     box-shadow: none !important;
-
     transform: rotate(-4deg);
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
-/* rotaciones collage */
-nav ul li:nth-child(2) a img { transform: rotate(5deg); }
-nav ul li:nth-child(3) a img { transform: rotate(-3deg); }
-nav ul li:nth-child(4) a img { transform: rotate(4deg); }
-nav ul li:nth-child(5) a img { transform: rotate(-5deg); }
+nav ul li:nth-child(2) a img {
+    transform: rotate(5deg);
+}
+
+nav ul li:nth-child(3) a img {
+    transform: rotate(-3deg);
+}
+
+nav ul li:nth-child(4) a img {
+    transform: rotate(4deg);
+}
+
+nav ul li:nth-child(5) a img {
+    transform: rotate(-5deg);
+}
 
 nav ul li a:hover img,
 nav ul li a.active img {
@@ -325,6 +290,58 @@ nav ul li a.active img {
     transform: translateY(2px);
 }
 
+/* =========================
+   HERO FLOATING RESORTES
+========================= */
+.hero-art {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-title {
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title img {
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    height: auto;
+}
+
+.floating-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.float-img {
+    position: absolute;
+    width: 45px;
+    opacity: 0.8;
+    animation: floatHero 18s ease-in-out infinite;
+}
+
+.f1 {
+    top: 8%;
+    left: -30px;
+}
+
+.f2 {
+    top: 55%;
+    right: -25px;
+    animation-duration: 22s;
+}
+
+.f3 {
+    bottom: 10%;
+    left: 10%;
+    animation-duration: 20s;
+}
+
 .hero-collage {
     position: relative;
     min-height: 430px;
@@ -360,6 +377,18 @@ nav ul li a.active img {
     bottom: 0;
     right: 0;
     transform: rotate(4deg);
+}
+
+@keyframes floatHero {
+    0% {
+        transform: translate(0, 0) rotate(-4deg);
+    }
+    50% {
+        transform: translate(12px, -8px) rotate(4deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(-4deg);
+    }
 }
 
 @keyframes bounce {
@@ -473,15 +502,50 @@ nav ul li a.active img {
     transition: filter 0.3s ease, box-shadow 0.3s ease;
 }
 
-.grid img:nth-child(1) { grid-column: span 4; transform: rotate(-3deg); }
-.grid img:nth-child(2) { grid-column: span 3; transform: rotate(2deg); }
-.grid img:nth-child(3) { grid-column: span 5; transform: rotate(-1deg); }
-.grid img:nth-child(4) { grid-column: span 6; transform: rotate(3deg); }
-.grid img:nth-child(5) { grid-column: span 3; transform: rotate(-2deg); }
-.grid img:nth-child(6) { grid-column: span 3; transform: rotate(1deg); }
-.grid img:nth-child(7) { grid-column: span 4; transform: rotate(-3deg); }
-.grid img:nth-child(8) { grid-column: span 4; transform: rotate(2deg); }
-.grid img:nth-child(9) { grid-column: span 4; transform: rotate(-1deg); }
+.grid img:nth-child(1) {
+    grid-column: span 4;
+    transform: rotate(-3deg);
+}
+
+.grid img:nth-child(2) {
+    grid-column: span 3;
+    transform: rotate(2deg);
+}
+
+.grid img:nth-child(3) {
+    grid-column: span 5;
+    transform: rotate(-1deg);
+}
+
+.grid img:nth-child(4) {
+    grid-column: span 6;
+    transform: rotate(3deg);
+}
+
+.grid img:nth-child(5) {
+    grid-column: span 3;
+    transform: rotate(-2deg);
+}
+
+.grid img:nth-child(6) {
+    grid-column: span 3;
+    transform: rotate(1deg);
+}
+
+.grid img:nth-child(7) {
+    grid-column: span 4;
+    transform: rotate(-3deg);
+}
+
+.grid img:nth-child(8) {
+    grid-column: span 4;
+    transform: rotate(2deg);
+}
+
+.grid img:nth-child(9) {
+    grid-column: span 4;
+    transform: rotate(-1deg);
+}
 
 .grid img:hover {
     filter: contrast(1.04) saturate(1.03);
@@ -541,21 +605,25 @@ nav ul li a.active img {
 .contacto .social-icons img {
     width: 80px;
     height: auto;
-
-    /* forzar quitar cualquier estilo heredado */
     background: transparent !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
-
     transform: rotate(-4deg);
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
-/* rotaciones collage */
-.contacto .social-icons a:nth-child(2) img { transform: rotate(5deg); }
-.contacto .social-icons a:nth-child(3) img { transform: rotate(-3deg); }
-.contacto .social-icons a:nth-child(4) img { transform: rotate(6deg); }
+.contacto .social-icons a:nth-child(2) img {
+    transform: rotate(5deg);
+}
+
+.contacto .social-icons a:nth-child(3) img {
+    transform: rotate(-3deg);
+}
+
+.contacto .social-icons a:nth-child(4) img {
+    transform: rotate(6deg);
+}
 
 .contacto .social-icons img:hover {
     transform: rotate(0deg) scale(1.12);
@@ -726,12 +794,24 @@ footer {
     }
 
     @keyframes cursorGlitch {
-        0% { transform: translate(-50%, -50%) translate(0, 0) scale(1); }
-        20% { transform: translate(-50%, -50%) translate(-2px, 1px) scale(1.03); }
-        40% { transform: translate(-50%, -50%) translate(2px, -1px) scale(0.98); }
-        60% { transform: translate(-50%, -50%) translate(-1px, 2px) scale(1.02); }
-        80% { transform: translate(-50%, -50%) translate(1px, -2px) scale(0.99); }
-        100% { transform: translate(-50%, -50%) translate(0, 0) scale(1); }
+        0% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
+        20% {
+            transform: translate(-50%, -50%) translate(-2px, 1px) scale(1.03);
+        }
+        40% {
+            transform: translate(-50%, -50%) translate(2px, -1px) scale(0.98);
+        }
+        60% {
+            transform: translate(-50%, -50%) translate(-1px, 2px) scale(1.02);
+        }
+        80% {
+            transform: translate(-50%, -50%) translate(1px, -2px) scale(0.99);
+        }
+        100% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
     }
 }
 
@@ -769,6 +849,10 @@ footer {
 @media (max-width: 768px) {
     header {
         padding: 0.9rem 1rem;
+    }
+
+    .headerlogo img {
+        width: 76px;
     }
 
     nav ul {
@@ -820,8 +904,20 @@ footer {
         padding-top: 4.4rem;
     }
 
+    .headerlogo img {
+        width: 68px;
+    }
+
     .hero-copy h1 {
         font-size: clamp(3rem, 15vw, 4.8rem);
+    }
+
+    .hero-title img {
+        max-width: 300px;
+    }
+
+    .float-img {
+        width: 32px;
     }
 
     .hero-collage {
@@ -834,10 +930,6 @@ footer {
 
     .grid {
         grid-template-columns: 1fr;
-    }
-
-    header .logo {
-        font-size: 1.35rem;
     }
 
     .hero-copy p,
