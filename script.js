@@ -304,3 +304,18 @@ if (window.matchMedia("(pointer: fine)").matches && cursor && follower) {
         cursor.style.opacity = "1";
         follower.style.opacity = "1";
     });
+
+
+    //resortes
+    
+    const floats = document.querySelectorAll(".float-img");
+
+document.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+    floats.forEach((el, i) => {
+        const speed = (i + 1) * 0.3;
+        el.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
+});

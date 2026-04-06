@@ -322,40 +322,22 @@ nav ul li a.active img {
     position: absolute;
     width: 60px;
     opacity: 0.8;
-    animation: floatHero 18s ease-in-out infinite;
+    animation: floatHero 6s ease-in-out infinite;
+    will-change: transform;
+    transition: transform 0.2s linear;
 }
 
-.f1 {
-    top: 8%;
-    left: -30px;
-}
+/* posiciones resortes */
+.f1 { top: 8%; left: -30px; animation-delay: 0s; }
+.f2 { top: 55%; right: -25px; animation-delay: -1s; }
+.f3 { bottom: 10%; left: 10%; animation-delay: -2s; }
+.f4 { top: 8%; left: -140px; animation-delay: -3s; }
+.f5 { bottom: 10%; left: -130px; animation-delay: -4s; }
+.f6 { top: 8%; left: -330px; animation-delay: -5s; }
 
-.f2 {
-    top: 55%;
-    right: -25px;
-    animation-duration: 22s;
-}
-
-.f3 {
-    bottom: 10%;
-    left: 10%;
-    animation-duration: 20s;
-}
-
-.f4 {
-    top: 8%;
-    left: -140px;
-}
-
-.f5 {
-    bottom: 10%;
-    left: -130px;
-    animation-duration: 10s;
-}
-
-.f6 {
-    top: 8%;
-    left: -330px;
+@keyframes floatHero {
+    0%,100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
 }
 
 .hero-collage {
