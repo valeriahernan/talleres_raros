@@ -118,40 +118,50 @@ header .logo {
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
-}
-.hero {
+}/* =========================
+   HERO FLOATING RESORTES
+========================= */
+.hero-art {
     position: relative;
-    overflow: hidden; /* importante */
+    display: inline-block;
+}
+
+.hero-title {
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title img {
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    height: auto;
 }
 
 .floating-bg {
-    position: fixed;   /* importante */
+    position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: -1;       /* detrás del contenido */
-    overflow: hidden;
+    z-index: 1;
 }
 
 .float-img {
     position: absolute;
-    width: 60px;       /* antes 10px */
-    opacity: 0.75;
-    animation: floatX linear infinite;
+    width: 45px;
+    opacity: 0.8;
+    animation: floatHero 18s ease-in-out infinite;
 }
 
-.f1 { top: 2%;  animation-duration: 60s; }
-.f2 { top: 50%; animation-duration: 75s; }
-.f3 { top: 35%; animation-duration: 50s; }
+.f1 { top: 8%; left: -30px; }
+.f2 { top: 55%; right: -25px; animation-duration: 22s; }
+.f3 { bottom: 10%; left: 10%; animation-duration: 20s; }
 
-@keyframes floatX {
-    from {
-        transform: translateX(-120vw) rotate(-6deg);
-    }
-    to {
-        transform: translateX(120vw) rotate(6deg);
-    }
+@keyframes floatHero {
+    0%   { transform: translate(0, 0) rotate(-4deg); }
+    50%  { transform: translate(12px, -8px) rotate(4deg); }
+    100% { transform: translate(0, 0) rotate(-4deg); }
 }
-
 /* =========================
    MENU STICKERS LIMPIOS
 ========================= */
