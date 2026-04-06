@@ -847,60 +847,6 @@ footer {
 @media (max-width: 768px) {
     header {
         padding: 0.9rem 1rem;
-    }
-
-    .headerlogo img {
-        width: 200px;
-        height: auto;
-    }
-
-    nav ul {
-        flex-direction: column;
-        position: absolute;
-        top: calc(100% + 0.4rem);
-        right: 0;
-        width: 220px;
-        display: none;
-        padding: 1rem;
-        gap: 0.75rem;
-        background:
-            linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)),
-            url("images/bkg2.jpg") center center / cover no-repeat;
-        border: 2px solid #66a2ca;
-        border-radius: 18px;
-        box-shadow: 4px 4px 0 #e18af0;
-    }
-
-    nav ul.show {
-        display: flex;
-    }
-
-    nav ul li a {
-        padding: 0.2rem;
-    }
-
-    nav ul li a img {
-        width: 58px;
-        max-height: 34px;
-    }
-
-    #menu-toggle {
-        display: block;
-    }
-
-    .section {
-        padding: 3.5rem 1rem;
-    }
-
-    .about-gallery {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 0.9rem 1rem;
         align-items: center;
     }
 
@@ -1002,5 +948,66 @@ footer {
     .about-gallery {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        padding-top: 4.4rem;
+    }
+
+    .headerlogo img {
+        width: 120px;
+    }
+
+    .hero-copy h1 {
+        font-size: clamp(3rem, 15vw, 4.8rem);
+    }
+
+    .hero-title img {
+        max-width: 280px;
+    }
+
+    .float-img {
+        width: 38px;
+    }
+
+    .hero-collage {
+        min-height: 280px;
+    }
+
+    .hero-sticker {
+        width: 150px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy p,
+    .about-intro {
+        font-size: 0.94rem;
+    }
+
+    .contacto .social-icons img {
+        width: 80px;
+        height: 80px;
+    }
+
+    nav ul {
+        width: min(84vw, 240px);
+        padding: 0.8rem;
+    }
+
+    nav ul li a {
+        padding: 0.65rem 0.75rem;
+    }
+
+    nav ul li a span {
+        font-size: 1.08rem;
+    }
+
+    .nav-convocatoria span {
+        font-size: 1.16rem;
     }
 }
