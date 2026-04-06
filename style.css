@@ -100,7 +100,7 @@ header {
 }
 
 .headerlogo img {
-    width: 160px;
+    width: 300px;
     height: auto;
     display: block;
 }
@@ -868,7 +868,7 @@ footer {
     }
 
     .headerlogo img {
-        width: 120px;
+        width: 140px;
         height: auto;
     }
 
