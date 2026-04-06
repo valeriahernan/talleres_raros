@@ -952,10 +952,9 @@ footer {
     }
 
     nav ul li a {
-        display: flex;
+        display: block;
         width: 100%;
-        justify-content: flex-start;
-        align-items: center;
+        text-align: center;
         padding: 0.7rem 0.8rem;
         border: 1.5px dashed transparent;
         border-radius: 12px;
@@ -972,10 +971,8 @@ footer {
         font-size: 1.2rem;
         line-height: 1;
         color: #1d1b19;
+        text-align: center;
         letter-spacing: 0.02em;
-        text-transform: none;
-        transform: none;
-        opacity: 1;
     }
 
     nav ul li a:hover,
