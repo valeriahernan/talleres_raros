@@ -92,14 +92,16 @@ header {
     gap: 1rem;
 }
 
-header .logo {
-    font-family: 'HighTower', serif;
-    font-size: 1.9rem;
-    line-height: 1;
-    letter-spacing: 0.5px;
-    color: #e18af0;
-    transform: rotate(-1deg);
-    white-space: nowrap;
+.headerlogo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.headerlogo img {
+    width: 120px;   /* ajusta tamaño */
+    height: auto;
+    display: block;
 }
 
 .hero {
