@@ -339,10 +339,6 @@ nav ul li a.active img {
 .f5 { bottom: 10%; left: -130px; animation-delay: -4s; }
 .f6 { top: 8%; left: -330px; animation-delay: -5s; }
 
-@keyframes floatHero {
-    0%,100% { transform: translateY(0px) rotate(-1deg); }
-    50% { transform: translateY(-8px) rotate(1deg); }
-}
 
 .hero-collage {
     position: relative;
