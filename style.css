@@ -959,3 +959,59 @@ footer {
         height: 80px;
     }
 }
+
+
+
+
+/* =========================
+   RESPONSIVE MENU (Móviles)
+========================= */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block; /* Mostrar el botón de hamburguesa */
+        z-index: 1001;
+    }
+
+    nav ul {
+        display: none; /* Ocultar menú por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Justo debajo del header */
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        width: 200px;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border: 2px dashed #66a2ca;
+        border-radius: 0 0 0 20px;
+        box-shadow: -5px 5px 0 #e18af0;
+    }
+
+    /* Clase que añadiremos con JS para mostrarlo */
+    nav ul.active {
+        display: flex;
+        animation: fadeInDown 0.3s ease forwards;
+    }
+
+    /* Ajuste de los stickers en móvil */
+    nav ul li a img {
+        width: 110px; /* Un poco más grandes para que sean fáciles de tocar */
+        transform: rotate(0deg) !important; /* Menos caos en vertical */
+    }
+
+    /* Ajuste del Hero para que no se amontone */
+    .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-copy { text-align: center; }
+    .hero-copy p { margin: 0 auto; }
+    .hero-notes { justify-content: center; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
