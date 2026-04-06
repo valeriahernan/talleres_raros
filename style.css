@@ -707,7 +707,7 @@ footer {
     .cursor {
         width: 32px;
         height: 32px;
-        background: url("cursors/studio.cur") no-repeat center;
+        background: url("cursors/Studio.cur") no-repeat center;
         background-size: contain;
         position: fixed;
         top: 0;
