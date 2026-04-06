@@ -109,7 +109,7 @@ header .logo {
 }
 
 .logo img {
-    width: 28px;   /* tamaño pequeño */
+    width: 20px;   /* prueba entre 20 y 32px */
     height: auto;
 }
 .hero {
