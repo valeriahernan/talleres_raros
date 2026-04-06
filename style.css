@@ -302,8 +302,8 @@ nav ul li a.active img {
     width: 60px;
     opacity: 0.8;
     animation: floatHero 6s ease-in-out infinite;
-    will-change: transform;
-    transition: transform 0.2s linear;
+    will-change: transform, margin;
+    transition: margin 0.12s linear;
 }
 
 /* posiciones resortes */
