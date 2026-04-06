@@ -864,9 +864,10 @@ footer {
         padding: 0.9rem 1rem;
     }
 
-    .headerlogo img {
-        width: 76px;
-    }
+.headerlogo img {
+    width: 160px;   /* antes 90px */
+    height: auto;
+}
 
     nav ul {
         flex-direction: column;
