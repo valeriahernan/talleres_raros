@@ -100,7 +100,7 @@ header {
 }
 
 .headerlogo img {
-    width: 90px;
+    width: 160px;
     height: auto;
     display: block;
 }
@@ -128,7 +128,7 @@ nav ul li a {
 }
 
 nav ul li a img {
-    max-width: 220px;
+    width: 110px;
     height: auto;
     background: transparent !important;
     border: none !important;
@@ -341,15 +341,18 @@ nav ul li a.active img {
     left: 10%;
     animation-duration: 20s;
 }
+
 .f4 {
     top: 8%;
     left: -140px;
 }
+
 .f5 {
     bottom: 10%;
     left: -130px;
     animation-duration: 10s;
 }
+
 .f6 {
     top: 8%;
     left: -330px;
@@ -864,10 +867,10 @@ footer {
         padding: 0.9rem 1rem;
     }
 
-.headerlogo img {
-    width: 160px;   /* antes 90px */
-    height: auto;
-}
+    .headerlogo img {
+        width: 120px;
+        height: auto;
+    }
 
     nav ul {
         flex-direction: column;
@@ -919,7 +922,7 @@ footer {
     }
 
     .headerlogo img {
-        width: 150px;
+        width: 100px;
     }
 
     .hero-copy h1 {
@@ -927,11 +930,11 @@ footer {
     }
 
     .hero-title img {
-        max-width: 150px;
+        max-width: 280px;
     }
 
     .float-img {
-        width: 82px;
+        width: 38px;
     }
 
     .hero-collage {
