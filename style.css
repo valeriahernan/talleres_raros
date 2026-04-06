@@ -1,40 +1,4 @@
 /* =========================
-   FUENTE
-========================= */
-@font-face {
-    font-family: 'HighTower';
-    src: url('fonts/High Tower Text Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* =========================
-   RESET
-========================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-    font: inherit;
-}
-
-/* =========================
    BASE
 ========================= */
 body {
@@ -127,10 +91,16 @@ nav ul li a {
     padding: 0;
 }
 
+/* ocultar texto del menú en desktop */
+nav ul li a span {
+    display: none;
+}
+
 .nav-convocatoria img {
-    width: 150px;   /* más grande */
+    width: 150px;
     transform: rotate(3deg);
 }
+
 nav ul li a img {
     width: 100px;
     height: auto;
@@ -160,6 +130,11 @@ nav ul li:nth-child(5) a img {
 
 nav ul li a:hover img,
 nav ul li a.active img {
+    transform: rotate(0deg) scale(1.08);
+}
+
+.nav-convocatoria:hover img,
+.nav-convocatoria.active img {
     transform: rotate(0deg) scale(1.08);
 }
 
@@ -338,7 +313,6 @@ nav ul li a.active img {
 .f4 { top: 8%; left: -140px; animation-delay: -3s; }
 .f5 { bottom: 10%; left: -130px; animation-delay: -4s; }
 .f6 { top: 8%; left: -330px; animation-delay: -5s; }
-
 
 .hero-collage {
     position: relative;
@@ -694,9 +668,9 @@ button:active,
 footer {
     text-align: center;
     padding: 2rem 1rem 3rem;
-    background: #f8f1e7;
-    border-top: 2px dashed #66a2ca;
-    color: #7a5a53;
+    background: #65c7aa;
+    border-top: 2px dashed #f3addc;
+    color: #000000;
     font-size: 0.9rem;
 }
 
@@ -707,7 +681,7 @@ footer {
     .cursor {
         width: 32px;
         height: 32px;
-        background: url("cursors/Studio.cur") no-repeat center;
+        background: url("cursors/studio.cur") no-repeat center;
         background-size: contain;
         position: fixed;
         top: 0;
@@ -887,6 +861,7 @@ footer {
         border: 2px solid #66a2ca;
         border-radius: 18px;
         box-shadow: 4px 4px 0 #e18af0;
+        z-index: 1001;
     }
 
     nav ul.show {
