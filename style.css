@@ -918,7 +918,7 @@ footer {
     }
 
     .headerlogo img {
-        width: 400px;
+        width: 150px;
     }
 
     .hero-copy h1 {
@@ -926,11 +926,11 @@ footer {
     }
 
     .hero-title img {
-        max-width: 500px;
+        max-width: 150px;
     }
 
     .float-img {
-        width: 32px;
+        width: 42px;
     }
 
     .hero-collage {
