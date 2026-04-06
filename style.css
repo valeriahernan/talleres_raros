@@ -125,28 +125,28 @@ header .logo {
     z-index: 0;
 }
 
-/* imágenes */
 .float-img {
     position: absolute;
-    width: 40px;
+    width: 10px;   /* antes 40px */
     opacity: 0.85;
     animation: floatX linear infinite;
 }
 
-/* posiciones */
-.f1 { top: 2%; animation-duration: 30s; }
-.f2 { top: 50%; animation-duration: 36s; }
-.f3 { top: 35%; animation-duration: 28s; }
+.f1 { top: 2%;  animation-duration: 60s; }
+.f2 { top: 50%; animation-duration: 75s; }
+.f3 { top: 35%; animation-duration: 50s; }
 
 /* animación horizontal */
 @keyframes floatX {
     from {
-        transform: translateX(-140px) rotate(-8deg);
+        transform: translateX(-120vw) rotate(-8deg);
     }
     to {
-        transform: translateX(calc(100% + 140px)) rotate(8deg);
+        transform: translateX(120vw) rotate(8deg);
     }
 }
+
+
 nav {
     position: relative;
 }
