@@ -124,18 +124,18 @@ header .logo {
     overflow: hidden; /* importante */
 }
 
-/* contenedor */
 .floating-bg {
-    position: absolute;
+    position: fixed;   /* importante */
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;       /* detrás del contenido */
+    overflow: hidden;
 }
 
 .float-img {
     position: absolute;
-    width: 30px;   /* antes 40px */
-    opacity: 0.85;
+    width: 60px;       /* antes 10px */
+    opacity: 0.75;
     animation: floatX linear infinite;
 }
 
@@ -143,27 +143,13 @@ header .logo {
 .f2 { top: 50%; animation-duration: 75s; }
 .f3 { top: 35%; animation-duration: 50s; }
 
-/* animación horizontal */
 @keyframes floatX {
     from {
-        transform: translateX(-120vw) rotate(-8deg);
+        transform: translateX(-120vw) rotate(-6deg);
     }
     to {
-        transform: translateX(120vw) rotate(8deg);
+        transform: translateX(120vw) rotate(6deg);
     }
-}
-
-
-nav {
-    position: relative;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    align-items: center;
 }
 
 /* =========================
