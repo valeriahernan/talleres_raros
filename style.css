@@ -101,6 +101,17 @@ header .logo {
     transform: rotate(-1deg);
     white-space: nowrap;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    width: 28px;   /* tamaño pequeño */
+    height: auto;
+}
 .hero {
     position: relative;
     overflow: hidden; /* importante */
