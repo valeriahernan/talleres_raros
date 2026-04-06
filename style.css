@@ -100,7 +100,7 @@ header {
 }
 
 .headerlogo img {
-    width: 300px;
+    width: 160px;
     height: auto;
     display: block;
 }
@@ -320,7 +320,7 @@ nav ul li a.active img {
 
 .float-img {
     position: absolute;
-    width: 65px;
+    width: 45px;
     opacity: 0.8;
     animation: floatHero 18s ease-in-out infinite;
 }
@@ -395,58 +395,17 @@ nav ul li a.active img {
     transform: rotate(4deg);
 }
 
-/* Variaciones para que no se muevan al unísono */
-.f1 { 
-    top: 8%; left: -30px; 
-    animation-duration: 12s; 
-    animation-delay: -2s; 
-}
-
-.f2 { 
-    top: 55%; right: -25px; 
-    animation-duration: 15s; 
-    animation-delay: -5s; 
-    animation-direction: reverse; /* Esta se mueve al revés */
-}
-
-.f3 { 
-    bottom: 10%; left: 10%; 
-    animation-duration: 18s; 
-    animation-delay: -10s; 
-}
-.f4 { 
-    top: 8%; left: -30px; 
-    animation-duration: 19s; 
-    animation-delay: -2s; 
-}
-
-.f5 { 
-    top: 55%; right: -15px; 
-    animation-duration: 15s; 
-    animation-delay: -5s; 
-    animation-direction: reverse; /* Esta se mueve al revés */
-}
-
-.f6 { 
-    bottom: 10%; left: 10%; 
-    animation-duration: 5s; 
-    animation-delay: -20s; 
-}
-
-
-/* Mejora de la animación para que sea más "rebotina" */
 @keyframes floatHero {
-    0%, 100% {
-        transform: translate(0, 0) rotate(-4deg) scale(1);
+    0% {
+        transform: translate(0, 0) rotate(-4deg);
     }
-    33% {
-        transform: translate(15px, -10px) rotate(8deg) scale(1.05);
+    50% {
+        transform: translate(12px, -8px) rotate(4deg);
     }
-    66% {
-        transform: translate(-10px, 15px) rotate(-12deg) scale(0.95);
+    100% {
+        transform: translate(0, 0) rotate(-4deg);
     }
 }
-
 
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -762,48 +721,115 @@ footer {
 /* =========================
    CURSOR
 ========================= */
-/* ... Tus fuentes y reset iniciales se mantienen ... */
-
-/* CURSOR CUSTOM */
-.cursor, .cursor-follower {
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
-}
-.cursor { width: 8px; height: 8px; background: #e18af0; }
-.cursor-follower { width: 30px; height: 30px; border: 1px solid #66a2ca; transition: transform 0.1s ease-out; }
-.cursor-text {
-    position: fixed;
-    pointer-events: none;
-    z-index: 10001;
-    font-size: 10px;
-    font-weight: bold;
-    color: #1d1b19;
-    transform: translate(-50%, -50%);
-}
-
-/* RESPONSIVE & MOBILE MENU */
-@media (max-width: 768px) {
-    #menu-toggle { display: block; }
-    nav ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; right: 0;
-        background: rgba(255,255,255,0.95);
-        padding: 1rem;
-        border: 2px dashed #66a2ca;
+@media (pointer: fine) {
+    .cursor {
+        width: 32px;
+        height: 32px;
+        background: url("cursors/studio.cur") no-repeat center;
+        background-size: contain;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease;
     }
-    nav ul.show { display: flex; }
-    .hero-inner { grid-template-columns: 1fr; }
-}
 
-/* ESTADOS DE HOVER PARA CURSOR */
-.cursor-follower.hover { scale: 1.5; background: rgba(102, 162, 202, 0.2); }
-.cursor-follower.gallery-mode { width: 60px; height: 60px; background: #e18af0; opacity: 0.7; }
+    .cursor-follower {
+        width: 46px;
+        height: 46px;
+        border: 1px dashed #66a2ca;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            width 0.22s ease,
+            height 0.22s ease,
+            background 0.22s ease,
+            border-color 0.22s ease,
+            transform 0.14s ease,
+            opacity 0.2s ease;
+    }
+
+    .cursor-text {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #e18af0;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    .cursor-follower.hover {
+        width: 68px;
+        height: 68px;
+        background: rgba(225, 138, 240, 0.12);
+    }
+
+    .cursor.hero-mode {
+        filter: brightness(1.15);
+    }
+
+    .cursor-follower.hero-mode {
+        border-color: #66a2ca;
+        background: rgba(102, 162, 202, 0.1);
+    }
+
+    .cursor-follower.gallery-mode {
+        width: 88px;
+        height: 88px;
+        background: rgba(255, 255, 255, 0.88);
+        border-width: 2px;
+    }
+
+    .cursor-follower.gallery-mode .cursor-text {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .cursor-follower.magnetic {
+        width: 76px;
+        height: 76px;
+        background: rgba(225, 138, 240, 0.14);
+    }
+
+    .cursor-follower.glitch {
+        animation: cursorGlitch 0.18s linear 2;
+    }
+
+    @keyframes cursorGlitch {
+        0% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
+        20% {
+            transform: translate(-50%, -50%) translate(-2px, 1px) scale(1.03);
+        }
+        40% {
+            transform: translate(-50%, -50%) translate(2px, -1px) scale(0.98);
+        }
+        60% {
+            transform: translate(-50%, -50%) translate(-1px, 2px) scale(1.02);
+        }
+        80% {
+            transform: translate(-50%, -50%) translate(1px, -2px) scale(0.99);
+        }
+        100% {
+            transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        }
+    }
+}
 
 /* =========================
    RESPONSIVE
@@ -896,7 +922,7 @@ footer {
     }
 
     .headerlogo img {
-        width: 140px;
+        width: 100px;
     }
 
     .hero-copy h1 {
