@@ -134,7 +134,7 @@ header .logo {
 
 .float-img {
     position: absolute;
-    width: 10px;   /* antes 40px */
+    width: 30px;   /* antes 40px */
     opacity: 0.85;
     animation: floatX linear infinite;
 }
