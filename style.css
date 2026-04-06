@@ -101,7 +101,41 @@ header .logo {
     transform: rotate(-1deg);
     white-space: nowrap;
 }
+.hero {
+    position: relative;
+    overflow: hidden; /* importante */
+}
 
+/* contenedor */
+.floating-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* imágenes */
+.float-img {
+    position: absolute;
+    width: 110px;
+    opacity: 0.85;
+    animation: floatX linear infinite;
+}
+
+/* posiciones */
+.f1 { top: 20%; animation-duration: 30s; }
+.f2 { top: 50%; animation-duration: 36s; }
+.f3 { top: 75%; animation-duration: 28s; }
+
+/* animación horizontal */
+@keyframes floatX {
+    from {
+        transform: translateX(-140px) rotate(-8deg);
+    }
+    to {
+        transform: translateX(calc(100% + 140px)) rotate(8deg);
+    }
+}
 nav {
     position: relative;
 }
