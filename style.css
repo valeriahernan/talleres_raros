@@ -112,6 +112,13 @@ header .logo {
     width: 20px;   /* prueba entre 20 y 32px */
     height: auto;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
 .hero {
     position: relative;
     overflow: hidden; /* importante */
