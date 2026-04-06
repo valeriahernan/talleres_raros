@@ -114,54 +114,47 @@ nav ul {
     align-items: center;
 }
 
-/* menú con imágenes sticker */
+/* =========================
+   MENU STICKERS LIMPIOS
+========================= */
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+}
+
 nav ul li a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.35rem 0.45rem;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    line-height: 1;
+    padding: 0;
 }
 
 nav ul li a img {
-    width: 90px;
+    width: 110px;        /* tamaño grande */
     height: auto;
-    max-height: 42px;
-    object-fit: contain;
-    display: block;
-    background: #fff;
-    padding: 3px;
-    border: 2px solid #66a2ca;
-    box-shadow: 3px 3px 0 #e18af0;
-    transform: rotate(-5deg);
-    transform-origin: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
 
-nav ul li:nth-child(2) a img {
-    transform: rotate(4deg);
-}
+    /* quitar fondo y bordes */
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 
-nav ul li:nth-child(3) a img {
-    transform: rotate(-3deg);
-}
-
-nav ul li:nth-child(4) a img {
-    transform: rotate(5deg);
-}
-
-nav ul li:nth-child(5) a img {
     transform: rotate(-4deg);
+    transition: transform .2s ease;
 }
+
+/* rotaciones collage */
+nav ul li:nth-child(2) a img { transform: rotate(5deg); }
+nav ul li:nth-child(3) a img { transform: rotate(-3deg); }
+nav ul li:nth-child(4) a img { transform: rotate(4deg); }
+nav ul li:nth-child(5) a img { transform: rotate(-5deg); }
 
 nav ul li a:hover img,
 nav ul li a.active img {
-    transform: rotate(0deg) scale(1.06);
-    box-shadow: 5px 5px 0 #e18af0;
-    opacity: 1;
+    transform: rotate(0deg) scale(1.08);
 }
 
 #menu-toggle {
