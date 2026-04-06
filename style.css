@@ -320,7 +320,7 @@ nav ul li a.active img {
 
 .float-img {
     position: absolute;
-    width: 45px;
+    width: 60px;
     opacity: 0.8;
     animation: floatHero 18s ease-in-out infinite;
 }
