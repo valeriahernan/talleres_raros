@@ -117,15 +117,15 @@ header .logo {
 /* imágenes */
 .float-img {
     position: absolute;
-    width: 110px;
+    width: 40px;
     opacity: 0.85;
     animation: floatX linear infinite;
 }
 
 /* posiciones */
-.f1 { top: 20%; animation-duration: 30s; }
+.f1 { top: 2%; animation-duration: 30s; }
 .f2 { top: 50%; animation-duration: 36s; }
-.f3 { top: 75%; animation-duration: 28s; }
+.f3 { top: 35%; animation-duration: 28s; }
 
 /* animación horizontal */
 @keyframes floatX {
