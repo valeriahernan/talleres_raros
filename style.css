@@ -102,66 +102,53 @@ header .logo {
     white-space: nowrap;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo img {
-    width: 70px;   /* prueba entre 20 y 32px */
-    height: auto;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-}/* =========================
-   HERO FLOATING RESORTES
-========================= */
-.hero-art {
+.hero {
     position: relative;
-    display: inline-block;
+    overflow: hidden; /* importante */
 }
 
-.hero-title {
-    margin: 0;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-title img {
-    display: block;
-    max-width: 420px;
-    width: 100%;
-    height: auto;
-}
-
+/* contenedor */
 .floating-bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
 }
 
+/* imágenes */
 .float-img {
     position: absolute;
-    width: 45px;
-    opacity: 0.8;
-    animation: floatHero 18s ease-in-out infinite;
+    width: 40px;
+    opacity: 0.85;
+    animation: floatX linear infinite;
 }
 
-.f1 { top: 8%; left: -30px; }
-.f2 { top: 55%; right: -25px; animation-duration: 22s; }
-.f3 { bottom: 10%; left: 10%; animation-duration: 20s; }
+/* posiciones */
+.f1 { top: 2%; animation-duration: 30s; }
+.f2 { top: 50%; animation-duration: 36s; }
+.f3 { top: 35%; animation-duration: 28s; }
 
-@keyframes floatHero {
-    0%   { transform: translate(0, 0) rotate(-4deg); }
-    50%  { transform: translate(12px, -8px) rotate(4deg); }
-    100% { transform: translate(0, 0) rotate(-4deg); }
+/* animación horizontal */
+@keyframes floatX {
+    from {
+        transform: translateX(-140px) rotate(-8deg);
+    }
+    to {
+        transform: translateX(calc(100% + 140px)) rotate(8deg);
+    }
 }
+nav {
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+}
+
 /* =========================
    MENU STICKERS LIMPIOS
 ========================= */
