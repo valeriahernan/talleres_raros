@@ -331,18 +331,3 @@ setInterval(draw, 33);
 
 
 
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.querySelector('nav ul');
-
-  menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-
-  // Cerrar el menú al hacer click en un sticker (opcional)
-  document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
-  });
-</script>
