@@ -1,191 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Talleres Raros</title>
+
+  <!-- FONTS -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- CSS -->
+
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-  <!-- NAV -->
+  <!-- MENU VERTICAL DERECHA -->
 
-  <header class="navbar">
-    <div class="logo">TALLERES RAROS</div>
+  <div class="menu-label">
+    MENU
+  </div>
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+      <img src="img/logo.png" alt="Talleres Raros">
+    </div>
+
+    <!-- NAV -->
 
     <nav>
-      <a href="#convocatorias">Convocatorias</a>
-      <a href="#proyecto">Proyecto</a>
-      <a href="#talleres">Talleres</a>
-      <a href="#compilados">Compilados</a>
-      <a href="#contacto">Contacto</a>
+
+      <a href="#convocatorias">
+        * CONVOCATORIAS
+      </a>
+
+      <a href="#proyecto">
+        * ACERCA DE
+      </a>
+
+      <a href="#talleres">
+        * TALLERES
+      </a>
+
+      <a href="#compilados">
+        * COMPILADOS
+      </a>
+
+      <a href="#contacto">
+        * CONTACTO
+      </a>
+
     </nav>
-  </header>
 
-  <!-- HERO -->
+  </aside>
 
-  <section class="hero">
+  <!-- MAIN -->
 
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="video.mp4" type="video/mp4">
-    </video>
+  <main>
 
-    <div class="overlay"></div>
+    <!-- HERO -->
 
-    <div class="hero-content">
-      <h1>
-        TALLERES<br>
-        RAROS
-      </h1>
+    <section class="hero">
 
-      <p>
-        arte / procesos / experimentación
-      </p>
-    </div>
+      <div class="hero-object">
+        <img src="img/objeto.png" alt="">
+      </div>
 
-  </section>
+      <div class="note">
 
-  <!-- CONVOCATORIAS -->
+        podríamos probar con una de las
+        versiones 3d del logo y ver si
+        funciona con colores o b/w
 
-  <section id="convocatorias" class="section">
+      </div>
 
-    <div class="section-header">
-      <span>01</span>
-      <h2>CONVOCATORIAS</h2>
-    </div>
+    </section>
 
-    <div class="poster-grid">
+    <!-- CONVOCATORIAS -->
 
-      <article class="poster">
-        <img src="img/poster-01.jpg" alt="">
-        <div class="poster-info">
-          <h3>TALLER VISUAL 001</h3>
-          <p>Agosto 2026</p>
-        </div>
-      </article>
+    <section id="convocatorias" class="content-section">
 
-      <article class="poster">
-        <img src="img/poster-02.jpg" alt="">
-        <div class="poster-info">
-          <h3>ARCHIVO SONORO</h3>
-          <p>Septiembre 2026</p>
-        </div>
-      </article>
+      <h2>
+        CONVOCATORIAS
+      </h2>
 
-    </div>
+      <div class="poster-grid">
 
-  </section>
+        <article class="poster">
 
-  <!-- PROYECTO -->
+          <img src="img/poster-01.jpg" alt="">
 
-  <section id="proyecto" class="section manifesto">
+          <div class="poster-info">
 
-    <div class="section-header">
-      <span>02</span>
-      <h2>PROYECTO</h2>
-    </div>
+            <h3>
+              TALLER VISUAL 001
+            </h3>
 
-    <div class="manifesto-text">
+            <p>
+              Agosto 2026
+            </p>
 
-      <p>
-        Talleres Raros es una plataforma de
-        experimentación artística enfocada en
-        procesos visuales, narrativos y sonoros.
-      </p>
+          </div>
 
-      <p>
-        Un espacio para crear, explorar y compartir
-        proyectos fuera de formatos tradicionales.
-      </p>
+        </article>
 
-    </div>
+        <article class="poster">
 
-  </section>
+          <img src="img/poster-02.jpg" alt="">
 
-  <!-- TALLERES -->
+          <div class="poster-info">
 
-  <section id="talleres" class="section">
+            <h3>
+              ARCHIVO SONORO
+            </h3>
 
-    <div class="section-header">
-      <span>03</span>
-      <h2>TALLERES</h2>
-    </div>
+            <p>
+              Septiembre 2026
+            </p>
 
-    <div class="work-grid">
+          </div>
 
-      <article class="work-item">
-        <img src="img/work-01.jpg" alt="">
-        <h3>ANIMACIÓN EXPERIMENTAL</h3>
-      </article>
+        </article>
 
-      <article class="work-item">
-        <img src="img/work-02.jpg" alt="">
-        <h3>FOTOGRAFÍA RAW</h3>
-      </article>
+      </div>
 
-      <article class="work-item">
-        <img src="img/work-03.jpg" alt="">
-        <h3>NARRATIVAS DIGITALES</h3>
-      </article>
+    </section>
 
-    </div>
+    <!-- PROYECTO -->
 
-  </section>
+    <section id="proyecto" class="content-section">
 
-  <!-- COMPILADOS -->
+      <h2>
+        ACERCA DE
+      </h2>
 
-  <section id="compilados" class="section compilados">
+      <div class="manifesto">
 
-    <div class="section-header">
-      <span>04</span>
-      <h2>COMPILADOS</h2>
-    </div>
+        <p>
+          Talleres Raros es una plataforma de
+          experimentación artística enfocada en
+          procesos visuales, narrativos y sonoros.
+        </p>
 
-    <div class="archive-list">
+        <p>
+          Un espacio para crear, compartir y
+          explorar proyectos fuera de formatos
+          tradicionales.
+        </p>
 
-      <article class="archive-item">
-        <span>COMPILADO_001</span>
-        <p>video / pdf / audio</p>
-      </article>
+      </div>
 
-      <article class="archive-item">
-        <span>COMPILADO_002</span>
-        <p>visual / experimental</p>
-      </article>
+    </section>
 
-      <article class="archive-item">
-        <span>COMPILADO_003</span>
-        <p>archivo colectivo</p>
-      </article>
+    <!-- TALLERES -->
 
-    </div>
+    <section id="talleres" class="content-section">
 
-  </section>
+      <h2>
+        TALLERES
+      </h2>
 
-  <!-- CONTACTO -->
+      <div class="work-grid">
 
-  <footer id="contacto" class="footer">
+        <article class="work-item">
 
-    <div class="section-header">
-      <span>05</span>
-      <h2>CONTACTO</h2>
-    </div>
+          <img src="img/work-01.jpg" alt="">
 
-    <div class="footer-links">
-      <a href="#">INSTAGRAM</a>
-      <a href="#">MAIL</a>
-      <a href="#">SUBSCRIBIRSE</a>
-    </div>
+          <h3>
+            ANIMACIÓN EXPERIMENTAL
+          </h3>
 
-  </footer>
+        </article>
+
+        <article class="work-item">
+
+          <img src="img/work-02.jpg" alt="">
+
+          <h3>
+            FOTOGRAFÍA RAW
+          </h3>
+
+        </article>
+
+        <article class="work-item">
+
+          <img src="img/work-03.jpg" alt="">
+
+          <h3>
+            NARRATIVAS DIGITALES
+          </h3>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- COMPILADOS -->
+
+    <section id="compilados" class="content-section">
+
+      <h2>
+        COMPILADOS
+      </h2>
+
+      <div class="archive-list">
+
+        <article class="archive-item">
+
+          <span>
+            COMPILADO_001
+          </span>
+
+          <p>
+            video / audio / pdf
+          </p>
+
+        </article>
+
+        <article class="archive-item">
+
+          <span>
+            COMPILADO_002
+          </span>
+
+          <p>
+            visual / experimental
+          </p>
+
+        </article>
+
+        <article class="archive-item">
+
+          <span>
+            COMPILADO_003
+          </span>
+
+          <p>
+            archivo colectivo
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- CONTACTO -->
+
+    <section id="contacto" class="content-section footer">
+
+      <h2>
+        CONTACTO
+      </h2>
+
+      <div class="footer-links">
+
+        <a href="#">
+          INSTAGRAM
+        </a>
+
+        <a href="#">
+          MAIL
+        </a>
+
+        <a href="#">
+          SUBSCRIBIRSE
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
+
 </html>
