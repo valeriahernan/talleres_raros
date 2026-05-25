@@ -1,208 +1,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Talleres Raros: talleres creativos, convocatorias y actividades artísticas.">
-    <title>Talleres Raros</title>
-    <link rel="icon" type="image/png" href="images/LOGO_ORIGINALBLANCO.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Talleres Raros</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header id="header">
-        <div class="headerlogo">
-            <a href="https://www.talleresraros.com/" class="nav-link"></a>
-    <img src="images/header_talleresraros.png" alt="Talleres Raros">
-    <span></span>
-</div>
-   
-        <nav id="nav" aria-label="Menú principal">
-            <ul>
-                <li>
-                    <a href="#acerca" class="nav-link">
-                        <img src="images/Acerca.png" alt="Acerca">
-                        <span>Acerca</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#talleres" class="nav-link">
-                        <img src="images/talleres.png" alt="Talleres">
-                        <span>Talleres</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#convocatorias" class="nav-link">
-                        <img src="images/Convocatoria.png" alt="Convocatorias">
-                          <span>Convocatorias</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#registro" class="nav-link">
-                        <img src="images/Subscribete.png" alt="Subscríbete">
-                        <span>Subscríbete</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#contacto" class="nav-link">
-                        <img src="images/Contacto.png" alt="Contacto">
-                        <span>Contacto</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+  <!-- NAV -->
 
-        <button id="menu-toggle" aria-label="Abrir menú">&#9776;</button>
-    </header>
+  <header class="navbar">
+    <div class="logo">TALLERES RAROS</div>
 
-    <main><section id="home" class="section hero cursor-hero">
-    <div class="hero-inner">
-        <div class="hero-copy">
-            <div class="hero-art">
-                <h1 class="hero-title">
-                    <img src="images/talleresraros.png" alt="Talleres Raros">
-                </h1>
+    <nav>
+      <a href="#convocatorias">Convocatorias</a>
+      <a href="#proyecto">Proyecto</a>
+      <a href="#talleres">Talleres</a>
+      <a href="#compilados">Compilados</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-                <div class="floating-bg" aria-hidden="true">
-                    <img src="images/resorte1.png" alt="" class="float-img f1">
-                    <img src="images/resorte2.png" alt="" class="float-img f2">
-                    <img src="images/resorte4.png" alt="" class="float-img f3">
-                    <img src="images/resorte1.png" alt="" class="float-img f4">
-                    <img src="images/resorte2.png" alt="" class="float-img f5">
-                    <img src="images/resorte4.png" alt="" class="float-img f6">
-                </div>
-            </div>
+  <!-- HERO -->
 
-            <p>
-                Proyecto de enseñanza musical que crea espacios horizontales fuera de la academia,
-                enfocado en composición contemporánea, producción, tecnologías digitales y escritura
-                de canciones, con una perspectiva reflexiva de la creación y un enfoque de género
-                LGBTTQIANB+.ദ്ദി( • ᴗ - ) ✧
-            </p>
+  <section class="hero">
 
-            <div class="hero-notes">
-                <div class="hero-note">online, presencial, gratuito</div>
-                <div class="hero-note">talleres + masterclasses</div>
-                <div class="hero-note">hacer música juntxs</div>
-            </div>
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="video.mp4" type="video/mp4">
+    </video>
 
-            <a href="#acerca" class="arrow-down" aria-label="Ir a la sección Acerca">↓</a>
-        </div>
+    <div class="overlay"></div>
 
-        <div class="hero-collage">
-            <div class="hero-sticker sticker-1">
-                <img src="images/d2.png" alt="Afiche de Talleres Raros 1" class="gallery-item">
-            </div>
-            <div class="hero-sticker sticker-2">
-                <img src="images/d5.png" alt="Afiche de Talleres Raros 2" class="gallery-item">
-            </div>
-            <div class="hero-sticker sticker-3">
-                <img src="images/d8.png" alt="Afiche de Talleres Raros 3" class="gallery-item">
-            </div>
-        </div>
-    </div>
-</section>
-        <section id="acerca" class="section about">
-            <div class="about-content">
-                <h2>ACERCA DE</h2>
+    <div class="hero-content">
+      <h1>
+        TALLERES<br>
+        RAROS
+      </h1>
 
-                <p class="about-intro">
-                    Talleres Raros es un proyecto de enseñanza de creación musical que promueve espacios
-                    horizontales fuera de la academia, enfocado en composición contemporánea, producción,
-                    tecnologías digitales y escritura de canciones. Fundado en 2019 por anthï (Aya Vargas),
-                    ofrece herramientas para la agencia creativa desde una perspectiva reflexiva, con enfoque
-                    de género y empoderamiento LGBTTQIANB+.‧₊˚♪ 𝄞₊˚⊹
-                </p>
-
-                <div class="about-gallery">
-                    <img src="images/d1.png" alt="Imagen de Talleres Raros 1" class="gallery-item">
-                    <img src="images/d3.png" alt="Imagen de Talleres Raros 2" class="gallery-item">
-                    <img src="images/d6.png" alt="Imagen de Talleres Raros 3" class="gallery-item">
-                </div>
-
-                <div class="about-text-block">
-                    <p>
-                        El enfoque pedagógico se basa en el aprendizaje por proyectos, situando a lxs participantes
-                        en el centro del proceso mediante la creación musical y el trabajo colaborativo.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="talleres" class="section talleres">
-            <h2>TALLERES</h2>
-
-            <div class="grid">
-                <img src="images/d1.png" alt="Taller 1" class="gallery-item">
-                <img src="images/d2.png" alt="Taller 2" class="gallery-item">
-                <img src="images/d3.png" alt="Taller 3" class="gallery-item">
-                <img src="images/d5.png" alt="Taller 4" class="gallery-item">
-                <img src="images/d6.png" alt="Taller 5" class="gallery-item">
-                <img src="images/d7.png" alt="Taller 6" class="gallery-item">
-                <img src="images/d8.png" alt="Taller 7" class="gallery-item">
-                <img src="images/d9.png" alt="Taller 8" class="gallery-item">
-            </div>
-        </section>
-
-        <section id="convocatorias" class="section convocatorias">
-            <h2>CONVOCATORIAS</h2>
-            <p>Nuevas convocatorias y actividades aparecerán aquí.</p>
-        </section>
-
-        <section id="registro" class="section registro">
-            <h2>SUBSCRÍBETE</h2>
-
-            <form id="subscribe-form">
-                <input type="text" name="nombre" placeholder="Nombre" required>
-                <input type="email" name="email" placeholder="Correo electrónico" required>
-                <button type="submit">Quiero enterarme</button>
-            </form>
-
-            <p id="success-msg" class="success-msg">
-               °❀⋆.ೃ࿔*:･¡Gracias! Te escribiremos cuando haya novedades.°❀⋆.ೃ࿔*:･
-            </p>
-        </section>
-
-        <section id="contacto" class="section contacto">
-            <h2>CONTACTO</h2>
-
-            <p>Puedes seguir el proyecto en distintas plataformas.</p>
-
-            <div class="social-icons">
-                <a href="https://talleresraros.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp de Talleres Raros">
-                    <img src="images/bc.png" alt="Bandcamp">
-                </a>
-
-                <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" aria-label="Spotify de Talleres Raros">
-                    <img src="images/sp.png" alt="Spotify">
-                </a>
-
-                <a href="https://www.instagram.com/talleresraros/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Talleres Raros">
-                    <img src="images/in.png" alt="Instagram">
-                </a>
-
-                <a href="https://soundcloud.com/talleresraros" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud de Talleres Raros">
-                    <img src="images/sn.png" alt="SoundCloud">
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p> ദ്ദി( • ᴗ - ) ✧ Talleres Raros — 2026ദ്ദി( • ᴗ - ) ✧</p>
-    </footer>
-
-    <div class="cursor"></div>
-    <div class="cursor-follower">
-        <span class="cursor-text">VIEW</span>
+      <p>
+        arte / procesos / experimentación
+      </p>
     </div>
 
-    <script src="script.js"></script>
+  </section>
+
+  <!-- CONVOCATORIAS -->
+
+  <section id="convocatorias" class="section">
+
+    <div class="section-header">
+      <span>01</span>
+      <h2>CONVOCATORIAS</h2>
+    </div>
+
+    <div class="poster-grid">
+
+      <article class="poster">
+        <img src="img/poster-01.jpg" alt="">
+        <div class="poster-info">
+          <h3>TALLER VISUAL 001</h3>
+          <p>Agosto 2026</p>
+        </div>
+      </article>
+
+      <article class="poster">
+        <img src="img/poster-02.jpg" alt="">
+        <div class="poster-info">
+          <h3>ARCHIVO SONORO</h3>
+          <p>Septiembre 2026</p>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- PROYECTO -->
+
+  <section id="proyecto" class="section manifesto">
+
+    <div class="section-header">
+      <span>02</span>
+      <h2>PROYECTO</h2>
+    </div>
+
+    <div class="manifesto-text">
+
+      <p>
+        Talleres Raros es una plataforma de
+        experimentación artística enfocada en
+        procesos visuales, narrativos y sonoros.
+      </p>
+
+      <p>
+        Un espacio para crear, explorar y compartir
+        proyectos fuera de formatos tradicionales.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- TALLERES -->
+
+  <section id="talleres" class="section">
+
+    <div class="section-header">
+      <span>03</span>
+      <h2>TALLERES</h2>
+    </div>
+
+    <div class="work-grid">
+
+      <article class="work-item">
+        <img src="img/work-01.jpg" alt="">
+        <h3>ANIMACIÓN EXPERIMENTAL</h3>
+      </article>
+
+      <article class="work-item">
+        <img src="img/work-02.jpg" alt="">
+        <h3>FOTOGRAFÍA RAW</h3>
+      </article>
+
+      <article class="work-item">
+        <img src="img/work-03.jpg" alt="">
+        <h3>NARRATIVAS DIGITALES</h3>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- COMPILADOS -->
+
+  <section id="compilados" class="section compilados">
+
+    <div class="section-header">
+      <span>04</span>
+      <h2>COMPILADOS</h2>
+    </div>
+
+    <div class="archive-list">
+
+      <article class="archive-item">
+        <span>COMPILADO_001</span>
+        <p>video / pdf / audio</p>
+      </article>
+
+      <article class="archive-item">
+        <span>COMPILADO_002</span>
+        <p>visual / experimental</p>
+      </article>
+
+      <article class="archive-item">
+        <span>COMPILADO_003</span>
+        <p>archivo colectivo</p>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACTO -->
+
+  <footer id="contacto" class="footer">
+
+    <div class="section-header">
+      <span>05</span>
+      <h2>CONTACTO</h2>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">INSTAGRAM</a>
+      <a href="#">MAIL</a>
+      <a href="#">SUBSCRIBIRSE</a>
+    </div>
+
+  </footer>
+
 </body>
 </html>
