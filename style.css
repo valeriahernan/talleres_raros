@@ -1,4 +1,260 @@
 /* =========================================================
+   RESET
+========================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+  background:#ffffff;
+  color:#000000;
+
+  font-family:'Space Grotesk', sans-serif;
+
+  overflow-x:hidden;
+
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+
+  cursor:none;
+}
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+a,
+button,
+model-viewer{
+  cursor:none;
+}
+
+.cursor{
+  position:fixed;
+
+  width:8px;
+  height:8px;
+
+  background:#00ff66;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  z-index:99999;
+
+  transform:translate(-50%,-50%);
+}
+
+.cursor-follower{
+  position:fixed;
+
+  width:34px;
+  height:34px;
+
+  border:1px solid rgba(0,255,100,.5);
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  z-index:99998;
+
+  transform:translate(-50%,-50%);
+
+  transition:
+    width .25s ease,
+    height .25s ease,
+    border .25s ease,
+    background .25s ease;
+}
+
+.cursor-follower.hover{
+
+  width:54px;
+  height:54px;
+
+  border:1px solid rgba(0,255,100,1);
+
+  background:rgba(0,255,100,.08);
+
+}
+
+/* =========================================================
+   MENU LABEL
+========================================================= */
+
+.menu-label{
+  position:fixed;
+
+  right:18px;
+  top:28px;
+
+  writing-mode:vertical-rl;
+
+  font-size:11px;
+
+  letter-spacing:.3em;
+
+  opacity:.45;
+
+  z-index:200;
+
+  font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:180px;
+  height:100vh;
+
+  padding:24px;
+
+  z-index:1000;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo{
+  width:120px;
+
+  margin-bottom:40px;
+}
+
+.logo img{
+  width:100%;
+
+  display:block;
+}
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
+
+.menu-toggle{
+  background:none;
+  border:none;
+
+  color:#000000;
+
+  font-size:.82rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.18em;
+
+  font-family:'IBM Plex Mono', monospace;
+
+  width:fit-content;
+
+  margin-bottom:20px;
+
+  transition:.25s ease;
+}
+
+.menu-toggle:hover{
+  transform:translateX(6px);
+
+  opacity:.45;
+}
+
+/* =========================================================
+   NAV MENU
+========================================================= */
+
+.nav-menu{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:22px;
+
+  max-height:0;
+
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:
+    max-height .5s ease,
+    opacity .3s ease;
+
+}
+
+/* ACTIVE */
+
+.nav-menu.active{
+
+  max-height:400px;
+
+  opacity:1;
+
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.nav-menu a{
+
+  color:#0a3f3b;
+
+  text-decoration:none;
+
+  font-size:.82rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.18em;
+
+  width:fit-content;
+
+  opacity:.9;
+
+  transition:.25s ease;
+
+  font-family:'IBM Plex Mono', monospace;
+
+}
+
+.nav-menu a:hover{
+
+  transform:translateX(8px);
+
+  opacity:.45;
+
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+  margin-left:180px;
+}
+
+/* =========================================================
    HERO
 ========================================================= */
 
@@ -130,6 +386,264 @@
 
   to{
     transform:rotate(360deg) scale(1.4);
+  }
+
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+  padding:140px 6vw;
+}
+
+/* =========================================================
+   TITLES
+========================================================= */
+
+.section-title{
+  font-size:clamp(2rem,6vw,6rem);
+
+  letter-spacing:-.07em;
+
+  margin-bottom:70px;
+
+  line-height:.9;
+}
+
+/* =========================================================
+   POSTERS
+========================================================= */
+
+.poster-grid{
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:34px;
+}
+
+.poster{
+  overflow:hidden;
+}
+
+.poster img{
+  width:100%;
+
+  aspect-ratio:4/5;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.4s ease;
+}
+
+.poster:hover img{
+  transform:scale(1.015);
+
+  opacity:.82;
+}
+
+.poster-info{
+  margin-top:18px;
+}
+
+.poster-info h3{
+  font-size:1.5rem;
+
+  letter-spacing:-.04em;
+
+  margin-bottom:6px;
+}
+
+.poster-info p{
+  font-size:11px;
+
+  opacity:.45;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   MANIFESTO
+========================================================= */
+
+.manifesto{
+  max-width:1000px;
+}
+
+.manifesto p{
+  font-size:clamp(2rem,4vw,4rem);
+
+  line-height:1.05;
+
+  letter-spacing:-.06em;
+
+  margin-bottom:48px;
+}
+
+/* =========================================================
+   WORK GRID
+========================================================= */
+
+.work-grid{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:24px;
+}
+
+.work-item img{
+  width:100%;
+
+  aspect-ratio:4/5;
+
+  object-fit:cover;
+
+  display:block;
+
+  margin-bottom:16px;
+}
+
+.work-item h3{
+  font-size:1.2rem;
+
+  letter-spacing:-.04em;
+}
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+.archive-list{
+  border-top:1px solid rgba(0,0,0,.08);
+}
+
+.archive-item{
+  padding:32px 0;
+
+  border-bottom:1px solid rgba(0,0,0,.08);
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+}
+
+.archive-item span{
+  font-size:clamp(1.8rem,4vw,4rem);
+
+  letter-spacing:-.06em;
+}
+
+.archive-item p{
+  font-size:11px;
+
+  opacity:.45;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+
+  gap:14px;
+}
+
+.footer-links a{
+  color:#f87272;
+
+  text-decoration:none;
+
+  font-size:clamp(2rem,5vw,5rem);
+
+  letter-spacing:-.06em;
+
+  width:fit-content;
+
+  transition:.25s ease;
+}
+
+.footer-links a:hover{
+  transform:translateX(10px);
+
+  opacity:.4;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .menu-label{
+    display:none;
+  }
+
+  .sidebar{
+    position:relative;
+
+    width:100%;
+    height:auto;
+  }
+
+  main{
+    margin-left:0;
+  }
+
+  .hero{
+    min-height:85vh;
+
+    padding:24px;
+
+    display:flex;
+    align-items:flex-end;
+  }
+
+  .hero-object{
+
+    width:100%;
+    height:70vh;
+
+    opacity:.5;
+
+  }
+
+  .hero-text h1{
+    font-size:22vw;
+  }
+
+  .poster-grid,
+  .work-grid{
+    grid-template-columns:1fr;
+  }
+
+  .archive-item{
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:10px;
+  }
+
+  .section{
+    padding:90px 24px;
   }
 
 }
