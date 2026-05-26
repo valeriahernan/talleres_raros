@@ -6,7 +6,6 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-
 }
 
 html{
@@ -21,11 +20,12 @@ body{
   background:#ffffff;
   color:#000000;
 
-  font-family:'Space Grotesk',sans-serif;
+  font-family:'Space Grotesk', sans-serif;
 
   overflow-x:hidden;
 
   -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 
 /* =========================================================
@@ -76,7 +76,7 @@ body{
 .logo{
   width:120px;
 
-  margin-bottom:60px;
+  margin-bottom:40px;
 }
 
 .logo img{
@@ -86,20 +86,78 @@ body{
 }
 
 /* =========================================================
-   NAV
+   MENU BUTTON
 ========================================================= */
 
-.sidebar nav{
+.menu-toggle{
+  background:none;
+  border:none;
+
+  color:#000000;
+
+  font-size:.82rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.18em;
+
+  font-family:'IBM Plex Mono', monospace;
+
+  width:fit-content;
+
+  margin-bottom:20px;
+
+  transition:.25s ease;
+}
+
+.menu-toggle:hover{
+  transform:translateX(6px);
+
+  opacity:.45;
+}
+
+/* =========================================================
+   NAV MENU
+========================================================= */
+
+.nav-menu{
+
   display:flex;
   flex-direction:column;
 
   gap:22px;
+
+  max-height:0;
+
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:
+    max-height .5s ease,
+    opacity .3s ease;
+
 }
 
-.sidebar nav a{
+/* ACTIVE */
+
+.nav-menu.active{
+
+  max-height:400px;
+
+  opacity:1;
+
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.nav-menu a{
+
   color:#0a3f3b;
 
-  text-decoration:wavy;
+  text-decoration:none;
 
   font-size:.82rem;
 
@@ -114,12 +172,15 @@ body{
   transition:.25s ease;
 
   font-family:'IBM Plex Mono', monospace;
+
 }
 
-.sidebar nav a:hover{
+.nav-menu a:hover{
+
   transform:translateX(8px);
 
   opacity:.45;
+
 }
 
 /* =========================================================
@@ -184,7 +245,7 @@ main{
     radial-gradient(
       circle at center,
       transparent 10%,
-      rgba(78, 255, 24, 0.55)255, 0.55)
+      rgba(78,255,24,.15)
     );
 }
 
@@ -276,6 +337,10 @@ main{
   gap:34px;
 }
 
+.poster{
+  overflow:hidden;
+}
+
 .poster img{
   width:100%;
 
@@ -284,10 +349,6 @@ main{
   object-fit:cover;
 
   display:block;
-
-  filter:
-    grayscale(100%)
-    contrast(110%);
 
   transition:.4s ease;
 }
@@ -362,10 +423,6 @@ main{
   display:block;
 
   margin-bottom:16px;
-
-  filter:
-    grayscale(100%)
-    contrast(110%);
 }
 
 .work-item h3{
@@ -379,13 +436,13 @@ main{
 ========================================================= */
 
 .archive-list{
-  border-top:1px solid rgba(255,255,255,.08);
+  border-top:1px solid rgba(0,0,0,.08);
 }
 
 .archive-item{
   padding:32px 0;
 
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(0,0,0,.08);
 
   display:flex;
 
