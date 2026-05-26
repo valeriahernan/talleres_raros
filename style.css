@@ -27,23 +27,6 @@ body{
   overflow-x:hidden;
 
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-::-webkit-scrollbar{
-  width:8px;
-}
-
-::-webkit-scrollbar-track{
-  background:#050505;
-}
-
-::-webkit-scrollbar-thumb{
-  background:#1f1f1f;
 }
 
 /* =========================================================
@@ -53,20 +36,20 @@ body{
 .menu-label{
   position:fixed;
 
-  right:20px;
-  top:30px;
+  right:18px;
+  top:28px;
 
   writing-mode:vertical-rl;
 
   font-size:11px;
 
-  letter-spacing:.35em;
+  letter-spacing:.3em;
 
   opacity:.45;
 
   z-index:200;
 
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -79,17 +62,12 @@ body{
   top:0;
   left:0;
 
-  width:220px;
+  width:180px;
   height:100vh;
 
-  padding:28px;
-
-  display:flex;
-  flex-direction:column;
+  padding:24px;
 
   z-index:100;
-
-  mix-blend-mode:difference;
 }
 
 /* =========================================================
@@ -97,15 +75,14 @@ body{
 ========================================================= */
 
 .logo{
-  width:140px;
+  width:120px;
 
-  margin-bottom:70px;
-
-  opacity:.95;
+  margin-bottom:60px;
 }
 
 .logo img{
   width:100%;
+
   display:block;
 }
 
@@ -117,7 +94,7 @@ body{
   display:flex;
   flex-direction:column;
 
-  gap:24px;
+  gap:22px;
 }
 
 .sidebar nav a{
@@ -125,17 +102,19 @@ body{
 
   text-decoration:none;
 
-  font-size:.95rem;
-
-  letter-spacing:.16em;
+  font-size:.82rem;
 
   text-transform:uppercase;
 
-  font-family:'IBM Plex Mono',monospace;
+  letter-spacing:.18em;
+
+  width:fit-content;
+
+  opacity:.9;
 
   transition:.25s ease;
 
-  width:fit-content;
+  font-family:'IBM Plex Mono', monospace;
 }
 
 .sidebar nav a:hover{
@@ -149,7 +128,7 @@ body{
 ========================================================= */
 
 main{
-  margin-left:220px;
+  margin-left:180px;
 }
 
 /* =========================================================
@@ -165,6 +144,8 @@ main{
 
   display:flex;
   align-items:center;
+
+  padding-left:7vw;
 }
 
 /* =========================================================
@@ -172,14 +153,16 @@ main{
 ========================================================= */
 
 .hero-object{
-  width:min(70vw,900px);
-
   position:absolute;
 
   right:-10vw;
   top:50%;
 
   transform:translateY(-50%);
+
+  width:min(75vw,1000px);
+
+  opacity:.14;
 }
 
 .hero-object img{
@@ -187,51 +170,77 @@ main{
 
   display:block;
 
-  filter:contrast(110%);
+  animation:slowRotate 40s linear infinite;
 }
 
 /* =========================================================
-   HERO GRAIN
+   HERO OVERLAY
 ========================================================= */
 
-.hero::after{
-  content:"";
-
+.hero-overlay{
   position:absolute;
   inset:0;
 
-  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-
-  opacity:.08;
-
-  pointer-events:none;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 10%,
+      rgba(0,0,0,.55)
+    );
 }
 
 /* =========================================================
-   NOTE
+   HERO TEXT
 ========================================================= */
 
-.note{
-  position:absolute;
-
-  left:8vw;
-  bottom:12vh;
-
-  max-width:320px;
+.hero-text{
+  position:relative;
 
   z-index:10;
 
-  font-size:.85rem;
+  max-width:700px;
+}
 
-  line-height:1.9;
+.hero-text h1{
+  font-size:clamp(4rem,11vw,11rem);
 
-  letter-spacing:.12em;
+  line-height:.8;
+
+  letter-spacing:-.09em;
+
+  margin-bottom:24px;
+}
+
+.hero-text p{
+  font-size:.8rem;
+
+  line-height:2;
+
+  letter-spacing:.16em;
 
   text-transform:uppercase;
 
-  opacity:.55;
+  opacity:.5;
 
-  font-family:'IBM Plex Mono',monospace;
+  max-width:340px;
+
+  font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================================
+   ROTATION
+========================================================= */
+
+@keyframes slowRotate{
+
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+
 }
 
 /* =========================================================
@@ -240,8 +249,6 @@ main{
 
 .section{
   padding:140px 6vw;
-
-  position:relative;
 }
 
 /* =========================================================
@@ -270,12 +277,6 @@ main{
   gap:34px;
 }
 
-.poster{
-  position:relative;
-
-  overflow:hidden;
-}
-
 .poster img{
   width:100%;
 
@@ -287,11 +288,9 @@ main{
 
   filter:
     grayscale(100%)
-    contrast(115%);
+    contrast(110%);
 
-  transition:
-    transform .5s ease,
-    opacity .5s ease;
+  transition:.4s ease;
 }
 
 .poster:hover img{
@@ -305,7 +304,7 @@ main{
 }
 
 .poster-info h3{
-  font-size:1.6rem;
+  font-size:1.5rem;
 
   letter-spacing:-.04em;
 
@@ -321,7 +320,7 @@ main{
 
   text-transform:uppercase;
 
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -335,7 +334,7 @@ main{
 .manifesto p{
   font-size:clamp(2rem,4vw,4rem);
 
-  line-height:1.04;
+  line-height:1.05;
 
   letter-spacing:-.06em;
 
@@ -352,10 +351,6 @@ main{
   grid-template-columns:repeat(3,1fr);
 
   gap:24px;
-}
-
-.work-item{
-  position:relative;
 }
 
 .work-item img{
@@ -375,7 +370,7 @@ main{
 }
 
 .work-item h3{
-  font-size:1.25rem;
+  font-size:1.2rem;
 
   letter-spacing:-.04em;
 }
@@ -397,12 +392,6 @@ main{
 
   justify-content:space-between;
   align-items:center;
-
-  transition:.3s ease;
-}
-
-.archive-item:hover{
-  opacity:.6;
 }
 
 .archive-item span{
@@ -420,16 +409,12 @@ main{
 
   text-transform:uppercase;
 
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
    FOOTER
 ========================================================= */
-
-.footer{
-  padding-bottom:120px;
-}
 
 .footer-links{
   display:flex;
@@ -459,15 +444,6 @@ main{
 }
 
 /* =========================================================
-   IMAGES
-========================================================= */
-
-img{
-  user-select:none;
-  -webkit-user-drag:none;
-}
-
-/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -482,16 +458,6 @@ img{
 
     width:100%;
     height:auto;
-
-    padding:24px;
-
-    mix-blend-mode:normal;
-  }
-
-  .logo{
-    width:120px;
-
-    margin-bottom:40px;
   }
 
   main{
@@ -504,34 +470,17 @@ img{
     padding:24px;
 
     display:flex;
-    flex-direction:column;
-    justify-content:center;
+    align-items:flex-end;
   }
 
   .hero-object{
-    position:relative;
+    width:120vw;
 
-    width:100%;
-
-    right:auto;
-    top:auto;
-
-    transform:none;
+    right:-40vw;
   }
 
-  .note{
-    position:relative;
-
-    left:auto;
-    bottom:auto;
-
-    margin-top:40px;
-
-    max-width:100%;
-  }
-
-  .section{
-    padding:90px 24px;
+  .hero-text h1{
+    font-size:22vw;
   }
 
   .poster-grid,
@@ -547,16 +496,8 @@ img{
     gap:10px;
   }
 
-  .sidebar nav{
-    gap:18px;
-  }
-
-  .sidebar nav a{
-    font-size:.85rem;
-  }
-
-  .section-title{
-    margin-bottom:50px;
+  .section{
+    padding:90px 24px;
   }
 
 }
