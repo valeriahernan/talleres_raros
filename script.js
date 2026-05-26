@@ -260,19 +260,6 @@ if(
 // HERO PARALLAX
 // =========================================================
 
-const heroObject =
-  document.querySelector(".hero-object");
 
-window.addEventListener("scroll", () => {
 
-  if(heroObject){
-
-    const scrollY =
-      window.scrollY * 0.08;
-
-    heroObject.style.transform =
-      `translateY(calc(-50% + ${scrollY}px))`;
-
-  }
-
-});
+;

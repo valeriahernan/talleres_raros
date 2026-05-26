@@ -105,29 +105,25 @@
     <!-- HERO -->
 
     <section class="hero">
+      <model-viewer  src="GLB/3Dtalleres.glb"
 
-      <!-- 3D OBJECT -->
+  autoplay
 
-      <div class="hero-object">
+  auto-rotate
+  auto-rotate-delay="0"
+  rotation-per-second="8deg"
 
-        <model-viewer
-          src="GLB/3Dtalleres.glb"
+  camera-controls
 
-          autoplay
+  shadow-intensity="1"
 
-          disable-zoom
+  exposure="1"
 
-          camera-controls
+  environment-image="neutral"
 
-          interaction-prompt="none"
+  interaction-prompt="none">
 
-          shadow-intensity="4"
-
-          exposure="1"
-
-          environment-image="neutral">
-
-        </model-viewer>
+</model-viewer>
 
       </div>
 
