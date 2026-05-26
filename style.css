@@ -97,9 +97,9 @@ body{
 }
 
 .sidebar nav a{
-  color:#b9fff9;
+  color:#0a3f3b;
 
-  text-decoration:none;
+  text-decoration:dotted;
 
   font-size:.82rem;
 
