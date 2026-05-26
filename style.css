@@ -7,7 +7,6 @@
   padding:0;
   box-sizing:border-box;
 
-  cursor:url("cursors/Studio.cur") 4 4, auto !important;
 }
 
 html{
@@ -19,8 +18,8 @@ html{
 ========================================================= */
 
 body{
-  background:#050505;
-  color:#f2f2f2;
+  background:#ffffff;
+  color:#000000;
 
   font-family:'Space Grotesk',sans-serif;
 
@@ -98,7 +97,7 @@ body{
 }
 
 .sidebar nav a{
-  color:#f2f2f2;
+  color:#b9fff9;
 
   text-decoration:none;
 
@@ -185,7 +184,7 @@ main{
     radial-gradient(
       circle at center,
       transparent 10%,
-      rgba(0,0,0,.55)
+      rgba(78, 255, 24, 0.55)255, 0.55)
     );
 }
 
@@ -424,7 +423,7 @@ main{
 }
 
 .footer-links a{
-  color:#f2f2f2;
+  color:#f87272;
 
   text-decoration:none;
 
