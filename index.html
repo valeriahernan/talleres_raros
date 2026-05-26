@@ -15,6 +15,10 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- MODEL VIEWER -->
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
   <!-- CSS -->
 
   <link rel="stylesheet" href="style.css">
@@ -31,47 +35,47 @@
 
   <!-- SIDEBAR -->
 
-<aside class="sidebar">
+  <aside class="sidebar">
 
-  <div class="logo">
-    <img src="images/talleresraros.png" alt="Talleres Raros">
-  </div>
+    <div class="logo">
+      <img src="images/talleresraros.png" alt="Talleres Raros">
+    </div>
 
-  <!-- BOTON MENU -->
+    <!-- BOTON MENU -->
 
-  <button class="menu-toggle" id="menuToggle">
+    <button class="menu-toggle" id="menuToggle">
 
-    MENU
+      MENU
 
-  </button>
+    </button>
 
-  <!-- NAV -->
+    <!-- NAV -->
 
-  <nav class="nav-menu" id="navMenu">
+    <nav class="nav-menu" id="navMenu">
 
-    <a href="#convocatorias">
-      CONVOCATORIAS
-    </a>
+      <a href="#convocatorias">
+        CONVOCATORIAS
+      </a>
 
-    <a href="#proyecto">
-      PROYECTO
-    </a>
+      <a href="#proyecto">
+        PROYECTO
+      </a>
 
-    <a href="#talleres">
-      TALLERES
-    </a>
+      <a href="#talleres">
+        TALLERES
+      </a>
 
-    <a href="#compilados">
-      COMPILADOS
-    </a>
+      <a href="#compilados">
+        COMPILADOS
+      </a>
 
-    <a href="#contacto">
-      CONTACTO
-    </a>
+      <a href="#contacto">
+        CONTACTO
+      </a>
 
-  </nav>
+    </nav>
 
-</aside>
+  </aside>
 
   <!-- MAIN -->
 
@@ -81,13 +85,41 @@
 
     <section class="hero">
 
+      <!-- 3D OBJECT -->
+
       <div class="hero-object">
 
-        <img src="images/LOGO_ORIGINALBLANCO.png" alt="">
+        <model-viewer
+          src="GLB/3Dtalleres.glb"
+
+          autoplay
+          auto-rotate
+
+          auto-rotate-delay="0"
+
+          rotation-per-second="8deg"
+
+          camera-controls
+
+          disable-zoom
+
+          shadow-intensity="1"
+
+          exposure="1"
+
+          environment-image="neutral"
+
+          interaction-prompt="none">
+
+        </model-viewer>
 
       </div>
 
+      <!-- OVERLAY -->
+
       <div class="hero-overlay"></div>
+
+      <!-- TEXT -->
 
       <div class="hero-text">
 
@@ -301,18 +333,26 @@
     </section>
 
   </main>
-<script>
 
-const toggle = document.getElementById("menuToggle");
-const nav = document.getElementById("navMenu");
+  <!-- MENU SCRIPT -->
 
-toggle.addEventListener("click", () => {
+  <script>
 
-  nav.classList.toggle("active");
+  document.addEventListener("DOMContentLoaded", () => {
 
-});
+    const toggle = document.getElementById("menuToggle");
+    const nav = document.getElementById("navMenu");
 
-</script>
+    toggle.addEventListener("click", () => {
+
+      nav.classList.toggle("active");
+
+    });
+
+  });
+
+  </script>
+
 </body>
 
 </html>
