@@ -4,24 +4,33 @@
 <head>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
 
   <title>Talleres Raros</title>
 
   <!-- FONTS -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
 
   <!-- MODEL VIEWER -->
 
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <!-- CSS -->
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+        href="style.css">
 
 </head>
 
@@ -37,13 +46,19 @@
 
   <aside class="sidebar">
 
+    <!-- LOGO -->
+
     <div class="logo">
-      <img src="images/talleresraros.png" alt="Talleres Raros">
+
+      <img src="images/talleresraros.png"
+           alt="Talleres Raros">
+
     </div>
 
-    <!-- BOTON MENU -->
+    <!-- MENU BUTTON -->
 
-    <button class="menu-toggle" id="menuToggle">
+    <button class="menu-toggle"
+            id="menuToggle">
 
       MENU
 
@@ -51,7 +66,8 @@
 
     <!-- NAV -->
 
-    <nav class="nav-menu" id="navMenu">
+    <nav class="nav-menu"
+         id="navMenu">
 
       <a href="#convocatorias">
         CONVOCATORIAS
@@ -93,11 +109,6 @@
           src="GLB/3Dtalleres.glb"
 
           autoplay
-          auto-rotate
-
-          auto-rotate-delay="0"
-
-          rotation-per-second="8deg"
 
           camera-controls
 
@@ -115,11 +126,11 @@
 
       </div>
 
-      <!-- OVERLAY -->
+      <!-- LIGHT -->
 
       <div class="hero-overlay"></div>
 
-      <!-- TEXT -->
+      <!-- HERO TEXT -->
 
       <div class="hero-text">
 
@@ -139,7 +150,8 @@
 
     <!-- CONVOCATORIAS -->
 
-    <section id="convocatorias" class="section">
+    <section id="convocatorias"
+             class="section">
 
       <div class="section-title">
         CONVOCATORIAS
@@ -149,7 +161,8 @@
 
         <article class="poster">
 
-          <img src="images/talleres.png" alt="">
+          <img src="images/talleres.png"
+               alt="">
 
           <div class="poster-info">
 
@@ -167,7 +180,8 @@
 
         <article class="poster">
 
-          <img src="images/Subscribete.png" alt="">
+          <img src="images/Subscribete.png"
+               alt="">
 
           <div class="poster-info">
 
@@ -189,7 +203,8 @@
 
     <!-- PROYECTO -->
 
-    <section id="proyecto" class="section">
+    <section id="proyecto"
+             class="section">
 
       <div class="section-title">
         PROYECTO
@@ -214,7 +229,8 @@
 
     <!-- TALLERES -->
 
-    <section id="talleres" class="section">
+    <section id="talleres"
+             class="section">
 
       <div class="section-title">
         TALLERES
@@ -224,7 +240,8 @@
 
         <article class="work-item">
 
-          <img src="images/Acerca.png" alt="">
+          <img src="images/Acerca.png"
+               alt="">
 
           <h3>
             ANIMACIÓN EXPERIMENTAL
@@ -234,7 +251,8 @@
 
         <article class="work-item">
 
-          <img src="images/Subscribete.png" alt="">
+          <img src="images/Subscribete.png"
+               alt="">
 
           <h3>
             FOTOGRAFÍA RAW
@@ -244,7 +262,8 @@
 
         <article class="work-item">
 
-          <img src="images/sn.png" alt="">
+          <img src="images/sn.png"
+               alt="">
 
           <h3>
             NARRATIVAS DIGITALES
@@ -258,7 +277,8 @@
 
     <!-- COMPILADOS -->
 
-    <section id="compilados" class="section">
+    <section id="compilados"
+             class="section">
 
       <div class="section-title">
         COMPILADOS
@@ -308,7 +328,8 @@
 
     <!-- CONTACTO -->
 
-    <section id="contacto" class="section footer">
+    <section id="contacto"
+             class="section footer">
 
       <div class="section-title">
         CONTACTO
@@ -338,18 +359,21 @@
 
   <script>
 
-  document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
 
-    const toggle = document.getElementById("menuToggle");
-    const nav = document.getElementById("navMenu");
+      const toggle =
+        document.getElementById("menuToggle");
 
-    toggle.addEventListener("click", () => {
+      const nav =
+        document.getElementById("navMenu");
 
-      nav.classList.toggle("active");
+      toggle.addEventListener("click", () => {
+
+        nav.classList.toggle("active");
+
+      });
 
     });
-
-  });
 
   </script>
 

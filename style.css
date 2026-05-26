@@ -82,8 +82,6 @@ model-viewer{
   padding:24px;
 
   z-index:100;
-
-  backdrop-filter:blur(4px);
 }
 
 /* =========================================================
@@ -120,8 +118,6 @@ model-viewer{
 
   font-family:'IBM Plex Mono', monospace;
 
-  width:fit-content;
-
   margin-bottom:20px;
 
   transition:.25s ease;
@@ -134,11 +130,10 @@ model-viewer{
 }
 
 /* =========================================================
-   NAV MENU
+   NAV
 ========================================================= */
 
 .nav-menu{
-
   display:flex;
   flex-direction:column;
 
@@ -153,27 +148,15 @@ model-viewer{
   transition:
     max-height .5s ease,
     opacity .3s ease;
-
 }
 
-/* =========================================================
-   ACTIVE
-========================================================= */
-
 .nav-menu.active{
-
   max-height:400px;
 
   opacity:1;
-
 }
 
-/* =========================================================
-   LINKS
-========================================================= */
-
 .nav-menu a{
-
   color:#0a3f3b;
 
   text-decoration:none;
@@ -191,15 +174,12 @@ model-viewer{
   transition:.25s ease;
 
   font-family:'IBM Plex Mono', monospace;
-
 }
 
 .nav-menu a:hover{
-
   transform:translateX(8px);
 
   opacity:.45;
-
 }
 
 /* =========================================================
@@ -242,9 +222,7 @@ main{
   width:min(80vw,1100px);
   height:100vh;
 
-  opacity:.92;
-
-  pointer-events:none;
+  opacity:.95;
 }
 
 /* =========================================================
@@ -260,24 +238,85 @@ main{
   --poster-color:transparent;
 
   filter:
-    contrast(110%)
-    saturate(105%);
+    brightness(1.05)
+    contrast(108%)
+    saturate(102%);
 }
 
 /* =========================================================
-   HERO OVERLAY
+   HERO LIGHT
 ========================================================= */
 
 .hero-overlay{
   position:absolute;
+
   inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+}
+
+.hero-overlay::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:60vw;
+  height:60vw;
+
+  border-radius:50%;
+
+  top:50%;
+  left:50%;
+
+  transform:
+    translate(-50%,-50%);
 
   background:
     radial-gradient(
-      circle at center,
-      transparent 15%,
-      rgba(78,255,24,.08)
+      circle,
+      rgba(163,255,127,.22) 0%,
+      rgba(163,255,127,.08) 30%,
+      transparent 70%
     );
+
+  mix-blend-mode:screen;
+
+  animation:
+    rotateLight 18s linear infinite;
+
+  filter:blur(40px);
+
+}
+
+/* =========================================================
+   LIGHT ROTATION
+========================================================= */
+
+@keyframes rotateLight{
+
+  from{
+
+    transform:
+      translate(-50%,-50%)
+      rotate(0deg)
+      translateX(180px)
+      rotate(0deg);
+
+  }
+
+  to{
+
+    transform:
+      translate(-50%,-50%)
+      rotate(360deg)
+      translateX(180px)
+      rotate(-360deg);
+
+  }
+
 }
 
 /* =========================================================
@@ -352,10 +391,6 @@ main{
   gap:34px;
 }
 
-.poster{
-  overflow:hidden;
-}
-
 .poster img{
   width:100%;
 
@@ -372,30 +407,6 @@ main{
   transform:scale(1.015);
 
   opacity:.82;
-}
-
-.poster-info{
-  margin-top:18px;
-}
-
-.poster-info h3{
-  font-size:1.5rem;
-
-  letter-spacing:-.04em;
-
-  margin-bottom:6px;
-}
-
-.poster-info p{
-  font-size:11px;
-
-  opacity:.45;
-
-  letter-spacing:.18em;
-
-  text-transform:uppercase;
-
-  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -440,12 +451,6 @@ main{
   margin-bottom:16px;
 }
 
-.work-item h3{
-  font-size:1.2rem;
-
-  letter-spacing:-.04em;
-}
-
 /* =========================================================
    ARCHIVE
 ========================================================= */
@@ -463,24 +468,6 @@ main{
 
   justify-content:space-between;
   align-items:center;
-}
-
-.archive-item span{
-  font-size:clamp(1.8rem,4vw,4rem);
-
-  letter-spacing:-.06em;
-}
-
-.archive-item p{
-  font-size:11px;
-
-  opacity:.45;
-
-  letter-spacing:.16em;
-
-  text-transform:uppercase;
-
-  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -502,8 +489,6 @@ main{
   font-size:clamp(2rem,5vw,5rem);
 
   letter-spacing:-.06em;
-
-  width:fit-content;
 
   transition:.25s ease;
 }
@@ -529,8 +514,6 @@ main{
 
     width:100%;
     height:auto;
-
-    padding:24px;
   }
 
   main{
@@ -542,7 +525,6 @@ main{
 
     padding:24px;
 
-    display:flex;
     align-items:flex-end;
   }
 
