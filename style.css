@@ -558,3 +558,82 @@ main{
   }
 
 }
+
+/* =========================================================
+   CUSTOM CURSOR FIX
+========================================================= */
+
+.cursor,
+.cursor-follower{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  pointer-events:none;
+
+  z-index:999999 !important;
+
+  transform:
+    translate(-50%, -50%);
+
+}
+
+/* CURSOR DOT */
+
+.cursor{
+
+  width:8px;
+  height:8px;
+
+  background:#000000;
+
+  border-radius:50%;
+}
+
+/* FOLLOWER */
+
+.cursor-follower{
+
+  width:42px;
+  height:42px;
+
+  border:1px solid rgba(0,0,0,.5);
+
+  border-radius:50%;
+
+  transition:
+    width .25s ease,
+    height .25s ease,
+    border .25s ease,
+    background .25s ease,
+    transform .08s linear;
+}
+
+/* HOVER */
+
+.cursor-follower.hover{
+
+  width:64px;
+  height:64px;
+
+  background:rgba(0,0,0,.06);
+}
+
+/* SIDEBAR FIX */
+
+.sidebar,
+.sidebar *{
+
+  cursor:none !important;
+
+}
+
+/* BODY */
+
+body{
+
+  cursor:none;
+
+}
