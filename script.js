@@ -135,6 +135,10 @@ if(
   let followerX = 0;
   let followerY = 0;
 
+  // =========================================================
+  // MOUSE MOVE
+  // =========================================================
+
   document.addEventListener("mousemove", (e) => {
 
     mouseX = e.clientX;
@@ -149,7 +153,7 @@ if(
   });
 
   // =========================================================
-  // FOLLOWER ANIMATION
+  // FOLLOWER SMOOTH
   // =========================================================
 
   function animateFollower(){
@@ -179,7 +183,7 @@ if(
   // =========================================================
 
   document.querySelectorAll(
-    "a, button, .poster, .work-item"
+    "a, button, .poster, .work-item, model-viewer"
   ).forEach((el) => {
 
     el.addEventListener("mouseenter", () => {
@@ -235,7 +239,7 @@ if(
   });
 
   // =========================================================
-  // HIDE CURSOR
+  // HIDE CURSOR WHEN LEAVING WINDOW
   // =========================================================
 
   document.addEventListener("mouseleave", () => {
@@ -255,11 +259,3 @@ if(
   });
 
 }
-
-// =========================================================
-// HERO PARALLAX
-// =========================================================
-
-
-
-;
