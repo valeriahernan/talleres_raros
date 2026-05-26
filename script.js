@@ -23,42 +23,111 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =========================================================
-// FADE IN SECTIONS
+// RIPPLE EFFECT
 // =========================================================
 
-const sections =
-  document.querySelectorAll(".section");
+const canvas =
+  document.getElementById("ripple-canvas");
 
-if(sections.length){
+const ctx =
+  canvas.getContext("2d");
 
-  const observer =
-    new IntersectionObserver((entries) => {
+let ripples = [];
 
-      entries.forEach((entry) => {
+function resizeCanvas(){
 
-        if(entry.isIntersecting){
+  canvas.width =
+    window.innerWidth;
 
-          entry.target.classList.add("visible");
+  canvas.height =
+    window.innerHeight;
 
-        }
+}
 
-      });
+resizeCanvas();
 
-    },{
-      threshold:0.12
-    });
+window.addEventListener(
+  "resize",
+  resizeCanvas
+);
 
-  sections.forEach((section) => {
+// =========================================================
+// MOUSE RIPPLE
+// =========================================================
 
-    observer.observe(section);
+window.addEventListener("mousemove", (e) => {
+
+  ripples.push({
+
+    x:e.clientX,
+    y:e.clientY,
+
+    radius:0,
+
+    alpha:1
 
   });
 
+});
+
+// =========================================================
+// DRAW
+// =========================================================
+
+function animate(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  ripples.forEach((ripple,index) => {
+
+    ripple.radius += 2.5;
+
+    ripple.alpha -= 0.015;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      ripple.x,
+      ripple.y,
+      ripple.radius,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.strokeStyle =
+      `rgba(0,255,120,${ripple.alpha})`;
+
+    ctx.lineWidth = 1;
+
+    ctx.stroke();
+
+    if(ripple.alpha <= 0){
+
+      ripples.splice(index,1);
+
+    }
+
+  });
+
+  requestAnimationFrame(
+    animate
+  );
+
 }
+
+animate();
 
 // =========================================================
 // ACTIVE SECTION
 // =========================================================
+
+const sections =
+  document.querySelectorAll(".section");
 
 const navLinks =
   document.querySelectorAll(".nav-menu a");
@@ -112,150 +181,3 @@ window.addEventListener(
   "load",
   updateActiveSection
 );
-
-// =========================================================
-// CUSTOM CURSOR
-// =========================================================
-
-const cursor =
-  document.querySelector(".cursor");
-
-const follower =
-  document.querySelector(".cursor-follower");
-
-if(
-  window.matchMedia("(pointer:fine)").matches &&
-  cursor &&
-  follower
-){
-
-  let mouseX = 0;
-  let mouseY = 0;
-
-  let followerX = 0;
-  let followerY = 0;
-
-  // =========================================================
-  // MOUSE MOVE
-  // =========================================================
-
-  document.addEventListener("mousemove", (e) => {
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    cursor.style.left =
-      `${mouseX}px`;
-
-    cursor.style.top =
-      `${mouseY}px`;
-
-  });
-
-  // =========================================================
-  // FOLLOWER SMOOTH
-  // =========================================================
-
-  function animateFollower(){
-
-    followerX +=
-      (mouseX - followerX) * 0.12;
-
-    followerY +=
-      (mouseY - followerY) * 0.12;
-
-    follower.style.left =
-      `${followerX}px`;
-
-    follower.style.top =
-      `${followerY}px`;
-
-    requestAnimationFrame(
-      animateFollower
-    );
-
-  }
-
-  animateFollower();
-
-  // =========================================================
-  // HOVER EFFECT
-  // =========================================================
-
-  document.querySelectorAll(
-    "a, button, .poster, .work-item, model-viewer"
-  ).forEach((el) => {
-
-    el.addEventListener("mouseenter", () => {
-
-      follower.classList.add("hover");
-
-    });
-
-    el.addEventListener("mouseleave", () => {
-
-      follower.classList.remove("hover");
-
-    });
-
-  });
-
-  // =========================================================
-  // MAGNETIC EFFECT
-  // =========================================================
-
-  document.querySelectorAll(
-    "a, button"
-  ).forEach((item) => {
-
-    item.addEventListener("mousemove", (e) => {
-
-      const rect =
-        item.getBoundingClientRect();
-
-      const itemCenterX =
-        rect.left + rect.width / 2;
-
-      const itemCenterY =
-        rect.top + rect.height / 2;
-
-      const deltaX =
-        (e.clientX - itemCenterX) * 0.08;
-
-      const deltaY =
-        (e.clientY - itemCenterY) * 0.08;
-
-      item.style.transform =
-        `translate(${deltaX}px, ${deltaY}px)`;
-
-    });
-
-    item.addEventListener("mouseleave", () => {
-
-      item.style.transform = "";
-
-    });
-
-  });
-
-  // =========================================================
-  // HIDE CURSOR WHEN LEAVING WINDOW
-  // =========================================================
-
-  document.addEventListener("mouseleave", () => {
-
-    cursor.style.opacity = "0";
-
-    follower.style.opacity = "0";
-
-  });
-
-  document.addEventListener("mouseenter", () => {
-
-    cursor.style.opacity = "1";
-
-    follower.style.opacity = "1";
-
-  });
-
-}
