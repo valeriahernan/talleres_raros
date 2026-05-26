@@ -57,7 +57,7 @@ if(sections.length){
 }
 
 // =========================================================
-// ACTIVE MENU LINK
+// ACTIVE SECTION
 // =========================================================
 
 const navLinks =
@@ -129,25 +129,57 @@ if(
   follower
 ){
 
+  let mouseX = 0;
+  let mouseY = 0;
+
+  let followerX = 0;
+  let followerY = 0;
+
   document.addEventListener("mousemove", (e) => {
 
-    const x = e.clientX;
-    const y = e.clientY;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-    cursor.style.left = `${x}px`;
-    cursor.style.top = `${y}px`;
+    cursor.style.left =
+      `${mouseX}px`;
 
-    follower.style.left = `${x}px`;
-    follower.style.top = `${y}px`;
+    cursor.style.top =
+      `${mouseY}px`;
 
   });
 
   // =========================================================
-  // HOVER
+  // FOLLOWER ANIMATION
+  // =========================================================
+
+  function animateFollower(){
+
+    followerX +=
+      (mouseX - followerX) * 0.12;
+
+    followerY +=
+      (mouseY - followerY) * 0.12;
+
+    follower.style.left =
+      `${followerX}px`;
+
+    follower.style.top =
+      `${followerY}px`;
+
+    requestAnimationFrame(
+      animateFollower
+    );
+
+  }
+
+  animateFollower();
+
+  // =========================================================
+  // HOVER EFFECT
   // =========================================================
 
   document.querySelectorAll(
-    "a, button, .work-item, .poster"
+    "a, button, .poster, .work-item"
   ).forEach((el) => {
 
     el.addEventListener("mouseenter", () => {
@@ -209,6 +241,7 @@ if(
   document.addEventListener("mouseleave", () => {
 
     cursor.style.opacity = "0";
+
     follower.style.opacity = "0";
 
   });
@@ -216,6 +249,7 @@ if(
   document.addEventListener("mouseenter", () => {
 
     cursor.style.opacity = "1";
+
     follower.style.opacity = "1";
 
   });
@@ -242,82 +276,3 @@ window.addEventListener("scroll", () => {
   }
 
 });
-
-// =========================================================
-// ASCII FX
-// =========================================================
-
-const canvas =
-  document.getElementById("canvas");
-
-if(canvas){
-
-  const ctx =
-    canvas.getContext("2d");
-
-  canvas.width =
-    window.innerWidth;
-
-  canvas.height =
-    window.innerHeight;
-
-  const chars = "01";
-  const fontSize = 16;
-
-  const columns =
-    canvas.width / fontSize;
-
-  const drops =
-    Array(Math.floor(columns)).fill(1);
-
-  function draw(){
-
-    ctx.fillStyle =
-      "rgba(255,255,255,0.04)";
-
-    ctx.fillRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-    ctx.fillStyle =
-      "#7dff72";
-
-    ctx.font =
-      fontSize + "px monospace";
-
-    drops.forEach((y,i) => {
-
-      const text =
-        chars[
-          Math.floor(
-            Math.random() * chars.length
-          )
-        ];
-
-      ctx.fillText(
-        text,
-        i * fontSize,
-        y * fontSize
-      );
-
-      if(
-        y * fontSize > canvas.height &&
-        Math.random() > 0.975
-      ){
-
-        drops[i] = 0;
-
-      }
-
-      drops[i]++;
-
-    });
-
-  }
-
-  setInterval(draw, 33);
-
-}

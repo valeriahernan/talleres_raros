@@ -26,21 +26,22 @@ body{
 
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
-
-  cursor:url("cursors/Studio.cur"), auto;
 }
 
 /* =========================================================
-   CURSOR
+   REMOVE DEFAULT CURSOR
 ========================================================= */
 
+html,
+body,
 a,
 button,
-.menu-toggle,
-.nav-menu,
+nav,
 .sidebar,
 model-viewer{
-  cursor:url("cursors/Studio.cur"), pointer;
+
+  cursor:none !important;
+
 }
 
 /* =========================================================
@@ -81,7 +82,7 @@ model-viewer{
 
   padding:24px;
 
-  z-index:100;
+  z-index:9999;
 }
 
 /* =========================================================
@@ -130,7 +131,7 @@ model-viewer{
 }
 
 /* =========================================================
-   NAV
+   NAV MENU
 ========================================================= */
 
 .nav-menu{
@@ -145,6 +146,10 @@ model-viewer{
 
   opacity:0;
 
+  position:relative;
+
+  z-index:99999;
+
   transition:
     max-height .5s ease,
     opacity .3s ease;
@@ -155,6 +160,10 @@ model-viewer{
 
   opacity:1;
 }
+
+/* =========================================================
+   LINKS
+========================================================= */
 
 .nav-menu a{
   color:#0a3f3b;
@@ -223,6 +232,8 @@ main{
   height:100vh;
 
   opacity:.95;
+
+  pointer-events:none;
 }
 
 /* =========================================================
@@ -236,6 +247,8 @@ main{
   background:transparent;
 
   --poster-color:transparent;
+
+  pointer-events:none;
 
   filter:
     brightness(1.05)
@@ -363,6 +376,20 @@ main{
 
 .section{
   padding:140px 6vw;
+
+  opacity:0;
+
+  transform:translateY(40px);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.section.visible{
+  opacity:1;
+
+  transform:translateY(0);
 }
 
 /* =========================================================
@@ -391,6 +418,10 @@ main{
   gap:34px;
 }
 
+.poster{
+  overflow:hidden;
+}
+
 .poster img{
   width:100%;
 
@@ -407,6 +438,30 @@ main{
   transform:scale(1.015);
 
   opacity:.82;
+}
+
+.poster-info{
+  margin-top:18px;
+}
+
+.poster-info h3{
+  font-size:1.5rem;
+
+  letter-spacing:-.04em;
+
+  margin-bottom:6px;
+}
+
+.poster-info p{
+  font-size:11px;
+
+  opacity:.45;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -500,6 +555,76 @@ main{
 }
 
 /* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor{
+
+  position:fixed;
+
+  width:8px;
+  height:8px;
+
+  background:#000;
+
+  border-radius:50%;
+
+  top:0;
+  left:0;
+
+  pointer-events:none;
+
+  z-index:999999999;
+
+  transform:
+    translate(-50%,-50%);
+
+}
+
+.cursor-follower{
+
+  position:fixed;
+
+  width:42px;
+  height:42px;
+
+  border:1px solid rgba(0,0,0,.45);
+
+  border-radius:50%;
+
+  top:0;
+  left:0;
+
+  pointer-events:none;
+
+  z-index:999999999;
+
+  transform:
+    translate(-50%,-50%);
+
+  transition:
+    width .25s ease,
+    height .25s ease,
+    background .25s ease,
+    border .25s ease,
+    transform .08s linear;
+
+  backdrop-filter:invert(1);
+
+}
+
+.cursor-follower.hover{
+
+  width:72px;
+  height:72px;
+
+  background:rgba(255,255,255,.06);
+
+  border-color:#000;
+
+}
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -557,83 +682,9 @@ main{
     padding:90px 24px;
   }
 
-}
-
-/* =========================================================
-   CUSTOM CURSOR FIX
-========================================================= */
-
-.cursor,
-.cursor-follower{
-
-  position:fixed;
-
-  top:0;
-  left:0;
-
-  pointer-events:none;
-
-  z-index:999999 !important;
-
-  transform:
-    translate(-50%, -50%);
-
-}
-
-/* CURSOR DOT */
-
-.cursor{
-
-  width:8px;
-  height:8px;
-
-  background:#000000;
-
-  border-radius:50%;
-}
-
-/* FOLLOWER */
-
-.cursor-follower{
-
-  width:42px;
-  height:42px;
-
-  border:1px solid rgba(0,0,0,.5);
-
-  border-radius:50%;
-
-  transition:
-    width .25s ease,
-    height .25s ease,
-    border .25s ease,
-    background .25s ease,
-    transform .08s linear;
-}
-
-/* HOVER */
-
-.cursor-follower.hover{
-
-  width:64px;
-  height:64px;
-
-  background:rgba(0,0,0,.06);
-}
-
-/* SIDEBAR FIX */
-
-.sidebar,
-.sidebar *{
-
-  cursor:none !important;
-
-}
-
-/* BODY */
-
-body{
-
-  cursor:none;
+  .cursor,
+  .cursor-follower{
+    display:none;
+  }
 
 }
