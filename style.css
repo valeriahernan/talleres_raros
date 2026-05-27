@@ -199,13 +199,12 @@ body{
 }
 
 .nav-menu a{
-  color:#c04296;
+  color:#ad2c82;
 
   text-decoration:none;
 
   font-size:.82rem;
 
-  text-transform:uppercase;
 
   letter-spacing:.18em;
 
@@ -255,7 +254,7 @@ main{
   position:absolute;
 
   top:0;
-  right:-4vw;
+  right:-9vw;
 
   width:72vw;
   height:100vh;
