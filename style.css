@@ -28,13 +28,11 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-
 /* =========================================================
    DISPLAY FONT
 ========================================================= */
 
 .hero-text h1,
-.manifesto p,
 .footer-links a{
   font-family:"Bitcount Prop Single", sans-serif;
   font-weight:600;
@@ -53,6 +51,25 @@ body{
 
   letter-spacing:.12em;
 }
+
+/* =========================================================
+   PROJECT TEXT
+========================================================= */
+
+.manifesto p{
+  font-family:'IBM Plex Mono', monospace;
+
+  font-weight:400;
+
+  font-size:clamp(1.2rem,2vw,2rem);
+
+  letter-spacing:.02em;
+
+  line-height:1.8;
+
+  max-width:900px;
+}
+
 /* =========================================================
    RIPPLE CANVAS
 ========================================================= */
@@ -289,27 +306,39 @@ main{
 }
 
 /* =========================================================
-   DISPLAY FONT
+   HERO TEXT
 ========================================================= */
 
-.hero-text h1,
-.footer-links a{
-  font-family:"Bitcount Prop Single", sans-serif;
-  font-weight:600;
+.hero-text{
+  position:relative;
+
+  z-index:5;
+
+  max-width:700px;
 }
 
-/* =========================================================
-   PROJECT TEXT
-========================================================= */
+.hero-text h1{
+  font-size:clamp(4rem,11vw,11rem);
 
-.manifesto p{
-  font-family:'IBM Plex Mono', monospace;
+  line-height:.82;
 
-  font-weight:400;
+  letter-spacing:-.08em;
 
-  letter-spacing:.02em;
+  margin-bottom:24px;
+}
 
-  line-height:1.8;
+.hero-text p{
+  font-size:.8rem;
+
+  line-height:2;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  opacity:.5;
+
+  max-width:340px;
 }
 
 /* =========================================================
@@ -342,8 +371,6 @@ main{
 
 .section-title{
   font-size:clamp(2rem,6vw,6rem);
-
-  letter-spacing:-.07em;
 
   margin-bottom:70px;
 
@@ -443,22 +470,6 @@ main{
 }
 
 /* =========================================================
-   MANIFESTO
-========================================================= */
-
-.manifesto{
-  max-width:1000px;
-}
-
-.manifesto p{
-  font-size:clamp(2rem,4vw,4rem);
-
-  line-height:1.05;
-
-  letter-spacing:-.06em;
-}
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -483,6 +494,137 @@ main{
 
 .footer-links a:hover{
   opacity:.45;
+}
+
+/* =========================================================
+   COMPILADOS
+========================================================= */
+
+.comp-grid{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:28px;
+
+  align-items:flex-start;
+}
+
+/* =========================================================
+   COMP ITEM
+========================================================= */
+
+.comp-item{
+  position:relative;
+
+  display:block;
+
+  width:105px;
+
+  overflow:hidden;
+
+  transition:
+    transform .35s ease,
+    opacity .35s ease;
+}
+
+.comp-item img{
+  width:100%;
+
+  aspect-ratio:1/1;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.comp-item:hover{
+  opacity:.8;
+
+  z-index:10;
+}
+
+/* =========================================================
+   RANDOM LAYOUT
+========================================================= */
+
+.comp-item:nth-child(1){
+  margin-top:40px;
+  transform:rotate(-3deg);
+}
+
+.comp-item:nth-child(2){
+  margin-top:0px;
+  transform:rotate(2deg);
+}
+
+.comp-item:nth-child(3){
+  margin-top:80px;
+  transform:rotate(-1deg);
+}
+
+.comp-item:nth-child(4){
+  margin-top:20px;
+  transform:rotate(4deg);
+}
+
+.comp-item:nth-child(5){
+  margin-top:100px;
+  transform:rotate(-4deg);
+}
+
+.comp-item:nth-child(6){
+  margin-top:10px;
+  transform:rotate(1deg);
+}
+
+.comp-item:nth-child(7){
+  margin-top:70px;
+  transform:rotate(-2deg);
+}
+
+.comp-item:nth-child(8){
+  margin-top:30px;
+  transform:rotate(3deg);
+}
+
+.comp-item:nth-child(9){
+  margin-top:110px;
+  transform:rotate(-5deg);
+}
+
+.comp-item:nth-child(10){
+  margin-top:50px;
+  transform:rotate(2deg);
+}
+
+.comp-item:nth-child(11){
+  margin-top:0px;
+  transform:rotate(-2deg);
+}
+
+/* =========================================================
+   RANDOM SIZES
+========================================================= */
+
+.comp-item:nth-child(2){
+  width:120px;
+}
+
+.comp-item:nth-child(5){
+  width:90px;
+}
+
+.comp-item:nth-child(7){
+  width:140px;
+}
+
+.comp-item:nth-child(9){
+  width:100px;
 }
 
 /* =========================================================
@@ -615,6 +757,19 @@ main{
   .work-grid,
   .work-modal-content{
     grid-template-columns:1fr;
+  }
+
+  .comp-grid{
+    gap:16px;
+  }
+
+  .comp-item{
+    width:42vw;
+  }
+
+  .comp-item:nth-child(n){
+    margin-top:0;
+    transform:none;
   }
 
   .section{
