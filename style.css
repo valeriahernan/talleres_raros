@@ -1,5 +1,5 @@
 :root{
-  --bg:#d9d9d9;
+  --bg:#d7d7d7;
   --text:#111;
   --accent:#ba7dff;
 }
@@ -24,8 +24,8 @@ body{
   top:0;
   width:180px;
   height:100vh;
-  z-index:1000;
   padding:20px;
+  z-index:1000;
 }
 
 .menu-label{
@@ -33,7 +33,6 @@ body{
   right:20px;
   top:20px;
   writing-mode:vertical-rl;
-  z-index:1000;
 }
 
 /* LINKS */
@@ -48,26 +47,34 @@ a{
   height:100vh;
 }
 
-/* SECTIONS (INSTALACIÓN) */
+/* SCENES */
 .section{
   position:absolute;
   inset:0;
-
   opacity:0;
   pointer-events:none;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
-
   padding:120px 6vw;
-
   transition:opacity .6s ease;
 }
 
 .section.active{
   opacity:1;
   pointer-events:auto;
+}
+
+/* HERO */
+.hero-object{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+
+.hero-text{
+  position:relative;
+  z-index:3;
 }
 
 /* TITLES */
@@ -81,30 +88,38 @@ a{
 .section p{
   max-width:900px;
   line-height:1.9;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
-/* HERO LAYERS */
-.hero-object{
-  position:absolute;
-  inset:0;
-  z-index:1;
+/* TALLERES */
+.taller-block{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
 }
 
-.hero-text{
-  position:relative;
-  z-index:3;
+.taller-desc{
+  opacity:.6;
+  font-size:.9rem;
+  margin-top:6px;
 }
 
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  z-index:2;
+/* COMPILADOS */
+.comp-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
 }
 
-/* MENU ACTIVE (opcional visual) */
-.nav-menu a.active{
-  background:var(--accent);
-  color:white;
-  padding:2px 6px;
+.comp-release{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  padding-bottom:10px;
+}
+
+.comp-code,.comp-year{
+  opacity:.5;
+  font-size:.75rem;
 }
