@@ -289,39 +289,27 @@ main{
 }
 
 /* =========================================================
-   HERO TEXT
+   DISPLAY FONT
 ========================================================= */
 
-.hero-text{
-  position:relative;
-
-  z-index:5;
-
-  max-width:700px;
+.hero-text h1,
+.footer-links a{
+  font-family:"Bitcount Prop Single", sans-serif;
+  font-weight:600;
 }
 
-.hero-text h1{
-  font-size:clamp(4rem,11vw,11rem);
+/* =========================================================
+   PROJECT TEXT
+========================================================= */
 
-  line-height:.82;
+.manifesto p{
+  font-family:'IBM Plex Mono', monospace;
 
-  letter-spacing:-.08em;
+  font-weight:400;
 
-  margin-bottom:24px;
-}
+  letter-spacing:.02em;
 
-.hero-text p{
-  font-size:.8rem;
-
-  line-height:2;
-
-  letter-spacing:.16em;
-
-  text-transform:uppercase;
-
-  opacity:.5;
-
-  max-width:340px;
+  line-height:1.8;
 }
 
 /* =========================================================
