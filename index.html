@@ -8,40 +8,36 @@
 
   <title>Talleres Raros</title>
 
-  <link rel="icon" type="image/png" href="images/LOGO_ORIGINALBLANCO.png">
+  <link rel="icon" href="images/LOGO_ORIGINALBLANCO.png">
 
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- MODEL VIEWER -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-  <!-- BACKGROUND FX -->
-  <canvas id="ripple-canvas"></canvas>
-
-  <!-- MENU LABEL -->
+  <!-- MENU -->
   <div class="menu-label">TALLERES RAROS</div>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
 
     <div class="logo">
-      <img src="images/talleresraros.png" alt="Talleres Raros">
+      <img src="images/talleresraros.png" alt="">
     </div>
 
     <button class="menu-toggle">MENU</button>
 
     <nav class="nav-menu">
+      <a href="#hero">INICIO</a>
       <a href="#convocatorias">CONVOCATORIAS</a>
       <a href="#proyecto">PROYECTO</a>
       <a href="#talleres">TALLERES</a>
@@ -51,11 +47,11 @@
 
   </aside>
 
-  <!-- MAIN -->
-  <main>
+  <!-- STAGE (INSTALACIÓN) -->
+  <main class="stage">
 
     <!-- HERO -->
-    <section class="hero" id="hero">
+    <section class="section active" id="hero">
 
       <div class="hero-object">
         <model-viewer
@@ -85,47 +81,57 @@
 
       <h2 class="section-title">CONVOCATORIAS ✩</h2>
 
-      <div class="convocatoria-text">
+      <p>CONVOCATORIA 2026 — TALLERES RAROS ㄨ RESIDENCIA PACÍFICA</p>
 
-        <p>CONVOCATORIA 2026 — TALLERES RAROS ㄨ RESIDENCIA PACÍFICA</p>
+      <p>
+        ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform" target="_blank">
+          Taller de Producción para Personas Trans
+        </a>
+      </p>
 
-        <p>
-          ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform" target="_blank">
-            Taller de Producción para Personas Trans
-          </a>
-        </p>
+      <p>☪ Taller de Composición Postdigital</p>
+      <p>☪ Taller de Letras</p>
+      <p>☪ Taller de Autoproducción Musical</p>
 
-        <p>☪ Taller de Composición Postdigital</p>
-        <p>☪ Taller de Letras</p>
-
-        <p>
-          ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform" target="_blank">
-            Masterclass Javiera Electra
-          </a>
-        </p>
-
-      </div>
+      <p>
+        ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform" target="_blank">
+          Masterclass Javiera Electra
+        </a>
+      </p>
 
     </section>
 
     <!-- PROYECTO -->
-    <section class="section manifesto" id="proyecto">
+    <section class="section" id="proyecto">
 
       <h2 class="section-title">PROYECTO ✩</h2>
 
       <p>
-        Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de la academia tradicional.
+        Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales.
       </p>
 
       <p>
-        Fundado en 2019 por anthï, el proyecto explora la producción musical como práctica colectiva y experimental.
+        Fundado en 2019 por anthï, el proyecto implementa talleres y masterclasses con enfoque experimental, colectivo y crítico.
       </p>
 
       <p>
-        EQUIPO:
-        <a href="https://anthi.neocities.org" target="_blank">anthï</a>
-        ·
+        ꧁ᬊᬁ EQUIPO DOCENTE<br>
+        <a href="https://anthi.neocities.org" target="_blank">anthï</a> ✴︎
         <a href="https://www.tatuara.net" target="_blank">Tatu Vergara</a>
+      </p>
+
+      <p>
+        ꧁ᬊᬁ DOCENTES INVITADES<br>
+        2026 : Javiera Electra ✴︎ lilen ✴︎ Hypereikon<br>
+        2025 : Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo<br>
+        2022 : Yaima Cat ✴︎ Niños Indigo<br>
+        2021 : Dadalú ✴︎ Violeta Castillo<br>
+        2020 : vimvau
+      </p>
+
+      <p>
+        DISEÑO GRÁFICO Y WEB<br>
+        <a href="https://www.instagram.com/talleresraros" target="_blank">@inpar</a>
       </p>
 
     </section>
@@ -135,13 +141,9 @@
 
       <h2 class="section-title">TALLERES ✩</h2>
 
-      <div class="talleres-inline">
-        <div class="taller-item">Taller de Autoproducción Musical</div>
-        <span>𖥔</span>
-        <div class="taller-item">Taller de Producción para Personas Trans</div>
-        <span>𖥔</span>
-        <div class="taller-item">Taller de Composición Postdigital</div>
-      </div>
+      <p>Taller de Autoproducción Musical</p>
+      <p>Taller de Producción para Personas Trans</p>
+      <p>Taller de Composición Postdigital</p>
 
     </section>
 
@@ -150,17 +152,11 @@
 
       <h2 class="section-title">COMPILADOS ✩</h2>
 
-      <div class="comp-list">
-
-        <div class="comp-release">
-          <span class="comp-code">TR011</span>
-          <a href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011" target="_blank">
-            me he perdido en muchas partes
-          </a>
-          <span class="comp-year">2025</span>
-        </div>
-
-      </div>
+      <p>
+        TR011 — me he perdido en muchas partes (2025)<br>
+        TR010 — El viejo, la flor y la luz (2024)<br>
+        TR009 — Super Sayonara (2023)
+      </p>
 
     </section>
 
@@ -169,40 +165,18 @@
 
       <h2 class="section-title">CONTACTO ✩</h2>
 
-      <div class="contact-block">
+      <p>talleresraros@gmail.com</p>
 
-        <p>stay ⋆ friends</p>
-
-        <a href="mailto:talleresraros@gmail.com">talleresraros@gmail.com</a>
-
-        <div>
-          <a href="https://www.instagram.com/talleresraros" target="_blank">@instagram</a>
-          /
-          <a href="https://talleresraros.bandcamp.com" target="_blank">bandcamp</a>
-        </div>
-
-      </div>
+      <p>
+        <a href="https://instagram.com/talleresraros" target="_blank">@instagram</a><br>
+        <a href="https://talleresraros.bandcamp.com" target="_blank">bandcamp</a>
+      </p>
 
     </section>
 
   </main>
 
-  <!-- MODAL -->
-  <div class="work-modal">
-    <button class="close-modal">Close</button>
-
-    <div class="work-modal-content">
-      <img id="modal-image" src="">
-      <div class="work-info">
-        <h2 id="modal-title"></h2>
-        <p id="modal-description"></p>
-      </div>
-    </div>
-
-  </div>
-
   <script src="script.js" defer></script>
 
 </body>
-
 </html>
