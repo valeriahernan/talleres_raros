@@ -698,28 +698,70 @@ main{
 /* =========================================================
    MOBILE
 ========================================================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:900px){
+
+  body{
+    overflow-x:hidden;
+  }
+
+  /* =========================
+     MENU
+  ========================= */
 
   .menu-label{
     display:none;
   }
 
   .sidebar{
-    position:relative;
+    position:fixed;
+
+    top:0;
+    left:0;
 
     width:100%;
+
     height:auto;
 
-    padding:20px 24px;
+    padding:18px 20px;
+
+    background:#f8f6f2;
+
+    z-index:9999;
   }
+
+  .logo{
+    width:90px;
+
+    margin-bottom:18px;
+  }
+
+  .nav-menu{
+    gap:16px;
+  }
+
+  .nav-menu a{
+    font-size:.72rem;
+  }
+
+  /* =========================
+     MAIN
+  ========================= */
 
   main{
     margin-left:0;
+    padding-top:120px;
   }
 
+  /* =========================
+     HERO
+  ========================= */
+
   .hero{
-    min-height:85vh;
+    min-height:100svh;
 
     padding:24px;
 
@@ -727,41 +769,133 @@ main{
   }
 
   .hero-object{
-    width:100%;
-    height:70vh;
+    width:120vw;
 
-    right:0;
+    height:58vh;
 
-    opacity:.5;
+    right:-10vw;
+
+    top:4vh;
+
+    opacity:.38;
+  }
+
+  .hero-object model-viewer{
+    transform:none;
+  }
+
+  .hero-text{
+    max-width:100%;
   }
 
   .hero-text h1{
-    font-size:22vw;
+    font-size:20vw;
+
+    line-height:.82;
+
+    letter-spacing:-.09em;
 
     left:0;
   }
 
-  .poster-grid,
-  .work-grid,
-  .work-modal-content{
-    grid-template-columns:1fr;
+  .hero-text p{
+    font-size:.68rem;
+
+    line-height:1.7;
+
+    max-width:260px;
   }
 
+  /* =========================
+     SECTIONS
+  ========================= */
+
+  .section{
+    padding:70px 24px;
+  }
+
+  .section-title{
+    font-size:1rem;
+
+    line-height:1.6;
+
+    margin-bottom:34px;
+
+    letter-spacing:.18em;
+  }
+
+  /* =========================
+     PROYECTO
+  ========================= */
+
+  .manifesto p{
+    font-size:1rem;
+
+    line-height:1.9;
+  }
+
+  /* =========================
+     TALLERES
+  ========================= */
+
+  .work-grid{
+    grid-template-columns:1fr;
+
+    gap:18px;
+  }
+
+  .work-item img{
+    aspect-ratio:4/5;
+  }
+
+  /* =========================
+     COMPILADOS
+  ========================= */
+
   .comp-grid{
-    gap:16px;
+    gap:12px;
+
+    justify-content:center;
   }
 
   .comp-item{
-    width:42vw;
+    width:28vw !important;
+
+    margin-top:0 !important;
+
+    transform:none !important;
   }
 
-  .comp-item:nth-child(n){
-    margin-top:0;
-    transform:none;
+  /* =========================
+     FOOTER
+  ========================= */
+
+  .footer-links{
+    gap:10px;
   }
 
-  .section{
-    padding:90px 24px;
+  .footer-links a{
+    font-size:1.2rem;
+
+    line-height:1.2;
+  }
+
+  /* =========================
+     MODAL
+  ========================= */
+
+  .work-modal{
+    padding:20px;
+  }
+
+  .work-modal-content{
+    grid-template-columns:1fr;
+
+    gap:20px;
+  }
+
+  .work-info h2{
+    font-size:1.5rem;
   }
 
 }
