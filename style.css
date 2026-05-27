@@ -35,7 +35,7 @@ body{
 .hero-text h1,
 .footer-links a{
   font-family:'IBM Plex Mono', monospace;
-  font-weight:500;
+  font-weight:300;
 }
 
 /* =========================================================
@@ -296,7 +296,7 @@ main{
   background:
     radial-gradient(
       circle at center,
-      rgba(0,153,140,.06) 0%,
+      rgba(255, 255, 255, 0.06) 0%,
       rgba(255,255,255,0) 65%
     );
 
