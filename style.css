@@ -34,8 +34,8 @@ body{
 
 .hero-text h1,
 .footer-links a{
-  font-family:"Bitcount Prop Single", sans-serif;
-  font-weight:600;
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:500;
 }
 
 /* =========================================================
