@@ -13,12 +13,21 @@ html{
 }
 
 /* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+  --bg:#d9d9d9;
+  --text:#111;
+}
+
+/* =========================================================
    BODY
 ========================================================= */
 
 body{
-  background:#f8f6f2;
-  color:#111111;
+  background:var(--bg);
+  color:var(--text);
 
   font-family:'IBM Plex Mono', monospace;
 
@@ -29,47 +38,7 @@ body{
 }
 
 /* =========================================================
-   DISPLAY FONT
-========================================================= */
-
-.hero-text h1,
-.footer-links a{
-  font-family:'IBM Plex Mono', monospace;
-  font-weight:700;
-}
-
-/* =========================================================
-   H2 TITLES
-========================================================= */
-
-.section-title,
-.work-info h2{
-  font-family:'IBM Plex Mono', monospace;
-  font-weight:500;
-
-  letter-spacing:.12em;
-}
-
-/* =========================================================
-   PROJECT TEXT
-========================================================= */
-
-.manifesto p{
-  font-family:'IBM Plex Mono', monospace;
-
-  font-weight:400;
-
-  font-size:clamp(1.2rem,2vw,2rem);
-
-  letter-spacing:.02em;
-
-  line-height:1.8;
-
-  max-width:900px;
-}
-
-/* =========================================================
-   RIPPLE CANVAS
+   RIPPLE CANVAS (FONDO)
 ========================================================= */
 
 #ripple-canvas{
@@ -79,13 +48,22 @@ body{
   width:100%;
   height:100%;
 
-  z-index:-1;
+  z-index:0;
 
   pointer-events:none;
 
-  opacity:.45;
+  opacity:.35;
+}
 
-  background:transparent;
+/* =========================================================
+   LAYERS GLOBAL
+========================================================= */
+
+main,
+.sidebar,
+.menu-label{
+  position:relative;
+  z-index:2;
 }
 
 /* =========================================================
@@ -94,14 +72,12 @@ body{
 
 .menu-label{
   position:fixed;
-
   right:18px;
   top:28px;
 
   writing-mode:vertical-rl;
 
   font-size:11px;
-
   letter-spacing:.3em;
 
   opacity:.35;
@@ -123,8 +99,6 @@ body{
   height:100vh;
 
   padding:24px;
-
-  z-index:1000;
 }
 
 /* =========================================================
@@ -133,7 +107,6 @@ body{
 
 .logo{
   width:120px;
-
   margin-bottom:40px;
 }
 
@@ -150,73 +123,41 @@ body{
   background:none;
   border:none;
 
-  color:#00998c;
-
   font-size:.82rem;
-
-  text-transform:uppercase;
-
   letter-spacing:.18em;
 
   cursor:pointer;
 
-  font-family:'IBM Plex Mono', monospace;
-
-  margin-bottom:20px;
-
-  transition:opacity .25s ease;
-}
-
-.menu-toggle:hover{
-  opacity:.5;
+  color:#333;
 }
 
 /* =========================================================
-   NAV MENU
+   NAV
 ========================================================= */
 
 .nav-menu{
   display:flex;
   flex-direction:column;
-
   gap:22px;
 
   max-height:0;
-
   overflow:hidden;
-
   opacity:0;
 
-  transition:
-    max-height .5s ease,
-    opacity .3s ease;
+  transition:.3s ease;
 }
 
 .nav-menu.active{
   max-height:500px;
-
   opacity:1;
 }
 
 .nav-menu a{
-  color:#ba7dff;
-
+  color:#444;
   text-decoration:none;
 
   font-size:.82rem;
-
-
   letter-spacing:.18em;
-
-  transition:
-    transform .25s ease,
-    opacity .25s ease;
-}
-
-.nav-menu a:hover{
-  transform:translateX(8px);
-
-  opacity:.45;
 }
 
 /* =========================================================
@@ -236,32 +177,29 @@ main{
 
   min-height:100vh;
 
-  overflow:hidden;
-
   display:flex;
   align-items:center;
 
   padding-left:7vw;
 
-  isolation:isolate;
+  overflow:hidden;
 }
 
 /* =========================================================
-   HERO OBJECT
+   GLB = FONDO
 ========================================================= */
 
 .hero-object{
   position:absolute;
 
-  top:0;
-  right:-9vw;
+  inset:0;
 
-  width:72vw;
-  height:100vh;
+  width:100%;
+  height:100%;
 
   z-index:1;
 
-  overflow:hidden;
+  pointer-events:none;
 }
 
 .hero-object model-viewer{
@@ -269,18 +207,10 @@ main{
   height:100%;
 
   background:transparent;
-
-  --poster-color:transparent;
-
-  opacity:.95;
-
-  filter:contrast(1.02);
-  
-  transform:translateX(-2vw);
 }
 
 /* =========================================================
-   HERO OVERLAY
+   OVERLAY
 ========================================================= */
 
 .hero-overlay{
@@ -291,40 +221,29 @@ main{
   z-index:2;
 
   pointer-events:none;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255,255,255,0) 65%
-    );
-
-  mix-blend-mode:multiply;
 }
+
 /* =========================================================
-   HERO TEXT
+   TEXTO HERO
 ========================================================= */
 
 .hero-text{
   position:relative;
 
-  z-index:5;
+  z-index:3;
 
   max-width:500px;
 }
 
 .hero-text h1{
+  font-family:"Geist Mono", monospace;
+
   font-size:clamp(3.8rem,9vw,8rem);
 
   line-height:.86;
-
   letter-spacing:-.08em;
 
   margin-bottom:24px;
-
-  position:relative;
-
-  left:-4px;
 }
 
 .hero-text p{
@@ -342,22 +261,6 @@ main{
 }
 
 /* =========================================================
-   LIGHT ROTATION
-========================================================= */
-
-@keyframes rotateLight{
-
-  from{
-    transform:rotate(0deg) scale(1.4);
-  }
-
-  to{
-    transform:rotate(360deg) scale(1.4);
-  }
-
-}
-
-/* =========================================================
    SECTIONS
 ========================================================= */
 
@@ -365,250 +268,79 @@ main{
   padding:70px 6vw;
 }
 
-/* =========================================================
-   TITLES
-========================================================= */
-
 .section-title{
+  font-family:'IBM Plex Mono', monospace;
+
   font-size:clamp(2rem,6vw,6rem);
 
+  letter-spacing:.12em;
+
   margin-bottom:70px;
-
-  line-height:.9;
 }
 
 /* =========================================================
-   POSTERS
+   MANIFESTO
 ========================================================= */
 
-.poster-grid{
-  display:grid;
+.manifesto p{
+  font-family:'IBM Plex Mono', monospace;
 
-  grid-template-columns:repeat(2,1fr);
+  font-size:clamp(1.2rem,2vw,2rem);
 
-  gap:34px;
-}
+  line-height:1.8;
 
-.poster{
-  overflow:hidden;
-}
-
-.poster img{
-  width:100%;
-
-  aspect-ratio:4/5;
-
-  object-fit:cover;
-
-  display:block;
-
-  transition:
-    transform .4s ease,
-    opacity .4s ease;
-}
-
-.poster:hover img{
-  transform:scale(1.015);
-
-  opacity:.82;
+  max-width:900px;
 }
 
 /* =========================================================
-   WORK GRID
+   COMPILADOS LIST
 ========================================================= */
 
-.work-grid{
-  display:grid;
-
-  grid-template-columns:repeat(3,1fr);
-
-  gap:24px;
-}
-
-.work-item{
-  position:relative;
-
-  cursor:pointer;
-
-  transition:
-    transform .3s ease,
-    opacity .3s ease;
-}
-
-.work-item:hover{
-  transform:translateY(-6px);
-}
-
-.work-item img{
-  width:100%;
-
-  aspect-ratio:4/5;
-
-  object-fit:cover;
-
-  display:block;
-
-  margin-bottom:16px;
-
-  transition:opacity .3s ease;
-}
-
-.work-item:hover img{
-  opacity:.82;
-}
-
-.work-item span{
-  display:block;
-
-  font-size:.72rem;
-
-  letter-spacing:.14em;
-
-  text-transform:uppercase;
-
-  opacity:.6;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer-links{
+.comp-list{
   display:flex;
   flex-direction:column;
-
-  gap:14px;
+  gap:26px;
 }
 
-.footer-links a{
-  color:#ba7dff;
-
-  text-decoration:none;
-
-  font-size:clamp(2rem,5vw,5rem);
-
-  letter-spacing:-.06em;
-
-  transition:opacity .25s ease;
-}
-
-.footer-links a:hover{
-  opacity:.45;
-}
-
-/* =========================================================
-   COMPILADOS
-========================================================= */
-
-.comp-grid{
+.comp-release{
   display:flex;
+
+  gap:24px;
+
+  align-items:baseline;
 
   flex-wrap:wrap;
 
-  gap:28px;
+  border-bottom:1px solid rgba(0,0,0,.08);
 
-  align-items:flex-start;
+  padding-bottom:14px;
+}
+
+.comp-code,
+.comp-year{
+  font-size:.72rem;
+
+  opacity:.5;
+
+  letter-spacing:.18em;
+}
+
+.comp-release a{
+  color:#111;
+  text-decoration:none;
+}
+
+.comp-release a:hover{
+  opacity:.5;
 }
 
 /* =========================================================
-   COMP ITEM
+   CONTACTO
 ========================================================= */
 
-.comp-item{
-  position:relative;
-
-  display:block;
-
-  width:105px;
-
-  overflow:hidden;
-
-  transition:
-    transform .35s ease,
-    opacity .35s ease;
-}
-
-.comp-item img{
-  width:100%;
-
-  aspect-ratio:1/1;
-
-  object-fit:cover;
-
-  display:block;
-}
-
-/* =========================================================
-   HOVER
-========================================================= */
-
-.comp-item:hover{
-  opacity:.8;
-
-  z-index:10;
-}
-
-/* =========================================================
-   RANDOM LAYOUT
-========================================================= */
-
-.comp-item:nth-child(1){
-  margin-top:40px;
-  transform:rotate(-3deg);
-}
-
-.comp-item:nth-child(2){
-  margin-top:0px;
-  transform:rotate(2deg);
-  width:120px;
-}
-
-.comp-item:nth-child(3){
-  margin-top:80px;
-  transform:rotate(-1deg);
-}
-
-.comp-item:nth-child(4){
-  margin-top:20px;
-  transform:rotate(4deg);
-}
-
-.comp-item:nth-child(5){
-  margin-top:100px;
-  transform:rotate(-4deg);
-  width:90px;
-}
-
-.comp-item:nth-child(6){
-  margin-top:10px;
-  transform:rotate(1deg);
-}
-
-.comp-item:nth-child(7){
-  margin-top:70px;
-  transform:rotate(-2deg);
-  width:140px;
-}
-
-.comp-item:nth-child(8){
-  margin-top:30px;
-  transform:rotate(3deg);
-}
-
-.comp-item:nth-child(9){
-  margin-top:110px;
-  transform:rotate(-5deg);
-  width:100px;
-}
-
-.comp-item:nth-child(10){
-  margin-top:50px;
-  transform:rotate(2deg);
-}
-
-.comp-item:nth-child(11){
-  margin-top:0px;
-  transform:rotate(-2deg);
+.contact-block a{
+  color:#333;
+  text-decoration:none;
 }
 
 /* =========================================================
@@ -620,22 +352,18 @@ main{
 
   inset:0;
 
-  background:rgba(248,246,242,.94);
-
-  backdrop-filter:blur(14px);
+  background:rgba(217,217,217,.95);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:40px;
-
-  z-index:9999;
-
   opacity:0;
   pointer-events:none;
 
-  transition:opacity .35s ease;
+  transition:.3s ease;
+
+  z-index:9999;
 }
 
 .work-modal.active{
@@ -643,109 +371,21 @@ main{
   pointer-events:auto;
 }
 
-.work-modal-content{
-  max-width:1000px;
-  width:100%;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:40px;
-}
-
-.work-modal img{
-  width:100%;
-  object-fit:cover;
-}
-
-.work-info h2{
-  font-size:clamp(2rem,5vw,5rem);
-
-  line-height:.9;
-
-  margin-bottom:24px;
-}
-
-.work-info p{
-  font-size:.82rem;
-
-  line-height:2;
-
-  opacity:.7;
-}
-
-.close-modal{
-  position:absolute;
-
-  top:30px;
-  right:30px;
-
-  background:none;
-  border:none;
-
-  font-size:.8rem;
-
-  letter-spacing:.2em;
-
-  text-transform:uppercase;
-
-  cursor:pointer;
-
-  font-family:'IBM Plex Mono', monospace;
-}
 /* =========================================================
    MOBILE
 ========================================================= */
 
-@media(max-width:900px){
+@media (max-width:900px){
 
-  body{
-    overflow-x:hidden;
-  }
-
-  /* =========================
-     MENU
-  ========================= */
-
-  .menu-label{
-    display:none;
-  }
-
+  /* SIDEBAR TOP */
   .sidebar{
-    position:fixed;
-
-    top:0;
-    left:0;
-
     width:100%;
-
     height:auto;
 
-    padding:18px 20px;
+    background:var(--bg);
 
-    background:#f8f6f2;
-
-    z-index:9999;
+    padding:16px;
   }
-
-  .logo{
-    width:90px;
-
-    margin-bottom:18px;
-  }
-
-  .nav-menu{
-    gap:16px;
-  }
-
-  .nav-menu a{
-    font-size:.72rem;
-  }
-
-  /* =========================
-     MAIN
-  ========================= */
 
   main{
     margin-left:0;
@@ -753,325 +393,45 @@ main{
   }
 
   /* =========================
-     HERO
+     HERO MOBILE (GLB DETRÁS)
   ========================= */
 
   .hero{
-    position:relative;
-
-    min-height:100svh;
-
     padding:24px;
-
     align-items:flex-end;
-
-    overflow:hidden;
   }
 
   .hero-object{
     position:absolute;
 
-    width:130vw;
+    inset:0;
 
-    height:62vh;
+    width:100%;
+    height:70vh;
 
-    right:-18vw;
-
-    top:6vh;
+    opacity:.55;
 
     z-index:1;
-
-    opacity:.45;
-
-    pointer-events:none;
-  }
-
-  .hero-object model-viewer{
-    width:100%;
-    height:100%;
-
-    transform:none;
   }
 
   .hero-text{
+    z-index:3;
     position:relative;
-
-    z-index:10;
-
-    max-width:100%;
   }
 
   .hero-text h1{
-    position:relative;
-
-    z-index:20;
-
-    font-size:20vw;
-
-    line-height:.82;
-
-    letter-spacing:-.09em;
-
-    left:0;
+    font-size:18vw;
   }
 
-  .hero-text p{
-    font-size:.68rem;
-
-    line-height:1.7;
-
-    max-width:260px;
-  }
-
-  /* =========================
-     SECTIONS
-  ========================= */
-
+  /* SECTION */
   .section{
-    padding:70px 24px;
+    padding:60px 24px;
   }
 
   .section-title{
     font-size:1rem;
-
-    line-height:1.6;
-
-    margin-bottom:34px;
-
     letter-spacing:.18em;
+    line-height:1.6;
+    margin-bottom:34px;
   }
-
-  /* =========================
-     PROYECTO
-  ========================= */
-
-  .manifesto p{
-    font-size:1rem;
-
-    line-height:1.9;
-  }
-
-  /* =========================
-     TALLERES
-  ========================= */
-
-  .work-grid{
-    grid-template-columns:1fr;
-
-    gap:18px;
-  }
-
-  .work-item img{
-    aspect-ratio:4/5;
-  }
-
-  /* =========================================================
-   TALLERES INLINE
-========================================================= */
-
-.talleres-inline{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:12px;
-
-  align-items:center;
-
-  max-width:1100px;
-}
-
-/* =========================================================
-   TALLER ITEM
-========================================================= */
-
-.taller-item{
-  position:relative;
-
-  cursor:pointer;
-
-  font-size:.9rem;
-
-  line-height:1.8;
-
-  transition:opacity .25s ease;
-}
-
-.taller-item:hover{
-  opacity:.5;
-}
-
-/* =========================================================
-   POPUP
-========================================================= */
-
-.taller-popup{
-  position:absolute;
-
-  top:140%;
-  left:0;
-
-  width:320px;
-
-  padding:18px;
-
-  background:#f8f6f2;
-
-  border:1px solid rgba(0,0,0,.08);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.06);
-
-  font-size:.72rem;
-
-  line-height:1.9;
-
-  opacity:0;
-
-  pointer-events:none;
-
-  transform:translateY(8px);
-
-  transition:
-    opacity .25s ease,
-    transform .25s ease;
-
-  z-index:100;
-}
-
-/* =========================================================
-   SHOW POPUP
-========================================================= */
-
-.taller-item:hover .taller-popup{
-  opacity:1;
-
-  transform:translateY(0);
-}
-
-  /* =========================
-     COMPILADOS
-  ========================= */
-
-  .comp-grid{
-    gap:12px;
-
-    justify-content:center;
-  }
-
-  .comp-item{
-    width:28vw !important;
-
-    margin-top:0 !important;
-
-    transform:none !important;
-  }
-
-  /* =========================================================
-   COMPILADOS LIST
-========================================================= */
-
-.comp-list{
-  display:flex;
-
-  flex-direction:column;
-
-  gap:26px;
-
-  max-width:900px;
-}
-
-/* =========================================================
-   RELEASE
-========================================================= */
-
-.comp-release{
-  display:flex;
-
-  gap:24px;
-
-  align-items:baseline;
-
-  flex-wrap:wrap;
-
-  border-bottom:1px solid rgba(0,0,0,.06);
-
-  padding-bottom:14px;
-}
-
-/* =========================================================
-   CODE
-========================================================= */
-
-.comp-code{
-  font-size:.72rem;
-
-  opacity:.4;
-
-  letter-spacing:.18em;
-
-  min-width:60px;
-}
-
-/* =========================================================
-   TITLE LINK
-========================================================= */
-
-.comp-release a{
-  color:#111111;
-
-  text-decoration:none;
-
-  font-size:1rem;
-
-  transition:opacity .25s ease;
-}
-
-.comp-release a:hover{
-  opacity:.45;
-}
-
-/* =========================================================
-   YEAR
-========================================================= */
-
-.comp-year{
-  font-size:.72rem;
-
-  opacity:.4;
-
-  letter-spacing:.12em;
-}
-  /* =========================
-     FOOTER
-  ========================= */
-
-  .footer-links{
-    gap:10px;
-  }
-
-  .footer-links a{
-    font-size:1.2rem;
-
-    line-height:1.2;
-  }
-
-  /* =========================
-     MODAL
-  ========================= */
-
-  .work-modal{
-    padding:20px;
-  }
-
-  .work-modal-content{
-    grid-template-columns:1fr;
-
-    gap:20px;
-  }
-
-  .work-info h2{
-    font-size:1.5rem;
-  }
-
 }
