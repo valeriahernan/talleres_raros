@@ -4,6 +4,7 @@
   --accent:#ba7dff;
 }
 
+/* RESET */
 *{
   margin:0;
   padding:0;
@@ -13,113 +14,113 @@
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'IBM Plex Mono', monospace;
   overflow:hidden;
+  font-family:"Geist Mono", monospace;
+}
+
+/* =========================
+   UI SIEMPRE ENCIMA
+========================= */
+
+.sidebar,
+.menu-label{
+  position:fixed;
+  z-index:9999;
 }
 
 /* MENU */
 .sidebar{
-  position:fixed;
   left:0;
   top:0;
   width:180px;
   height:100vh;
   padding:20px;
-  z-index:1000;
 }
 
 .menu-label{
-  position:fixed;
   right:20px;
   top:20px;
   writing-mode:vertical-rl;
+  font-size:12px;
+  color:var(--accent);
 }
 
 /* LINKS */
-a{
+.nav-menu a{
+  display:block;
+  margin:10px 0;
   color:var(--accent);
   text-decoration:none;
+  font-size:12px;
 }
 
-/* STAGE */
+/* =========================
+   STAGE / SCENES
+========================= */
+
 .stage{
   position:relative;
+  margin-left:180px;
   height:100vh;
+  z-index:1;
 }
 
-/* SCENES */
-.section{
+.scene{
   position:absolute;
   inset:0;
   opacity:0;
   pointer-events:none;
+  transition:opacity .6s ease;
+  padding:80px;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:120px 6vw;
-  transition:opacity .6s ease;
 }
 
-.section.active{
+.scene.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* HERO */
-.hero-object{
+/* =========================
+   GLB SOLO HERO BACKGROUND
+========================= */
+
+.glb-layer{
   position:absolute;
   inset:0;
-  z-index:1;
+  z-index:0;
+  pointer-events:none;
 }
 
+.glb-layer model-viewer{
+  width:100%;
+  height:100%;
+}
+
+/* HERO TEXT ENCIMA */
 .hero-text{
   position:relative;
-  z-index:3;
+  z-index:2;
 }
 
-/* TITLES */
-.section-title{
+.hero-text h1{
+  font-size:6vw;
   color:var(--accent);
-  font-size:clamp(2rem,5vw,5rem);
-  margin-bottom:30px;
+  line-height:0.9;
 }
 
-/* TEXT */
-.section p{
-  max-width:900px;
-  line-height:1.9;
-  margin-bottom:14px;
+/* =========================
+   TIPOGRAFÍA
+========================= */
+
+.section-title{
+  font-size:3vw;
+  color:var(--accent);
+  margin-bottom:20px;
 }
 
-/* TALLERES */
-.taller-block{
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-.taller-desc{
-  opacity:.6;
-  font-size:.9rem;
-  margin-top:6px;
-}
-
-/* COMPILADOS */
-.comp-list{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-.comp-release{
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
-  border-bottom:1px solid rgba(0,0,0,.1);
-  padding-bottom:10px;
-}
-
-.comp-code,.comp-year{
-  opacity:.5;
-  font-size:.75rem;
+.scene p{
+  max-width:800px;
+  line-height:1.8;
 }
