@@ -117,3 +117,50 @@ body{
   color:#ba7dff;
   margin-bottom:20px;
 }
+
+.talleres-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:flex-start;
+  max-width:900px;
+}
+
+/* ITEM */
+.taller{
+  position:relative;
+  cursor:pointer;
+  color:#111;
+}
+
+/* TITULO */
+.taller-title{
+  font-size:1rem;
+  color:#ba7dff;
+  margin-bottom:6px;
+}
+
+/* DESCRIPCIÓN OCULTA POR DEFECTO */
+.taller-desc{
+  max-width:320px;
+  font-size:.85rem;
+  line-height:1.7;
+
+  opacity:0;
+  transform:translateY(6px);
+  transition:.25s ease;
+
+  pointer-events:none;
+}
+
+/* HOVER REVEAL */
+.taller:hover .taller-desc{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SEPARADOR */
+.sep{
+  opacity:.3;
+  padding:0 6px;
+}
