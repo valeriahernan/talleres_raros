@@ -1,27 +1,11 @@
-:root{
-  --bg:#d7d7d7;
-  --text:#111;
-  --accent:#ba7dff;
-}
-
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
-  background:var(--bg);
-  color:var(--text);
-  overflow:hidden;
+  margin:0;
+  background:#d6d6d6;
   font-family:"Geist Mono", monospace;
+  overflow:hidden;
 }
 
-/* =========================
-   UI SIEMPRE ENCIMA
-========================= */
-
+/* UI ENCIMA SIEMPRE */
 .sidebar,
 .menu-label{
   position:fixed;
@@ -30,51 +14,43 @@ body{
 
 /* MENU */
 .sidebar{
-  left:0;
-  top:0;
   width:180px;
   height:100vh;
+  left:0;
+  top:0;
   padding:20px;
 }
 
 .menu-label{
   right:20px;
   top:20px;
+  color:#ba7dff;
   writing-mode:vertical-rl;
-  font-size:12px;
-  color:var(--accent);
 }
 
 /* LINKS */
 .nav-menu a{
   display:block;
   margin:10px 0;
-  color:var(--accent);
+  color:#ba7dff;
   text-decoration:none;
-  font-size:12px;
 }
 
-/* =========================
-   STAGE / SCENES
-========================= */
-
+/* STAGE */
 .stage{
-  position:relative;
   margin-left:180px;
   height:100vh;
-  z-index:1;
+  position:relative;
 }
 
+/* SCENES */
 .scene{
   position:absolute;
   inset:0;
   opacity:0;
   pointer-events:none;
-  transition:opacity .6s ease;
   padding:80px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  transition:.5s;
 }
 
 .scene.active{
@@ -83,14 +59,19 @@ body{
 }
 
 /* =========================
-   GLB SOLO HERO BACKGROUND
+   HERO FIX (IMPORTANTE)
 ========================= */
 
+.hero{
+  padding:0;
+}
+
+/* GLB BACKGROUND */
 .glb-layer{
   position:absolute;
   inset:0;
   z-index:0;
-  pointer-events:none;
+  pointer-events:auto; /* 👈 TOCABLE */
 }
 
 .glb-layer model-viewer{
@@ -98,29 +79,41 @@ body{
   height:100%;
 }
 
-/* HERO TEXT ENCIMA */
-.hero-text{
-  position:relative;
-  z-index:2;
+/* VIGNETTE */
+.hero-vignette{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:radial-gradient(
+    circle,
+    rgba(214,214,214,0.2),
+    rgba(214,214,214,0.85)
+  );
 }
 
-.hero-text h1{
+/* HERO TEXT */
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero-title{
   font-size:6vw;
-  color:var(--accent);
+  color:#ba7dff;
   line-height:0.9;
 }
 
-/* =========================
-   TIPOGRAFÍA
-========================= */
-
-.section-title{
-  font-size:3vw;
-  color:var(--accent);
-  margin-bottom:20px;
+.hero-sub{
+  opacity:.7;
+  max-width:400px;
 }
 
-.scene p{
-  max-width:800px;
-  line-height:1.8;
+/* TITLES */
+.section-title{
+  color:#ba7dff;
+  margin-bottom:20px;
 }

@@ -2,208 +2,203 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Talleres Raros</title>
+<title>Talleres Raros</title>
 
-  <link rel="icon" href="images/LOGO_ORIGINALBLANCO.png">
+<link rel="icon" href="images/LOGO_ORIGINALBLANCO.png">
 
-  <!-- GEIST MONO -->
-  <link rel="stylesheet" href="https://unpkg.com/geist-font@latest/dist/font.css">
+<!-- GEIST MONO -->
+<link rel="stylesheet" href="https://unpkg.com/geist-font@latest/dist/font.css">
 
-  <!-- MODEL VIEWER -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<!-- MODEL VIEWER (GLB interactivo) -->
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="menu-label">TALLERES RAROS</div>
+<div class="menu-label">TALLERES RAROS</div>
 
-  <aside class="sidebar">
+<aside class="sidebar">
 
-    <div class="logo">
-      <img src="images/talleresraros.png">
-    </div>
+  <div class="logo">
+    <img src="images/talleresraros.png" alt="">
+  </div>
 
-    <nav class="nav-menu">
-      <a href="#hero">INICIO</a>
-      <a href="#convocatorias">CONVOCATORIAS</a>
-      <a href="#proyecto">PROYECTO</a>
-      <a href="#talleres">TALLERES</a>
-      <a href="#compilados">COMPILADOS</a>
-      <a href="#contacto">CONTACTO</a>
-    </nav>
+  <nav class="nav-menu">
+    <a href="#hero">INICIO</a>
+    <a href="#convocatorias">CONVOCATORIAS</a>
+    <a href="#proyecto">PROYECTO</a>
+    <a href="#talleres">TALLERES</a>
+    <a href="#compilados">COMPILADOS</a>
+    <a href="#contacto">CONTACTO</a>
+  </nav>
 
-  </aside>
+</aside>
 
-  <main class="stage">
+<main class="stage">
 
-    <!-- HERO -->
-    <section class="scene active" id="hero">
+<!-- HERO -->
+<section class="scene active hero" id="hero">
 
-      <div class="glb-layer">
-        <model-viewer
-          src="GLB/3Dtalleres.glb"
-          auto-rotate
-          camera-controls
-          disable-pan
-          exposure="1"
-          camera-orbit="0deg 90deg 100%">
-        </model-viewer>
-      </div>
+  <div class="glb-layer">
+    <model-viewer
+      src="GLB/3Dtalleres.glb"
+      auto-rotate
+      camera-controls
+      touch-action="pan-y"
+      disable-pan="false"
+      exposure="1"
+      camera-orbit="0deg 90deg 100%">
+    </model-viewer>
+  </div>
 
-      <div class="hero-text">
-        <h1>TALLERES<br>RAROS</h1>
-        <p>prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses</p>
-      </div>
+  <div class="hero-vignette"></div>
 
-    </section>
+  <div class="hero-content">
 
-    <!-- CONVOCATORIAS -->
-    <section class="scene" id="convocatorias">
+    <h1 class="hero-title">
+      TALLERES<br>RAROS
+    </h1>
 
-      <h2 class="section-title">CONVOCATORIAS ✩₊˚.⋆☾⋆⁺₊✧</h2>
+    <p class="hero-sub">
+      música · workshops · arte · comunidad · experimentación
+    </p>
 
-      <p>
-        CONVOCATORIA 2026<br>
-        TALLERES RAROSㄨ RESIDENCIA PACÍFICA
-      </p>
+  </div>
 
-      <p>
-        ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform" target="_blank">
-          Taller de Producción para Personas Trans
-        </a><br>
+</section>
 
-        ☪ Taller de Composición Postdigital<br>
-        ☪ Taller de Letras<br>
-        ☪ Taller de Autoproducción Musical<br><br>
+<!-- CONVOCATORIAS -->
+<section class="scene" id="convocatorias">
 
-        ☪ Masterclass Hypereikon (próximamente)<br>
-        ☪ Masterclass lilen (próximamente)<br><br>
+<h2 class="section-title">CONVOCATORIAS ✩₊˚</h2>
 
-        ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform" target="_blank">
-          Masterclass Javiera Electra
-        </a>
-      </p>
+<p>
+CONVOCATORIA 2026<br>
+TALLERES RAROS ㄨ RESIDENCIA PACÍFICA
+</p>
 
-      <p>
-        Talleres Raros presenta una serie de actividades gratuitas online y presenciales en colaboración con PACÍFICA,
-        programa de residencias y formación para personas FLINTA+ en la escena de música electrónica.
-      </p>
+<p>
+☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform" target="_blank">
+Taller de Producción para Personas Trans
+</a><br>
 
-    </section>
+☪ Taller de Composición Postdigital<br>
+☪ Taller de Letras<br>
+☪ Taller de Autoproducción Musical<br><br>
 
-    <!-- PROYECTO -->
-    <section class="scene" id="proyecto">
+☪ Masterclass Hypereikon (próximamente)<br>
+☪ Masterclass lilen (próximamente)<br>
+☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform" target="_blank">
+Masterclass Javiera Electra
+</a>
+</p>
 
-      <h2 class="section-title">PROYECTO ✩₊˚.⋆☾⋆⁺₊✧</h2>
+</section>
 
-      <p>
-        Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas.
-      </p>
+<!-- PROYECTO -->
+<section class="scene" id="proyecto">
 
-      <p>
-        Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos. Interseccionamos experimentación, aprendizaje colectivo y el no-saber-hacer.
-      </p>
+<h2 class="section-title">PROYECTO ✩₊˚</h2>
 
-      <p>
-        ꧁ᬊᬁ EQUIPO DOCENTE<br><br>
+<p>
+Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales.
+</p>
 
-        <a href="https://anthi.neocities.org" target="_blank">anthï</a> ✴︎
-        <a href="https://www.tatuara.net" target="_blank">Tatu Vergara</a>
-      </p>
+<p>
+Dirigido y fundado en 2019 por anthï en Chile. Explora prácticas de experimentación, aprendizaje colectivo y no-saber-hacer.
+</p>
 
-      <p>
-        ꧁ᬊᬁ DOCENTES INVITADES<br><br>
+<p>
+꧁ᬊᬁ EQUIPO DOCENTE<br>
+<a href="https://anthi.neocities.org">anthï</a> ✴︎
+<a href="https://www.tatuara.net">Tatu Vergara</a>
+</p>
 
-        2026 : Javiera Electra ✴︎ lilen ✴︎ Hypereikon<br>
-        2025 : Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo<br>
-        2022 : Yaima Cat ✴︎ Niños Indigo<br>
-        2021 : Dadalú ✴︎ Violeta Castillo<br>
-        2020 : vimvau
-      </p>
+<p>
+꧁ᬊᬁ INVITADES<br>
+2026: Javiera Electra ✴︎ lilen ✴︎ Hypereikon<br>
+2025: Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo<br>
+2022: Yaima Cat ✴︎ Niños Indigo
+</p>
 
-      <p>
-        DISEÑO GRÁFICO Y WEB<br>
-        <a href="https://www.instagram.com/inpar_/" target="_blank">@inpar</a>
-      </p>
+<p>
+DISEÑO: <a href="https://instagram.com/inpar_">@inpar</a>
+</p>
 
-    </section>
+</section>
 
-    <!-- TALLERES -->
-    <section class="scene" id="talleres">
+<!-- TALLERES -->
+<section class="scene" id="talleres">
 
-      <h2 class="section-title">TALLERES ✩₊˚.⋆☾⋆⁺₊✧</h2>
+<h2 class="section-title">TALLERES ✩₊˚</h2>
 
-      <p>
-        Taller de Composición Postdigital<br>
-        Laboratorio de creación sonora que pone al computador como el “instrumento más íntimo”, explorando estrategias de composición que sólo existen en él.
-      </p>
+<p>
+Taller de Composición Postdigital<br>
+Laboratorio donde el computador es instrumento íntimo.
+</p>
 
-      <p>
-        Taller de Creación Musical Digital<br>
-        Iniciación a técnicas de composición específicas del entorno digital y las herramientas de producción de un DAW.
-      </p>
+<p>
+Taller de Creación Musical Digital<br>
+Producción en entorno DAW.
+</p>
 
-      <p>
-        Taller de Canciones Raras<br>
-        Laboratorio de composición que habita en las fisuras de lo pop y lo experimental.
-      </p>
+<p>
+Taller de Canciones Raras<br>
+Fusión entre lo pop y lo experimental.
+</p>
 
-      <p>
-        Taller de Letras<br>
-        Laboratorio de escritura en torno al juego, la memoria digital y la autoficción.
-      </p>
+<p>
+Taller de Letras<br>
+Escritura, autoficción y memoria digital.
+</p>
 
-    </section>
+</section>
 
-    <!-- COMPILADOS -->
-    <section class="scene" id="compilados">
+<!-- COMPILADOS -->
+<section class="scene" id="compilados">
 
-      <h2 class="section-title">COMPILADOS ✩₊˚.⋆☾⋆⁺₊✧</h2>
+<h2 class="section-title">COMPILADOS ✩₊˚</h2>
 
-      <p>
-        TR011 — <a href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">me he perdido en muchas partes</a> — 2025<br>
-        TR010 — <a href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> — 2024<br>
-        TR009 — <a href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> — 2023<br>
-        TR008 — <a href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> — 2023<br>
-        TR007 — <a href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> — 2022<br>
-        TR006 — <a href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> — 2022<br>
-        TR005 — <a href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café</a> — 2021<br>
-        TR004 — <a href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya, hazte famosa</a> — 2021<br>
-        TR003 — <a href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> — 2020<br>
-        TR002 — <a href="https://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> — 2020<br>
-        TR001 — <a href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida en ese miedo</a> — 2020
-      </p>
+<p>
+TR011 — <a href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">me he perdido en muchas partes</a> — 2025<br>
+TR010 — <a href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> — 2024<br>
+TR009 — <a href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> — 2023<br>
+TR008 — <a href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> — 2023<br>
+TR007 — <a href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> — 2022<br>
+TR006 — <a href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> — 2022<br>
+TR005 — <a href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café</a> — 2021<br>
+TR004 — <a href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya hazte famosa</a> — 2021<br>
+TR003 — <a href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> — 2020<br>
+TR002 — <a href="https://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> — 2020<br>
+TR001 — <a href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida</a> — 2020
+</p>
 
-    </section>
+</section>
 
-    <!-- CONTACTO -->
-    <section class="scene" id="contacto">
+<!-- CONTACTO -->
+<section class="scene" id="contacto">
 
-      <h2 class="section-title">CONTACTO ✩₊˚.⋆☾⋆⁺₊✧</h2>
+<h2 class="section-title">CONTACTO ✩₊˚</h2>
 
-      <p>
-        stay ⋆ 𝒇𝒓𝒊𝒆𝒏𝒅𝒔
-      </p>
+<p>stay ⋆ friends</p>
 
-      <p>
-        ✉︎ talleresraros@gmail.com
-      </p>
+<p>talleresraros@gmail.com</p>
 
-      <p>
-        <a href="https://instagram.com/talleresraros">@TALLERESRAROS</a><br>
-        <a href="https://talleresraros.bandcamp.com">BANDCAMP</a>
-      </p>
+<p>
+<a href="https://instagram.com/talleresraros">@TALLERESRAROS</a><br>
+<a href="https://talleresraros.bandcamp.com">BANDCAMP</a>
+</p>
 
-    </section>
+</section>
 
-  </main>
+</main>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
