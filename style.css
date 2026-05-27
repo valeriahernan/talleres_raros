@@ -276,6 +276,8 @@ main{
   opacity:.95;
 
   filter:contrast(1.02);
+  
+  transform:translateX(-2vw);
 }
 
 /* =========================================================
