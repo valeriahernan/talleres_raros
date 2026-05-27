@@ -257,9 +257,9 @@ main{
   position:absolute;
 
   top:0;
-  right:0;
+  right:-4vw;
 
-  width:65vw;
+  width:72vw;
   height:100vh;
 
   z-index:1;
@@ -318,13 +318,17 @@ main{
 }
 
 .hero-text h1{
-  font-size:clamp(4rem,11vw,11rem);
+  font-size:clamp(5.5rem,14vw,15rem);
 
-  line-height:.82;
+  line-height:.78;
 
-  letter-spacing:-.08em;
+  letter-spacing:-.11em;
 
   margin-bottom:24px;
+
+  position:relative;
+
+  left:-10px;
 }
 
 .hero-text p{
@@ -560,6 +564,7 @@ main{
 .comp-item:nth-child(2){
   margin-top:0px;
   transform:rotate(2deg);
+  width:120px;
 }
 
 .comp-item:nth-child(3){
@@ -575,6 +580,7 @@ main{
 .comp-item:nth-child(5){
   margin-top:100px;
   transform:rotate(-4deg);
+  width:90px;
 }
 
 .comp-item:nth-child(6){
@@ -585,6 +591,7 @@ main{
 .comp-item:nth-child(7){
   margin-top:70px;
   transform:rotate(-2deg);
+  width:140px;
 }
 
 .comp-item:nth-child(8){
@@ -595,6 +602,7 @@ main{
 .comp-item:nth-child(9){
   margin-top:110px;
   transform:rotate(-5deg);
+  width:100px;
 }
 
 .comp-item:nth-child(10){
@@ -605,26 +613,6 @@ main{
 .comp-item:nth-child(11){
   margin-top:0px;
   transform:rotate(-2deg);
-}
-
-/* =========================================================
-   RANDOM SIZES
-========================================================= */
-
-.comp-item:nth-child(2){
-  width:120px;
-}
-
-.comp-item:nth-child(5){
-  width:90px;
-}
-
-.comp-item:nth-child(7){
-  width:140px;
-}
-
-.comp-item:nth-child(9){
-  width:100px;
 }
 
 /* =========================================================
@@ -746,11 +734,15 @@ main{
     width:100%;
     height:70vh;
 
+    right:0;
+
     opacity:.5;
   }
 
   .hero-text h1{
     font-size:22vw;
+
+    left:0;
   }
 
   .poster-grid,
