@@ -1,97 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
   <meta charset="UTF-8" />
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Talleres Raros</title>
 
-  <!-- FONTS -->
+  <!-- GOOGLE FONTS -->
 
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
-        rel="stylesheet">
-        
-<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@600&display=swap" rel="stylesheet">
+  <!-- MODEL VIEWER -->
 
-  <script type="module"
-          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <!-- CSS -->
 
-  <link rel="stylesheet"
-        href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
 </head>
 
 <body>
 
-  <!-- RIPPLE CANVAS -->
+  <!-- RIPPLE -->
 
   <canvas id="ripple-canvas"></canvas>
 
   <!-- MENU LABEL -->
 
   <div class="menu-label">
-    MENU
+    TALLERES RAROS
   </div>
 
   <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
-    <!-- LOGO -->
-
     <div class="logo">
-
-      <img src="images/talleresraros.png"
-           alt="Talleres Raros">
-
+      <img src="images/header_talleresraros.png" alt="">
     </div>
 
-    <!-- MENU BUTTON -->
-
-    <button class="menu-toggle"
-            id="menuToggle">
-
-      MENU
-
+    <button class="menu-toggle">
+      Menu
     </button>
 
-    <!-- NAV -->
+    <nav class="nav-menu">
 
-    <nav class="nav-menu"
-         id="navMenu">
-
-      <a href="#convocatorias">
-        CONVOCATORIAS
-      </a>
-
-      <a href="#proyecto">
-        PROYECTO
-      </a>
-
-      <a href="#talleres">
-        TALLERES
-      </a>
-
-      <a href="#compilados">
-        COMPILADOS
-      </a>
-
-      <a href="#contacto">
-        CONTACTO
-      </a>
+      <a href="#about">About</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#contact">Contact</a>
 
     </nav>
 
@@ -105,255 +67,127 @@
 
     <section class="hero">
 
-      <!-- 3D OBJECT -->
-
       <div class="hero-object">
 
         <model-viewer
-
-          src="GLB/3Dtalleres.glb"
-
-          auto-rotate
-          auto-rotate-delay="0"
-          rotation-per-second="6deg"
-
+          src="images/in.png"
           camera-controls
-
+          auto-rotate
           disable-pan
-
-          interaction-prompt="none"
-
-          shadow-intensity="1"
-
+          shadow-intensity="0"
           exposure="1"
-
-          environment-image="neutral">
-
+          environment-image="neutral"
+        >
         </model-viewer>
 
       </div>
 
-      <!-- LIGHT -->
-
       <div class="hero-overlay"></div>
-
-      <!-- HERO TEXT -->
 
       <div class="hero-text">
 
         <h1>
-          TALLERES<br>
-          RAROS
+          Talleres<br>
+          Raros
         </h1>
 
         <p>
-          plataforma de experimentación artística,
-          procesos visuales, narrativos y sonoros.
+          archivo visual · workshops · arte · comunidad · experimentación
         </p>
 
       </div>
 
     </section>
 
-    <!-- CONVOCATORIAS -->
+    <!-- ABOUT -->
 
-    <section id="convocatorias"
-             class="section">
+    <section class="section" id="about">
 
-      <div class="section-title">
-        CONVOCATORIAS
-      </div>
+      <h2 class="section-title">
+        Archivo
+      </h2>
 
       <div class="poster-grid">
 
-        <article class="poster">
+        <div class="poster">
+          <img src="images/resorte1.png" alt="">
+        </div>
 
-          <img src="images/talleres.png"
-               alt="">
-
-          <div class="poster-info">
-
-            <h3>
-              TALLER VISUAL 001
-            </h3>
-
-            <p>
-              AGOSTO 2026
-            </p>
-
-          </div>
-
-        </article>
-
-        <article class="poster">
-
-          <img src="images/Subscribete.png"
-               alt="">
-
-          <div class="poster-info">
-
-            <h3>
-              ARCHIVO SONORO
-            </h3>
-
-            <p>
-              SEPTIEMBRE 2026
-            </p>
-
-          </div>
-
-        </article>
+        <div class="poster">
+          <img src="images/resorte2.png" alt="">
+        </div>
 
       </div>
 
     </section>
 
-    <!-- PROYECTO -->
+    <!-- WORKSHOPS -->
 
-    <section id="proyecto"
-             class="section">
+    <section class="section" id="workshops">
 
-      <div class="section-title">
-        PROYECTO
-      </div>
-
-      <div class="manifesto">
-
-        <p>
-          Talleres Raros es un espacio de
-          experimentación visual, sonora y narrativa.
-        </p>
-
-        <p>
-          Un archivo vivo para compartir procesos,
-          ejercicios y proyectos fuera de formatos
-          tradicionales.
-        </p>
-
-      </div>
-
-    </section>
-
-    <!-- TALLERES -->
-
-    <section id="talleres"
-             class="section">
-
-      <div class="section-title">
-        TALLERES
-      </div>
+      <h2 class="section-title">
+        Workshops
+      </h2>
 
       <div class="work-grid">
 
-        <article class="work-item">
+        <div class="work-item" data-work="0">
+          <img src="images/t0.png" alt="">
+          <span>Taller 01</span>
+        </div>
 
-          <img src="images/Acerca.png"
-               alt="">
+        <div class="work-item" data-work="1">
+          <img src="images/t1.png" alt="">
+          <span>Taller 02</span>
+        </div>
 
-          <h3>
-            ANIMACIÓN EXPERIMENTAL
-          </h3>
+        <div class="work-item" data-work="2">
+          <img src="images/t2.png" alt="">
+          <span>Taller 03</span>
+        </div>
 
-        </article>
+        <div class="work-item" data-work="3">
+          <img src="images/t3.png" alt="">
+          <span>Taller 04</span>
+        </div>
 
-        <article class="work-item">
+        <div class="work-item" data-work="4">
+          <img src="images/t4.png" alt="">
+          <span>Taller 05</span>
+        </div>
 
-          <img src="images/Subscribete.png"
-               alt="">
-
-          <h3>
-            FOTOGRAFÍA RAW
-          </h3>
-
-        </article>
-
-        <article class="work-item">
-
-          <img src="images/sn.png"
-               alt="">
-
-          <h3>
-            NARRATIVAS DIGITALES
-          </h3>
-
-        </article>
+        <div class="work-item" data-work="5">
+          <img src="images/t5.png" alt="">
+          <span>Taller 06</span>
+        </div>
 
       </div>
 
     </section>
 
-    <!-- COMPILADOS -->
+    <!-- MANIFESTO -->
 
-    <section id="compilados"
-             class="section">
+    <section class="section manifesto" id="manifesto">
 
-      <div class="section-title">
-        COMPILADOS
-      </div>
-
-      <div class="archive-list">
-
-        <article class="archive-item">
-
-          <span>
-            COMPILADO_001
-          </span>
-
-          <p>
-            VIDEO / PDF / AUDIO
-          </p>
-
-        </article>
-
-        <article class="archive-item">
-
-          <span>
-            COMPILADO_002
-          </span>
-
-          <p>
-            VISUAL / EXPERIMENTAL
-          </p>
-
-        </article>
-
-        <article class="archive-item">
-
-          <span>
-            COMPILADO_003
-          </span>
-
-          <p>
-            ARCHIVO COLECTIVO
-          </p>
-
-        </article>
-
-      </div>
+      <p>
+        Talleres Raros es una plataforma de exploración visual y colectiva,
+        donde arte, diseño y experimentación convergen.
+      </p>
 
     </section>
 
-    <!-- CONTACTO -->
+    <!-- CONTACT -->
 
-    <section id="contacto"
-             class="section footer">
-
-      <div class="section-title">
-        CONTACTO
-      </div>
+    <section class="section" id="contact">
 
       <div class="footer-links">
 
         <a href="#">
-          INSTAGRAM
+          Instagram
         </a>
 
         <a href="#">
-          MAIL
-        </a>
-
-        <a href="#">
-          SUBSCRIBETE
+          Contacto
         </a>
 
       </div>
@@ -362,10 +196,33 @@
 
   </main>
 
+  <!-- MODAL -->
+
+  <div class="work-modal">
+
+    <button class="close-modal">
+      Close
+    </button>
+
+    <div class="work-modal-content">
+
+      <img id="modal-image" src="" alt="">
+
+      <div class="work-info">
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- JS -->
 
   <script src="script.js"></script>
 
 </body>
-
 </html>

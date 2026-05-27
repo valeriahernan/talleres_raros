@@ -35,7 +35,8 @@ body{
 .hero-text h1,
 .section-title,
 .manifesto p,
-.footer-links a{
+.footer-links a,
+.work-info h2{
   font-family:"Bitcount Prop Single", sans-serif;
   font-weight:600;
 }
@@ -79,10 +80,6 @@ body{
   opacity:.35;
 
   z-index:200;
-
-  color:#111;
-
-  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -101,8 +98,6 @@ body{
   padding:24px;
 
   z-index:1000;
-
-  background:transparent;
 }
 
 /* =========================================================
@@ -117,7 +112,6 @@ body{
 
 .logo img{
   width:100%;
-
   display:block;
 }
 
@@ -142,12 +136,6 @@ body{
   font-family:'IBM Plex Mono', monospace;
 
   margin-bottom:20px;
-
-  transition:opacity .25s ease;
-}
-
-.menu-toggle:hover{
-  opacity:.5;
 }
 
 /* =========================================================
@@ -188,11 +176,7 @@ body{
 
   letter-spacing:.18em;
 
-  font-family:'IBM Plex Mono', monospace;
-
-  transition:
-    transform .25s ease,
-    opacity .25s ease;
+  transition:.25s ease;
 }
 
 .nav-menu a:hover{
@@ -224,8 +208,6 @@ main{
   align-items:center;
 
   padding-left:7vw;
-
-  isolation:isolate;
 }
 
 /* =========================================================
@@ -242,8 +224,6 @@ main{
   height:100vh;
 
   z-index:1;
-
-  overflow:hidden;
 }
 
 .hero-object model-viewer{
@@ -251,10 +231,6 @@ main{
   height:100%;
 
   background:transparent;
-
-  --poster-color:transparent;
-
-  opacity:.92;
 }
 
 /* =========================================================
@@ -302,8 +278,6 @@ main{
   letter-spacing:-.08em;
 
   margin-bottom:24px;
-
-  color:#111;
 }
 
 .hero-text p{
@@ -318,10 +292,6 @@ main{
   opacity:.5;
 
   max-width:340px;
-
-  color:#111;
-
-  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -345,8 +315,6 @@ main{
 ========================================================= */
 
 .section{
-  position:relative;
-
   padding:140px 6vw;
 }
 
@@ -362,8 +330,6 @@ main{
   margin-bottom:70px;
 
   line-height:.9;
-
-  color:#111;
 }
 
 /* =========================================================
@@ -391,15 +357,59 @@ main{
 
   display:block;
 
-  transition:
-    transform .4s ease,
-    opacity .4s ease;
+  transition:.4s ease;
 }
 
 .poster:hover img{
   transform:scale(1.015);
 
   opacity:.82;
+}
+
+/* =========================================================
+   WORK GRID
+========================================================= */
+
+.work-grid{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:24px;
+}
+
+.work-item{
+  cursor:pointer;
+
+  transition:.3s ease;
+}
+
+.work-item:hover{
+  transform:translateY(-6px);
+}
+
+.work-item img{
+  width:100%;
+
+  aspect-ratio:4/5;
+
+  object-fit:cover;
+
+  display:block;
+
+  margin-bottom:16px;
+}
+
+.work-item span{
+  display:block;
+
+  font-size:.72rem;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  opacity:.6;
 }
 
 /* =========================================================
@@ -416,40 +426,6 @@ main{
   line-height:1.05;
 
   letter-spacing:-.06em;
-
-  margin-bottom:48px;
-
-  color:#111;
-}
-
-/* =========================================================
-   WORK GRID
-========================================================= */
-
-.work-grid{
-  display:grid;
-
-  grid-template-columns:repeat(3,1fr);
-
-  gap:24px;
-}
-
-.work-item img{
-  width:100%;
-
-  aspect-ratio:4/5;
-
-  object-fit:cover;
-
-  display:block;
-
-  margin-bottom:16px;
-
-  transition:opacity .3s ease;
-}
-
-.work-item:hover img{
-  opacity:.82;
 }
 
 /* =========================================================
@@ -471,12 +447,89 @@ main{
   font-size:clamp(2rem,5vw,5rem);
 
   letter-spacing:-.06em;
-
-  transition:opacity .25s ease;
 }
 
-.footer-links a:hover{
-  opacity:.45;
+/* =========================================================
+   MODAL
+========================================================= */
+
+.work-modal{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(248,246,242,.94);
+
+  backdrop-filter:blur(14px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:40px;
+
+  z-index:9999;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:opacity .35s ease;
+}
+
+.work-modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.work-modal-content{
+  max-width:1000px;
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:40px;
+}
+
+.work-modal img{
+  width:100%;
+}
+
+.work-info h2{
+  font-size:clamp(2rem,5vw,5rem);
+
+  line-height:.9;
+
+  margin-bottom:24px;
+}
+
+.work-info p{
+  font-size:.82rem;
+
+  line-height:2;
+
+  opacity:.7;
+}
+
+.close-modal{
+  position:absolute;
+
+  top:30px;
+  right:30px;
+
+  background:none;
+  border:none;
+
+  font-size:.8rem;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  font-family:'IBM Plex Mono', monospace;
 }
 
 /* =========================================================
@@ -494,8 +547,6 @@ main{
 
     width:100%;
     height:auto;
-
-    padding:20px 24px;
   }
 
   main{
@@ -522,7 +573,8 @@ main{
   }
 
   .poster-grid,
-  .work-grid{
+  .work-grid,
+  .work-modal-content{
     grid-template-columns:1fr;
   }
 

@@ -1,93 +1,193 @@
-// =========================================================
-// MENU TOGGLE
-// =========================================================
+/* =========================================================
+   MENU TOGGLE
+========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
 
-  const toggle =
-    document.getElementById("menuToggle");
+menuToggle.addEventListener("click", () => {
 
-  const nav =
-    document.getElementById("navMenu");
-
-  if(toggle && nav){
-
-    toggle.addEventListener("click", () => {
-
-      nav.classList.toggle("active");
-
-    });
-
-  }
+  navMenu.classList.toggle("active");
 
 });
 
-// =========================================================
-// RIPPLE EFFECT
-// =========================================================
+/* =========================================================
+   WORKSHOP DATA
+========================================================= */
 
-const canvas =
-  document.getElementById("ripple-canvas");
+const workshops = [
 
-const ctx =
-  canvas.getContext("2d");
+  {
+    title: "Taller 01",
+    image: "images/t0.png",
+    description:
+      "Exploración visual y experimental enfocada en composición, imagen y procesos colectivos."
+  },
 
-let ripples = [];
+  {
+    title: "Taller 02",
+    image: "images/t1.png",
+    description:
+      "Instancia abierta de creación visual, referencias gráficas y conversación interdisciplinaria."
+  },
 
-function resizeCanvas(){
+  {
+    title: "Taller 03",
+    image: "images/t2.png",
+    description:
+      "Workshop dedicado a procesos editoriales, identidad visual y narrativa contemporánea."
+  },
 
-  canvas.width =
-    window.innerWidth;
+  {
+    title: "Taller 04",
+    image: "images/t3.png",
+    description:
+      "Laboratorio experimental enfocado en arte digital, diseño y materialidad visual."
+  },
 
-  canvas.height =
-    window.innerHeight;
+  {
+    title: "Taller 05",
+    image: "images/t4.png",
+    description:
+      "Encuentro colaborativo para desarrollar ideas visuales y ejercicios curatoriales."
+  },
 
-}
+  {
+    title: "Taller 06",
+    image: "images/t5.png",
+    description:
+      "Espacio de experimentación artística y producción visual contemporánea."
+  }
 
-resizeCanvas();
+];
 
-window.addEventListener(
-  "resize",
-  resizeCanvas
-);
+/* =========================================================
+   MODAL
+========================================================= */
 
-// =========================================================
-// MOUSE RIPPLE
-// =========================================================
+const modal = document.querySelector(".work-modal");
 
-window.addEventListener("mousemove", (e) => {
+const modalImage = document.querySelector("#modal-image");
 
-  ripples.push({
+const modalTitle = document.querySelector("#modal-title");
 
-    x:e.clientX,
-    y:e.clientY,
+const modalDescription = document.querySelector("#modal-description");
 
-    radius:0,
+const closeModal = document.querySelector(".close-modal");
 
-    alpha:1
+/* =========================================================
+   OPEN MODAL
+========================================================= */
+
+document.querySelectorAll(".work-item").forEach(item => {
+
+  item.addEventListener("click", () => {
+
+    const index = item.dataset.work;
+
+    const data = workshops[index];
+
+    modalImage.src = data.image;
+
+    modalTitle.textContent = data.title;
+
+    modalDescription.textContent = data.description;
+
+    modal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
 
   });
 
 });
 
-// =========================================================
-// DRAW
-// =========================================================
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
-function animate(){
+function closeWorkshopModal(){
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+  modal.classList.remove("active");
+
+  document.body.style.overflow = "auto";
+
+}
+
+closeModal.addEventListener("click", closeWorkshopModal);
+
+/* =========================================================
+   CLOSE WITH BACKGROUND CLICK
+========================================================= */
+
+modal.addEventListener("click", (e) => {
+
+  if(e.target === modal){
+
+    closeWorkshopModal();
+
+  }
+
+});
+
+/* =========================================================
+   CLOSE WITH ESC
+========================================================= */
+
+document.addEventListener("keydown", (e) => {
+
+  if(e.key === "Escape"){
+
+    closeWorkshopModal();
+
+  }
+
+});
+
+/* =========================================================
+   SIMPLE RIPPLE BACKGROUND
+========================================================= */
+
+const canvas = document.getElementById("ripple-canvas");
+
+const ctx = canvas.getContext("2d");
+
+let width;
+let height;
+
+function resizeCanvas(){
+
+  width = canvas.width = window.innerWidth;
+
+  height = canvas.height = window.innerHeight;
+
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+resizeCanvas();
+
+const ripples = [];
+
+window.addEventListener("mousemove", (e) => {
+
+  ripples.push({
+    x:e.clientX,
+    y:e.clientY,
+    radius:0,
+    alpha:0.12
+  });
+
+});
+
+function animateRipples(){
+
+  ctx.clearRect(0,0,width,height);
 
   ripples.forEach((ripple,index) => {
 
-    ripple.radius += 2.5;
+    ripple.radius += 1.6;
 
-    ripple.alpha -= 0.015;
+    ripple.alpha -= 0.002;
 
     ctx.beginPath();
 
@@ -99,8 +199,7 @@ function animate(){
       Math.PI * 2
     );
 
-    ctx.strokeStyle =
-      `rgba(0,255,120,${ripple.alpha})`;
+    ctx.strokeStyle = `rgba(0,153,140,${ripple.alpha})`;
 
     ctx.lineWidth = 1;
 
@@ -114,70 +213,8 @@ function animate(){
 
   });
 
-  requestAnimationFrame(
-    animate
-  );
+  requestAnimationFrame(animateRipples);
 
 }
 
-animate();
-
-// =========================================================
-// ACTIVE SECTION
-// =========================================================
-
-const sections =
-  document.querySelectorAll(".section");
-
-const navLinks =
-  document.querySelectorAll(".nav-menu a");
-
-function updateActiveSection(){
-
-  let current = "";
-
-  sections.forEach((section) => {
-
-    const sectionTop =
-      section.offsetTop - 140;
-
-    const sectionHeight =
-      section.offsetHeight;
-
-    if(
-      window.scrollY >= sectionTop &&
-      window.scrollY < sectionTop + sectionHeight
-    ){
-
-      current =
-        section.getAttribute("id");
-
-    }
-
-  });
-
-  navLinks.forEach((link) => {
-
-    link.classList.remove("active");
-
-    if(
-      link.getAttribute("href") === `#${current}`
-    ){
-
-      link.classList.add("active");
-
-    }
-
-  });
-
-}
-
-window.addEventListener(
-  "scroll",
-  updateActiveSection
-);
-
-window.addEventListener(
-  "load",
-  updateActiveSection
-);
+animateRipples();
