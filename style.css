@@ -865,6 +865,90 @@ main{
     aspect-ratio:4/5;
   }
 
+  /* =========================================================
+   TALLERES INLINE
+========================================================= */
+
+.talleres-inline{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  align-items:center;
+
+  max-width:1100px;
+}
+
+/* =========================================================
+   TALLER ITEM
+========================================================= */
+
+.taller-item{
+  position:relative;
+
+  cursor:pointer;
+
+  font-size:.9rem;
+
+  line-height:1.8;
+
+  transition:opacity .25s ease;
+}
+
+.taller-item:hover{
+  opacity:.5;
+}
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+.taller-popup{
+  position:absolute;
+
+  top:140%;
+  left:0;
+
+  width:320px;
+
+  padding:18px;
+
+  background:#f8f6f2;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06);
+
+  font-size:.72rem;
+
+  line-height:1.9;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transform:translateY(8px);
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+
+  z-index:100;
+}
+
+/* =========================================================
+   SHOW POPUP
+========================================================= */
+
+.taller-item:hover .taller-popup{
+  opacity:1;
+
+  transform:translateY(0);
+}
+
   /* =========================
      COMPILADOS
   ========================= */
@@ -883,6 +967,81 @@ main{
     transform:none !important;
   }
 
+  /* =========================================================
+   COMPILADOS LIST
+========================================================= */
+
+.comp-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:26px;
+
+  max-width:900px;
+}
+
+/* =========================================================
+   RELEASE
+========================================================= */
+
+.comp-release{
+  display:flex;
+
+  gap:24px;
+
+  align-items:baseline;
+
+  flex-wrap:wrap;
+
+  border-bottom:1px solid rgba(0,0,0,.06);
+
+  padding-bottom:14px;
+}
+
+/* =========================================================
+   CODE
+========================================================= */
+
+.comp-code{
+  font-size:.72rem;
+
+  opacity:.4;
+
+  letter-spacing:.18em;
+
+  min-width:60px;
+}
+
+/* =========================================================
+   TITLE LINK
+========================================================= */
+
+.comp-release a{
+  color:#111111;
+
+  text-decoration:none;
+
+  font-size:1rem;
+
+  transition:opacity .25s ease;
+}
+
+.comp-release a:hover{
+  opacity:.45;
+}
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+.comp-year{
+  font-size:.72rem;
+
+  opacity:.4;
+
+  letter-spacing:.12em;
+}
   /* =========================
      FOOTER
   ========================= */
