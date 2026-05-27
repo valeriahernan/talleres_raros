@@ -26,7 +26,7 @@
 
 <body>
 
-  <!-- RIPPLE BACKGROUND -->
+  <!-- BACKGROUND FX -->
   <canvas id="ripple-canvas"></canvas>
 
   <!-- MENU LABEL -->
@@ -42,13 +42,11 @@
     <button class="menu-toggle">MENU</button>
 
     <nav class="nav-menu">
-
       <a href="#convocatorias">CONVOCATORIAS</a>
       <a href="#proyecto">PROYECTO</a>
       <a href="#talleres">TALLERES</a>
       <a href="#compilados">COMPILADOS</a>
       <a href="#contacto">CONTACTO</a>
-
     </nav>
 
   </aside>
@@ -57,34 +55,27 @@
   <main>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="hero">
 
-      <!-- GLB BACKGROUND -->
       <div class="hero-object">
-
         <model-viewer
           src="GLB/3Dtalleres.glb"
-          camera-controls
           auto-rotate
+          camera-controls
           disable-pan
-          shadow-intensity="0"
-          exposure="1"
-          environment-image="neutral"
+          exposure="1.1"
+          tone-mapping="commerce"
+          environment-image="https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_HDR.hdr"
           camera-orbit="0deg 90deg 100%"
-          field-of-view="28deg"
-          interaction-prompt="none">
+          field-of-view="28deg">
         </model-viewer>
-
       </div>
 
       <div class="hero-overlay"></div>
 
       <div class="hero-text">
-
         <h1>TALLERES<br>RAROS</h1>
-
         <p>música · workshops · arte · comunidad · experimentación</p>
-
       </div>
 
     </section>
@@ -92,16 +83,11 @@
     <!-- CONVOCATORIAS -->
     <section class="section" id="convocatorias">
 
-      <h2 class="section-title">
-        CONVOCATORIAS ✩₊˚.⋆☾⋆⁺₊✧
-      </h2>
+      <h2 class="section-title">CONVOCATORIAS ✩</h2>
 
       <div class="convocatoria-text">
 
-        <p>
-          CONVOCATORIA 2026<br>
-          TALLERES RAROSㄨ RESIDENCIA PACÍFICA
-        </p>
+        <p>CONVOCATORIA 2026 — TALLERES RAROS ㄨ RESIDENCIA PACÍFICA</p>
 
         <p>
           ☪ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform" target="_blank">
@@ -125,12 +111,18 @@
     <!-- PROYECTO -->
     <section class="section manifesto" id="proyecto">
 
-      <h2 class="section-title">PROYECTO ✩₊˚.⋆☾⋆⁺₊✧</h2>
-
-      <p>Talleres Raros es un proyecto de enseñanza musical...</p>
+      <h2 class="section-title">PROYECTO ✩</h2>
 
       <p>
-        Equipo:
+        Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de la academia tradicional.
+      </p>
+
+      <p>
+        Fundado en 2019 por anthï, el proyecto explora la producción musical como práctica colectiva y experimental.
+      </p>
+
+      <p>
+        EQUIPO:
         <a href="https://anthi.neocities.org" target="_blank">anthï</a>
         ·
         <a href="https://www.tatuara.net" target="_blank">Tatu Vergara</a>
@@ -141,18 +133,14 @@
     <!-- TALLERES -->
     <section class="section" id="talleres">
 
-      <h2 class="section-title">TALLERES ✩₊˚.⋆☾⋆⁺₊✧</h2>
+      <h2 class="section-title">TALLERES ✩</h2>
 
       <div class="talleres-inline">
-
         <div class="taller-item">Taller de Autoproducción Musical</div>
         <span>𖥔</span>
-
         <div class="taller-item">Taller de Producción para Personas Trans</div>
         <span>𖥔</span>
-
         <div class="taller-item">Taller de Composición Postdigital</div>
-
       </div>
 
     </section>
@@ -160,7 +148,7 @@
     <!-- COMPILADOS -->
     <section class="section" id="compilados">
 
-      <h2 class="section-title">COMPILADOS ✩₊˚.⋆☾⋆⁺₊✧</h2>
+      <h2 class="section-title">COMPILADOS ✩</h2>
 
       <div class="comp-list">
 
@@ -179,20 +167,18 @@
     <!-- CONTACTO -->
     <section class="section" id="contacto">
 
-      <h2 class="section-title">CONTACTO ✩₊˚.⋆☾⋆⁺₊✧</h2>
+      <h2 class="section-title">CONTACTO ✩</h2>
 
       <div class="contact-block">
 
         <p>stay ⋆ friends</p>
 
-        <a href="mailto:talleresraros@gmail.com">
-          ✉︎ talleresraros@gmail.com
-        </a>
+        <a href="mailto:talleresraros@gmail.com">talleresraros@gmail.com</a>
 
         <div>
-          <a href="https://www.instagram.com/talleresraros" target="_blank">@TALLERESRAROS</a>
+          <a href="https://www.instagram.com/talleresraros" target="_blank">@instagram</a>
           /
-          <a href="https://talleresraros.bandcamp.com" target="_blank">BANDCAMP</a>
+          <a href="https://talleresraros.bandcamp.com" target="_blank">bandcamp</a>
         </div>
 
       </div>
@@ -201,13 +187,12 @@
 
   </main>
 
-  <!-- MODAL (CORRECTO: visible por CSS, no inline) -->
+  <!-- MODAL -->
   <div class="work-modal">
-
     <button class="close-modal">Close</button>
 
     <div class="work-modal-content">
-      <img id="modal-image" src="" alt="">
+      <img id="modal-image" src="">
       <div class="work-info">
         <h2 id="modal-title"></h2>
         <p id="modal-description"></p>
@@ -216,7 +201,6 @@
 
   </div>
 
-  <!-- JS -->
   <script src="script.js" defer></script>
 
 </body>

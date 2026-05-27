@@ -1,6 +1,12 @@
 /* =========================================================
-   RESET
+   BASE + COLORS
 ========================================================= */
+
+:root{
+  --bg:#d9d9d9;
+  --text:#111;
+  --accent:#ba7dff;
+}
 
 *{
   margin:0;
@@ -12,51 +18,27 @@ html{
   scroll-behavior:smooth;
 }
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root{
-  --bg:#d9d9d9;
-  --text:#111;
-}
-
-/* =========================================================
-   BODY
-========================================================= */
-
 body{
   background:var(--bg);
   color:var(--text);
-
   font-family:'IBM Plex Mono', monospace;
-
   overflow-x:hidden;
-
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
 }
 
 /* =========================================================
-   RIPPLE CANVAS (FONDO)
+   RIPPLE
 ========================================================= */
 
 #ripple-canvas{
   position:fixed;
   inset:0;
-
-  width:100%;
-  height:100%;
-
   z-index:0;
-
   pointer-events:none;
-
   opacity:.35;
 }
 
 /* =========================================================
-   LAYERS GLOBAL
+   GLOBAL LAYERS
 ========================================================= */
 
 main,
@@ -67,105 +49,38 @@ main,
 }
 
 /* =========================================================
-   MENU LABEL
+   MENU
 ========================================================= */
 
 .menu-label{
   position:fixed;
   right:18px;
   top:28px;
-
   writing-mode:vertical-rl;
-
   font-size:11px;
-  letter-spacing:.3em;
-
-  opacity:.35;
-
-  z-index:200;
+  opacity:.4;
 }
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
 
 .sidebar{
   position:fixed;
-
   top:0;
   left:0;
-
   width:180px;
   height:100vh;
-
   padding:24px;
 }
 
 /* =========================================================
-   LOGO
+   LINKS
 ========================================================= */
 
-.logo{
-  width:120px;
-  margin-bottom:40px;
-}
-
-.logo img{
-  width:100%;
-  display:block;
-}
-
-/* =========================================================
-   MENU BUTTON
-========================================================= */
-
-.menu-toggle{
-  background:none;
-  border:none;
-
-  font-size:.82rem;
-  letter-spacing:.18em;
-
-  cursor:pointer;
-
-  color:#333;
-}
-
-/* =========================================================
-   NAV
-========================================================= */
-
-.nav-menu{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-
-  transition:.3s ease;
-}
-
-.nav-menu.active{
-  max-height:500px;
-  opacity:1;
-}
-
-.nav-menu a{
-  color:#444;
+a{
+  color:var(--accent);
   text-decoration:none;
-
-  font-size:.82rem;
-  letter-spacing:.18em;
 }
 
-/* =========================================================
-   MAIN
-========================================================= */
-
-main{
-  margin-left:180px;
+a:hover{
+  opacity:.6;
 }
 
 /* =========================================================
@@ -174,173 +89,87 @@ main{
 
 .hero{
   position:relative;
-
   min-height:100vh;
-
   display:flex;
   align-items:center;
-
-  padding-left:7vw;
-
   overflow:hidden;
 }
 
-/* =========================================================
-   GLB = FONDO
-========================================================= */
-
 .hero-object{
   position:absolute;
-
   inset:0;
-
-  width:100%;
-  height:100%;
-
   z-index:1;
-
-  pointer-events:none;
 }
 
 .hero-object model-viewer{
   width:100%;
   height:100%;
-
-  background:transparent;
 }
-
-/* =========================================================
-   OVERLAY
-========================================================= */
 
 .hero-overlay{
   position:absolute;
-
   inset:0;
-
   z-index:2;
-
-  pointer-events:none;
 }
-
-/* =========================================================
-   TEXTO HERO
-========================================================= */
 
 .hero-text{
   position:relative;
-
   z-index:3;
-
-  max-width:500px;
+  padding-left:7vw;
 }
 
 .hero-text h1{
   font-family:"Geist Mono", monospace;
-
-  font-size:clamp(3.8rem,9vw,8rem);
-
-  line-height:.86;
-  letter-spacing:-.08em;
-
-  margin-bottom:24px;
-}
-
-.hero-text p{
-  font-size:.8rem;
-
-  line-height:2;
-
-  letter-spacing:.16em;
-
-  text-transform:uppercase;
-
-  opacity:.5;
-
-  max-width:340px;
+  font-size:clamp(3rem,8vw,8rem);
+  letter-spacing:-.06em;
+  line-height:.9;
 }
 
 /* =========================================================
-   SECTIONS
+   SECTIONS = CAPÍTULOS
 ========================================================= */
 
 .section{
-  padding:70px 6vw;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:100px 6vw;
+  scroll-margin-top:120px;
 }
 
 .section-title{
-  font-family:'IBM Plex Mono', monospace;
-
-  font-size:clamp(2rem,6vw,6rem);
-
-  letter-spacing:.12em;
-
-  margin-bottom:70px;
+  color:var(--accent);
+  font-size:clamp(2rem,5vw,5rem);
+  margin-bottom:40px;
 }
 
 /* =========================================================
-   MANIFESTO
+   TEXT DENSITY (IMPORTANTE)
 ========================================================= */
 
-.manifesto p{
-  font-family:'IBM Plex Mono', monospace;
-
-  font-size:clamp(1.2rem,2vw,2rem);
-
-  line-height:1.8;
-
+.section p{
   max-width:900px;
+  line-height:1.9;
+  margin-bottom:18px;
 }
 
 /* =========================================================
-   COMPILADOS LIST
+   COMPILADOS
 ========================================================= */
 
 .comp-list{
   display:flex;
   flex-direction:column;
-  gap:26px;
-}
-
-.comp-release{
-  display:flex;
-
   gap:24px;
-
-  align-items:baseline;
-
-  flex-wrap:wrap;
-
-  border-bottom:1px solid rgba(0,0,0,.08);
-
-  padding-bottom:14px;
-}
-
-.comp-code,
-.comp-year{
-  font-size:.72rem;
-
-  opacity:.5;
-
-  letter-spacing:.18em;
-}
-
-.comp-release a{
-  color:#111;
-  text-decoration:none;
-}
-
-.comp-release a:hover{
-  opacity:.5;
 }
 
 /* =========================================================
-   CONTACTO
+   CONTACT
 ========================================================= */
 
 .contact-block a{
-  color:#333;
-  text-decoration:none;
+  color:var(--accent);
 }
 
 /* =========================================================
@@ -349,20 +178,14 @@ main{
 
 .work-modal{
   position:fixed;
-
   inset:0;
-
   background:rgba(217,217,217,.95);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   opacity:0;
   pointer-events:none;
-
   transition:.3s ease;
-
   z-index:9999;
 }
 
@@ -377,13 +200,10 @@ main{
 
 @media (max-width:900px){
 
-  /* SIDEBAR TOP */
   .sidebar{
     width:100%;
     height:auto;
-
     background:var(--bg);
-
     padding:16px;
   }
 
@@ -392,46 +212,15 @@ main{
     padding-top:120px;
   }
 
-  /* =========================
-     HERO MOBILE (GLB DETRÁS)
-  ========================= */
-
-  .hero{
-    padding:24px;
-    align-items:flex-end;
+  .hero-text{
+    padding-left:24px;
   }
 
   .hero-object{
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:70vh;
-
-    opacity:.55;
-
-    z-index:1;
+    opacity:.6;
   }
 
-  .hero-text{
-    z-index:3;
-    position:relative;
-  }
-
-  .hero-text h1{
-    font-size:18vw;
-  }
-
-  /* SECTION */
   .section{
-    padding:60px 24px;
-  }
-
-  .section-title{
-    font-size:1rem;
-    letter-spacing:.18em;
-    line-height:1.6;
-    margin-bottom:34px;
+    padding:80px 24px;
   }
 }
