@@ -309,21 +309,21 @@ main{
 
   z-index:5;
 
-  max-width:700px;
+  max-width:500px;
 }
 
 .hero-text h1{
-  font-size:clamp(5.5rem,14vw,15rem);
+  font-size:clamp(3.8rem,9vw,8rem);
 
-  line-height:.78;
+  line-height:.86;
 
-  letter-spacing:-.11em;
+  letter-spacing:-.08em;
 
   margin-bottom:24px;
 
   position:relative;
 
-  left:-10px;
+  left:-4px;
 }
 
 .hero-text p{
