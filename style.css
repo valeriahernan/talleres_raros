@@ -296,15 +296,12 @@ main{
   background:
     radial-gradient(
       circle at center,
-      rgba(0,153,140,.08) 0%,
+      rgba(0,153,140,.06) 0%,
       rgba(255,255,255,0) 65%
     );
 
   mix-blend-mode:multiply;
-
-  animation:rotateLight 35s linear infinite;
 }
-
 /* =========================================================
    HERO TEXT
 ========================================================= */

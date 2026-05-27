@@ -5,11 +5,15 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 
-menuToggle.addEventListener("click", () => {
+if(menuToggle && navMenu){
 
-  navMenu.classList.toggle("active");
+  menuToggle.addEventListener("click", () => {
 
-});
+    navMenu.classList.toggle("active");
+
+  });
+
+}
 
 /* =========================================================
    WORKSHOP DATA
@@ -87,6 +91,8 @@ document.querySelectorAll(".work-item").forEach(item => {
 
     const data = workshops[index];
 
+    if(!data) return;
+
     modalImage.src = data.image;
 
     modalTitle.textContent = data.title;
@@ -113,21 +119,29 @@ function closeWorkshopModal(){
 
 }
 
-closeModal.addEventListener("click", closeWorkshopModal);
+if(closeModal){
+
+  closeModal.addEventListener("click", closeWorkshopModal);
+
+}
 
 /* =========================================================
    CLOSE WITH BACKGROUND CLICK
 ========================================================= */
 
-modal.addEventListener("click", (e) => {
+if(modal){
 
-  if(e.target === modal){
+  modal.addEventListener("click", (e) => {
 
-    closeWorkshopModal();
+    if(e.target === modal){
 
-  }
+      closeWorkshopModal();
 
-});
+    }
+
+  });
+
+}
 
 /* =========================================================
    CLOSE WITH ESC
@@ -144,7 +158,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* =========================================================
-   SIMPLE RIPPLE BACKGROUND
+   RIPPLE BACKGROUND
 ========================================================= */
 
 const canvas = document.getElementById("ripple-canvas");
@@ -166,18 +180,35 @@ window.addEventListener("resize", resizeCanvas);
 
 resizeCanvas();
 
+/* =========================================================
+   RIPPLE ARRAY
+========================================================= */
+
 const ripples = [];
+
+/* =========================================================
+   MOUSE MOVE
+========================================================= */
 
 window.addEventListener("mousemove", (e) => {
 
   ripples.push({
+
     x:e.clientX,
+
     y:e.clientY,
+
     radius:0,
-    alpha:0.12
+
+    alpha:0.08
+
   });
 
 });
+
+/* =========================================================
+   ANIMATION
+========================================================= */
 
 function animateRipples(){
 
@@ -185,9 +216,9 @@ function animateRipples(){
 
   ripples.forEach((ripple,index) => {
 
-    ripple.radius += 1.6;
+    ripple.radius += 1.2;
 
-    ripple.alpha -= 0.002;
+    ripple.alpha -= 0.0015;
 
     ctx.beginPath();
 
