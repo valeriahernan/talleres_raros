@@ -159,12 +159,12 @@ if(canvas){
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* LIGHTS */
+
 scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
 const light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(5, 5, 5);
 scene.add(light);
-
   
 
   /* LOAD GLB */
