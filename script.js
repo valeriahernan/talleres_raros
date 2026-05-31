@@ -167,6 +167,7 @@ if(canvas){
   const light = new THREE.DirectionalLight(0xffffff, 2);
   light.position.set(5, 5, 5);
   scene.add(light);
+  
 
   /* =========================
      LOAD GLB
@@ -196,6 +197,9 @@ loader.load(
     model.scale.setScalar(scale);
 
     scene.add(model);
+    
+console.log("MODEL POSITION:", model.position);
+console.log("MODEL SCALE:", model.scale);
 
   },
   undefined,
