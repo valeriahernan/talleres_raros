@@ -1,12 +1,11 @@
 const scenes = document.querySelectorAll(".scene");
-
 const links = document.querySelectorAll(".nav-menu a");
 const stage = document.querySelector(".stage");
 const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 
 /* =========================
-   SHADERS
+   SHADERS (NO USADOS AÚN, SOLO LISTOS)
 ========================= */
 
 const vertexShader = `
@@ -41,7 +40,7 @@ void main() {
 `;
 
 /* =========================
-   UNIFORMS (IMPORTANTE: ARRIBA)
+   UNIFORMS (LISTO PARA FUTURO RIPPLE)
 ========================= */
 
 const uniforms = {
@@ -147,7 +146,7 @@ if(canvas){
     100
   );
 
-  camera.position.set(0, 0, 3);
+  camera.position.set(0, 0, 5); // 🔥 MÁS SEGURO PARA VER MODELO
 
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -158,43 +157,67 @@ if(canvas){
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  /* LIGHTS */
+  /* =========================
+     LIGHTS (NECESARIAS)
+  ========================= */
 
-scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
-const light = new THREE.DirectionalLight(0xffffff, 2);
-light.position.set(5, 5, 5);
-scene.add(light);
-  
+  const light = new THREE.DirectionalLight(0xffffff, 2);
+  light.position.set(5, 5, 5);
+  scene.add(light);
 
-  /* LOAD GLB */
+  /* =========================
+     LOAD GLB
+  ========================= */
+
   const loader = new THREE.GLTFLoader();
 
-  loader.load("GLB/3Dtalleres.glb", (gltf) => {
+  loader.load(
+    "GLB/3Dtalleres.glb",
 
-    model = gltf.scene;
-    console.log(gltf.scene);
+    (gltf) => {
 
-    model.traverse((child) => {
-      console.log(child);
-      if(child.isMesh){
+      console.log("GLB CARGADO OK");
 
-        child.material = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        roughness: 0.6,
-        metalness: 0.2
+      model = gltf.scene;
+
+      /* FIX VISUAL CRÍTICO */
+      model.position.set(0, 0, 0);
+      model.scale.set(1, 1, 1);
+
+      model.traverse((child) => {
+
+        if(child.isMesh){
+
+          console.log("MESH:", child);
+
+          /* TEMPORAL: material seguro para ver el modelo */
+          child.material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            roughness: 0.6,
+            metalness: 0.2
+          });
+
+        }
+
       });
 
+      scene.add(model);
 
-      }
+    },
 
-    });
+    undefined,
 
-    scene.add(model);
+    (error) => {
+      console.error("ERROR GLB:", error);
+    }
+  );
 
-  });
+  /* =========================
+     MOUSE INTERACTION (LISTO FUTURO RIPPLE)
+  ========================= */
 
-  /* MOUSE INTERACTION */
   window.addEventListener("mousemove", (e) => {
 
     uniforms.uMouse.value.x = e.clientX / window.innerWidth;
@@ -202,7 +225,10 @@ scene.add(light);
 
   });
 
-  /* ANIMATE */
+  /* =========================
+     ANIMATE
+  ========================= */
+
   function animate(){
 
     requestAnimationFrame(animate);
@@ -218,7 +244,10 @@ scene.add(light);
 
   animate();
 
-  /* RESIZE */
+  /* =========================
+     RESIZE
+  ========================= */
+
   window.addEventListener("resize", () => {
 
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -227,4 +256,5 @@ scene.add(light);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
   });
+
 }
