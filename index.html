@@ -12,6 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/geist-font@latest/dist/font.css">
 
@@ -49,16 +53,8 @@
   <section class="scene active" id="hero">
 
     <div class="glb-layer">
-      <model-viewer
-        src="GLB/3Dtalleres.glb"
-        camera-controls
-        auto-rotate
-        interaction-prompt="none"
-        shadow-intensity="0"
-        exposure="1"
-        environment-image="neutral">
-      </model-viewer>
-    </div>
+  <canvas id="three-canvas"></canvas>
+</div>
 
     <div class="hero-vignette"></div>
 
@@ -251,6 +247,6 @@
 </main>
 
 <script src="script.js"></script>
-
+<canvas id="ripple"></canvas>
 </body>
 </html>

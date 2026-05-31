@@ -97,3 +97,60 @@ if(mobileBtn){
 window.addEventListener("load", () => {
   showScene("#hero");
 });
+
+const rippleCanvas = document.getElementById("ripple");
+
+if(rippleCanvas){
+
+  const ctx = rippleCanvas.getContext("2d");
+
+  let w, h;
+
+  function resize(){
+    w = rippleCanvas.width = window.innerWidth;
+    h = rippleCanvas.height = window.innerHeight;
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+
+  const ripples = [];
+
+  window.addEventListener("mousemove", (e) => {
+    ripples.push({
+      x: e.clientX,
+      y: e.clientY,
+      radius: 0,
+      alpha: 0.6
+    });
+  });
+
+  function animate(){
+
+    ctx.clearRect(0,0,w,h);
+
+    for(let i = 0; i < ripples.length; i++){
+
+      const r = ripples[i];
+
+      r.radius += 3;
+      r.alpha *= 0.96;
+
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+
+      ctx.strokeStyle = `rgba(186,125,255,${r.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      if(r.alpha < 0.01){
+        ripples.splice(i,1);
+        i--;
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
