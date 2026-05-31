@@ -11,19 +11,28 @@ body{
   font-family:"IBM Plex Mono", monospace;
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR
+========================= */
+
 .sidebar{
   position:fixed;
   left:0;
   top:0;
+
   width:220px;
   height:100vh;
+
   padding:30px;
-  z-index:999;
+
+  z-index:9999;
+
+  font-family:'IBM Plex Mono', monospace;
 }
 
 .logo img{
   width:120px;
+  display:block;
   margin-bottom:40px;
 }
 
@@ -34,16 +43,32 @@ body{
 }
 
 .nav-menu a{
-  color:#ba7dff;
   text-decoration:none;
+  color:#ba7dff;
   font-size:.85rem;
+  transition:opacity .25s ease;
+}
+
+.nav-menu a:hover{
+  opacity:.55;
 }
 
 .nav-menu a.active{
   opacity:1;
 }
 
-/* STAGE */
+/* =========================
+   MOBILE BAR
+========================= */
+
+.mobile-bar{
+  display:none;
+}
+
+/* =========================
+   STAGE
+========================= */
+
 .stage{
   margin-left:220px;
   height:100vh;
@@ -51,89 +76,266 @@ body{
   overflow:hidden;
 }
 
-/* SCENES */
+/* =========================
+   SCENES SYSTEM
+========================= */
+
 .scene{
   position:absolute;
   inset:0;
+
   opacity:0;
   pointer-events:none;
+
   transition:opacity .35s ease;
+
   z-index:1;
 }
 
 .scene.active{
   opacity:1;
   pointer-events:auto;
+
   z-index:2;
 }
 
-/* SCROLL CONTENT */
+/* =========================
+   SCROLL CONTENT
+========================= */
+
 .scene-scroll{
   height:100vh;
+
   overflow-y:auto;
+  overflow-x:hidden;
+
   padding:80px;
+
+  scrollbar-width:thin;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  overflow:hidden;
+}
+
+/* GLB LAYER */
+
 .glb-layer{
   position:absolute;
   inset:0;
+
   z-index:1;
+
+  pointer-events:auto;
 }
 
-model-viewer{
+.glb-layer model-viewer{
   width:100%;
   height:100%;
+
+  cursor:grab;
+  touch-action:pan-y;
 }
 
-/* OVERLAY */
+.glb-layer model-viewer:active{
+  cursor:grabbing;
+}
+
+/* VIGNETTE */
+
 .hero-vignette{
   position:absolute;
   inset:0;
+
   z-index:2;
-  background:radial-gradient(circle, rgba(214,214,214,.1), rgba(214,214,214,.8));
+
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(214,214,214,.10),
+      rgba(214,214,214,.80)
+    );
 }
 
-/* CONTENT */
+/* HERO CONTENT */
+
 .hero-content{
   position:relative;
+
   z-index:3;
+
   height:100%;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
+
   padding:80px;
+
+  pointer-events:none;
 }
 
 .hero-title{
-  font-size:clamp(4rem,8vw,9rem);
   color:#ba7dff;
+
+  font-size:clamp(4rem,10vw,10rem);
+
+  line-height:.85;
+
+  max-width:900px;
 }
 
-/* TEXT */
+.hero-sub{
+  margin-top:24px;
+
+  max-width:520px;
+
+  line-height:1.8;
+}
+
+/* =========================
+   TYPOGRAPHY GLOBAL
+========================= */
+
 .section-title{
   color:#ba7dff;
-  font-size:3rem;
-  margin-bottom:40px;
+
+  font-size:clamp(2rem,4vw,4rem);
+
+  margin-bottom:50px;
 }
 
+.scene p{
+  line-height:1.9;
+
+  margin-bottom:18px;
+
+  max-width:1000px;
+}
+
+.scene a{
+  color:#ba7dff;
+  text-decoration:none;
+}
+
+.scene a:hover{
+  opacity:.6;
+}
+
+/* =========================
+   TALLERES
+========================= */
+
 .taller-card{
-  margin-bottom:40px;
+  margin-bottom:48px;
+  max-width:900px;
+}
+
+.taller-card h3{
+  color:#ba7dff;
+  margin-bottom:12px;
+}
+
+/* =========================
+   COMPILADOS (FIX REAL)
+========================= */
+
+.release-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  max-width:1000px;
 }
 
 .release-list div{
   display:flex;
+  flex-wrap:wrap;
+  align-items:center;
   gap:10px;
-  margin-bottom:12px;
+  line-height:1.8;
 }
 
 .release-list span{
   opacity:.5;
+  min-width:60px;
 }
 
-/* MOBILE */
-@media(max-width:900px){
-  .sidebar{display:none;}
-  .stage{margin-left:0;}
-  .hero-content{padding:20px;}
+.release-list small{
+  opacity:.5;
+}
+
+/* =========================
+   PROJECT BLOCK
+========================= */
+
+.project-block{
+  margin-top:48px;
+}
+
+.project-block h3{
+  color:#ba7dff;
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:20px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:900px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .stage{
+    margin-left:0;
+  }
+
+  .scene-scroll{
+    padding:90px 24px 40px 24px;
+  }
+
+  .hero-content{
+    padding:24px;
+  }
+
+  .hero-title{
+    font-size:22vw;
+    line-height:.82;
+  }
+
+  .hero-sub{
+    max-width:280px;
+    font-size:.9rem;
+  }
+
+  .section-title{
+    font-size:1.8rem;
+  }
+
+  .release-list div{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
