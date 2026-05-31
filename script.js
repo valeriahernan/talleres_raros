@@ -1,4 +1,5 @@
 const scenes = document.querySelectorAll(".scene");
+
 const links = document.querySelectorAll(".nav-menu a");
 const stage = document.querySelector(".stage");
 const sidebar = document.querySelector(".sidebar");
@@ -158,11 +159,13 @@ if(canvas){
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* LIGHTS */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-  dirLight.position.set(2, 3, 5);
-  scene.add(dirLight);
+const light = new THREE.DirectionalLight(0xffffff, 2);
+light.position.set(5, 5, 5);
+scene.add(light);
+
+  
 
   /* LOAD GLB */
   const loader = new THREE.GLTFLoader();
@@ -170,16 +173,18 @@ if(canvas){
   loader.load("GLB/3Dtalleres.glb", (gltf) => {
 
     model = gltf.scene;
+    console.log(gltf.scene);
 
     model.traverse((child) => {
-
+      console.log(child);
       if(child.isMesh){
 
-        child.material = new THREE.ShaderMaterial({
-          vertexShader,
-          fragmentShader,
-          uniforms
-        });
+        child.material = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.6,
+        metalness: 0.2
+      });
+
 
       }
 
