@@ -1,16 +1,31 @@
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 
-function show(id){
-  scenes.forEach(s => s.classList.remove("active"));
-  document.querySelector(id).classList.add("active");
+function showScene(id){
+
+  scenes.forEach(scene=>{
+    scene.classList.remove("active");
+  });
+
+  const target = document.querySelector(id);
+
+  if(target){
+    target.classList.add("active");
+  }
 }
 
-links.forEach(l=>{
-  l.addEventListener("click", e=>{
+links.forEach(link=>{
+
+  link.addEventListener("click",(e)=>{
+
     e.preventDefault();
-    show(l.getAttribute("href"));
+
+    const target = link.getAttribute("href");
+
+    showScene(target);
+
   });
+
 });
 
-show("#hero");
+showScene("#hero");
