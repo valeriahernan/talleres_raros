@@ -170,49 +170,38 @@ if(canvas){
   /* =========================
      LOAD GLB
   ========================= */
+  
+loader.load(
+  "GLB/3Dtalleres.glb",
+  (gltf) => {
 
-  const loader = new THREE.GLTFLoader();
+    model = gltf.scene;
 
-  loader.load(
-    "GLB/3Dtalleres.glb",
+    console.log("GLB CARGADO OK");
 
-    (gltf) => {
+    /* 🔥 CALCULAR CENTRO REAL DEL MODELO */
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
 
-      console.log("GLB CARGADO OK");
+    /* mover al centro */
+    model.position.x -= center.x;
+    model.position.y -= center.y;
+    model.position.z -= center.z;
 
-      model = gltf.scene;
+    /* 🔥 ajustar escala automática */
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxDim;
+    model.scale.setScalar(scale);
 
-      /* FIX VISUAL CRÍTICO */
-      model.position.set(0, 0, 0);
-      model.scale.set(1, 1, 1);
+    scene.add(model);
 
-      model.traverse((child) => {
-
-        if(child.isMesh){
-
-          console.log("MESH:", child);
-
-          /* TEMPORAL: material seguro para ver el modelo */
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            roughness: 0.6,
-            metalness: 0.2
-          });
-
-        }
-
-      });
-
-      scene.add(model);
-
-    },
-
-    undefined,
-
-    (error) => {
-      console.error("ERROR GLB:", error);
-    }
-  );
+  },
+  undefined,
+  (error) => {
+    console.error("ERROR GLB:", error);
+  }
+);
 
   /* =========================
      MOUSE INTERACTION (LISTO FUTURO RIPPLE)
