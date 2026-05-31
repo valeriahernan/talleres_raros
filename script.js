@@ -5,30 +5,27 @@ const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 
 /* =========================
-   CAMBIAR ESCENA
+   CAMBIO DE ESCENA
 ========================= */
 
 function showScene(id){
 
-  // apagar todas las escenas
   scenes.forEach(scene => {
     scene.classList.remove("active");
   });
 
-  // activar escena objetivo
   const target = document.querySelector(id);
 
   if(target){
     target.classList.add("active");
 
-    // reset scroll interno (IMPORTANTE)
+    // reset scroll interno
     const scroll = target.querySelector(".scene-scroll");
     if(scroll){
       scroll.scrollTop = 0;
     }
   }
 
-  // actualizar nav activo
   links.forEach(link => {
     link.classList.remove("active");
 
@@ -49,7 +46,7 @@ links.forEach(link => {
     const target = link.getAttribute("href");
     showScene(target);
 
-    // cerrar menú mobile si está abierto
+    // cerrar menú mobile
     if(window.innerWidth < 900 && sidebar){
       sidebar.style.display = "none";
     }
@@ -60,7 +57,9 @@ links.forEach(link => {
    INIT
 ========================= */
 
-showScene("#hero");
+window.addEventListener("load", () => {
+  showScene("#hero");
+});
 
 /* =========================
    MOBILE MENU
@@ -71,9 +70,9 @@ if(mobileBtn){
 
     if(!sidebar) return;
 
-    const isHidden = sidebar.style.display === "none" || sidebar.style.display === "";
+    const hidden = !sidebar.style.display || sidebar.style.display === "none";
 
-    if(isHidden){
+    if(hidden){
       sidebar.style.display = "flex";
       sidebar.style.position = "fixed";
       sidebar.style.top = "60px";
@@ -91,66 +90,73 @@ if(mobileBtn){
 }
 
 /* =========================
-   ACTIVE LINK ON LOAD
+   THREE.JS BASIC SETUP (GLB READY)
 ========================= */
 
-window.addEventListener("load", () => {
-  showScene("#hero");
-});
+const canvas = document.getElementById("three-canvas");
 
-const rippleCanvas = document.getElementById("ripple");
+let scene, camera, renderer, model;
 
-if(rippleCanvas){
+if(canvas){
 
-  const ctx = rippleCanvas.getContext("2d");
+  scene = new THREE.Scene();
 
-  let w, h;
+  camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
 
-  function resize(){
-    w = rippleCanvas.width = window.innerWidth;
-    h = rippleCanvas.height = window.innerHeight;
-  }
+  camera.position.set(0, 0, 3);
 
-  resize();
-  window.addEventListener("resize", resize);
-
-  const ripples = [];
-
-  window.addEventListener("mousemove", (e) => {
-    ripples.push({
-      x: e.clientX,
-      y: e.clientY,
-      radius: 0,
-      alpha: 0.6
-    });
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true
   });
 
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  /* LIGHTS */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+  dirLight.position.set(2, 3, 5);
+  scene.add(dirLight);
+
+  /* LOAD GLB */
+  const loader = new THREE.GLTFLoader();
+
+  loader.load("GLB/3Dtalleres.glb", (gltf) => {
+
+    model = gltf.scene;
+    scene.add(model);
+
+  });
+
+  /* ANIMATE */
   function animate(){
 
-    ctx.clearRect(0,0,w,h);
+    requestAnimationFrame(animate);
 
-    for(let i = 0; i < ripples.length; i++){
-
-      const r = ripples[i];
-
-      r.radius += 3;
-      r.alpha *= 0.96;
-
-      ctx.beginPath();
-      ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-
-      ctx.strokeStyle = `rgba(186,125,255,${r.alpha})`;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      if(r.alpha < 0.01){
-        ripples.splice(i,1);
-        i--;
-      }
+    if(model){
+      model.rotation.y += 0.002;
     }
 
-    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
   }
 
   animate();
+
+  /* RESIZE */
+  window.addEventListener("resize", () => {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+  });
 }
