@@ -146,7 +146,8 @@ if(canvas){
     100
   );
 
-  camera.position.set(0, 0, 5); // 🔥 MÁS SEGURO PARA VER MODELO
+  camera.position.set(0, 0, 4);
+  camera.lookAt(0, 0, 0); // 🔥 MÁS SEGURO PARA VER MODELO
 
   renderer = new THREE.WebGLRenderer({
     canvas,
