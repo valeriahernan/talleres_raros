@@ -24,7 +24,7 @@ function showScene(id){
   });
 }
 
-/* NAV */
+/* NAV CLICK */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -39,13 +39,12 @@ links.forEach(link => {
 /* INIT */
 window.addEventListener("load", () => showScene("#hero"));
 
-/* MOBILE */
+/* MOBILE MENU */
 if(mobileBtn){
   mobileBtn.addEventListener("click", () => {
     if(!sidebar) return;
 
     const hidden = !sidebar.style.display || sidebar.style.display === "none";
-
     sidebar.style.display = hidden ? "flex" : "none";
   });
 }
@@ -60,8 +59,10 @@ let scene, camera, renderer, model;
 
 if(canvas){
 
+  /* SCENE */
   scene = new THREE.Scene();
 
+  /* CAMERA */
   camera = new THREE.PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
@@ -72,6 +73,7 @@ if(canvas){
   camera.position.set(0, 0, 5);
   camera.lookAt(0, 0, 0);
 
+  /* RENDERER */
   renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -81,6 +83,8 @@ if(canvas){
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+  renderer.setClearColor(0x000000, 0);
+
   /* LIGHTS */
   scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
@@ -88,39 +92,60 @@ if(canvas){
   light.position.set(5, 5, 5);
   scene.add(light);
 
+  /* HELPER (DEBUG opcional) */
+  // scene.add(new THREE.AxesHelper(5));
+
   /* =========================
-     GLTF LOADER (CORRECTO)
+     GLTF LOADER
   ========================= */
 
   const loader = new THREE.GLTFLoader();
 
   loader.load(
     "GLB/3Dtalleres.glb",
+
     (gltf) => {
 
       model = gltf.scene;
       scene.add(model);
 
-      /* CENTER */
+      /* =========================
+         CENTER MODEL (CRÍTICO)
+      ========================= */
+
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
 
       model.position.sub(center);
 
-      /* SCALE */
+      /* =========================
+         SCALE AUTO FIX
+      ========================= */
+
       const maxSize = Math.max(size.x, size.y, size.z);
-      model.scale.setScalar(2.5 / maxSize);
+      const scale = 2.5 / maxSize;
+
+      model.scale.set(scale, scale, scale);
+
+      /* RE-ENCADRE FINAL */
+      camera.position.set(0, 0, 5);
+      camera.lookAt(0, 0, 0);
 
       console.log("GLB LOADED OK");
     },
+
     undefined,
+
     (err) => {
       console.error("GLB ERROR:", err);
     }
   );
 
-  /* ANIMATE */
+  /* =========================
+     ANIMATION LOOP
+  ========================= */
+
   function animate(){
 
     requestAnimationFrame(animate);
@@ -134,7 +159,10 @@ if(canvas){
 
   animate();
 
-  /* RESIZE */
+  /* =========================
+     RESIZE
+  ========================= */
+
   window.addEventListener("resize", () => {
 
     camera.aspect = window.innerWidth / window.innerHeight;
