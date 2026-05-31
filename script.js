@@ -5,6 +5,50 @@ const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 
 /* =========================
+   SHADERS
+========================= */
+
+const vertexShader = `
+uniform vec2 uMouse;
+uniform float uTime;
+
+varying vec2 vUv;
+
+void main() {
+  vUv = uv;
+
+  vec3 pos = position;
+
+  float dist = distance(uv, uMouse);
+
+  float ripple = sin(dist * 20.0 - uTime * 5.0);
+
+  float effect = exp(-dist * 8.0) * ripple * 0.15;
+
+  pos += normal * effect;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+}
+`;
+
+const fragmentShader = `
+varying vec2 vUv;
+
+void main() {
+  gl_FragColor = vec4(0.73, 0.49, 1.0, 1.0);
+}
+`;
+
+/* =========================
+   UNIFORMS (IMPORTANTE: ARRIBA)
+========================= */
+
+const uniforms = {
+  uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+  uTime: { value: 0 }
+};
+
+/* =========================
    CAMBIO DE ESCENA
 ========================= */
 
@@ -19,11 +63,8 @@ function showScene(id){
   if(target){
     target.classList.add("active");
 
-    // reset scroll interno
     const scroll = target.querySelector(".scene-scroll");
-    if(scroll){
-      scroll.scrollTop = 0;
-    }
+    if(scroll) scroll.scrollTop = 0;
   }
 
   links.forEach(link => {
@@ -36,17 +77,15 @@ function showScene(id){
 }
 
 /* =========================
-   CLICK NAV
+   NAV CLICK
 ========================= */
 
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const target = link.getAttribute("href");
-    showScene(target);
+    showScene(link.getAttribute("href"));
 
-    // cerrar menú mobile
     if(window.innerWidth < 900 && sidebar){
       sidebar.style.display = "none";
     }
@@ -78,7 +117,6 @@ if(mobileBtn){
       sidebar.style.top = "60px";
       sidebar.style.left = "0";
       sidebar.style.width = "100%";
-      sidebar.style.height = "auto";
       sidebar.style.flexDirection = "row";
       sidebar.style.justifyContent = "space-around";
       sidebar.style.background = "#d6d6d6";
@@ -90,7 +128,7 @@ if(mobileBtn){
 }
 
 /* =========================
-   THREE.JS BASIC SETUP (GLB READY)
+   THREE.JS SETUP
 ========================= */
 
 const canvas = document.getElementById("three-canvas");
@@ -132,7 +170,30 @@ if(canvas){
   loader.load("GLB/3Dtalleres.glb", (gltf) => {
 
     model = gltf.scene;
+
+    model.traverse((child) => {
+
+      if(child.isMesh){
+
+        child.material = new THREE.ShaderMaterial({
+          vertexShader,
+          fragmentShader,
+          uniforms
+        });
+
+      }
+
+    });
+
     scene.add(model);
+
+  });
+
+  /* MOUSE INTERACTION */
+  window.addEventListener("mousemove", (e) => {
+
+    uniforms.uMouse.value.x = e.clientX / window.innerWidth;
+    uniforms.uMouse.value.y = 1.0 - (e.clientY / window.innerHeight);
 
   });
 
@@ -140,6 +201,8 @@ if(canvas){
   function animate(){
 
     requestAnimationFrame(animate);
+
+    uniforms.uTime.value += 0.02;
 
     if(model){
       model.rotation.y += 0.002;
