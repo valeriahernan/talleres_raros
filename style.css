@@ -203,21 +203,6 @@ body{
   margin-bottom:50px;
 }
 
-.subsection-title{
-  color:#ba7dff;
-
-  font-family:"Geist Mono", monospace;
-
-  font-size:.9rem;
-
-  letter-spacing:.18em;
-
-  text-transform:uppercase;
-
-  margin-top:40px;
-  margin-bottom:16px;
-}
-
 .scene p{
   font-family:"Geist Mono", monospace;
 
@@ -391,18 +376,57 @@ body{
     min-width:auto;
   }
 }
-
+/* =========================
+   CONVOCATORIAS + PROYECTO
+========================= */
 
 .project-block{
   margin-top:48px;
 }
 
-.subsection-title{
-  color:#ba7dff;
+#convocatorias,
+#proyecto{
   font-family:"Geist Mono", monospace;
+}
+
+#convocatorias h3,
+#proyecto h3{
+  color:#ba7dff;
+
+  font-family:"Geist Mono", monospace;
+
   font-size:1rem;
   font-weight:500;
+
   letter-spacing:.08em;
-  margin-bottom:16px;
+
   text-transform:uppercase;
+
+  margin-top:40px;
+  margin-bottom:16px;
+}
+
+#convocatorias p,
+#proyecto p{
+  color:#111;
+
+  line-height:1.9;
+
+  margin-bottom:18px;
+
+  max-width:900px;
+}
+
+#convocatorias a,
+#proyecto a{
+  color:#ba7dff;
+
+  text-decoration:none;
+
+  transition:opacity .25s ease;
+}
+
+#convocatorias a:hover,
+#proyecto a:hover{
+  opacity:.6;
 }
