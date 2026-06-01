@@ -7,16 +7,16 @@ const mobileBtn = document.getElementById("mobile-menu-btn");
    SCENES
 ========================= */
 
-function showScene(id) {
+function showScene(id){
+
   scenes.forEach(s => s.classList.remove("active"));
 
   const target = document.querySelector(id);
-
-  if (target) {
+  if(target){
     target.classList.add("active");
 
     const scroll = target.querySelector(".scene-scroll");
-    if (scroll) scroll.scrollTop = 0;
+    if(scroll) scroll.scrollTop = 0;
   }
 
   links.forEach(l => {
@@ -30,24 +30,13 @@ links.forEach(link => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
 
-    if (window.innerWidth < 900 && sidebar) {
+    if(window.innerWidth < 900){
       sidebar.style.display = "none";
     }
   });
 });
 
-/* INIT */
 window.addEventListener("load", () => showScene("#hero"));
-
-/* MOBILE */
-if (mobileBtn) {
-  mobileBtn.addEventListener("click", () => {
-    if (!sidebar) return;
-
-    const hidden = !sidebar.style.display || sidebar.style.display === "none";
-    sidebar.style.display = hidden ? "flex" : "none";
-  });
-}
 
 /* =========================
    THREE.JS
@@ -57,16 +46,18 @@ const canvas = document.getElementById("three-canvas");
 
 let scene, camera, renderer, model;
 
-if (canvas) {
+if(canvas){
 
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(
-    55,
+    60,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
+
+  camera.position.set(0, 0, 4);
 
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -78,21 +69,22 @@ if (canvas) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* =========================
-     LIGHTS (IMPORTANTE)
+     LUCES (IMPORTANTE)
   ========================= */
 
-  scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+  const ambient = new THREE.AmbientLight(0xffffff, 1.2);
+  scene.add(ambient);
 
-  const key = new THREE.DirectionalLight(0xffffff, 2);
-  key.position.set(5, 10, 5);
-  scene.add(key);
+  const dir = new THREE.DirectionalLight(0xffffff, 2);
+  dir.position.set(3, 5, 2);
+  scene.add(dir);
 
-  const fill = new THREE.DirectionalLight(0xffffff, 0.8);
-  fill.position.set(-5, 3, -5);
-  scene.add(fill);
+  const back = new THREE.DirectionalLight(0xffffff, 1);
+  back.position.set(-3, -2, -2);
+  scene.add(back);
 
   /* =========================
-     LOAD GLB
+     GLB LOAD
   ========================= */
 
   const loader = new THREE.GLTFLoader();
@@ -105,47 +97,41 @@ if (canvas) {
       model = gltf.scene;
       scene.add(model);
 
-      /* =========================
-         AUTO CENTER + SCALE SAFE
-      ========================= */
-
+      /* CENTER */
       const box = new THREE.Box3().setFromObject(model);
-      const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
 
       model.position.sub(center);
 
+      /* SCALE */
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 2.2 / maxDim;
-      model.scale.setScalar(scale);
+      model.scale.setScalar(2.5 / maxDim);
 
-      /* =========================
-         CAMERA FIT REAL (CLAVE)
-      ========================= */
+      /* FORCE VISIBILITY FIX */
+      model.traverse((child) => {
+        if(child.isMesh){
+          child.material.transparent = false;
+          child.material.opacity = 1;
+          child.material.needsUpdate = true;
+        }
+      });
 
-      const distance = maxDim * 2.8;
-
-      camera.position.set(0, 0, distance);
-      camera.lookAt(0, 0, 0);
-
-      console.log("GLB VISIBLE OK");
+      console.log("GLB LOADED OK");
     },
 
     undefined,
-
-    (err) => {
-      console.error("GLB ERROR:", err);
-    }
+    (err) => console.error(err)
   );
 
   /* =========================
-     RENDER LOOP
+     ANIMATE
   ========================= */
 
-  function animate() {
+  function animate(){
     requestAnimationFrame(animate);
 
-    if (model) {
+    if(model){
       model.rotation.y += 0.002;
     }
 
@@ -155,10 +141,11 @@ if (canvas) {
   animate();
 
   /* =========================
-     RESIZE
+     RESIZE FIX
   ========================= */
 
   window.addEventListener("resize", () => {
+
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
