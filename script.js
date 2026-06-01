@@ -14,9 +14,6 @@ function showScene(id){
   const target = document.querySelector(id);
   if(target){
     target.classList.add("active");
-
-    const scroll = target.querySelector(".scene-scroll");
-    if(scroll) scroll.scrollTop = 0;
   }
 
   links.forEach(l => {
@@ -24,7 +21,6 @@ function showScene(id){
   });
 }
 
-/* NAV */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -51,13 +47,11 @@ if(canvas){
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(
-    60,
+    50,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
-
-  camera.position.set(0, 0, 4);
 
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -66,25 +60,28 @@ if(canvas){
   });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
   /* =========================
-     LUCES (IMPORTANTE)
+     LUCES (ESTO ES CLAVE)
   ========================= */
 
-  const ambient = new THREE.AmbientLight(0xffffff, 1.2);
-  scene.add(ambient);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
-  const dir = new THREE.DirectionalLight(0xffffff, 2);
-  dir.position.set(3, 5, 2);
-  scene.add(dir);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2);
+  keyLight.position.set(3, 5, 2);
+  scene.add(keyLight);
 
-  const back = new THREE.DirectionalLight(0xffffff, 1);
-  back.position.set(-3, -2, -2);
-  scene.add(back);
+  const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  fillLight.position.set(-3, 1, -2);
+  scene.add(fillLight);
+
+  const backLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  backLight.position.set(0, -3, -3);
+  scene.add(backLight);
 
   /* =========================
-     GLB LOAD
+     LOAD GLB
   ========================= */
 
   const loader = new THREE.GLTFLoader();
@@ -97,27 +94,28 @@ if(canvas){
       model = gltf.scene;
       scene.add(model);
 
-      /* CENTER */
+      /* =========================
+         FIT PERFECTO (CRÍTICO)
+      ========================= */
+
       const box = new THREE.Box3().setFromObject(model);
-      const center = box.getCenter(new THREE.Vector3());
       const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
 
       model.position.sub(center);
 
-      /* SCALE */
-      const maxDim = Math.max(size.x, size.y, size.z);
-      model.scale.setScalar(2.5 / maxDim);
+      const maxSize = Math.max(size.x, size.y, size.z);
 
-      /* FORCE VISIBILITY FIX */
-      model.traverse((child) => {
-        if(child.isMesh){
-          child.material.transparent = false;
-          child.material.opacity = 1;
-          child.material.needsUpdate = true;
-        }
-      });
+      model.scale.setScalar(2.2 / maxSize);
 
-      console.log("GLB LOADED OK");
+      /* =========================
+         CAMERA AUTO FIT (ESTO TE FALTABA)
+      ========================= */
+
+      camera.position.set(0, 0, maxSize * 1.8);
+      camera.lookAt(0, 0, 0);
+
+      console.log("GLB VISIBLE OK");
     },
 
     undefined,
@@ -125,7 +123,7 @@ if(canvas){
   );
 
   /* =========================
-     ANIMATE
+     ANIMATION
   ========================= */
 
   function animate(){
@@ -150,5 +148,6 @@ if(canvas){
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
+
   });
 }
