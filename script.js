@@ -114,17 +114,36 @@ if (canvas) {
   /* =========================
      GLB LOADER
   ========================= */
+loader.load(
+  "GLB/3Dtalleres.glb",
+  (gltf) => {
 
-  const loader = new THREE.GLTFLoader();
+    model = gltf.scene;
 
-  loader.load(
-    "GLB/3Dtalleres.glb",
+    // 👇 IMPORTANTE: agregar primero al scene
+    scene.add(model);
 
-    (gltf) => {
+    // 🔥 centrar modelo REAL
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
 
-      model = gltf.scene;
-      scene.add(model);
+    model.position.x -= center.x;
+    model.position.y -= center.y;
+    model.position.z -= center.z;
 
+    // 🔥 escala segura (evita invisibilidad)
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2 / maxDim;
+    model.scale.setScalar(scale);
+
+    // 🔥 cámara ajustada automáticamente
+    camera.position.set(0, 0, maxDim * 2.5);
+    camera.lookAt(0, 0, 0);
+
+    console.log("GLB LOADED + VISIBLE FIXED");
+  }
+);
       /* =========================
          CENTRAR MODELO (CRÍTICO)
       ========================= */
