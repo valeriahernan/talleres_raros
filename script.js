@@ -1,45 +1,52 @@
+
+// =========================
+// SCENES
+// =========================
+
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 
-function showScene(id){
-
-  scenes.forEach(scene=>{
+function showScene(id) {
+  scenes.forEach(scene => {
     scene.classList.remove("active");
   });
 
   const target = document.querySelector(id);
 
-  if(target){
+  if (target) {
     target.classList.add("active");
   }
 }
 
-links.forEach(link=>{
-
-  link.addEventListener("click",(e)=>{
-
+links.forEach(link => {
+  link.addEventListener("click", (e) => {
     e.preventDefault();
 
     const target = link.getAttribute("href");
-
     showScene(target);
-
   });
-
 });
 
 showScene("#hero");
+
+// =========================
+// TRAIL (FIXED + STABLE)
+// =========================
+
 const container = document.getElementById("trail-container");
 
 let lastX = 0;
 let lastY = 0;
-
-const container = document.getElementById("trail-container");
-
-let lastX = 0;
-let lastY = 0;
+let lastTime = 0;
 
 document.addEventListener("mousemove", (e) => {
+
+  const now = performance.now();
+
+  // throttle para evitar lag (CLAVE)
+  if (now - lastTime < 16) return;
+  lastTime = now;
+
   const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
 
   if (dist > 3) {
