@@ -1,3 +1,6 @@
+/* =========================
+   TRAIL
+========================= */
 
 #trail-container {
   position: fixed;
@@ -10,12 +13,12 @@
 }
 
 .trail-dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
+  position: fixed;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: white;
-  opacity: 0.6;
+  opacity: 0.5;
   transform: translate(-50%, -50%);
   animation: fadeOut 0.6s linear forwards;
 }
@@ -23,11 +26,13 @@
 @keyframes fadeOut {
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.3);
+    transform: translate(-50%, -50%) scale(0.2);
   }
 }
 
-
+/* =========================
+   RESET
+========================= */
 
 *{
   margin:0;
@@ -49,14 +54,10 @@ body{
   position:fixed;
   left:0;
   top:0;
-
   width:220px;
   height:100vh;
-
   padding:30px;
-
   z-index:9999;
-
   font-family:'IBM Plex Mono', monospace;
 }
 
@@ -104,12 +105,9 @@ body{
 .scene{
   position:absolute;
   inset:0;
-
   opacity:0;
   pointer-events:none;
-
-  transition:
-    opacity .35s ease;
+  transition: opacity .35s ease;
 }
 
 .scene.active{
@@ -119,14 +117,10 @@ body{
 
 .scene-scroll{
   height:100vh;
-
   overflow-y:auto;
   overflow-x:hidden;
-
   padding:80px;
-
   font-family:"Geist Mono", monospace;
-
   scrollbar-width:thin;
 }
 
@@ -143,20 +137,15 @@ body{
 .glb-layer{
   position:absolute;
   inset:0;
-
   z-index:1;
-
   pointer-events:auto;
 }
 
 .glb-layer model-viewer{
   width:100%;
   height:100%;
-
   pointer-events:auto;
-
   cursor:grab;
-
   touch-action:pan-y;
 }
 
@@ -169,14 +158,10 @@ body{
 .hero-vignette{
   position:absolute;
   inset:0;
-
   z-index:2;
-
   pointer-events:none;
-
   background:
-    radial-gradient(
-      circle,
+    radial-gradient(circle,
       rgba(214,214,214,.10),
       rgba(214,214,214,.80)
     );
@@ -186,37 +171,26 @@ body{
 
 .hero-content{
   position:relative;
-
   z-index:3;
-
   height:100%;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
-
   padding:80px;
-
   font-family:"Geist Mono", monospace;
-
   pointer-events:none;
 }
 
 .hero-title{
   color:#ba7dff;
-
   font-size:clamp(5rem,10vw,10rem);
-
   line-height:.85;
-
   max-width:900px;
 }
 
 .hero-sub{
   margin-top:24px;
-
   max-width:520px;
-
   line-height:1.8;
 }
 
@@ -224,29 +198,30 @@ body{
    TYPOGRAPHY
 ========================= */
 
+/* 🔥 UNIFICADO: TODOS LOS H3 */
+h3{
+  color:#ba7dff;
+  font-family:"Geist Mono", monospace;
+  font-weight:800;
+}
+
+/* títulos de sección */
 .section-title{
   color:#ba7dff;
-
   font-family:"Geist Mono", monospace;
-
   font-size:clamp(2rem,4vw,4rem);
-
   margin-bottom:50px;
 }
 
 .scene p{
   font-family:"Geist Mono", monospace;
-
   line-height:1.9;
-
   margin-bottom:18px;
-
   max-width:1000px;
 }
 
 .scene a{
   color:#ba7dff;
-
   text-decoration:none;
 }
 
@@ -260,20 +235,11 @@ body{
 
 .taller-card{
   margin-bottom:48px;
-
   max-width:900px;
 }
 
 .taller-card h3{
-  color:#ba7dff;
-
   margin-bottom:12px;
-
-  font-family:"Geist Mono", monospace;
-}
-
-.taller-card p{
-  margin-bottom:0;
 }
 
 /* =========================
@@ -283,27 +249,20 @@ body{
 .release-list{
   display:flex;
   flex-direction:column;
-
   gap:18px;
-
   max-width:1000px;
 }
 
 .release{
   display:flex;
-
   flex-wrap:wrap;
-
   align-items:center;
-
   gap:10px;
-
   line-height:1.8;
 }
 
 .release span{
   opacity:.5;
-
   min-width:60px;
 }
 
@@ -318,95 +277,10 @@ body{
 .contact-links{
   display:flex;
   flex-direction:column;
-
   gap:10px;
-
   margin-top:20px;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width:900px){
-
-  body{
-    overflow:hidden;
-  }
-
-  .sidebar{
-    display:none;
-  }
-
-  .mobile-bar{
-    display:flex;
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    padding:16px 20px;
-
-    background:#d6d6d6;
-
-    z-index:9999;
-  }
-
-  #mobile-menu-btn{
-    background:none;
-    border:none;
-
-    color:#ba7dff;
-
-    font-family:'IBM Plex Mono', monospace;
-
-    cursor:pointer;
-  }
-
-  .stage{
-    margin-left:0;
-  }
-
-  .scene-scroll{
-    padding:
-      90px
-      24px
-      40px
-      24px;
-  }
-
-  .hero-content{
-    padding:24px;
-  }
-
-  .hero-title{
-    font-size:22vw;
-
-    line-height:.82;
-  }
-
-  .hero-sub{
-    max-width:280px;
-
-    font-size:.9rem;
-  }
-
-  .section-title{
-    font-size:1.8rem;
-  }
-
-  .release{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .release span{
-    min-width:auto;
-  }
-}
 /* =========================
    CONVOCATORIAS + PROYECTO
 ========================= */
@@ -422,17 +296,8 @@ body{
 
 #convocatorias h3,
 #proyecto h3{
-  color:#ba7dff;
-
-  font-family:"Geist Mono", monospace;
-
-  font-size:1rem;
-  font-weight:500;
-
   letter-spacing:.08em;
-
   text-transform:uppercase;
-
   margin-top:40px;
   margin-bottom:16px;
 }
@@ -440,24 +305,80 @@ body{
 #convocatorias p,
 #proyecto p{
   color:#111;
-
   line-height:1.9;
-
   margin-bottom:18px;
-
   max-width:900px;
 }
 
 #convocatorias a,
 #proyecto a{
   color:#ba7dff;
-
   text-decoration:none;
-
   transition:opacity .25s ease;
 }
 
 #convocatorias a:hover,
 #proyecto a:hover{
   opacity:.6;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:900px){
+
+  body{ overflow:hidden; }
+
+  .sidebar{ display:none; }
+
+  .mobile-bar{
+    display:flex;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:16px 20px;
+    background:#d6d6d6;
+    z-index:9999;
+  }
+
+  #mobile-menu-btn{
+    background:none;
+    border:none;
+    color:#ba7dff;
+    font-family:'IBM Plex Mono', monospace;
+    cursor:pointer;
+  }
+
+  .stage{ margin-left:0; }
+
+  .scene-scroll{
+    padding:90px 24px 40px 24px;
+  }
+
+  .hero-content{ padding:24px; }
+
+  .hero-title{
+    font-size:22vw;
+    line-height:.82;
+  }
+
+  .hero-sub{
+    max-width:280px;
+    font-size:.9rem;
+  }
+
+  .section-title{
+    font-size:1.8rem;
+  }
+
+  .release{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .release span{
+    min-width:auto;
+  }
 }
