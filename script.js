@@ -65,49 +65,42 @@ if (btn && sidebar) {
 /* =========================
    TRAIL (OPTIMIZED + MOBILE SAFE)
 ========================= */
+const text = "TALLERES RAROS";
+const STEP = 18;
 
-const container = document.getElementById("trail-container");
+document.addEventListener("mousemove", (e) => {
 
-let lastX = 0;
-let lastY = 0;
-let lastTime = 0;
+  const now = performance.now();
 
-const MAX_DOTS = 35;
+  if (now - lastTime < 16) return;
+  lastTime = now;
 
-// disable trail on touch devices (CRÍTICO performance)
-const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
 
-if (!isTouch) {
+  if (dist > STEP) {
 
-  document.addEventListener("mousemove", (e) => {
+    const dot = document.createElement("div");
+    dot.className = "trail-dot";
 
-    const now = performance.now();
+    // 🔥 AQUÍ está el cambio clave
+    dot.textContent = text;
 
-    if (now - lastTime < 16) return;
-    lastTime = now;
+    dot.style.left = e.clientX + "px";
+    dot.style.top = e.clientY + "px";
 
-    const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+    container.appendChild(dot);
 
-    if (dist > 3) {
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
+    setTimeout(() => {
+      dot.remove();
+    }, 800);
 
-      dot.style.left = e.clientX + "px";
-      dot.style.top = e.clientY + "px";
-
-      container.appendChild(dot);
-
-      setTimeout(() => {
-        dot.remove();
-      }, 600);
-
-      if (container.children.length > MAX_DOTS) {
-        container.removeChild(container.firstChild);
-      }
-
-      lastX = e.clientX;
-      lastY = e.clientY;
+    if (container.children.length > MAX_DOTS) {
+      container.removeChild(container.firstChild);
     }
-  });
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+  }
+});
 
 }
