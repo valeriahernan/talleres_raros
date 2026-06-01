@@ -1,7 +1,13 @@
 
-// =========================
-// SCENES
-// =========================
+/* =========================
+   CLICK FIX (safe)
+========================= */
+
+document.addEventListener("click", () => {}, { passive: true });
+
+/* =========================
+   SCENES SYSTEM
+========================= */
 
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
@@ -27,11 +33,12 @@ links.forEach(link => {
   });
 });
 
+// init
 showScene("#hero");
 
-// =========================
-// TRAIL (FIXED + STABLE)
-// =========================
+/* =========================
+   TRAIL (STABLE + OPTIMIZED)
+========================= */
 
 const container = document.getElementById("trail-container");
 
@@ -39,11 +46,13 @@ let lastX = 0;
 let lastY = 0;
 let lastTime = 0;
 
+const MAX_DOTS = 40;
+
 document.addEventListener("mousemove", (e) => {
 
   const now = performance.now();
 
-  // throttle para evitar lag (CLAVE)
+  // throttle (evita lag y rompe-input)
   if (now - lastTime < 16) return;
   lastTime = now;
 
@@ -58,7 +67,15 @@ document.addEventListener("mousemove", (e) => {
 
     container.appendChild(dot);
 
-    setTimeout(() => dot.remove(), 600);
+    // auto-remove
+    setTimeout(() => {
+      dot.remove();
+    }, 600);
+
+    // limit DOM size (CRÍTICO)
+    if (container.children.length > MAX_DOTS) {
+      container.removeChild(container.firstChild);
+    }
 
     lastX = e.clientX;
     lastY = e.clientY;
