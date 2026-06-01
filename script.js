@@ -47,13 +47,12 @@ if (mobileBtn) {
     if (!sidebar) return;
 
     const hidden = !sidebar.style.display || sidebar.style.display === "none";
-
     sidebar.style.display = hidden ? "flex" : "none";
   });
-}
+});
 
 /* =========================
-   THREE.JS SETUP (FIXED)
+   THREE.JS SETUP (FIXED FINAL)
 ========================= */
 
 const canvas = document.getElementById("three-canvas");
@@ -71,6 +70,8 @@ if (canvas) {
     100
   );
 
+  camera.position.set(0, 0, 5);
+
   renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -81,7 +82,15 @@ if (canvas) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* =========================
-     LIGHTS (CRÍTICO PARA VER GLB)
+     🔥 FIX VISUAL (CRÍTICO)
+  ========================= */
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+
+  /* =========================
+     LIGHTS (CORRECTAS)
   ========================= */
 
   const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
@@ -106,7 +115,7 @@ if (canvas) {
       scene.add(model);
 
       /* =========================
-         CENTRAR MODELO (CRÍTICO)
+         CENTRAR MODELO
       ========================= */
 
       const box = new THREE.Box3().setFromObject(model);
@@ -116,7 +125,7 @@ if (canvas) {
       model.position.sub(center);
 
       /* =========================
-         ESCALA AUTOMÁTICA
+         ESCALA SEGURA
       ========================= */
 
       const maxDim = Math.max(size.x, size.y, size.z);
@@ -124,7 +133,7 @@ if (canvas) {
       model.scale.setScalar(scale);
 
       /* =========================
-         CÁMARA BIEN AJUSTADA
+         CÁMARA CORRECTA
       ========================= */
 
       camera.position.set(0, 0, maxDim * 2.2);
@@ -157,7 +166,7 @@ if (canvas) {
   animate();
 
   /* =========================
-     RESIZE FIX
+     RESIZE (FIX IMPORTANTE)
   ========================= */
 
   window.addEventListener("resize", () => {
@@ -167,5 +176,6 @@ if (canvas) {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 
+    camera.lookAt(0, 0, 0); // 🔥 FIX EXTRA IMPORTANTE
   });
 }
