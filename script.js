@@ -4,7 +4,7 @@ const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 
 /* =========================
-   SCENES SYSTEM
+   SCENES
 ========================= */
 
 function showScene(id) {
@@ -37,11 +37,9 @@ links.forEach(link => {
 });
 
 /* INIT */
-window.addEventListener("load", () => {
-  showScene("#hero");
-});
+window.addEventListener("load", () => showScene("#hero"));
 
-/* MOBILE MENU */
+/* MOBILE */
 if (mobileBtn) {
   mobileBtn.addEventListener("click", () => {
     if (!sidebar) return;
@@ -52,7 +50,7 @@ if (mobileBtn) {
 }
 
 /* =========================
-   THREE.JS FIXED SETUP
+   THREE.JS
 ========================= */
 
 const canvas = document.getElementById("three-canvas");
@@ -61,19 +59,15 @@ let scene, camera, renderer, model;
 
 if (canvas) {
 
-  /* SCENE */
   scene = new THREE.Scene();
 
-  /* CAMERA */
   camera = new THREE.PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
-  camera.position.set(0, 0, 5);
 
-  /* RENDERER */
   renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -84,21 +78,21 @@ if (canvas) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* =========================
-     🔥 LIGHTS (CRÍTICO)
+     LIGHTS (IMPORTANTE)
   ========================= */
 
-  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
-  const dirLight1 = new THREE.DirectionalLight(0xffffff, 2);
-  dirLight1.position.set(5, 10, 5);
-  scene.add(dirLight1);
+  const key = new THREE.DirectionalLight(0xffffff, 2);
+  key.position.set(5, 10, 5);
+  scene.add(key);
 
-  const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-  dirLight2.position.set(-5, 2, -5);
-  scene.add(dirLight2);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.8);
+  fill.position.set(-5, 3, -5);
+  scene.add(fill);
 
   /* =========================
-     GLTF LOADER
+     LOAD GLB
   ========================= */
 
   const loader = new THREE.GLTFLoader();
@@ -112,7 +106,7 @@ if (canvas) {
       scene.add(model);
 
       /* =========================
-         CENTER MODEL (FIX REAL)
+         AUTO CENTER + SCALE SAFE
       ========================= */
 
       const box = new THREE.Box3().setFromObject(model);
@@ -121,22 +115,20 @@ if (canvas) {
 
       model.position.sub(center);
 
-      /* =========================
-         SCALE FIX
-      ========================= */
-
-      const maxSize = Math.max(size.x, size.y, size.z);
-      const scale = 2.5 / maxSize;
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 2.2 / maxDim;
       model.scale.setScalar(scale);
 
       /* =========================
-         CAMERA AUTO FIT
+         CAMERA FIT REAL (CLAVE)
       ========================= */
 
-      camera.position.set(0, 0, maxSize * 2.5);
+      const distance = maxDim * 2.8;
+
+      camera.position.set(0, 0, distance);
       camera.lookAt(0, 0, 0);
 
-      console.log("GLB LOADED & VISIBLE");
+      console.log("GLB VISIBLE OK");
     },
 
     undefined,
@@ -147,7 +139,7 @@ if (canvas) {
   );
 
   /* =========================
-     ANIMATE
+     RENDER LOOP
   ========================= */
 
   function animate() {
@@ -163,7 +155,7 @@ if (canvas) {
   animate();
 
   /* =========================
-     RESIZE FIX
+     RESIZE
   ========================= */
 
   window.addEventListener("resize", () => {
