@@ -12,32 +12,58 @@ document.addEventListener("click", () => {}, { passive: true });
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 
-function showScene(id) {
-  scenes.forEach(scene => {
-    scene.classList.remove("active");
+function setActiveLink(hash) {
+  links.forEach(l => {
+    if (l.getAttribute("href") === hash) {
+      l.classList.add("active");
+    } else {
+      l.classList.remove("active");
+    }
   });
+}
+
+function showScene(id) {
+  scenes.forEach(scene => scene.classList.remove("active"));
 
   const target = document.querySelector(id);
 
   if (target) {
     target.classList.add("active");
+    setActiveLink(id);
   }
 }
 
+/* NAV CLICK */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
 
     const target = link.getAttribute("href");
     showScene(target);
+
+    // close sidebar on mobile (important UX)
+    sidebar?.classList.remove("active");
   });
 });
 
-// init
+/* INIT */
 showScene("#hero");
 
 /* =========================
-   TRAIL (STABLE + OPTIMIZED)
+   MOBILE MENU FIX (FALTABA ESTO)
+========================= */
+
+const btn = document.getElementById("mobile-menu-btn");
+const sidebar = document.querySelector(".sidebar");
+
+if (btn && sidebar) {
+  btn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+  });
+}
+
+/* =========================
+   TRAIL (OPTIMIZED + MOBILE SAFE)
 ========================= */
 
 const container = document.getElementById("trail-container");
@@ -46,38 +72,42 @@ let lastX = 0;
 let lastY = 0;
 let lastTime = 0;
 
-const MAX_DOTS = 40;
+const MAX_DOTS = 35;
 
-document.addEventListener("mousemove", (e) => {
+// disable trail on touch devices (CRÍTICO performance)
+const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
-  const now = performance.now();
+if (!isTouch) {
 
-  // throttle (evita lag y rompe-input)
-  if (now - lastTime < 16) return;
-  lastTime = now;
+  document.addEventListener("mousemove", (e) => {
 
-  const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+    const now = performance.now();
 
-  if (dist > 3) {
-    const dot = document.createElement("div");
-    dot.className = "trail-dot";
+    if (now - lastTime < 16) return;
+    lastTime = now;
 
-    dot.style.left = e.clientX + "px";
-    dot.style.top = e.clientY + "px";
+    const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
 
-    container.appendChild(dot);
+    if (dist > 3) {
+      const dot = document.createElement("div");
+      dot.className = "trail-dot";
 
-    // auto-remove
-    setTimeout(() => {
-      dot.remove();
-    }, 600);
+      dot.style.left = e.clientX + "px";
+      dot.style.top = e.clientY + "px";
 
-    // limit DOM size (CRÍTICO)
-    if (container.children.length > MAX_DOTS) {
-      container.removeChild(container.firstChild);
+      container.appendChild(dot);
+
+      setTimeout(() => {
+        dot.remove();
+      }, 600);
+
+      if (container.children.length > MAX_DOTS) {
+        container.removeChild(container.firstChild);
+      }
+
+      lastX = e.clientX;
+      lastY = e.clientY;
     }
+  });
 
-    lastX = e.clientX;
-    lastY = e.clientY;
-  }
-});
+}

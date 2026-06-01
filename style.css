@@ -1,4 +1,4 @@
-
+  
 /* =========================
    TRAIL
 ========================= */
@@ -34,7 +34,7 @@
 }
 
 /* =========================
-   RESET
+   RESET + BASE FIX
 ========================= */
 
 *{
@@ -46,11 +46,12 @@
 body{
   background:#d6d6d6;
   color:#111;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
 /* =========================
-   MENU
+   SIDEBAR
 ========================= */
 
 .sidebar {
@@ -93,6 +94,10 @@ body{
   opacity:.55;
 }
 
+/* =========================
+   MOBILE BAR
+========================= */
+
 .mobile-bar{
   display:none;
 }
@@ -103,12 +108,12 @@ body{
 
 .stage{
   margin-left:220px;
-  height:100vh;
+  min-height:100vh;
   position:relative;
 }
 
 /* =========================
-   SCENES
+   SCENES (FIX IMPORTANTE)
 ========================= */
 
 .scene{
@@ -117,6 +122,9 @@ body{
   opacity:0;
   pointer-events:none;
   transition: opacity .35s ease;
+
+  display:flex;
+  flex-direction:column;
 }
 
 .scene.active{
@@ -125,12 +133,13 @@ body{
 }
 
 .scene-scroll{
-  height:100vh;
+  height:100%;
   overflow-y:auto;
   overflow-x:hidden;
   padding:80px;
   font-family:"Geist Mono", monospace;
   scrollbar-width:thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* =========================
@@ -141,13 +150,12 @@ body{
   overflow:hidden;
 }
 
-/* GLB (FIX REAL IMPORTANTE) */
-
+/* GLB / MODEL VIEWER */
 .glb-layer{
   position:absolute;
   inset:0;
   z-index:1;
-  pointer-events:none; /* 🔥 clave: no bloquea UI */
+  pointer-events:none;
 }
 
 .glb-layer model-viewer{
@@ -155,11 +163,10 @@ body{
   height:100%;
   cursor:grab;
   touch-action:pan-y;
-  pointer-events:auto; /* solo interacción del modelo */
+  pointer-events:auto;
 }
 
-/* OVERLAY */
-
+/* VIGNETTE */
 .hero-vignette{
   position:absolute;
   inset:0;
@@ -173,8 +180,7 @@ body{
     );
 }
 
-/* CONTENT */
-
+/* HERO CONTENT */
 .hero-content{
   position:relative;
   z-index:3;
@@ -244,7 +250,7 @@ body{
 }
 
 /* =========================
-   COMPILADOS
+   COMPILADOS (FIX REAL)
 ========================= */
 
 .release-list{
@@ -254,20 +260,20 @@ body{
   max-width:1000px;
 }
 
-.release{
+.release-list div{
   display:flex;
   flex-wrap:wrap;
-  align-items:center;
   gap:10px;
+  align-items:center;
   line-height:1.8;
 }
 
-.release span{
+.release-list span{
   opacity:.5;
   min-width:60px;
 }
 
-.release small{
+.release-list small{
   opacity:.5;
 }
 
@@ -283,81 +289,16 @@ body{
 }
 
 /* =========================
-   MOBILE
-========================= */
-
-@media (max-width:900px){
-
-  body{
-    overflow:hidden;
-  }
-
-  .sidebar{
-    display:none;
-  }
-
-  .mobile-bar{
-    display:flex;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:16px 20px;
-    background:#d6d6d6;
-    z-index:9999;
-  }
-
-  #mobile-menu-btn{
-    background:none;
-    border:none;
-    color:#ba7dff;
-    font-family:'IBM Plex Mono', monospace;
-    cursor:pointer;
-  }
-
-  .stage{
-    margin-left:0;
-  }
-
-  .scene-scroll{
-    padding:90px 24px 40px 24px;
-  }
-
-  .hero-content{
-    padding:24px;
-  }
-
-  .hero-title{
-    font-size:22vw;
-    line-height:.82;
-  }
-
-  .hero-sub{
-    max-width:280px;
-    font-size:.9rem;
-  }
-
-  .section-title{
-    font-size:1.8rem;
-  }
-
-  .release{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .release span{
-    min-width:auto;
-  }
-}
-
-/* =========================
-   CONVOCATORIAS + PROYECTO
+   PROJECT BLOCK
 ========================= */
 
 .project-block{
   margin-top:48px;
 }
+
+/* =========================
+   CONVOCATORIAS + PROYECTO
+========================= */
 
 #convocatorias,
 #proyecto{
@@ -394,4 +335,105 @@ body{
 #convocatorias a:hover,
 #proyecto a:hover{
   opacity:.6;
+}
+
+/* =========================
+   MOBILE MENU FIX REAL
+========================= */
+
+.sidebar.active{
+  transform:translateX(0);
+}
+
+/* =========================
+   MOBILE / TABLET
+========================= */
+
+@media (max-width:900px){
+
+  body{
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+
+    width:80%;
+    max-width:280px;
+    height:100vh;
+
+    background:#d6d6d6;
+    padding:30px;
+
+    transform:translateX(-100%);
+    transition:transform .3s ease;
+
+    z-index:100000;
+  }
+
+  .sidebar.active{
+    transform:translateX(0);
+  }
+
+  .mobile-bar{
+    display:flex;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:16px 20px;
+    background:#d6d6d6;
+    z-index:9999;
+  }
+
+  #mobile-menu-btn{
+    background:none;
+    border:none;
+    color:#ba7dff;
+    font-family:'IBM Plex Mono', monospace;
+    cursor:pointer;
+  }
+
+  .stage{
+    margin-left:0;
+  }
+
+  .scene-scroll{
+    padding:90px 24px 40px 24px;
+  }
+
+  .hero-content{
+    padding:24px;
+    justify-content:flex-end;
+  }
+
+  .hero-title{
+    font-size:22vw;
+    line-height:.82;
+  }
+
+  .hero-sub{
+    max-width:280px;
+    font-size:.9rem;
+  }
+
+  .section-title{
+    font-size:1.8rem;
+  }
+
+  .release-list div{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .release-list span{
+    min-width:auto;
+  }
+
+  .glb-layer model-viewer{
+    height:60vh;
+  }
 }
