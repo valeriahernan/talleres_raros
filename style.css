@@ -159,8 +159,8 @@ body{
 }
 
 .glb-layer model-viewer{
-  width:40%;
-  height:40%;
+  width:100%;
+  height:100%;
   cursor:grab;
   touch-action:pan-y;
   pointer-events:auto; /* SOLO interacción interna */
