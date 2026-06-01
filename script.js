@@ -22,9 +22,12 @@ function showScene(id) {
   links.forEach(l => {
     l.classList.toggle("active", l.getAttribute("href") === id);
   });
+
+  // IMPORTANTE: resize canvas cuando cambia escena
+  setTimeout(resizeRenderer, 50);
 }
 
-/* NAV CLICK */
+/* NAV */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -37,11 +40,9 @@ links.forEach(link => {
 });
 
 /* INIT */
-window.addEventListener("load", () => {
-  showScene("#hero");
-});
+window.addEventListener("load", () => showScene("#hero"));
 
-/* MOBILE MENU */
+/* MOBILE */
 if (mobileBtn) {
   mobileBtn.addEventListener("click", () => {
     if (!sidebar) return;
@@ -49,28 +50,42 @@ if (mobileBtn) {
     const hidden = !sidebar.style.display || sidebar.style.display === "none";
     sidebar.style.display = hidden ? "flex" : "none";
   });
-});
+}
 
 /* =========================
-   THREE.JS SETUP (FIXED FINAL)
+   THREE.JS SETUP (FIX REAL)
 ========================= */
 
 const canvas = document.getElementById("three-canvas");
 
 let scene, camera, renderer, model;
 
+function resizeRenderer() {
+  if (!renderer || !camera) return;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+}
+
 if (canvas) {
 
   scene = new THREE.Scene();
+  scene.background = null;
 
   camera = new THREE.PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
     0.1,
-    100
+    1000
   );
 
-  camera.position.set(0, 0, 5);
+  // 🔥 CLAVE: cámara más cerca
+  camera.position.set(0, 0, 2.5);
 
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -82,26 +97,22 @@ if (canvas) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   /* =========================
-     🔥 FIX VISUAL (CRÍTICO)
+     LUCES (ESTO ES CRÍTICO)
   ========================= */
 
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  const ambient = new THREE.AmbientLight(0xffffff, 1.2);
+  scene.add(ambient);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+  dirLight.position.set(3, 5, 2);
+  scene.add(dirLight);
+
+  const fillLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  fillLight.position.set(-3, 2, -2);
+  scene.add(fillLight);
 
   /* =========================
-     LIGHTS (CORRECTAS)
-  ========================= */
-
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
-  scene.add(hemi);
-
-  const dir = new THREE.DirectionalLight(0xffffff, 2);
-  dir.position.set(5, 10, 5);
-  scene.add(dir);
-
-  /* =========================
-     LOAD GLB
+     GLB LOADER
   ========================= */
 
   const loader = new THREE.GLTFLoader();
@@ -115,7 +126,7 @@ if (canvas) {
       scene.add(model);
 
       /* =========================
-         CENTRAR MODELO
+         CENTRAR MODELO (CRÍTICO)
       ========================= */
 
       const box = new THREE.Box3().setFromObject(model);
@@ -125,32 +136,23 @@ if (canvas) {
       model.position.sub(center);
 
       /* =========================
-         ESCALA SEGURA
+         ESCALA AUTOMÁTICA
       ========================= */
 
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 2.5 / maxDim;
+      const scale = 2 / maxDim;
       model.scale.setScalar(scale);
 
-      /* =========================
-         CÁMARA CORRECTA
-      ========================= */
-
-      camera.position.set(0, 0, maxDim * 2.2);
-      camera.lookAt(0, 0, 0);
-
-      console.log("GLB OK - visible");
+      console.log("GLB OK");
     },
 
     undefined,
 
-    (err) => {
-      console.error("GLB ERROR:", err);
-    }
+    (err) => console.error("GLB ERROR:", err)
   );
 
   /* =========================
-     ANIMATE
+     ANIMATION LOOP
   ========================= */
 
   function animate() {
@@ -165,17 +167,6 @@ if (canvas) {
 
   animate();
 
-  /* =========================
-     RESIZE (FIX IMPORTANTE)
-  ========================= */
-
-  window.addEventListener("resize", () => {
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    camera.lookAt(0, 0, 0); // 🔥 FIX EXTRA IMPORTANTE
-  });
+  /* RESIZE FIX */
+  window.addEventListener("resize", resizeRenderer);
 }
