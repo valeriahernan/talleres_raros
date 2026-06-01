@@ -12,88 +12,67 @@ document.addEventListener("click", () => {}, { passive: true });
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 
-function setActiveLink(hash) {
-  links.forEach(l => {
-    if (l.getAttribute("href") === hash) {
-      l.classList.add("active");
-    } else {
-      l.classList.remove("active");
-    }
-  });
-}
-
 function showScene(id) {
-  scenes.forEach(scene => scene.classList.remove("active"));
+  scenes.forEach(scene => {
+    scene.classList.remove("active");
+  });
 
   const target = document.querySelector(id);
 
   if (target) {
     target.classList.add("active");
-    setActiveLink(id);
   }
 }
 
-/* NAV CLICK */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
 
     const target = link.getAttribute("href");
     showScene(target);
-
-    // close sidebar on mobile (important UX)
-    sidebar?.classList.remove("active");
   });
 });
 
-/* INIT */
+// init
 showScene("#hero");
 
 /* =========================
-   MOBILE MENU FIX (FALTABA ESTO)
+   TRAIL (STABLE + OPTIMIZED)
 ========================= */
 
-const btn = document.getElementById("mobile-menu-btn");
-const sidebar = document.querySelector(".sidebar");
+const container = document.getElementById("trail-container");
 
-if (btn && sidebar) {
-  btn.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
-  });
-}
+let lastX = 0;
+let lastY = 0;
+let lastTime = 0;
 
-/* =========================
-   TRAIL (OPTIMIZED + MOBILE SAFE)
-========================= */
-const text = "TALLERES RAROS";
-const STEP = 18;
+const MAX_DOTS = 40;
 
 document.addEventListener("mousemove", (e) => {
 
   const now = performance.now();
 
+  // throttle (evita lag y rompe-input)
   if (now - lastTime < 16) return;
   lastTime = now;
 
   const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
 
-  if (dist > STEP) {
-
+  if (dist > 3) {
     const dot = document.createElement("div");
     dot.className = "trail-dot";
-
-    // 🔥 AQUÍ está el cambio clave
-    dot.textContent = text;
 
     dot.style.left = e.clientX + "px";
     dot.style.top = e.clientY + "px";
 
     container.appendChild(dot);
 
+    // auto-remove
     setTimeout(() => {
       dot.remove();
-    }, 800);
+    }, 600);
 
+    // limit DOM size (CRÍTICO)
     if (container.children.length > MAX_DOTS) {
       container.removeChild(container.firstChild);
     }
@@ -102,5 +81,3 @@ document.addEventListener("mousemove", (e) => {
     lastY = e.clientY;
   }
 });
-
-}
