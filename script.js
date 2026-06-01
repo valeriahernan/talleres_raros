@@ -4,19 +4,19 @@ const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 
 /* =========================
-   SCENES
+   SCENES SYSTEM
 ========================= */
 
-function showScene(id){
-
+function showScene(id) {
   scenes.forEach(s => s.classList.remove("active"));
 
   const target = document.querySelector(id);
-  if(target){
+
+  if (target) {
     target.classList.add("active");
 
     const scroll = target.querySelector(".scene-scroll");
-    if(scroll) scroll.scrollTop = 0;
+    if (scroll) scroll.scrollTop = 0;
   }
 
   links.forEach(l => {
@@ -30,39 +30,40 @@ links.forEach(link => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
 
-    if(window.innerWidth < 900 && sidebar){
+    if (window.innerWidth < 900 && sidebar) {
       sidebar.style.display = "none";
     }
   });
 });
 
 /* INIT */
-window.addEventListener("load", () => showScene("#hero"));
+window.addEventListener("load", () => {
+  showScene("#hero");
+});
 
 /* MOBILE MENU */
-if(mobileBtn){
+if (mobileBtn) {
   mobileBtn.addEventListener("click", () => {
-    if(!sidebar) return;
+    if (!sidebar) return;
 
     const hidden = !sidebar.style.display || sidebar.style.display === "none";
+
     sidebar.style.display = hidden ? "flex" : "none";
   });
 }
 
 /* =========================
-   THREE.JS SETUP
+   THREE.JS SETUP (FIXED)
 ========================= */
 
 const canvas = document.getElementById("three-canvas");
 
 let scene, camera, renderer, model;
 
-if(canvas){
+if (canvas) {
 
-  /* SCENE */
   scene = new THREE.Scene();
 
-  /* CAMERA */
   camera = new THREE.PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
@@ -70,10 +71,6 @@ if(canvas){
     100
   );
 
-  camera.position.set(0, 0, 5);
-  camera.lookAt(0, 0, 0);
-
-  /* RENDERER */
   renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -83,20 +80,19 @@ if(canvas){
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  renderer.setClearColor(0x000000, 0);
+  /* =========================
+     LIGHTS (CRÍTICO PARA VER GLB)
+  ========================= */
 
-  /* LIGHTS */
-  scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+  scene.add(hemi);
 
-  const light = new THREE.DirectionalLight(0xffffff, 2);
-  light.position.set(5, 5, 5);
-  scene.add(light);
-
-  /* HELPER (DEBUG opcional) */
-  // scene.add(new THREE.AxesHelper(5));
+  const dir = new THREE.DirectionalLight(0xffffff, 2);
+  dir.position.set(5, 10, 5);
+  scene.add(dir);
 
   /* =========================
-     GLTF LOADER
+     LOAD GLB
   ========================= */
 
   const loader = new THREE.GLTFLoader();
@@ -110,29 +106,31 @@ if(canvas){
       scene.add(model);
 
       /* =========================
-         CENTER MODEL (CRÍTICO)
+         CENTRAR MODELO (CRÍTICO)
       ========================= */
 
       const box = new THREE.Box3().setFromObject(model);
-      const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
 
       model.position.sub(center);
 
       /* =========================
-         SCALE AUTO FIX
+         ESCALA AUTOMÁTICA
       ========================= */
 
-      const maxSize = Math.max(size.x, size.y, size.z);
-      const scale = 2.5 / maxSize;
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 2.5 / maxDim;
+      model.scale.setScalar(scale);
 
-      model.scale.set(scale, scale, scale);
+      /* =========================
+         CÁMARA BIEN AJUSTADA
+      ========================= */
 
-      /* RE-ENCADRE FINAL */
-      camera.position.set(0, 0, 5);
+      camera.position.set(0, 0, maxDim * 2.2);
       camera.lookAt(0, 0, 0);
 
-      console.log("GLB LOADED OK");
+      console.log("GLB OK - visible");
     },
 
     undefined,
@@ -143,14 +141,13 @@ if(canvas){
   );
 
   /* =========================
-     ANIMATION LOOP
+     ANIMATE
   ========================= */
 
-  function animate(){
-
+  function animate() {
     requestAnimationFrame(animate);
 
-    if(model){
+    if (model) {
       model.rotation.y += 0.002;
     }
 
@@ -160,7 +157,7 @@ if(canvas){
   animate();
 
   /* =========================
-     RESIZE
+     RESIZE FIX
   ========================= */
 
   window.addEventListener("resize", () => {
