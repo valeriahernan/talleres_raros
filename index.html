@@ -13,9 +13,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/geist-font@latest/dist/font.css">
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -25,11 +25,11 @@
 <aside class="sidebar">
 
   <div class="logo">
-    <img src="images/talleresraros.png">
+    <img src="images/talleresraros.png" alt="Talleres Raros">
   </div>
 
   <nav class="nav-menu">
-    <a href="#hero" class="active">INICIO</a>
+    <a href="#hero">INICIO</a>
     <a href="#convocatorias">CONVOCATORIAS</a>
     <a href="#proyecto">PROYECTO</a>
     <a href="#talleres">TALLERES</a>
@@ -45,94 +45,244 @@
 
 <main class="stage">
 
-<!-- HERO -->
-<section class="scene active" id="hero">
+  <!-- HERO -->
 
-  <div class="glb-layer">
-    <canvas id="three-canvas"></canvas>
-  </div>
+  <section class="scene active hero" id="hero">
 
-  <div class="hero-vignette"></div>
+<div class="glb-layer">
+  <model-viewer
+    src="GLB/3Dtalleres.glb"
+    camera-controls
+    auto-rotate
+    interaction-prompt="none"
+    min-camera-orbit="auto auto 50%"
+    max-camera-orbit="auto auto 200%"
+    shadow-intensity="0"
+    exposure="1"
+    environment-image="neutral">
+  </model-viewer>
+</div>
 
-  <div class="hero-content">
-    <h1 class="hero-title">TALLERES<br>RAROS</h1>
-    <p class="hero-sub">música ✧ workshops ✧ experimentación</p>
-  </div>
+<div class="hero-vignette"></div>
 
-</section>
-
-<!-- CONVOCATORIAS -->
-<section class="scene" id="convocatorias">
-  <div class="scene-scroll">
-    <h2 class="section-title">CONVOCATORIAS</h2>
-
-    <p>Residencia 2026</p>
-    <p>Producción para personas trans</p>
-    <p>Composición postdigital</p>
-  </div>
-</section>
-
-<!-- PROYECTO -->
-<section class="scene" id="proyecto">
-  <div class="scene-scroll">
-    <h2 class="section-title">PROYECTO</h2>
-
-    <p>Talleres Raros es un espacio de formación musical experimental...</p>
-
-    <div class="project-block">
-      <h3>EQUIPO</h3>
-      <p>anthï ✴︎ Tatu Vergara</p>
-    </div>
-  </div>
-</section>
-
-<!-- TALLERES -->
-<section class="scene" id="talleres">
-  <div class="scene-scroll">
-    <h2 class="section-title">TALLERES</h2>
-
-    <div class="taller-card">
-      <h3>Autoproducción Musical</h3>
-      <p>Producción experimental.</p>
     </div>
 
-    <div class="taller-card">
-      <h3>Producción Trans</h3>
-      <p>Perspectiva crítica sonora.</p>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content">
+
+      <h1 class="hero-title">
+        TALLERES<br>RAROS
+      </h1>
+
+      <p class="hero-sub">
+        prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses
+      </p>
+
     </div>
 
-    <div class="taller-card">
-      <h3>Composición Postdigital</h3>
-      <p>El computador como instrumento.</p>
+  </section>
+
+  <!-- CONVOCATORIAS -->
+
+  <section class="scene" id="convocatorias">
+
+    <div class="scene-scroll">
+
+      <h2 class="section-title">CONVOCATORIAS</h2>
+
+      <h3>CONVOCATORIA 2026</h3>
+
+<p>
+  TALLERES RAROS ㄨ RESIDENCIA PACÍFICA
+</p>
+
+      <br>
+
+      <p>
+        ☪ <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform">Taller de Producción para Personas Trans</a>
+      </p>
+
+      <p>☪ Taller de Composición Postdigital</p>
+      <p>☪ Taller de Letras</p>
+      <p>☪ Taller de Autoproducción Musical</p>
+
+      <br>
+
+      <p>☪ Masterclass Hypereikon (próximamente)</p>
+      <p>☪ Masterclass lilen (próximamente)</p>
+
+      <p>
+        ☪ <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform">Masterclass Javiera Electra</a>
+      </p>
+
     </div>
-  </div>
+
+  </section>
+
+  <!-- PROYECTO -->
+
+  <section class="scene" id="proyecto">
+
+    <div class="scene-scroll">
+
+      <h2 class="section-title">PROYECTO</h2>
+
+<p>
+  Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas.
+</p>
+
+<p>
+  Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos. Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea. Orientamos una propuesta que amplíe el acceso de estas prácticas especialmente para la población LGBTTQIANB+.
+</p>
+
+<div class="project-block">
+
+  <h3 class="subsection-title">꧁ EQUIPO DOCENTE</h3>
+
+  <p>
+    <a target="_blank" href="https://anthi.neocities.org">
+      anthï
+    </a>
+    ✴︎
+    <a target="_blank" href="https://www.tatuara.net">
+      Tatu Vergara
+    </a>
+  </p>
+
+</div>
+
+<div class="project-block">
+
+  <h3 class="subsection-title">꧁ DOCENTES INVITADES</h3>
+
+  <p>2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon</p>
+  <p>2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo</p>
+  <p>2022 · Yaima Cat ✴︎ Niños Indigo</p>
+  <p>2021 · Dadalú ✴︎ Violeta Castillo</p>
+  <p>2020 · vimvau</p>
+
+</div>
+
+<div class="project-block">
+
+  <h3 class="subsection-title">DISEÑO GRÁFICO Y WEB</h3>
+
+  <p>
+    <a target="_blank" href="https://www.instagram.com/inpar_/">
+      @inpar
+    </a>
+  </p>
+
+</div>
+
+</div>
+
 </section>
+  </p>
 
-<!-- COMPILADOS -->
-<section class="scene" id="compilados">
-  <div class="scene-scroll">
-    <h2 class="section-title">COMPILADOS</h2>
+</div>
 
-    <div class="release-list">
-      <div><span>TR011</span> me he perdido en muchas partes <small>2025</small></div>
-      <div><span>TR010</span> El viejo, la flor y la luz <small>2024</small></div>
-      <div><span>TR009</span> Super Sayonara <small>2023</small></div>
+  </section>
+
+  <!-- TALLERES -->
+
+  <section class="scene" id="talleres">
+
+    <div class="scene-scroll">
+
+      <h2 class="section-title">TALLERES</h2>
+
+      <div class="taller-card">
+        <h3>Taller de Autoproducción Musical</h3>
+        <p>Iniciación a la producción musical en formato digital, enfatizando la autodeterminación y experimentación creativa, la exploración de lo imprevisto y del glitch, del potencial de las limitaciones y del no-saber-hacer.</p>
+      </div>
+
+      <div class="taller-card">
+        <h3>Taller de Producción para Personas Trans</h3>
+        <p>Iniciación a la producción separatista que plantea perspectivas críticas y prácticas de la producción específicas para las identidades disidentes de género.</p>
+      </div>
+
+      <div class="taller-card">
+        <h3>Taller de Composición Postdigital</h3>
+        <p>Laboratorio de creación sonora que pone al computador como el “instrumento más íntimo”, explorando estrategias de composición que sólo existen en él.</p>
+      </div>
+
+      <div class="taller-card">
+        <h3>Taller de Creación Musical Digital</h3>
+        <p>Iniciación a técnicas de composición específicas del entorno digital y las herramientas de producción de un DAW.</p>
+      </div>
+
+      <div class="taller-card">
+        <h3>Taller de Canciones Raras</h3>
+        <p>Laboratorio de composición que habita en las fisuras de las categorías de lo pop y lo experimental.</p>
+      </div>
+
+      <div class="taller-card">
+        <h3>Taller de Letras</h3>
+        <p>Laboratorio de escritura en torno al juego y los hallazgos inesperados de nuestro propio lenguaje, utilizando la memoria digital y la autoficción.</p>
+      </div>
+
     </div>
-  </div>
-</section>
 
-<!-- CONTACTO -->
-<section class="scene" id="contacto">
-  <div class="scene-scroll">
-    <h2 class="section-title">CONTACTO</h2>
+  </section>
 
-    <p>talleresraros@gmail.com</p>
-    <p>@TALLERESRAROS</p>
-  </div>
-</section>
+  <!-- COMPILADOS -->
+
+  <section class="scene" id="compilados">
+
+    <div class="scene-scroll">
+
+      <h2 class="section-title">COMPILADOS</h2>
+
+      <div class="release-list">
+
+        <div><span>TR011</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">me he perdido en muchas partes</a> <small>2025</small></div>
+        <div><span>TR010</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> <small>2024</small></div>
+        <div><span>TR009</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> <small>2023</small></div>
+        <div><span>TR008</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> <small>2023</small></div>
+        <div><span>TR007</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> <small>2022</small></div>
+        <div><span>TR006</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> <small>2022</small></div>
+        <div><span>TR005</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café (y hazme el amor)</a> <small>2021</small></div>
+        <div><span>TR004</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya, hazte famosa</a> <small>2021</small></div>
+        <div><span>TR003</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> <small>2020</small></div>
+        <div><span>TR002</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> <small>2020</small></div>
+        <div><span>TR001</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida en ese miedo</a> <small>2020</small></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACTO -->
+
+  <section class="scene" id="contacto">
+
+    <div class="scene-scroll">
+
+      <h2 class="section-title">CONTACTO</h2>
+
+      <p>stay ⋆ friends</p>
+
+      <p>
+        <a href="mailto:talleresraros@gmail.com">
+          ✉︎ talleresraros@gmail.com
+        </a>
+      </p>
+
+      <p>
+        <a target="_blank" href="https://www.instagram.com/talleresraros">@TALLERESRAROS</a><br>
+        <a target="_blank" href="https://talleresraros.bandcamp.com">BANDCAMP</a>
+      </p>
+
+    </div>
+
+  </section>
 
 </main>
 
 <script src="script.js"></script>
+
 </body>
 </html>
