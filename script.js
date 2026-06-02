@@ -137,3 +137,56 @@ document.addEventListener("keydown", (e) => {
   }
 
 });
+
+
+const letters = document.querySelectorAll(".hero-title span");
+
+let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+document.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+// animación suave (mejor que mousemove directo)
+function animate() {
+
+  letters.forEach((letter) => {
+
+    const rect = letter.getBoundingClientRect();
+
+    const lx = rect.left + rect.width / 2;
+    const ly = rect.top + rect.height / 2;
+
+    const dx = lx - mouse.x;
+    const dy = ly - mouse.y;
+
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    const maxDist = 180;
+
+    if (dist < maxDist) {
+
+      const force = (1 - dist / maxDist);
+
+      const moveX = dx * force * 0.25;
+      const moveY = dy * force * 0.25;
+
+      const rotate = moveX * 0.6;
+
+      letter.style.transform = `
+        translate(${moveX}px, ${moveY}px)
+        rotate(${rotate}deg)
+        scale(${1 + force * 0.15})
+      `;
+
+    } else {
+      letter.style.transform = "translate(0,0) rotate(0) scale(1)";
+    }
+
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
