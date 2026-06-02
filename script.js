@@ -133,10 +133,33 @@ window.addEventListener("load", () => {
       return;
     }
 
-    // Inicializa el efecto personalizado con la paleta de color de Talleres Raros
+/* =========================
+   RAINBOW CURSOR INITIALIZATION
+========================= */
+/* =========================
+   RAINBOW CURSOR INITIALIZATION
+========================= */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    // Si el canvas global ya existe, evitamos duplicados accidentales
+    if (document.getElementById("custom-rainbow-canvas")) return;
+
+    if (!window.cursoreffects?.rainbowCursor) {
+      console.warn("cursor-effects no cargó correctamente.");
+      return;
+    }
+
+    // Creamos un canvas limpio antes de disparar la librería
+    const targetCanvas = document.createElement("canvas");
+    targetCanvas.id = "custom-rainbow-canvas";
+    document.body.appendChild(targetCanvas);
+
+    // Inicializamos el efecto vinculándolo directamente a este lienzo seguro
     new cursoreffects.rainbowCursor({
+      element: targetCanvas,
       length: 22,
       colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
     });
   }, 400);
 });
+
