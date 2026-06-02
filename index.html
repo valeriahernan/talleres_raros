@@ -276,9 +276,11 @@
 <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
 <script>
-  new cursoreffects.rainbowCursor({
-    length: 20,
-    colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
+  window.addEventListener("DOMContentLoaded", () => {
+    new cursoreffects.rainbowCursor({
+      length: 18,
+      colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
+    });
   });
 </script>
 
