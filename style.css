@@ -186,6 +186,8 @@ body{
   font-family:"Urbanist", sans-serif;
   pointer-events:none;
 }
+/* EFECTO HERO TITLE*/
+
 
 .hero-title{
   color:#ffffff;
@@ -204,9 +206,21 @@ body{
 
 .hero-title span{
   display:inline-block;
-  transition:
-    transform .25s ease,
-    color .25s ease;
+  transition:.3s ease;
+}
+
+.hero-title:hover span{
+  filter:blur(1px);
+  opacity:.4;
+}
+
+.hero-title span:hover{
+  filter:none !important;
+  opacity:1 !important;
+  transform:
+    translateY(-10px)
+    scale(1.2)
+    rotate(-8deg);
 }
 
 @media (hover:hover){
