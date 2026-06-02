@@ -1,3 +1,4 @@
+
 /* =========================
    CLICK FIX (safe)
 ========================= */
@@ -20,6 +21,7 @@ links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
+
     if (window.innerWidth <= 900) {
       sidebar?.classList.remove("active");
     }
@@ -33,7 +35,7 @@ const mobileBtn = document.getElementById("mobile-menu-btn");
 
 if (mobileBtn && sidebar) {
   mobileBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // Evita conflictos con eventos globales de clic
+    e.stopPropagation();
     sidebar.classList.toggle("active");
   });
 }
@@ -47,7 +49,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Cierra el menú móvil si el usuario hace clic fuera de la barra lateral
 document.addEventListener("click", (e) => {
   if (window.innerWidth <= 900 && sidebar?.classList.contains("active")) {
     if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
@@ -57,19 +58,24 @@ document.addEventListener("click", (e) => {
 });
 
 /* =========================
-   HERO TITLE REACTION (Lerp Optimizado)
+   HERO TEXT REACTION (SMOOTH LERP)
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
   let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-  
-  // Almacena el estado de transformación actual y objetivo de cada letra para suavizar el movimiento
-  const letterStates = Array.from(letters).map(letter => ({
-    element: letter,
-    currentX: 0, currentY: 0, currentRot: 0, currentScale: 1,
-    targetX: 0,  targetY: 0,  targetRot: 0,  targetScale: 1
+
+  const states = Array.from(letters).map(letter => ({
+    el: letter,
+    x: 0,
+    y: 0,
+    rot: 0,
+    scale: 1,
+    tx: 0,
+    ty: 0,
+    trot: 0,
+    tscale: 1
   }));
 
   document.addEventListener("mousemove", (e) => {
@@ -78,42 +84,41 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   function animate() {
-    letterStates.forEach((state) => {
-      const rect = state.element.getBoundingClientRect();
-      const lx = rect.left + rect.width / 2 - state.currentX; // Base sin transformación previa
-      const ly = rect.top + rect.height / 2 - state.currentY;
+    states.forEach(state => {
+      const rect = state.el.getBoundingClientRect();
+
+      const lx = rect.left + rect.width / 2;
+      const ly = rect.top + rect.height / 2;
 
       const dx = lx - mouse.x;
       const dy = ly - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
+
       const maxDist = 180;
 
-      if (dist < maxDist && dist !== 0) {
-        const force = (1 - dist / maxDist);
-        
-        // Configura los valores objetivo basados en la distancia física
-        state.targetX = dx * force * 0.35;
-        state.targetY = dy * force * 0.35;
-        state.targetRot = state.targetX * 0.7;
-        state.targetScale = 1 + force * 0.20;
+      if (dist < maxDist) {
+        const force = 1 - dist / maxDist;
+
+        state.tx = dx * force * 0.35;
+        state.ty = dy * force * 0.35;
+        state.trot = state.tx * 0.6;
+        state.tscale = 1 + force * 0.2;
       } else {
-        // Retorno elástico a la posición base
-        state.targetX = 0;
-        state.targetY = 0;
-        state.targetRot = 0;
-        state.targetScale = 1;
+        state.tx = 0;
+        state.ty = 0;
+        state.trot = 0;
+        state.tscale = 1;
       }
 
-      // Interpolación lineal (Lerp) para suavizar la transición (0.1 = velocidad de suavizado)
-      state.currentX += (state.targetX - state.currentX) * 0.1;
-      state.currentY += (state.targetY - state.currentY) * 0.1;
-      state.currentRot += (state.targetRot - state.currentRot) * 0.1;
-      state.currentScale += (state.targetScale - state.currentScale) * 0.1;
+      state.x += (state.tx - state.x) * 0.1;
+      state.y += (state.ty - state.y) * 0.1;
+      state.rot += (state.trot - state.rot) * 0.1;
+      state.scale += (state.tscale - state.scale) * 0.1;
 
-      state.element.style.transform = `
-        translate(${state.currentX}px, ${state.currentY}px) 
-        rotate(${state.currentRot}deg) 
-        scale(${state.currentScale})
+      state.el.style.transform = `
+        translate(${state.x}px, ${state.y}px)
+        rotate(${state.rot}deg)
+        scale(${state.scale})
       `;
     });
 
@@ -124,29 +129,20 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   RAINBOW CURSOR INITIALIZATION
+   RAINBOW CURSOR (FIXED + STABLE)
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
-    // Si el canvas global ya existe, evitamos duplicados accidentales
-    if (document.getElementById("custom-rainbow-canvas")) return;
-
     if (!window.cursoreffects?.rainbowCursor) {
       console.warn("cursor-effects no cargó correctamente.");
       return;
     }
 
-    // Creamos un canvas limpio antes de disparar la librería
-    const targetCanvas = document.createElement("canvas");
-    targetCanvas.id = "custom-rainbow-canvas";
-    document.body.appendChild(targetCanvas);
-
-    // Inicializamos el efecto vinculándolo directamente a este lienzo seguro
+    // SOLO UNA INSTANCIA (sin canvas manual)
     new cursoreffects.rainbowCursor({
-      element: targetCanvas,
       length: 22,
       colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
     });
-  }, 400);
-});
 
+  }, 300);
+});

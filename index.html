@@ -214,6 +214,14 @@
 
   <!-- Enlace a tu archivo JavaScript externo -->
   <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
-
+  <!-- CURSOR INIT (ESTO TE FALTABA) -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      new cursoreffects.rainbowCursor({
+        length: 20,
+        colors: ["#ff0000", "#ff7a00", "#ffe600", "#00ff2a", "#00c3ff", "#7a00ff"]
+      });
+    });
+  </script>
 </body>
 </html>
