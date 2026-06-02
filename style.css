@@ -62,6 +62,7 @@ body {
   margin-left: 220px;
   height: 100vh;
   position: relative;
+  z-index: 1; /* Establece un contexto de apilamiento inicial seguro */
 }
 
 .scene {
