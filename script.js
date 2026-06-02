@@ -114,10 +114,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 window.addEventListener("load", () => {
-  if (!window.cursoreffects) return;
+  setTimeout(() => {
+    if (!window.cursoreffects?.rainbowCursor) {
+      console.warn("cursor-effects no cargó");
+      return;
+    }
 
-  new cursoreffects.rainbowCursor({
-    length: 14,
-    colors: ["#ba7dff", "#ffffff"]
-  });
+    new cursoreffects.rainbowCursor({
+      length: 22,
+      colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
+    });
+
+  }, 500);
 });
