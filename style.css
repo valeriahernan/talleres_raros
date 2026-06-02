@@ -242,18 +242,48 @@ body{
 /* =========================
    TALLERES
 ========================= */
-
-.taller-card{
-  margin-bottom:48px;
-  max-width:900px;
+.taller-item {
+  margin-bottom: 28px;
+  max-width: 900px;
+  cursor: pointer;
 }
 
-.taller-card h3{
-  color:#ba7dff;
-  margin-bottom:12px;
-  font-family:"Geist Mono", monospace;
-  font-weight:800;
+.taller-item h3 {
+  color: #ba7dff;
+  font-family: "Geist Mono", monospace;
+  font-weight: 800;
+  margin-bottom: 6px;
+  transition: opacity .25s ease;
 }
+
+.taller-item p {
+  font-family: "Geist Mono", monospace;
+  line-height: 1.8;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: all .35s ease;
+}
+
+.taller-item:hover p {
+  opacity: 1;
+  max-height: 500px;
+  transform: translateY(0);
+}
+
+.taller-item:hover h3 {
+  opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  .taller-item p {
+    opacity: 1;
+    max-height: none;
+    transform: none;
+  }
+}
+
 
 /* =========================
    COMPILADOS
