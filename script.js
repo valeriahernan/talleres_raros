@@ -1,4 +1,3 @@
-
 /* =========================
    CLICK FIX (safe)
 ========================= */
@@ -11,8 +10,10 @@ document.addEventListener("click", () => {}, { passive: true });
 
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
+const sidebar = document.querySelector(".sidebar");
 
 function showScene(id) {
+
   scenes.forEach(scene => {
     scene.classList.remove("active");
   });
@@ -22,22 +23,34 @@ function showScene(id) {
   if (target) {
     target.classList.add("active");
   }
+
 }
 
 links.forEach(link => {
+
   link.addEventListener("click", (e) => {
+
     e.preventDefault();
 
     const target = link.getAttribute("href");
+
     showScene(target);
+
+    // cerrar menú en móvil
+    if (window.innerWidth <= 900) {
+      sidebar?.classList.remove("active");
+    }
+
   });
+
 });
 
-// init
+/* INIT */
+
 showScene("#hero");
 
 /* =========================
-   TRAIL (STABLE + OPTIMIZED)
+   TRAIL
 ========================= */
 
 const container = document.getElementById("trail-container");
@@ -48,56 +61,82 @@ let lastTime = 0;
 
 const MAX_DOTS = 40;
 
-document.addEventListener("mousemove", (e) => {
+/* desactivar trail en móviles */
 
-  const now = performance.now();
+const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
-  // throttle (evita lag y rompe-input)
-  if (now - lastTime < 16) return;
-  lastTime = now;
+if (!isTouch && container) {
 
-  const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+  document.addEventListener("mousemove", (e) => {
 
-  if (dist > 3) {
-    const dot = document.createElement("div");
-    dot.className = "trail-dot";
+    const now = performance.now();
 
-    dot.style.left = e.clientX + "px";
-    dot.style.top = e.clientY + "px";
+    if (now - lastTime < 16) return;
 
-    container.appendChild(dot);
+    lastTime = now;
 
-    // auto-remove
-    setTimeout(() => {
-      dot.remove();
-    }, 600);
+    const dist = Math.hypot(
+      e.clientX - lastX,
+      e.clientY - lastY
+    );
 
-    // limit DOM size (CRÍTICO)
-    if (container.children.length > MAX_DOTS) {
-      container.removeChild(container.firstChild);
+    if (dist > 3) {
+
+      const dot = document.createElement("div");
+
+      dot.className = "trail-dot";
+
+      dot.style.left = e.clientX + "px";
+      dot.style.top = e.clientY + "px";
+
+      container.appendChild(dot);
+
+      setTimeout(() => {
+        dot.remove();
+      }, 600);
+
+      if (container.children.length > MAX_DOTS) {
+        container.removeChild(container.firstChild);
+      }
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+
     }
 
-    lastX = e.clientX;
-    lastY = e.clientY;
-  }
-});
+  });
+
+}
 
 /* =========================
    MOBILE MENU
 ========================= */
 
 const mobileBtn = document.getElementById("mobile-menu-btn");
-const sidebar = document.querySelector(".sidebar");
 
 if (mobileBtn && sidebar) {
 
   mobileBtn.addEventListener("click", () => {
+
+    console.log("MENU CLICK");
+
     sidebar.classList.toggle("active");
+
   });
 
 }
 
-mobileBtn.addEventListener("click", () => {
-  console.log("MENU CLICK");
-  sidebar.classList.toggle("active");
+/* =========================
+   ESC CLOSE
+========================= */
+
+document.addEventListener("keydown", (e) => {
+
+  if (
+    e.key === "Escape" &&
+    sidebar?.classList.contains("active")
+  ) {
+    sidebar.classList.remove("active");
+  }
+
 });

@@ -288,6 +288,16 @@ body{
 
 @media (max-width:900px){
 
+  .glb-layer{
+    pointer-events:none !important;
+  }
+
+  .glb-layer model-viewer{
+    pointer-events:none !important;
+  }
+
+}
+
   body{
     overflow:hidden;
   }
