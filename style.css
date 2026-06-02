@@ -187,15 +187,17 @@ body{
 }
 
 .hero-title{
-  color:#ba7dff;
+  color:#ffffff;
   font-size:clamp(5rem,10vw,10rem);
-  line-height:.85;
-  max-width:400px;
 
   font-family:"Urbanist", sans-serif;
   font-weight:700;
   font-style:italic;
-  letter-spacing:-0.05em;
+
+  letter-spacing:-0.12em;
+  line-height:0.72;
+
+  max-width:400px;
 }
 
 .hero-sub{
