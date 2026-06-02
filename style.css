@@ -460,11 +460,5 @@ body{
 }
 
 canvas {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 2147483647 !important;
   pointer-events: none !important;
 }
