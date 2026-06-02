@@ -31,52 +31,6 @@ links.forEach(link => {
 });
 
 /* =========================
-   TRAIL
-========================= */
-
-const container = document.getElementById("trail-container");
-
-let lastX = 0;
-let lastY = 0;
-let lastTime = 0;
-
-const MAX_DOTS = 40;
-
-const isTouch = window.matchMedia("(pointer: coarse)").matches;
-
-if (!isTouch && container) {
-
-  document.addEventListener("mousemove", (e) => {
-
-    const now = performance.now();
-    if (now - lastTime < 16) return;
-    lastTime = now;
-
-    const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-
-    if (dist > 3) {
-
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
-
-      dot.style.left = e.clientX + "px";
-      dot.style.top = e.clientY + "px";
-
-      container.appendChild(dot);
-
-      setTimeout(() => dot.remove(), 600);
-
-      if (container.children.length > MAX_DOTS) {
-        container.removeChild(container.firstChild);
-      }
-
-      lastX = e.clientX;
-      lastY = e.clientY;
-    }
-  });
-}
-
-/* =========================
    MOBILE MENU
 ========================= */
 
@@ -156,4 +110,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   animate();
 
+});
+
+
+new cursoreffects.rainbowCursor({
+  length: 14,
+  colors: ["#ba7dff", "#ffffff"]
 });
