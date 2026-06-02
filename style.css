@@ -288,16 +288,6 @@ body{
 
 @media (max-width:900px){
 
-  .glb-layer{
-    pointer-events:none !important;
-  }
-
-  .glb-layer model-viewer{
-    pointer-events:none !important;
-  }
-
-}
-
   body{
     overflow:hidden;
   }
@@ -353,10 +343,9 @@ body{
     padding:24px;
   }
 
-  .hero-title {
-    font-size: 14vw;      /* Achica el texto en celulares para que no desborde */
-    line-height: 0.9;     /* Separa un milímetro las líneas para que no se encima el texto */
-    word-break: break-word; /* Evita que palabras largas rompan el layout si se salen de la pantalla */
+  .hero-title{
+    font-size:22vw;
+    line-height:.82;
   }
 
   .hero-sub{
@@ -381,6 +370,7 @@ body{
     pointer-events:none;
   }
 
+}
 
 /* =========================
    CONVOCATORIAS + PROYECTO
