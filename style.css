@@ -1,4 +1,3 @@
-
 /* =========================
    RESET
 ========================= */
@@ -13,6 +12,7 @@ body {
   color: #111;
   overflow: hidden;
   height: 100vh;
+  cursor: auto;
 }
 
 /* =========================
@@ -25,7 +25,7 @@ body {
   width: 220px;
   height: 100vh;
   padding: 30px;
-  z-index: 100000;
+  z-index: 10;
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -91,11 +91,14 @@ body {
 ========================= */
 .hero {
   overflow: hidden;
-}.glb-layer {
+  position: relative;
+}
+
+/* GLB LAYER */
+.glb-layer {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  pointer-events: none;
+  z-index: 2;
 }
 
 .glb-layer model-viewer {
@@ -103,13 +106,14 @@ body {
   height: 100%;
   cursor: grab;
   touch-action: pan-y;
-  pointer-events: none; /* 🔥 clave */
+  pointer-events: auto; /* 🔥 ahora SÍ interactúa */
 }
+
 /* VIGNETTE */
 .hero-vignette {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
   background: radial-gradient(circle, rgba(214,214,214,.10), #ececec);
 }
@@ -117,14 +121,14 @@ body {
 /* HERO CONTENT */
 .hero-content {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 80px;
   font-family: "Urbanist", sans-serif;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .hero-title {
@@ -244,18 +248,15 @@ body {
 }
 
 /* =========================
-   CURSOR FIX (IMPORTANTE)
+   CANVAS / CURSOR FIX
 ========================= */
-
-/* esto es lo que realmente hace visible el cursor */
 canvas {
   position: fixed !important;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 999999 !important;
-  pointer-events: none !important;
+  z-index: 1 !important;
+  pointer-events: none;
 }
 
 /* =========================
@@ -266,6 +267,7 @@ canvas {
   .sidebar {
     transform: translateX(-100%);
     transition: transform .3s ease;
+    z-index: 10;
   }
 
   .sidebar.active {
