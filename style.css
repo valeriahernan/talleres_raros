@@ -114,7 +114,7 @@ body{
   position:absolute;
   inset:0;
   z-index:1;
-  pointer-events:none; /* 🔥 clave: no bloquea UI */
+  pointer-events:none; 
 }
 
 .glb-layer model-viewer{

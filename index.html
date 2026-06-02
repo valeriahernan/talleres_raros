@@ -277,12 +277,23 @@
 <script src="https://cdn.jsdelivr.net/npm/cursor-effects@1.0.17/dist/browser.js"></script>
 
 <script>
-window.addEventListener("load", () => {
-  new cursoreffects.rainbowCursor({
-    length: 18,
-    colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
-  });
-});
+(function initRainbowCursor() {
+
+  function start() {
+    if (!window.cursoreffects?.rainbowCursor) {
+      requestAnimationFrame(start);
+      return;
+    }
+
+    new cursoreffects.rainbowCursor({
+      length: 20,
+      colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
+    });
+  }
+
+  window.addEventListener("load", start);
+
+})();
 </script>
 
 </body>
