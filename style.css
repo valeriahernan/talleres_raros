@@ -293,7 +293,23 @@ body{
   }
 
   .sidebar{
-    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 280px;
+    height: 100vh;
+
+    background:#d6d6d6;
+
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+
+    z-index:100000;
+  }
+
+  .sidebar.active{
+    transform: translateX(0);
   }
 
   .mobile-bar{
@@ -304,7 +320,7 @@ body{
     width:100%;
     padding:16px 20px;
     background:#d6d6d6;
-    z-index:9999;
+    z-index:999999;
   }
 
   #mobile-menu-btn{
@@ -349,6 +365,11 @@ body{
   .release span{
     min-width:auto;
   }
+
+  .glb-layer model-viewer{
+    pointer-events:none;
+  }
+
 }
 
 /* =========================

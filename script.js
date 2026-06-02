@@ -81,3 +81,23 @@ document.addEventListener("mousemove", (e) => {
     lastY = e.clientY;
   }
 });
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const mobileBtn = document.getElementById("mobile-menu-btn");
+const sidebar = document.querySelector(".sidebar");
+
+if (mobileBtn && sidebar) {
+
+  mobileBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+  });
+
+}
+
+mobileBtn.addEventListener("click", () => {
+  console.log("MENU CLICK");
+  sidebar.classList.toggle("active");
+});
