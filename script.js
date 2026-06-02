@@ -64,6 +64,8 @@ title.innerHTML = title.textContent
 
 showScene("#hero");
 
+
+
 /* =========================
    TRAIL
 ========================= */
