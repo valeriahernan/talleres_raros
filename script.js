@@ -113,7 +113,11 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-new cursoreffects.rainbowCursor({
-  length: 14,
-  colors: ["#ba7dff", "#ffffff"]
+window.addEventListener("load", () => {
+  if (!window.cursoreffects) return;
+
+  new cursoreffects.rainbowCursor({
+    length: 14,
+    colors: ["#ba7dff", "#ffffff"]
+  });
 });
