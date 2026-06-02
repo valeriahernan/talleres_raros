@@ -294,8 +294,8 @@ canvas {
   }
 
   .hero-content {
-    padding: 24px;
-  }
+  align-items: flex-start;
+}
 
   .hero-title {
     font-size: 20vw;
