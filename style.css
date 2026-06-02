@@ -91,11 +91,11 @@ body {
 ========================= */
 .hero {
   overflow: hidden;
-}
-
-/* GLB LAYER */
-.glb-layer model-viewer {
-  pointer-events: auto;
+}.glb-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .glb-layer model-viewer {
@@ -103,9 +103,8 @@ body {
   height: 100%;
   cursor: grab;
   touch-action: pan-y;
-  pointer-events: auto;
+  pointer-events: none; /* 🔥 clave */
 }
-
 /* VIGNETTE */
 .hero-vignette {
   position: absolute;
