@@ -186,18 +186,16 @@ body{
   pointer-events:none;
 }
 
-.hero-title{
-  color:#ffffff;
-  font-size:clamp(5rem,10vw,10rem);
+.hero-title span{
+  display:inline-block;
+  transition:transform .25s ease;
+}
 
-  font-family:"Urbanist", sans-serif;
-  font-weight:700;
-  font-style:italic;
-
-  letter-spacing:-0.12em;
-  line-height:0.72;
-
-  max-width:400px;
+.hero-title span:hover{
+  transform:
+    translateY(8px)
+    skewX(-15deg)
+    scaleY(1.3);
 }
 
 .hero-sub{

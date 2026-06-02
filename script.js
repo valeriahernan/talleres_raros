@@ -45,6 +45,21 @@ links.forEach(link => {
 
 });
 
+/* =========================
+   hero title movement
+========================= */
+
+const title = document.querySelector('.hero-title');
+
+title.innerHTML = title.textContent
+  .split('')
+  .map(letter =>
+    letter === ' '
+      ? ' '
+      : `<span>${letter}</span>`
+  )
+  .join('');
+
 /* INIT */
 
 showScene("#hero");
