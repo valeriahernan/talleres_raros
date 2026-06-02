@@ -353,9 +353,10 @@ body{
     padding:24px;
   }
 
-  .hero-title{
-    font-size:21vw;
-    line-height:.82;
+  .hero-title {
+    font-size: 14vw;      /* Achica el texto en celulares para que no desborde */
+    line-height: 0.9;     /* Separa un milímetro las líneas para que no se encima el texto */
+    word-break: break-word; /* Evita que palabras largas rompan el layout si se salen de la pantalla */
   }
 
   .hero-sub{
