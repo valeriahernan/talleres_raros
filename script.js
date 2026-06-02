@@ -133,16 +133,20 @@ window.addEventListener("DOMContentLoaded", () => {
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
-    if (!window.cursoreffects?.rainbowCursor) {
-      console.warn("cursor-effects no cargó correctamente.");
+
+    console.log("cursor library:", window.cursoreffects);
+
+    if (!window.cursoreffects || !window.cursoreffects.rainbowCursor) {
+      console.warn("cursor-effects no cargó bien");
       return;
     }
 
-    // SOLO UNA INSTANCIA (sin canvas manual)
-    new cursoreffects.rainbowCursor({
-      length: 22,
-      colors: ["#ba7dff", "#ffffff", "#ff4ecd", "#00f0ff"]
+    new window.cursoreffects.rainbowCursor({
+      length: 25,
+      colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
     });
 
-  }, 300);
+    console.log("cursor iniciado");
+
+  }, 500);
 });
