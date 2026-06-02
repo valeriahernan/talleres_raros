@@ -1,4 +1,6 @@
-
+canvas {
+  display: none;
+}
 /* =========================
    RESET
 ========================= */
@@ -436,4 +438,5 @@ canvas {
   height: 100%;
   z-index: 999999 !important;
   pointer-events: none !important;
+  display: block !important;
 }
