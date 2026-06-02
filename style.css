@@ -94,11 +94,8 @@ body {
 }
 
 /* GLB LAYER */
-.glb-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+.glb-layer model-viewer {
+  pointer-events: auto;
 }
 
 .glb-layer model-viewer {
