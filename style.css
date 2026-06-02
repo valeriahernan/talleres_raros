@@ -95,19 +95,19 @@ body {
 }
 
 /* Visor GLB 3D */
-.glb-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none; 
+.glb-layer{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none; /* 🔥 clave: no bloquea UI */
 }
 
-.glb-layer model-viewer {
-  width: 100%;
-  height: 100%;
-  cursor: grab;
-  touch-action: pan-y;
-  pointer-events: auto; /* Permite arrastrar el modelo */
+.glb-layer model-viewer{
+  width:100%;
+  height:100%;
+  cursor:grab;
+  touch-action:pan-y;
+  pointer-events:auto; /* solo interacción del modelo */
 }
 
 /* Gradiente Overlay */
