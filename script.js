@@ -128,19 +128,6 @@ window.addEventListener("DOMContentLoaded", () => {
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
-    if (!window.cursoreffects?.rainbowCursor) {
-      console.warn("cursor-effects no cargó correctamente.");
-      return;
-    }
-
-/* =========================
-   RAINBOW CURSOR INITIALIZATION
-========================= */
-/* =========================
-   RAINBOW CURSOR INITIALIZATION
-========================= */
-window.addEventListener("load", () => {
-  setTimeout(() => {
     // Si el canvas global ya existe, evitamos duplicados accidentales
     if (document.getElementById("custom-rainbow-canvas")) return;
 
