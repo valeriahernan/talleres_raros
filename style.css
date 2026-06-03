@@ -495,83 +495,16 @@ canvas {
 
 @media (min-width: 901px) {
 
+window.addEventListener("DOMContentLoaded", () => {
 
-  /* ===== SIDEBAR → DOCK INFERIOR IZQUIERDO ===== */
-  .sidebar {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
+  const sidebar = document.querySelector(".sidebar");
+  const toggle = document.getElementById("menuToggle");
 
-    top: auto;
-    width: auto;
-    height: auto;
+  if (!sidebar || !toggle) return;
 
-    padding: 0;
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("open");
+  });
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    background: transparent;
-
-    z-index: var(--z-sidebar);
-  }
-
-  /* ocultamos logo en modo dock */
-  .logo {
-    display: none;
-  }
-
-  /* BOTÓN SIEMPRE VISIBLE */
-  .menu-toggle {
-    display: block !important;
-
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(10px);
-
-    border: none;
-    padding: 10px 14px;
-    border-radius: 999px;
-
-    font-size: 18px;
-    font-weight: 900;
-    color: var(--color-primary);
-
-    cursor: pointer;
-
-    z-index: 999999;
-  }
-
-  /* MENÚ OCULTO POR DEFECTO */
-  .nav-menu {
-    margin-top: 10px;
-
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
-
-    transition: 0.3s ease;
-
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(12px);
-
-    padding: 12px 14px;
-    border-radius: 14px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* ABIERTO */
-  .sidebar.open .nav-menu {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  /* IMPORTANTE */
-  .stage {
-    margin-left: 0;
-  }
-}
+});
