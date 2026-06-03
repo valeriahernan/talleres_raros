@@ -307,9 +307,8 @@ body {
 ========================= */
 
 .release {
-  display: grid;
-  grid-template-columns: 55px auto 40px;
-  gap: 6px;
+  display: flex;
+  gap: 8px;
   align-items: center;
   font-weight: 700;
 }
@@ -337,10 +336,22 @@ body {
    CONTACTO
 ========================= */
 
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+#contacto .contact-links p,
+#contacto .contact-links a {
+  font-weight: 700;
+}
+
+#contacto .contact-links {
+  gap: 6px;
+}
+
+#contacto p {
+  line-height: 1.4;
+}
+
+#contacto > .scene-scroll > p:first-of-type {
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 /* =========================
