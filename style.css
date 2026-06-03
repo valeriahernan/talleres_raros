@@ -72,15 +72,6 @@ body {
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* hover */
-.nav-menu a:hover::after {
-  transform: scaleX(1);
-}
-
-/* hover texto más suave (estilo Halogen) */
-.nav-menu a:hover {
-  opacity: 0.7;
-}
 
 .nav-menu a {
   width: fit-content;
