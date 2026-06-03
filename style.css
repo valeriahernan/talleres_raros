@@ -497,3 +497,30 @@ canvas {
     color: #ba7dff;
   }
 }
+
+.lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.lang-switch button {
+  background: transparent;
+  border: 2px solid #ba7dff;
+  color: #ba7dff;
+
+  font-weight: 700;
+  font-size: 0.9rem;
+
+  padding: 6px 12px;
+  border-radius: 6px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.lang-switch button:hover {
+  background: #ba7dff;
+  color: white;
+}
