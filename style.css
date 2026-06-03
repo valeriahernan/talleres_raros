@@ -495,12 +495,14 @@ canvas {
 
 @media (min-width: 901px) {
 
-  /* ===== SIDEBAR BASE (COLAPSADA) ===== */
-  .sidebar {
-    top: auto;
-    left: 20px;
-    bottom: 20px;
 
+  /* ===== SIDEBAR → DOCK INFERIOR IZQUIERDO ===== */
+  .sidebar {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    top: auto;
     width: auto;
     height: auto;
 
@@ -512,32 +514,35 @@ canvas {
 
     background: transparent;
 
-    transform: none;
+    z-index: var(--z-sidebar);
   }
 
-  /* LOGO opcional (puedes ocultarlo o dejarlo pequeño) */
+  /* ocultamos logo en modo dock */
   .logo {
     display: none;
   }
 
-  /* BOTÓN TOGGLE */
+  /* BOTÓN SIEMPRE VISIBLE */
   .menu-toggle {
-    display: block;
-    background: rgba(255,255,255,0.8);
+    display: block !important;
+
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(10px);
 
     border: none;
     padding: 10px 14px;
     border-radius: 999px;
 
-    font-family: var(--font-mono);
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: 900;
     color: var(--color-primary);
 
     cursor: pointer;
+
+    z-index: 999999;
   }
 
-  /* MENU OCULTO POR DEFECTO */
+  /* MENÚ OCULTO POR DEFECTO */
   .nav-menu {
     margin-top: 10px;
 
@@ -545,32 +550,27 @@ canvas {
     transform: translateY(10px);
     pointer-events: none;
 
-    transition: all var(--transition-normal);
+    transition: 0.3s ease;
 
     background: rgba(255,255,255,0.75);
     backdrop-filter: blur(12px);
 
-    padding: 14px 16px;
-    border-radius: 16px;
+    padding: 12px 14px;
+    border-radius: 14px;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  /* LINKS */
-  .nav-menu a {
-    font-size: 0.95rem;
-  }
-
-  /* ESTADO ABIERTO */
+  /* ABIERTO */
   .sidebar.open .nav-menu {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
   }
 
-  /* QUITAMOS SIDEBAR LATERAL */
+  /* IMPORTANTE */
   .stage {
     margin-left: 0;
   }

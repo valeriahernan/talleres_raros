@@ -1,4 +1,3 @@
-
 /* =========================
    CLICK FIX (safe)
 ========================= */
@@ -22,9 +21,13 @@ links.forEach(link => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
 
+    // cerrar sidebar en mobile
     if (window.innerWidth <= 900) {
       sidebar?.classList.remove("active");
     }
+
+    // opcional: cerrar menú desplegable desktop también
+    sidebar?.classList.remove("open");
   });
 });
 
@@ -40,15 +43,26 @@ if (mobileBtn && sidebar) {
   });
 }
 
-const sidebar = document.querySelector(".sidebar");
-const toggle = document.getElementById("menuToggle");
-
-toggle.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-});
 /* =========================
-   CLOSE SIDEBAR EVENTS
+   DESKTOP TOGGLE MENU (DOCK)
 ========================= */
+window.addEventListener("DOMContentLoaded", () => {
+
+  const sidebar = document.querySelector(".sidebar");
+  const toggle = document.getElementById("menuToggle");
+
+  if (!sidebar || !toggle) return;
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("open");
+  });
+
+});
+
+/* =========================
+   CLOSE SIDEBAR EVENTS (MOBILE)
+   ========================= */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && sidebar?.classList.contains("active")) {
     sidebar.classList.remove("active");
@@ -135,12 +149,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   RAINBOW CURSOR (FIXED + STABLE)
+   RAINBOW CURSOR
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
-
-    console.log("cursor library:", window.cursoreffects);
 
     if (!window.cursoreffects || !window.cursoreffects.rainbowCursor) {
       console.warn("cursor-effects no cargó bien");
@@ -152,12 +164,12 @@ window.addEventListener("load", () => {
       colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
     });
 
-    console.log("cursor iniciado");
-
   }, 500);
 });
 
-
+/* =========================
+   LANGUAGE TOGGLE
+========================= */
 let currentLang = "es";
 
 const btn = document.getElementById("langBtn");
@@ -183,5 +195,3 @@ window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("lang");
   if (saved) setLanguage(saved);
 });
-
-
