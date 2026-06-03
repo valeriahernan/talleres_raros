@@ -427,3 +427,45 @@ canvas {
     pointer-events: auto;
   }
 }
+
+/* =========================
+   SCROLL TOP
+========================= */
+
+#scrollTopBtn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ba7dff;
+  color: white;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  z-index: 999999;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+#scrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#scrollTopBtn:hover {
+  transform: translateY(-3px);
+}
