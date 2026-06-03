@@ -1,15 +1,20 @@
 /* =========================
-   CLICK FIX (safe)
+   CLICK FIX
 ========================= */
 document.addEventListener("click", () => {}, { passive: true });
 
 /* =========================
-   SCENES SYSTEM
+   ELEMENTOS
 ========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 const sidebar = document.querySelector(".sidebar");
+const mobileBtn = document.getElementById("mobile-menu-btn");
+const desktopToggle = document.getElementById("menuToggle");
 
+/* =========================
+   SCENES SYSTEM
+========================= */
 function showScene(id) {
   scenes.forEach(scene => scene.classList.remove("active"));
   const target = document.querySelector(id);
@@ -21,12 +26,7 @@ links.forEach(link => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
 
-    // cerrar sidebar en mobile
-    if (window.innerWidth <= 900) {
-      sidebar?.classList.remove("active");
-    }
-
-    // opcional: cerrar menú desplegable desktop también
+    sidebar?.classList.remove("active");
     sidebar?.classList.remove("open");
   });
 });
@@ -34,8 +34,6 @@ links.forEach(link => {
 /* =========================
    MOBILE MENU
 ========================= */
-const mobileBtn = document.getElementById("mobile-menu-btn");
-
 if (mobileBtn && sidebar) {
   mobileBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -44,28 +42,22 @@ if (mobileBtn && sidebar) {
 }
 
 /* =========================
-   DESKTOP TOGGLE MENU (DOCK)
+   DESKTOP TOGGLE MENU
 ========================= */
-window.addEventListener("DOMContentLoaded", () => {
-
-  const sidebar = document.querySelector(".sidebar");
-  const toggle = document.getElementById("menuToggle");
-
-  if (!sidebar || !toggle) return;
-
-  toggle.addEventListener("click", (e) => {
+if (desktopToggle && sidebar) {
+  desktopToggle.addEventListener("click", (e) => {
     e.stopPropagation();
     sidebar.classList.toggle("open");
   });
-
-});
+}
 
 /* =========================
-   CLOSE SIDEBAR EVENTS (MOBILE)
-   ========================= */
+   CLOSE EVENTS
+========================= */
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && sidebar?.classList.contains("active")) {
-    sidebar.classList.remove("active");
+  if (e.key === "Escape") {
+    sidebar?.classList.remove("active");
+    sidebar?.classList.remove("open");
   }
 });
 
@@ -78,7 +70,7 @@ document.addEventListener("click", (e) => {
 });
 
 /* =========================
-   HERO TEXT REACTION (SMOOTH LERP)
+   HERO TEXT EFFECT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
@@ -107,18 +99,14 @@ window.addEventListener("DOMContentLoaded", () => {
     states.forEach(state => {
       const rect = state.el.getBoundingClientRect();
 
-      const lx = rect.left + rect.width / 2;
-      const ly = rect.top + rect.height / 2;
-
-      const dx = lx - mouse.x;
-      const dy = ly - mouse.y;
+      const dx = rect.left + rect.width / 2 - mouse.x;
+      const dy = rect.top + rect.height / 2 - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       const maxDist = 180;
 
       if (dist < maxDist) {
         const force = 1 - dist / maxDist;
-
         state.tx = dx * force * 0.35;
         state.ty = dy * force * 0.35;
         state.trot = state.tx * 0.6;
@@ -149,21 +137,16 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   RAINBOW CURSOR
+   CURSOR EFFECT
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
-
-    if (!window.cursoreffects || !window.cursoreffects.rainbowCursor) {
-      console.warn("cursor-effects no cargó bien");
-      return;
-    }
+    if (!window.cursoreffects?.rainbowCursor) return;
 
     new window.cursoreffects.rainbowCursor({
       length: 25,
       colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
     });
-
   }, 500);
 });
 
@@ -171,7 +154,6 @@ window.addEventListener("load", () => {
    LANGUAGE TOGGLE
 ========================= */
 let currentLang = "es";
-
 const btn = document.getElementById("langBtn");
 
 function setLanguage(lang) {
@@ -186,9 +168,8 @@ function setLanguage(lang) {
   localStorage.setItem("lang", lang);
 }
 
-btn.addEventListener("click", () => {
-  const newLang = currentLang === "es" ? "en" : "es";
-  setLanguage(newLang);
+btn?.addEventListener("click", () => {
+  setLanguage(currentLang === "es" ? "en" : "es");
 });
 
 window.addEventListener("DOMContentLoaded", () => {
