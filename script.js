@@ -1,10 +1,10 @@
+
 /* =========================
    ELEMENTOS
 ========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 const sidebar = document.querySelector(".sidebar");
-const mobileBtn = document.getElementById("mobile-menu-btn");
 const desktopToggle = document.getElementById("menuToggle");
 const langBtn = document.getElementById("langBtn");
 
@@ -19,12 +19,12 @@ function showScene(id) {
   });
 
   const target = document.querySelector(id);
+
   if (target) {
     target.classList.add("active");
     found = true;
   }
 
-  // fallback seguro
   if (!found) {
     document.querySelector("#hero")?.classList.add("active");
   }
@@ -40,42 +40,32 @@ links.forEach(link => {
     const targetId = link.getAttribute("href");
     showScene(targetId);
 
-    // cerrar sidebar (unificado)
-    sidebar?.classList.remove("active");
+    // cerrar menú (COHERENTE CON CSS: .sidebar.open)
+    sidebar?.classList.remove("open");
   });
 });
 
 /* =========================
-   MOBILE MENU
+   MENU TOGGLE (SIDEBAR)
 ========================= */
-if (mobileBtn && sidebar) {
-  mobileBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("active");
-  });
+function toggleSidebar(e) {
+  e?.stopPropagation();
+  sidebar?.classList.toggle("open");
 }
 
-/* =========================
-   DESKTOP TOGGLE MENU
-========================= */
-if (desktopToggle && sidebar) {
-  desktopToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("active");
-  });
-}
+desktopToggle?.addEventListener("click", toggleSidebar);
 
 /* =========================
    CLOSE ON ESC
 ========================= */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    sidebar?.classList.remove("active");
+    sidebar?.classList.remove("open");
   }
 });
 
 /* =========================
-   CLICK OUTSIDE SIDEBAR (FIXED)
+   CLICK OUTSIDE SIDEBAR (MOBILE)
 ========================= */
 document.addEventListener("click", (e) => {
   if (!sidebar) return;
@@ -83,16 +73,16 @@ document.addEventListener("click", (e) => {
   const isMobile = window.innerWidth <= 900;
   if (!isMobile) return;
 
-  const clickedInsideSidebar = sidebar.contains(e.target);
-  const clickedMobileBtn = e.target === mobileBtn;
+  const clickedInside = sidebar.contains(e.target);
+  const clickedButton = e.target === desktopToggle;
 
-  if (!clickedInsideSidebar && !clickedMobileBtn) {
-    sidebar.classList.remove("active");
+  if (!clickedInside && !clickedButton) {
+    sidebar.classList.remove("open");
   }
 });
 
 /* =========================
-   HERO TEXT EFFECT (OPTIMIZED)
+   HERO LETTER EFFECT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");

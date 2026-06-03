@@ -1,3 +1,4 @@
+
 /* ==========================================================================
    VARIABLES
    ========================================================================== */
@@ -5,11 +6,9 @@
   --color-bg: #ececec;
   --color-text: #111;
   --color-primary: #ba7dff;
-  --color-white: #ffffff;
+  --color-white: #fff;
 
-  --transition-fast: 0.15s ease-out;
-  --transition-normal: 0.25s ease;
-  --transition-slow: 0.35s ease;
+  --transition: 0.25s ease;
 
   --z-canvas: 1;
   --z-sidebar: 9999;
@@ -31,10 +30,11 @@ body {
   color: var(--color-text);
   overflow: hidden;
   height: 100vh;
+  font-family: 'Urbanist', sans-serif;
 }
 
 /* ==========================================================================
-   CANVAS
+   CANVAS / MODEL
    ========================================================================== */
 canvas {
   position: fixed !important;
@@ -43,6 +43,25 @@ canvas {
   height: 100vh !important;
   z-index: var(--z-canvas);
   pointer-events: none;
+}
+
+/* ==========================================================================
+   LANG SWITCH
+   ========================================================================== */
+.lang-switch {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: var(--z-button);
+}
+
+.lang-switch button {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--color-primary);
+  background: rgba(255,255,255,0.8);
+  cursor: pointer;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -57,19 +76,13 @@ canvas {
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 10px;
 }
 
 /* ==========================================================================
    MENU BUTTON
    ========================================================================== */
 .menu-toggle {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-
-  z-index: var(--z-button);
-
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(12px);
 
@@ -82,7 +95,7 @@ canvas {
   font-weight: 800;
   cursor: pointer;
 
-  transition: transform 0.2s ease;
+  transition: transform var(--transition);
 }
 
 .menu-toggle:hover {
@@ -93,17 +106,15 @@ canvas {
    NAV MENU
    ========================================================================== */
 .nav-menu {
-  margin-top: 10px;
-
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
 
-  transition: var(--transition-normal);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(12px);
@@ -118,33 +129,10 @@ canvas {
   pointer-events: auto;
 }
 
-/* LINKS */
 .nav-menu a {
   text-decoration: none;
   color: var(--color-primary);
   font-weight: 700;
-  position: relative;
-}
-
-.nav-menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-
-  width: 100%;
-  height: 2px;
-
-  background: var(--color-primary);
-
-  transform: scaleX(0);
-  transform-origin: left;
-
-  transition: transform 0.3s ease;
-}
-
-.nav-menu a:hover::after {
-  transform: scaleX(1);
 }
 
 /* ==========================================================================
@@ -174,6 +162,18 @@ canvas {
 }
 
 /* ==========================================================================
+   SCENE SCROLL (FIX CRÍTICO)
+   ========================================================================== */
+.scene-scroll {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 80px;
+
+  scrollbar-width: thin;
+}
+
+/* ==========================================================================
    HERO
    ========================================================================== */
 .hero {
@@ -181,12 +181,23 @@ canvas {
   height: 100vh;
 }
 
+.glb-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0.05), var(--color-bg));
+  pointer-events: none;
+}
+
 .hero-content {
   position: relative;
-  z-index: 5;
+  z-index: 2;
 
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -195,13 +206,23 @@ canvas {
 }
 
 .hero-title {
-  color: var(--color-white);
   font-size: clamp(2.2rem, 4.5vw, 5rem);
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: 0.12em;
-  line-height: 0.72;
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 0.9;
+}
+
+.hero-sub {
+  margin-top: 10px;
   max-width: 420px;
+}
+
+/* ==========================================================================
+   LOGO (FIX OPCIONAL)
+   ========================================================================== */
+.logo img {
+  width: 120px;
+  height: auto;
 }
 
 /* ==========================================================================
@@ -214,18 +235,15 @@ canvas {
   }
 
   .sidebar {
-    transform: translateX(-110%);
-    transition: transform 0.3s ease;
-    top: 0;
-    bottom: auto;
+    bottom: 15px;
+    left: 15px;
   }
 
-  .sidebar.open {
-    transform: translateX(0);
+  .hero-content {
+    padding: 40px;
   }
 
-  .menu-toggle {
-    bottom: 16px;
-    left: 16px;
+  .scene-scroll {
+    padding: 40px;
   }
 }
