@@ -5,20 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
-  <!-- UI GLOBAL -->
-<button class="menu-toggle" id="menuToggle">☰</button>
-
-<aside class="sidebar">
-  <div class="logo">
-    <img src="images/talleresraros.png">
-  </div>
-
-  <nav class="nav-menu">
-  <!-- Cursor Effects -->
-  <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
-
   <title>Talleres Raros</title>
 
   <link rel="icon" href="images/LOGO_ORIGINALBLANCO.png">
@@ -26,28 +12,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 </head>
 
 <body>
 
-  <!-- LANGUAGE SWITCH -->
-  <div class="lang-switch">
-    <button id="langBtn">EN</button>
-  </div>
+<!-- UI GLOBAL -->
+<div class="lang-switch">
+  <button id="langBtn">EN</button>
+</div>
 
-  <!-- MOBILE BAR -->
-  <div class="mobile-bar">
-    <button id="mobile-menu-btn">MENU</button>
-  </div>
+<div class="mobile-bar">
+  <button id="mobile-menu-btn">MENU</button>
+</div>
 
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <!-- BOTÓN TOGGLE -->
   <button class="menu-toggle" id="menuToggle">☰</button>
 
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="images/talleresraros.png" alt="Talleres Raros">
+  </div>
+
+  <!-- NAV -->
   <nav class="nav-menu">
     <a href="#hero" data-es="INICIO" data-en="HOME">INICIO</a>
     <a href="#convocatorias" data-es="CONVOCATORIAS" data-en="CALLS">CONVOCATORIAS</a>
@@ -58,9 +54,9 @@
   </nav>
 
 </aside>
-  <!-- MAIN -->
-  <main class="stage">
 
+<!-- MAIN -->
+<main class="stage">
     <!-- HERO -->
     <section class="scene active hero" id="hero">
 
@@ -97,6 +93,7 @@
         </p>
       </div>
     </section>
+
 <!-- CONVOCATORIAS -->
 <section class="scene" id="convocatorias">
   <div class="scene-scroll">
@@ -180,7 +177,6 @@
   </div>
 </section>
 
-<!-- PROYECTO -->
 <!-- PROYECTO -->
 <section class="scene" id="proyecto">
   <div class="scene-scroll">

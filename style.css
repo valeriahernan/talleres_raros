@@ -52,32 +52,93 @@ canvas {
   pointer-events: none !important;
 }
 
-/* ==========================================================================
-   SIDEBAR BASE
-   ========================================================================== */
+/* =========================
+   SIDEBAR DOCK (DESKTOP)
+========================= */
 .sidebar {
   position: fixed;
-  left: 0;
-  top: 0;
+  bottom: 20px;
+  left: 20px;
+  top: auto;
 
-  width: 220px;
-  height: 100vh;
+  width: auto;
+  height: auto;
 
-  padding: 30px;
+  z-index: var(--z-sidebar);
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: flex-start;
 
-  z-index: var(--z-sidebar);
-  font-family: var(--font-mono);
+  pointer-events: auto;
 }
 
-.logo img {
-  width: 120px;
-  margin-bottom: 30px;
+/* botón */
+.menu-toggle {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-weight: 800;
+  color: var(--color-primary);
+
+  cursor: pointer;
+  z-index: 10;
 }
 
+/* menú oculto */
+.nav-menu {
+  margin-top: 10px;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  pointer-events: none;
+
+  transition: all 0.25s ease;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* estado abierto */
+.sidebar.open .nav-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 900px) {
+
+  .sidebar {
+    bottom: auto;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+  }
+
+  .menu-toggle {
+    margin: 12px;
+  }
+
+  .nav-menu {
+    position: relative;
+    width: calc(100% - 24px);
+  }
+}
 /* ==========================================================================
    MENU TOGGLE (IMPORTANTE FIX)
    ========================================================================== */
