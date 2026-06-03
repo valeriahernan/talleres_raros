@@ -443,3 +443,111 @@ function newColour() {
 	return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
 }
 // ]]>
+
+
+import React, { useRef, useMemo } from "https://esm.sh/react";
+import ReactDOM from "https://esm.sh/react-dom/client";
+
+import * as THREE from "https://esm.sh/three";
+import { Canvas, useFrame, extend, useThree } from "https://esm.sh/@react-three/fiber";
+import { shaderMaterial, Text, RenderTexture, PerspectiveCamera } from "https://esm.sh/@react-three/drei";
+
+// 1. Define the custom shader material
+const DistortionMaterial = shaderMaterial(
+  {
+    u_texture: null,
+    u_mouse: new THREE.Vector2(0, 0),
+    u_prevMouse: new THREE.Vector2(0, 0),
+  },
+  // Vertex Shader
+  `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+  `,
+  // Fragment Shader
+  `
+  uniform sampler2D u_texture;
+  uniform vec2 u_mouse;
+  uniform vec2 u_prevMouse;
+  varying vec2 vUv;
+
+  void main() {
+    vec2 gridUV = floor(vUv * vec2(40.0, 40.0)) / vec2(40.0, 40.0);
+    vec2 centerOfPixel = gridUV + vec2(1.0/40.0, 1.0/40.0);
+    
+    vec2 mouseDirection = u_mouse - u_prevMouse;
+    vec2 pixelToMouseDirection = centerOfPixel - u_mouse;
+    float pixelDistanceToMouse = length(pixelToMouseDirection);
+    
+    float strength = smoothstep(0.4, 0.0, pixelDistanceToMouse);
+
+    vec2 uvOffset = strength * -mouseDirection * 0.5;
+    vec2 uv = vUv - uvOffset;
+
+    vec4 color = texture2D(u_texture, uv);
+    gl_FragColor = color;
+  }
+  `
+);
+
+// 2. Register the material so it can be used as JSX <distortionMaterial />
+extend({ DistortionMaterial });
+
+function Hero() {
+  const meshRef = useRef();
+  const { viewport, size } = useThree();
+
+  useFrame((state) => {
+    const { mouse } = state;
+    if (meshRef.current) {
+      const material = meshRef.current.material;
+      // Smoothly interpolate the previous mouse to the current mouse
+      material.u_prevMouse.lerp(material.u_mouse, 0.1);
+      // Map mouse from (-1 to 1) to (0 to 1)
+      material.u_mouse.set(mouse.x * 0.5 + 0.5, mouse.y * 0.5 + 0.5);
+    }
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <planeGeometry args={[viewport.width, viewport.height]} />
+      <distortionMaterial transparent>
+        <RenderTexture attach="u_texture" width={size.width} height={size.height}>
+          <PerspectiveCamera
+            makeDefault
+            manual
+            aspect={viewport.width / viewport.height}
+            position={[0, 0, 5]}
+          />
+          <color attach="background" args={["#000"]} />
+          <Text
+            fontSize={viewport.width * 0.1}
+            color="white"
+            maxWidth={viewport.width * 0.8}
+            textAlign="center"
+            anchorX="center"
+            anchorY="middle"
+          >
+            GLITCH{"\n"}AGENCY
+          </Text>
+        </RenderTexture>
+      </distortionMaterial>
+    </mesh>
+  );
+}
+
+function App() {
+  return (
+    <div style={{ width: "100vw", height: "100vh", background: "#000" }}>
+      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 75 }}>
+        <Hero />
+      </Canvas>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
