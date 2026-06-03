@@ -198,6 +198,13 @@ canvas {
   opacity: .4;
 }
 
+.hero-title .word {
+  display: block;
+}
+
+.hero-title .word:first-child {
+  margin-bottom: 18px; /* 👈 AQUÍ controlas el espacio */
+}
 .hero-title span:hover {
   filter: none !important;
   opacity: 1 !important;
