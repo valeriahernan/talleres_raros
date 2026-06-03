@@ -144,6 +144,10 @@ body {
   line-height: 0.72;
   max-width: 400px;
 
+.hero-sub {
+  pointer-events: auto;
+}
+
   position: relative;
   top: -30px; /* sube ligeramente el texto */
 }
