@@ -90,10 +90,10 @@ body {
    HERO
 ========================= */
 .hero {
-  position: relative;
-  height: 100vh;
   overflow: hidden;
+  position: relative;
 }
+
 /* GLB LAYER */
 .glb-layer {
   position: absolute;
@@ -294,8 +294,8 @@ canvas {
   }
 
   .hero-content {
-  align-items: flex-start;
-}
+    padding: 24px;
+  }
 
   .hero-title {
     font-size: 20vw;
