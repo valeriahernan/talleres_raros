@@ -306,21 +306,31 @@ body {
    COMPILADOS
 ========================= */
 
-.release-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
 .release {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 70px 1fr 50px;
+  gap: 12px;
+  align-items: center;
+  font-weight: 700;
 }
 
-.release span,
+.release span {
+  font-weight: 900;
+  opacity: 1;
+}
+
+.release a {
+  font-weight: 700;
+}
+
 .release small {
-  opacity: .5;
+  font-weight: 700;
+  opacity: 1;
+  text-align: right;
+}
+
+.release-list {
+  gap: 6px;
 }
 
 /* =========================
