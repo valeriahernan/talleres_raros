@@ -250,13 +250,27 @@ body {
    PROYECTO
 ========================= */
 
+/* =========================
+   PROYECTO
+========================= */
+/* =========================
+   PROYECTO
+========================= */
+
 .project-block {
-  margin-top: 60px;
+  margin-top: 28px;
 }
 
 .subsection-title {
   color: #ba7dff;
-  margin-bottom: 15px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.project-block p {
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 2px;
 }
 
 /* =========================
