@@ -323,7 +323,7 @@ body {
 
 .release {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
   font-weight: 700;
 }
