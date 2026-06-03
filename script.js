@@ -150,3 +150,30 @@ window.addEventListener("load", () => {
 
   }, 500);
 });
+
+
+let currentLang = "es";
+
+const btn = document.getElementById("langBtn");
+
+function setLanguage(lang) {
+  document.querySelectorAll("[data-es]").forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if (text) el.textContent = text;
+  });
+
+  btn.textContent = lang === "es" ? "EN" : "ES";
+  currentLang = lang;
+
+  localStorage.setItem("lang", lang);
+}
+
+btn.addEventListener("click", () => {
+  const newLang = currentLang === "es" ? "en" : "es";
+  setLanguage(newLang);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("lang");
+  if (saved) setLanguage(saved);
+});
