@@ -60,7 +60,7 @@ canvas {
   padding: 30px;
   z-index: var(--z-sidebar);
   pointer-events: auto !important;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .logo img {
@@ -131,7 +131,7 @@ canvas {
   height: 100vh;
   overflow-y: auto;
   padding: 80px;
-  font-family: var(--font-geist);
+  font-family: var(--font-sans);
 }
 
 /* ==========================================================================
