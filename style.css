@@ -491,3 +491,54 @@ canvas {
     pointer-events: auto;
   }
 }
+
+
+@media (min-width: 1024px) {
+
+  /* ===== SIDEBAR → NAVBAR INFERIOR ===== */
+  .sidebar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    top: auto;
+    width: auto;
+    height: auto;
+
+    padding: 14px 18px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 999px;
+
+    z-index: var(--z-sidebar);
+  }
+
+  /* ocultamos logo en modo dock */
+  .logo {
+    display: none;
+  }
+
+  /* menú horizontal */
+  .nav-menu {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* quitamos underline animado “alto” para que no moleste en dock */
+  .nav-menu a::after {
+    bottom: -4px;
+  }
+
+  /* ===== IMPORTANTE: desactivar layout lateral ===== */
+  .stage {
+    margin-left: 0;
+  }
+}
