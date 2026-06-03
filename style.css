@@ -178,9 +178,9 @@ canvas {
 .hero-title {
   color: var(--color-white);
   font-size: clamp(2.2rem, 4.5vw, 5rem);
-  font-weight: 500;
+  font-weight: 700;
   font-style: italic;
-  letter-spacing: -0.12em;
+  letter-spacing: 0.12em;
   line-height: 0.72;
   max-width: 400px;
   position: relative;
