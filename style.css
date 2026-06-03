@@ -18,6 +18,7 @@ body {
 /* =========================
    SIDEBAR
 ========================= */
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -25,7 +26,8 @@ body {
   width: 220px;
   height: 100vh;
   padding: 30px;
-  z-index: 9999;
+  z-index: 999999;
+  pointer-events: auto;
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -46,6 +48,7 @@ body {
   color: #ba7dff;
   font-size: .85rem;
   transition: opacity .25s ease;
+  pointer-events: auto;
 }
 
 .nav-menu a:hover {
@@ -59,6 +62,7 @@ body {
 /* =========================
    STAGE & SCENES
 ========================= */
+
 .stage {
   margin-left: 220px;
   height: 100vh;
@@ -96,11 +100,12 @@ body {
   overflow: hidden;
 }
 
-/* GLB LAYER */
+/* GLB */
+
 .glb-layer {
   position: absolute;
   inset: 0;
-  z-index: -10;
+  z-index: 0;
 }
 
 .glb-layer model-viewer {
@@ -110,18 +115,24 @@ body {
 }
 
 /* VIGNETTE */
+
 .hero-vignette {
   position: absolute;
   inset: 0;
   z-index: 20;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(214,214,214,.10), #ececec);
+  background: radial-gradient(
+    circle,
+    rgba(214,214,214,.10),
+    #ececec
+  );
 }
 
 /* HERO CONTENT */
+
 .hero-content {
   position: relative;
-  z-index: 40;
+  z-index: 50;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -129,10 +140,10 @@ body {
   padding: 80px;
   font-family: "Urbanist", sans-serif;
   pointer-events: none;
-  
 }
 
 /* TITULO */
+
 .hero-title {
   color: #fff;
   font-size: clamp(3.2rem, 6.5vw, 6.8rem);
@@ -141,18 +152,15 @@ body {
   letter-spacing: -0.12em;
   line-height: 0.72;
   max-width: 400px;
-
-.hero-sub {
-  pointer-events: auto;
-}
-
   position: relative;
-  top: -30px; /* sube ligeramente el texto */
+  top: -30px;
 }
 
 .hero-title span {
   display: inline-block;
-  transition: transform .15s ease-out, filter .2s ease-out;
+  transition:
+    transform .15s ease-out,
+    filter .2s ease-out;
   will-change: transform;
 }
 
@@ -164,19 +172,25 @@ body {
 .hero-title span:hover {
   filter: none !important;
   opacity: 1 !important;
-  transform: translateY(-10px) scale(1.2) rotate(-8deg);
+  transform:
+    translateY(-10px)
+    scale(1.2)
+    rotate(-8deg);
 }
 
 /* SUBTEXTO */
+
 .hero-sub {
   margin-top: 24px;
   max-width: 520px;
   line-height: 1.8;
+  pointer-events: auto;
 }
 
 /* =========================
    TEXTOS GENERALES
 ========================= */
+
 .section-title {
   color: #ba7dff;
   font-size: clamp(2rem, 4vw, 4rem);
@@ -200,8 +214,22 @@ body {
 }
 
 /* =========================
+   PROYECTO
+========================= */
+
+.project-block {
+  margin-top: 60px;
+}
+
+.subsection-title {
+  color: #ba7dff;
+  margin-bottom: 15px;
+}
+
+/* =========================
    TALLERES
 ========================= */
+
 .taller-item {
   margin-bottom: 28px;
   max-width: 900px;
@@ -230,6 +258,7 @@ body {
 /* =========================
    COMPILADOS
 ========================= */
+
 .release-list {
   display: flex;
   flex-direction: column;
@@ -250,6 +279,7 @@ body {
 /* =========================
    CONTACTO
 ========================= */
+
 .contact-links {
   display: flex;
   flex-direction: column;
@@ -257,26 +287,35 @@ body {
 }
 
 /* =========================
-   CANVAS / CURSOR FIX
+   CURSOR / CANVAS FIX
 ========================= */
+
 canvas {
   position: fixed !important;
   inset: 0;
   width: 100vw !important;
   height: 100vh !important;
   z-index: 1 !important;
-  pointer-events: none;
+  pointer-events: none !important;
+}
+
+.sidebar,
+.sidebar *,
+.mobile-bar,
+.mobile-bar * {
+  pointer-events: auto !important;
 }
 
 /* =========================
    MOBILE
 ========================= */
+
 @media (max-width: 900px) {
 
   .sidebar {
     transform: translateX(-100%);
     transition: transform .3s ease;
-    z-index: 10;
+    z-index: 999999;
   }
 
   .sidebar.active {
@@ -291,7 +330,7 @@ canvas {
     width: 100%;
     padding: 16px 20px;
     background: #ececec;
-    z-index: 999999;
+    z-index: 9999999;
   }
 
   .stage {
@@ -303,8 +342,8 @@ canvas {
   }
 
   .hero-content {
-  align-items: flex-start;
-}
+    align-items: flex-start;
+  }
 
   .hero-title {
     font-size: 20vw;
