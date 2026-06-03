@@ -151,9 +151,6 @@ body {
   line-height: 1.8;
 }
 
-  position: relative;
-  top: -30px; /* sube ligeramente el texto */
-}
 
 .hero-title span {
   display: inline-block;
