@@ -130,7 +130,8 @@ body {
   justify-content: center;
   padding: 80px;
   font-family: "Urbanist", sans-serif;
-  pointer-events: auto;
+  pointer-events: none;
+  
 }
 
 /* TITULO */
