@@ -99,8 +99,14 @@ body {
 /* GLB LAYER */
 .glb-layer {
   position: absolute;
-  inset: 0;
-  z-index: 50;
+
+  width: 65%;
+  height: 100%;
+
+  right: 0;
+  top: 0;
+
+  z-index: 2;
 }
 
 .glb-layer model-viewer {
