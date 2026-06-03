@@ -188,6 +188,36 @@ body {
 }
 
 /* =========================
+   CONVOCATORIAS
+========================= */
+
+.conv-title {
+  color: #ba7dff;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.conv-subtitle {
+  margin-bottom: 18px !important;
+  opacity: 0.85;
+}
+
+.conv-list {
+  margin-bottom: 18px;
+}
+
+.conv-list p {
+  margin-bottom: 4px !important;
+  line-height: 1.4;
+}
+
+.conv-description {
+  margin-top: 24px;
+  max-width: 900px;
+  line-height: 1.7;
+}
+
+/* =========================
    TEXTOS GENERALES
 ========================= */
 
