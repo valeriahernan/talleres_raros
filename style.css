@@ -89,13 +89,11 @@ body {
 /* =========================
    HERO
 ========================= */
-
 .hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
-
 /* GLB LAYER */
 .glb-layer {
   position: absolute;
@@ -108,7 +106,7 @@ body {
   height: 100%;
   cursor: grab;
   touch-action: pan-y;
-  pointer-events: auto;
+  pointer-events: auto; /* 🔥 ahora SÍ interactúa */
 }
 
 /* VIGNETTE */
@@ -133,7 +131,6 @@ body {
   pointer-events: auto;
 }
 
-/* TITULO */
 .hero-title {
   color: #fff;
   font-size: clamp(3.2rem, 6.5vw, 6.8rem);
@@ -142,9 +139,6 @@ body {
   letter-spacing: -0.12em;
   line-height: 0.72;
   max-width: 400px;
-
-  position: relative;
-  top: -30px; /* sube ligeramente el texto */
 }
 
 .hero-title span {
@@ -153,25 +147,18 @@ body {
   will-change: transform;
 }
 
-.hero-title span {
-  display: inline-block;
-  transition: transform .35s ease, opacity .35s ease;
+.hero-title:hover span {
+  filter: blur(1px);
+  opacity: .4;
 }
 
-.hero-title span {
-  display: inline-block;
-  position: relative;
-  transition:
-    transform 1.8s cubic-bezier(.19,1,.22,1),
-    opacity .6s ease;
-  will-change: transform;
+.hero-title span:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: translateY(-10px) scale(1.2) rotate(-8deg);
 }
 
-.hero-title.exploded span {
-  pointer-events: none;
-}
-
-/* SUBTEXTO */
+/* SUBTEXT */
 .hero-sub {
   margin-top: 24px;
   max-width: 520px;
