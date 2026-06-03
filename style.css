@@ -1,6 +1,30 @@
-/* =========================
-   RESET
-========================= */
+/* ==========================================================================
+   1. VARIABLES & TOKENS
+   ========================================================================== */
+:root {
+  --color-bg: #ececec;
+  --color-text: #111;
+  --color-primary: #ba7dff;
+  --color-white: #ffffff;
+  
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-geist: 'Geist Mono', monospace;
+  --font-sans: 'Urbanist', sans-serif;
+  
+  --z-canvas: 1;
+  --z-stage: 1;
+  --z-lang: 9999;
+  --z-sidebar: 999999;
+  --z-mobile: 9999999;
+  
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.35s ease;
+}
+
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -8,17 +32,25 @@
 }
 
 body {
-  background: #ececec;
-  color: #111;
+  background: var(--color-bg);
+  color: var(--color-text);
   overflow: hidden;
   height: 100vh;
   cursor: auto;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+canvas {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: var(--z-canvas) !important;
+  pointer-events: none !important;
+}
 
+/* ==========================================================================
+   3. LAYOUT & STRUCTURE (SIDEBAR, STAGE, NAVIGATION)
+   ========================================================================== */
 .sidebar {
   position: fixed;
   left: 0;
@@ -26,9 +58,9 @@ body {
   width: 220px;
   height: 100vh;
   padding: 30px;
-  z-index: 999999;
-  pointer-events: auto;
-  font-family: 'IBM Plex Mono', monospace;
+  z-index: var(--z-sidebar);
+  pointer-events: auto !important;
+  font-family: var(--font-mono);
 }
 
 .logo img {
@@ -36,10 +68,6 @@ body {
   display: block;
   margin-bottom: 40px;
 }
-
-/* =========================
-   NAVBAR
-========================= */
 
 .nav-menu {
   display: flex;
@@ -52,32 +80,23 @@ body {
   position: relative;
   display: inline-block;
   width: fit-content;
-
   text-decoration: none;
-  color: #ba7dff;
-
+  color: var(--color-primary);
   font-size: 1.05rem;
   font-weight: 700;
-
   padding-bottom: 6px;
 }
 
-/* línea base */
 .nav-menu a::after {
   content: "";
   position: absolute;
-
   left: 0;
   bottom: 2px;
-
   width: 100%;
   height: 3px;
-
-  background: #ba7dff;
-
+  background: var(--color-primary);
   transform: scaleX(0);
   transform-origin: left;
-
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -85,23 +104,22 @@ body {
   transform: scaleX(1);
 }
 
-/* =========================
-   STAGE & SCENES
-========================= */
-
 .stage {
   margin-left: 220px;
   height: 100vh;
   position: relative;
-  z-index: 1;
+  z-index: var(--z-stage);
 }
 
+/* ==========================================================================
+   4. SCENES & VIEWS
+   ========================================================================== */
 .scene {
   position: absolute;
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .35s ease;
+  transition: opacity var(--transition-slow);
 }
 
 .scene.active {
@@ -113,20 +131,17 @@ body {
   height: 100vh;
   overflow-y: auto;
   padding: 80px;
-  font-family: "Geist Mono", monospace;
+  font-family: var(--font-geist);
 }
 
-/* =========================
-   HERO
-========================= */
-
+/* ==========================================================================
+   5. HERO COMPONENT
+   ========================================================================== */
 .hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
-
-/* GLB */
 
 .glb-layer {
   position: absolute;
@@ -140,21 +155,13 @@ body {
   pointer-events: auto !important;
 }
 
-/* VIGNETTE */
-
 .hero-vignette {
   position: absolute;
   inset: 0;
   z-index: 20;
   pointer-events: none;
-  background: radial-gradient(
-    circle,
-    rgba(214,214,214,.10),
-    #ececec
-  );
+  background: radial-gradient(circle, rgba(214,214,214,.10), var(--color-bg));
 }
-
-/* HERO CONTENT */
 
 .hero-content {
   position: relative;
@@ -164,14 +171,12 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 80px;
-  font-family: "Urbanist", sans-serif;
+  font-family: var(--font-sans);
   pointer-events: none;
 }
 
-/* TITULO */
-
 .hero-title {
-  color: #fff;
+  color: var(--color-white);
   font-size: clamp(3.2rem, 6.5vw, 6.8rem);
   font-weight: 500;
   font-style: italic;
@@ -184,7 +189,7 @@ body {
 
 .hero-title span {
   display: inline-block;
-  transition: transform .15s ease-out, filter .2s ease-out;
+  transition: transform var(--transition-fast), filter 0.2s ease-out;
   will-change: transform;
 }
 
@@ -199,8 +204,6 @@ body {
   transform: translateY(-10px) scale(1.2) rotate(-8deg);
 }
 
-/* SUBTEXTO */
-
 .hero-sub {
   margin-top: 24px;
   max-width: 520px;
@@ -208,12 +211,12 @@ body {
   pointer-events: auto;
 }
 
-/* =========================
-   CONVOCATORIAS
-========================= */
-
+/* ==========================================================================
+   6. INNER COMPONENTS & SECTIONS
+   ========================================================================== */
+/* Convocatorias */
 .conv-title {
-  color: #ba7dff;
+  color: var(--color-primary);
   margin-bottom: 6px;
   font-weight: 900;
 }
@@ -242,12 +245,9 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   TEXTOS GENERALES
-========================= */
-
+/* Textos Generales */
 .section-title {
-  color: #ba7dff;
+  color: var(--color-primary);
   font-size: clamp(2rem, 4vw, 4rem);
   margin-bottom: 50px;
 }
@@ -259,25 +259,22 @@ body {
 }
 
 .scene a {
-  color: #ba7dff;
+  color: var(--color-primary);
   text-decoration: none;
-  transition: opacity .25s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .scene a:hover {
   opacity: .6;
 }
 
-/* =========================
-   PROYECTO
-========================= */
-
+/* Proyectos */
 .project-block {
   margin-top: 28px;
 }
 
 .subsection-title {
-  color: #ba7dff;
+  color: var(--color-primary);
   font-weight: 900;
   margin-bottom: 4px;
 }
@@ -288,17 +285,14 @@ body {
   margin-bottom: 2px;
 }
 
-/* =========================
-   TALLERES
-========================= */
-
+/* Talleres */
 .taller-item {
   margin-bottom: 28px;
   max-width: 900px;
 }
 
 .taller-item h3 {
-  color: #ba7dff;
+  color: var(--color-primary);
   font-weight: 800;
   margin-bottom: 6px;
 }
@@ -308,7 +302,7 @@ body {
   max-height: 0;
   overflow: hidden;
   transform: translateY(-6px);
-  transition: all .35s ease;
+  transition: all var(--transition-slow);
 }
 
 .taller-item:hover p {
@@ -317,10 +311,7 @@ body {
   transform: translateY(0);
 }
 
-/* =========================
-   COMPILADOS
-========================= */
-
+/* Compilados (Releases) */
 .release {
   display: flex;
   gap: 12px;
@@ -347,17 +338,14 @@ body {
   gap: 12px;
 }
 
-/* =========================
-   CONTACTO
-========================= */
+/* Contacto */
+#contacto .contact-links {
+  gap: 12px;
+}
 
 #contacto .contact-links p,
 #contacto .contact-links a {
   font-weight: 900;
-}
-
-#contacto .contact-links {
-  gap: 12px;
 }
 
 #contacto p {
@@ -369,36 +357,83 @@ body {
   margin-bottom: 12px;
 }
 
-/* =========================
-   CURSOR / CANVAS FIX
-========================= */
-
-canvas {
-  position: fixed !important;
-  inset: 0;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 1 !important;
-  pointer-events: none !important;
+/* ==========================================================================
+   7. UI INTERACTIVE CONTROLS
+   ========================================================================== */
+/* Mobile Bar (Hidden by default) */
+.mobile-bar {
+  display: none;
 }
 
-.sidebar,
+/* Scroll Top Button */
+#scrollTopBtn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: var(--z-sidebar);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+#scrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#scrollTopBtn:hover {
+  transform: translateY(-3px);
+}
+
+/* Language Switch */
+.lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-lang);
+}
+
+.lang-switch button {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.lang-switch button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Pointer Events Overrides */
 .sidebar *,
 .mobile-bar,
 .mobile-bar * {
   pointer-events: auto !important;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
+/* ==========================================================================
+   8. MEDIA QUERIES (RESPONSIVE DEFAULTS)
+   ========================================================================== */
 @media (max-width: 900px) {
-
   .sidebar {
     transform: translateX(-100%);
-    transition: transform .3s ease;
-    z-index: 999999;
+    transition: transform 0.3s ease;
+    z-index: var(--z-sidebar);
   }
 
   .sidebar.active {
@@ -412,8 +447,15 @@ canvas {
     left: 0;
     width: 100%;
     padding: 16px 20px;
-    background: #ececec;
-    z-index: 9999999;
+    background: var(--color-bg);
+    z-index: var(--z-mobile);
+  }
+
+  #mobile-menu-btn {
+    all: unset;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--color-primary);
   }
 
   .stage {
@@ -441,99 +483,4 @@ canvas {
   .glb-layer model-viewer {
     pointer-events: auto;
   }
-}
-
-/* =========================
-   SCROLL TOP
-========================= */
-
-#scrollTopBtn {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-
-  width: 42px;
-  height: 42px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: #ba7dff;
-  color: white;
-
-  font-size: 18px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  z-index: 999999;
-
-  opacity: 0;
-  pointer-events: none;
-
-  transition: opacity .25s ease, transform .25s ease;
-}
-
-#scrollTopBtn.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#scrollTopBtn:hover {
-  transform: translateY(-3px);
-}
-
-.mobile-bar {
-  display: none;
-}
-
-@media (max-width: 900px) {
-  .mobile-bar {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 16px 20px;
-    background: #ececec;
-    z-index: 9999999;
-  }
-
-  #mobile-menu-btn {
-    all: unset;
-    cursor: pointer;
-    font-weight: 700;
-    color: #ba7dff;
-  }
-}
-
-/* =========================
-   LANGUAGE SWITCH
-========================= */
-
-.lang-switch {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-}
-
-.lang-switch button {
-  background: transparent;
-  border: 2px solid #ba7dff;
-  color: #ba7dff;
-
-  font-weight: 700;
-  font-size: 0.9rem;
-
-  padding: 6px 12px;
-  border-radius: 6px;
-
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.lang-switch button:hover {
-  background: #ba7dff;
-  color: white;
 }
