@@ -90,12 +90,9 @@ body {
    HERO
 ========================= */
 .hero {
+  position: relative;
   height: 100vh;
-}
-
-.hero-content {
-  justify-content: center;
-  transform: translateY(12vh);
+  overflow: hidden;
 }
 /* GLB LAYER */
 .glb-layer {
