@@ -173,7 +173,7 @@ body {
 .hero-title {
   color: #fff;
   font-size: clamp(3.2rem, 6.5vw, 6.8rem);
-  font-weight: 800;
+  font-weight: 900;
   font-style: italic;
   letter-spacing: -0.12em;
   line-height: 0.72;
@@ -215,7 +215,7 @@ body {
 .conv-title {
   color: #ba7dff;
   margin-bottom: 6px;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .conv-subtitle {
@@ -278,7 +278,7 @@ body {
 
 .subsection-title {
   color: #ba7dff;
-  font-weight: 800;
+  font-weight: 900;
   margin-bottom: 4px;
 }
 
@@ -325,7 +325,7 @@ body {
   display: flex;
   gap: 12px;
   align-items: center;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .release span {
@@ -353,7 +353,7 @@ body {
 
 #contacto .contact-links p,
 #contacto .contact-links a {
-  font-weight: 700;
+  font-weight: 900;
 }
 
 #contacto .contact-links {
@@ -462,7 +462,7 @@ canvas {
   color: white;
 
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
 
   cursor: pointer;
 
