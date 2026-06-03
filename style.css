@@ -40,13 +40,6 @@ body {
 /* =========================
    NAVBAR
 ========================= */
-
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .nav-menu a {
   position: relative;
   display: block;
@@ -57,14 +50,14 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
 
-  transition: opacity .25s ease;
+  padding-bottom: 3px;
 }
 
 /* línea base */
 .nav-menu a::after {
   content: "";
-
   position: absolute;
+
   left: 0;
   bottom: 0;
 
@@ -76,7 +69,7 @@ body {
   transform: scaleX(0);
   transform-origin: left;
 
-  transition: transform .25s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* hover */
@@ -84,13 +77,9 @@ body {
   transform: scaleX(1);
 }
 
+/* hover texto más suave (estilo Halogen) */
 .nav-menu a:hover {
-  opacity: .6;
-}
-
-/* mobile */
-.mobile-bar {
-  display: none;
+  opacity: 0.7;
 }
 
 /* =========================
@@ -280,13 +269,6 @@ body {
   opacity: .6;
 }
 
-/* =========================
-   PROYECTO
-========================= */
-
-/* =========================
-   PROYECTO
-========================= */
 /* =========================
    PROYECTO
 ========================= */
