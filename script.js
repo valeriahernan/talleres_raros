@@ -1,9 +1,4 @@
 /* =========================
-   CLICK FIX
-========================= */
-document.addEventListener("click", () => {}, { passive: true });
-
-/* =========================
    ELEMENTOS
 ========================= */
 const scenes = document.querySelectorAll(".scene");
@@ -11,23 +6,42 @@ const links = document.querySelectorAll(".nav-menu a");
 const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 const desktopToggle = document.getElementById("menuToggle");
+const langBtn = document.getElementById("langBtn");
 
 /* =========================
    SCENES SYSTEM
 ========================= */
 function showScene(id) {
-  scenes.forEach(scene => scene.classList.remove("active"));
+  let found = false;
+
+  scenes.forEach(scene => {
+    scene.classList.remove("active");
+  });
+
   const target = document.querySelector(id);
-  if (target) target.classList.add("active");
+  if (target) {
+    target.classList.add("active");
+    found = true;
+  }
+
+  // fallback seguro
+  if (!found) {
+    document.querySelector("#hero")?.classList.add("active");
+  }
 }
 
+/* =========================
+   NAV LINKS
+========================= */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    showScene(link.getAttribute("href"));
 
+    const targetId = link.getAttribute("href");
+    showScene(targetId);
+
+    // cerrar sidebar (unificado)
     sidebar?.classList.remove("active");
-    sidebar?.classList.remove("open");
   });
 });
 
@@ -47,36 +61,44 @@ if (mobileBtn && sidebar) {
 if (desktopToggle && sidebar) {
   desktopToggle.addEventListener("click", (e) => {
     e.stopPropagation();
-    sidebar.classList.toggle("open");
+    sidebar.classList.toggle("active");
   });
 }
 
 /* =========================
-   CLOSE EVENTS
+   CLOSE ON ESC
 ========================= */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     sidebar?.classList.remove("active");
-    sidebar?.classList.remove("open");
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if (window.innerWidth <= 900 && sidebar?.classList.contains("active")) {
-    if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
-      sidebar.classList.remove("active");
-    }
   }
 });
 
 /* =========================
-   HERO TEXT EFFECT
+   CLICK OUTSIDE SIDEBAR (FIXED)
+========================= */
+document.addEventListener("click", (e) => {
+  if (!sidebar) return;
+
+  const isMobile = window.innerWidth <= 900;
+  if (!isMobile) return;
+
+  const clickedInsideSidebar = sidebar.contains(e.target);
+  const clickedMobileBtn = e.target === mobileBtn;
+
+  if (!clickedInsideSidebar && !clickedMobileBtn) {
+    sidebar.classList.remove("active");
+  }
+});
+
+/* =========================
+   HERO TEXT EFFECT (OPTIMIZED)
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  let mouse = { x: 0, y: 0 };
 
   const states = Array.from(letters).map(letter => ({
     el: letter,
@@ -93,7 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-  });
+  }, { passive: true });
 
   function animate() {
     states.forEach(state => {
@@ -107,6 +129,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (dist < maxDist) {
         const force = 1 - dist / maxDist;
+
         state.tx = dx * force * 0.35;
         state.ty = dy * force * 0.35;
         state.trot = state.tx * 0.6;
@@ -137,24 +160,27 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   CURSOR EFFECT
+   CURSOR EFFECT (SAFE)
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
     if (!window.cursoreffects?.rainbowCursor) return;
 
-    new window.cursoreffects.rainbowCursor({
-      length: 25,
-      colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
-    });
-  }, 500);
+    try {
+      new window.cursoreffects.rainbowCursor({
+        length: 20,
+        colors: ["#ba7dff", "#ff4ecd", "#00f0ff"]
+      });
+    } catch (err) {
+      console.warn("Cursor effect error:", err);
+    }
+  }, 800);
 });
 
 /* =========================
    LANGUAGE TOGGLE
 ========================= */
 let currentLang = "es";
-const btn = document.getElementById("langBtn");
 
 function setLanguage(lang) {
   document.querySelectorAll("[data-es]").forEach(el => {
@@ -162,13 +188,15 @@ function setLanguage(lang) {
     if (text) el.textContent = text;
   });
 
-  btn.textContent = lang === "es" ? "EN" : "ES";
-  currentLang = lang;
+  if (langBtn) {
+    langBtn.textContent = lang === "es" ? "EN" : "ES";
+  }
 
+  currentLang = lang;
   localStorage.setItem("lang", lang);
 }
 
-btn?.addEventListener("click", () => {
+langBtn?.addEventListener("click", () => {
   setLanguage(currentLang === "es" ? "en" : "es");
 });
 

@@ -12,8 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Urbanist:wght@100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
@@ -35,15 +34,12 @@
 <!-- SIDEBAR -->
 <aside class="sidebar">
 
-  <!-- BOTÓN TOGGLE -->
   <button class="menu-toggle" id="menuToggle">☰</button>
 
-  <!-- LOGO -->
   <div class="logo">
     <img src="images/talleresraros.png" alt="Talleres Raros">
   </div>
 
-  <!-- NAV -->
   <nav class="nav-menu">
     <a href="#hero" data-es="INICIO" data-en="HOME">INICIO</a>
     <a href="#convocatorias" data-es="CONVOCATORIAS" data-en="CALLS">CONVOCATORIAS</a>
@@ -57,42 +53,45 @@
 
 <!-- MAIN -->
 <main class="stage">
-    <!-- HERO -->
-    <section class="scene active hero" id="hero">
 
-      <div class="glb-layer">
-        <model-viewer
-          src="GLB/3Dtalleres.glb"
-          camera-controls
-          auto-rotate
-          interaction-prompt="none"
-          scale="0.1 0.1 0.1"
-          camera-target="-3m 5m 0m"
-          camera-orbit="90deg 90deg 70m"
-          min-camera-orbit="auto auto 10%"
-          max-camera-orbit="auto auto 80%"
-          shadow-intensity="2"
-          exposure="1"
-          environment-image="neutral">
-        </model-viewer>
-      </div>
+  <!-- HERO -->
+  <section class="scene active hero" id="hero">
 
-      <div class="hero-vignette"></div>
+    <div class="glb-layer">
+      <model-viewer
+        src="GLB/3Dtalleres.glb"
+        camera-controls
+        auto-rotate
+        interaction-prompt="none"
+        scale="0.1 0.1 0.1"
+        camera-target="-3m 5m 0m"
+        camera-orbit="90deg 90deg 70m"
+        min-camera-orbit="auto auto 10%"
+        max-camera-orbit="auto auto 80%"
+        shadow-intensity="2"
+        exposure="1"
+        environment-image="neutral">
+      </model-viewer>
+    </div>
 
-      <div class="hero-content">
-        <h1 class="hero-title">
-          <span>T</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>E</span><span>S</span>
-          <br>
-          <span>R</span><span>A</span><span>R</span><span>O</span><span>S</span>
-        </h1>
+    <!-- overlays (no bloquean clicks) -->
+    <div class="hero-vignette"></div>
 
-        <p class="hero-sub"
-           data-es="prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses"
-           data-en="contemporary approaches for music creation ✧ workshops ✧ masterclasses">
-          prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses
-        </p>
-      </div>
-    </section>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span>T</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>E</span><span>S</span>
+        <br>
+        <span>R</span><span>A</span><span>R</span><span>O</span><span>S</span>
+      </h1>
+
+      <p class="hero-sub"
+         data-es="prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses"
+         data-en="contemporary approaches for music creation ✧ workshops ✧ masterclasses">
+        prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses
+      </p>
+    </div>
+
+  </section>
 
 <!-- CONVOCATORIAS -->
 <section class="scene" id="convocatorias">
