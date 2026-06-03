@@ -25,7 +25,7 @@ body {
   width: 220px;
   height: 100vh;
   padding: 30px;
-  z-index: 10;
+  z-index: 9999;
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -100,7 +100,7 @@ body {
 .glb-layer {
   position: absolute;
   inset: 0;
-  z-index: 50;
+  z-index: 100;
 }
 
 .glb-layer model-viewer {
@@ -141,16 +141,14 @@ body {
   letter-spacing: -0.12em;
   line-height: 0.72;
   max-width: 400px;
-  position: relative;
-  top: -30px;
-}
 
 .hero-sub {
-  margin-top: 24px;
-  max-width: 520px;
-  line-height: 1.8;
+  pointer-events: auto;
 }
 
+  position: relative;
+  top: -30px; /* sube ligeramente el texto */
+}
 
 .hero-title span {
   display: inline-block;
