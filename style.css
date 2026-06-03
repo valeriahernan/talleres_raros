@@ -37,6 +37,10 @@ body {
   margin-bottom: 40px;
 }
 
+/* =========================
+   NAVBAR
+========================= */
+
 .nav-menu {
   display: flex;
   flex-direction: column;
@@ -44,17 +48,47 @@ body {
 }
 
 .nav-menu a {
+  position: relative;
+  display: block;
+
   text-decoration: none;
   color: #ba7dff;
-  font-size: .85rem;
+
+  font-size: 1.05rem;
+  font-weight: 700;
+
   transition: opacity .25s ease;
-  pointer-events: auto;
+}
+
+/* línea base */
+.nav-menu a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #ba7dff;
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform .25s ease;
+}
+
+/* hover */
+.nav-menu a:hover::after {
+  transform: scaleX(1);
 }
 
 .nav-menu a:hover {
-  opacity: .55;
+  opacity: .6;
 }
 
+/* mobile */
 .mobile-bar {
   display: none;
 }
