@@ -192,7 +192,7 @@ canvas {
 }
 
 .hero-title span {
-  display: inline-block;
+  
   transition: transform var(--transition-fast), filter 0.2s ease-out;
   will-change: transform;
 }
