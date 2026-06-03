@@ -217,6 +217,9 @@ body {
   line-height: 1.7;
 }
 
+.conv-strong {
+  font-weight: 600;
+}
 /* =========================
    TEXTOS GENERALES
 ========================= */
