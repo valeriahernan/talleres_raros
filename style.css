@@ -1,23 +1,29 @@
-
 /* ==========================================================================
-   VARIABLES
+   1. VARIABLES & TOKENS
    ========================================================================== */
 :root {
   --color-bg: #ececec;
   --color-text: #111;
   --color-primary: #ba7dff;
-  --color-white: #fff;
-
-  --transition: 0.25s ease;
-
+  --color-white: #ffffff;
+  
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-geist: 'Geist Mono', monospace;
+  --font-sans: 'Urbanist', sans-serif;
+  
   --z-canvas: 1;
-  --z-sidebar: 9999;
-  --z-menu: 10000;
-  --z-button: 10001;
+  --z-stage: 1;
+  --z-lang: 9999;
+  --z-sidebar: 999999;
+  --z-mobile: 9999999;
+  
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.35s ease;
 }
 
 /* ==========================================================================
-   RESET
+   2. RESET & BASE STYLES
    ========================================================================== */
 * {
   margin: 0;
@@ -30,130 +36,90 @@ body {
   color: var(--color-text);
   overflow: hidden;
   height: 100vh;
-  font-family: 'Urbanist', sans-serif;
+  cursor: auto;
 }
 
-/* ==========================================================================
-   CANVAS / MODEL
-   ========================================================================== */
 canvas {
   position: fixed !important;
   inset: 0;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: var(--z-canvas);
-  pointer-events: none;
+  z-index: var(--z-canvas) !important;
+  pointer-events: none !important;
 }
 
 /* ==========================================================================
-   LANG SWITCH
-   ========================================================================== */
-.lang-switch {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: var(--z-button);
-}
-
-.lang-switch button {
-  padding: 8px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--color-primary);
-  background: rgba(255,255,255,0.8);
-  cursor: pointer;
-  font-weight: 700;
-}
-
-/* ==========================================================================
-   SIDEBAR
+   3. LAYOUT & STRUCTURE (SIDEBAR, STAGE, NAVIGATION)
    ========================================================================== */
 .sidebar {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 100vh;
+  padding: 30px;
   z-index: var(--z-sidebar);
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  pointer-events: auto !important;
+  font-family: var(--font-mono);
 }
 
-/* ==========================================================================
-   MENU BUTTON
-   ========================================================================== */
-.menu-toggle {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-
-  padding: 10px 14px;
-  border-radius: 999px;
-
-  font-weight: 800;
-  cursor: pointer;
-
-  transition: transform var(--transition);
+.logo img {
+  width: 120px;
+  display: block;
+  margin-bottom: 40px;
 }
 
-.menu-toggle:hover {
-  transform: scale(1.05);
-}
-
-/* ==========================================================================
-   NAV MENU
-   ========================================================================== */
 .nav-menu {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-
-  transition: opacity 0.25s ease, transform 0.25s ease;
-
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-
-  padding: 12px 14px;
-  border-radius: 14px;
-}
-
-.sidebar.open .nav-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .nav-menu a {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
   text-decoration: none;
   color: var(--color-primary);
+  font-size: 1.05rem;
   font-weight: 700;
+  padding-bottom: 6px;
 }
 
-/* ==========================================================================
-   STAGE
-   ========================================================================== */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 3px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-menu a:hover::after {
+  transform: scaleX(1);
+}
+
 .stage {
   margin-left: 220px;
   height: 100vh;
+  position: relative;
+  z-index: var(--z-stage);
 }
 
 /* ==========================================================================
-   SCENES
+   4. SCENES & VIEWS
    ========================================================================== */
 .scene {
   position: absolute;
   inset: 0;
-
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity 0.4s ease;
+  transition: opacity var(--transition-slow);
 }
 
 .scene.active {
@@ -161,89 +127,367 @@ canvas {
   pointer-events: auto;
 }
 
-/* ==========================================================================
-   SCENE SCROLL (FIX CRÍTICO)
-   ========================================================================== */
 .scene-scroll {
-  position: relative;
   height: 100vh;
   overflow-y: auto;
   padding: 80px;
-
-  scrollbar-width: thin;
+  font-family: var(--font-geist);
 }
 
 /* ==========================================================================
-   HERO
+   5. HERO COMPONENT
    ========================================================================== */
 .hero {
   position: relative;
   height: 100vh;
+  overflow: hidden;
 }
 
 .glb-layer {
   position: absolute;
   inset: 0;
+  z-index: 0;
+}
+
+.glb-layer model-viewer {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto !important;
 }
 
 .hero-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(0,0,0,0.05), var(--color-bg));
+  z-index: 20;
   pointer-events: none;
+  background: radial-gradient(circle, rgba(214,214,214,.10), var(--color-bg));
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
-
+  z-index: 50;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   padding: 80px;
+  font-family: var(--font-sans);
+  pointer-events: none;
 }
 
 .hero-title {
-  font-size: clamp(2.2rem, 4.5vw, 5rem);
-  font-weight: 800;
   color: var(--color-white);
-  line-height: 0.9;
+  font-size: clamp(2.2rem, 4.5vw, 5rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  line-height: 0.72;
+  max-width: 400px;
+  position: relative;
+  top: -30px;
+}
+
+.hero-title span {
+  display: inline-block;
+  transition: transform var(--transition-fast), filter 0.2s ease-out;
+  will-change: transform;
+}
+
+.hero-title:hover span {
+  filter: blur(1px);
+  opacity: .4;
+}
+
+.hero-title .word {
+  display: block;
+}
+
+.hero-title .word:first-child {
+  margin-bottom: 3px; /* 👈 AQUÍ controlas el espacio */
+}
+.hero-title span:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: translateY(-10px) scale(1.2) rotate(-8deg);
 }
 
 .hero-sub {
-  margin-top: 10px;
-  max-width: 420px;
+  margin-top: 24px;
+  max-width: 520px;
+  line-height: 1.8;
+  pointer-events: auto;
 }
 
 /* ==========================================================================
-   LOGO (FIX OPCIONAL)
+   6. INNER COMPONENTS & SECTIONS
    ========================================================================== */
-.logo img {
-  width: 120px;
-  height: auto;
+/* Convocatorias */
+.conv-title {
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  font-weight: 900;
+}
+
+.conv-subtitle {
+  margin-bottom: 18px !important;
+  opacity: 0.85;
+}
+
+.conv-list {
+  margin-bottom: 18px;
+}
+
+.conv-list p {
+  margin-bottom: 4px !important;
+  line-height: 1.4;
+}
+
+.conv-description {
+  margin-top: 24px;
+  max-width: 900px;
+  line-height: 1.7;
+}
+
+.conv-strong {
+  font-weight: 600;
+}
+
+/* Textos Generales */
+.section-title {
+  color: var(--color-primary);
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin-bottom: 50px;
+}
+
+.scene p {
+  line-height: 1.9;
+  margin-bottom: 18px;
+  max-width: 900px;
+}
+
+.scene a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-normal);
+}
+
+.scene a:hover {
+  opacity: .6;
+}
+
+/* Proyectos */
+.project-block {
+  margin-top: 28px;
+}
+
+.subsection-title {
+  color: var(--color-primary);
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.project-block p {
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 2px;
+}
+
+/* Talleres */
+.taller-item {
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+
+.taller-item h3 {
+  color: var(--color-primary);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.taller-item p {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: all var(--transition-slow);
+}
+
+.taller-item:hover p {
+  opacity: 1;
+  max-height: 500px;
+  transform: translateY(0);
+}
+
+/* Compilados (Releases) */
+.release {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 900;
+}
+
+.release span {
+  font-weight: 900;
+  opacity: 1;
+}
+
+.release a {
+  font-weight: 700;
+}
+
+.release small {
+  font-weight: 700;
+  opacity: 1;
+  text-align: right;
+}
+
+.release-list {
+  gap: 12px;
+}
+
+/* Contacto */
+#contacto .contact-links {
+  gap: 12px;
+}
+
+#contacto .contact-links p,
+#contacto .contact-links a {
+  font-weight: 900;
+}
+
+#contacto p {
+  line-height: 1.4;
+}
+
+#contacto > .scene-scroll > p:first-of-type {
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 /* ==========================================================================
-   MOBILE
+   7. UI INTERACTIVE CONTROLS
+   ========================================================================== */
+/* Mobile Bar (Hidden by default) */
+.mobile-bar {
+  display: none;
+}
+
+/* Scroll Top Button */
+#scrollTopBtn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: var(--z-sidebar);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+#scrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#scrollTopBtn:hover {
+  transform: translateY(-3px);
+}
+
+/* Language Switch */
+.lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-lang);
+}
+
+.lang-switch button {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.lang-switch button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Pointer Events Overrides */
+.sidebar *,
+.mobile-bar,
+.mobile-bar * {
+  pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   8. MEDIA QUERIES (RESPONSIVE DEFAULTS)
    ========================================================================== */
 @media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: var(--z-sidebar);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .mobile-bar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--color-bg);
+    z-index: var(--z-mobile);
+  }
+
+  #mobile-menu-btn {
+    all: unset;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
 
   .stage {
     margin-left: 0;
   }
 
-  .sidebar {
-    bottom: 15px;
-    left: 15px;
+  .scene-scroll {
+    padding: 90px 24px 40px;
   }
 
   .hero-content {
-    padding: 40px;
+    align-items: flex-start;
   }
 
-  .scene-scroll {
-    padding: 40px;
+  .hero-title {
+    font-size: 20vw;
+  }
+
+  .taller-item p {
+    opacity: 1;
+    max-height: none;
+    transform: none;
+  }
+
+  .glb-layer model-viewer {
+    pointer-events: auto;
   }
 }

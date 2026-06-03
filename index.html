@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Cursor Effects -->
+  <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
   <title>Talleres Raros</title>
 
   <link rel="icon" href="images/LOGO_ORIGINALBLANCO.png">
@@ -12,507 +15,413 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Urbanist:wght@100..900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+  <link href="https://googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- UI GLOBAL -->
-<div class="lang-switch">
-  <button id="langBtn">EN</button>
-</div>
+  <!-- LANGUAGE SWITCH -->
+  <div class="lang-switch">
+    <button id="langBtn">EN</button>
+  </div>
 
-<!-- SIDEBAR -->
+  <!-- MOBILE BAR -->
+  <div class="mobile-bar">
+    <button id="mobile-menu-btn">MENU</button>
+  </div>
+
 <aside class="sidebar">
-
-  <button class="menu-toggle" id="menuToggle">☰</button>
 
   <div class="logo">
     <img src="images/talleresraros.png" alt="Talleres Raros">
   </div>
 
-  <nav class="nav-menu">
+  <button class="menu-toggle" id="menuToggle">☰</button>
 
+  <nav class="nav-menu">
     <a href="#hero" data-es="INICIO" data-en="HOME">INICIO</a>
     <a href="#convocatorias" data-es="CONVOCATORIAS" data-en="CALLS">CONVOCATORIAS</a>
     <a href="#proyecto" data-es="PROYECTO" data-en="PROJECT">PROYECTO</a>
     <a href="#talleres" data-es="TALLERES" data-en="WORKSHOPS">TALLERES</a>
     <a href="#compilados" data-es="COMPILADOS" data-en="RELEASES">COMPILADOS</a>
     <a href="#contacto" data-es="CONTACTO" data-en="CONTACT">CONTACTO</a>
-
   </nav>
 
 </aside>
+  <!-- MAIN -->
+  <main class="stage">
 
-<!-- MAIN -->
-<main class="stage">
+    <!-- HERO -->
+    <section class="scene active hero" id="hero">
 
-  <!-- HERO -->
-  <section class="scene active hero" id="hero">
+      <div class="glb-layer">
+        <model-viewer
+          src="GLB/3Dtalleres.glb"
+          camera-controls
+          auto-rotate
+          interaction-prompt="none"
+          scale="0.1 0.1 0.1"
+          camera-target="-3m 5m 0m"
+          camera-orbit="90deg 90deg 70m"
+          min-camera-orbit="auto auto 10%"
+          max-camera-orbit="auto auto 80%"
+          shadow-intensity="2"
+          exposure="1"
+          environment-image="neutral">
+        </model-viewer>
+      </div>
 
-    <div class="glb-layer">
-      <model-viewer
-        src="GLB/3Dtalleres.glb"
-        camera-controls
-        auto-rotate
-        interaction-prompt="none"
-        scale="0.1 0.1 0.1"
-        camera-target="-3m 5m 0m"
-        camera-orbit="90deg 90deg 70m"
-        min-camera-orbit="auto auto 10%"
-        max-camera-orbit="auto auto 80%"
-        shadow-intensity="2"
-        exposure="1"
-        environment-image="neutral">
-      </model-viewer>
-    </div>
+      <div class="hero-vignette"></div>
 
-    <div class="hero-vignette"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span>T</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>E</span><span>S</span>
+          <br>
+          <span>R</span><span>A</span><span>R</span><span>O</span><span>S</span>
+        </h1>
 
-    <div class="hero-content">
+        <p class="hero-sub"
+           data-es="prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses"
+           data-en="contemporary approaches for music creation ✧ workshops ✧ masterclasses">
+          prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses
+        </p>
+      </div>
+    </section>
+<!-- CONVOCATORIAS -->
+<section class="scene" id="convocatorias">
+  <div class="scene-scroll">
 
-      <h1 class="hero-title">
-        <span>T</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>E</span><span>S</span>
-        <br>
-        <span>R</span><span>A</span><span>R</span><span>O</span><span>S</span>
-      </h1>
+    <h2 class="section-title"
+        data-es="CONVOCATORIAS"
+        data-en="CALLS">
+      CONVOCATORIAS
+    </h2>
 
-      <p class="hero-sub"
-         data-es="prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses"
-         data-en="contemporary approaches for music creation ✧ workshops ✧ masterclasses">
-        prácticas contemporáneas para la creación musical ✧ workshops ✧ masterclasses
+    <h3 class="conv-title"
+        data-es="CONVOCATORIA 2026"
+        data-en="2026 CALL">
+      CONVOCATORIA 2026
+    </h3>
+
+    <div class="conv-list">
+
+      <p class="conv-strong"
+         data-es="TALLERES RAROS ㄨ RESIDENCIA PACÍFICA"
+         data-en="TALLERES RAROS ㄨ PACÍFICA RESIDENCY">
+        TALLERES RAROS ㄨ RESIDENCIA PACÍFICA
+      </p>
+
+      <p class="conv-strong">
+        ☪ <a target="_blank"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform"
+             data-es="Taller de Producción para Personas Trans"
+             data-en="Production Workshop for Trans People">
+          Taller de Producción para Personas Trans
+        </a>
+      </p>
+
+      <p class="conv-strong"
+         data-es="Taller de Composición Postdigital"
+         data-en="Postdigital Composition Workshop">
+        Taller de Composición Postdigital
+      </p>
+
+      <p class="conv-strong"
+         data-es="Taller de Letras"
+         data-en="Lyrics Workshop">
+        Taller de Letras
+      </p>
+
+      <p class="conv-strong"
+         data-es="Taller de Autoproducción Musical"
+         data-en="Music Self-Production Workshop">
+        Taller de Autoproducción Musical
+      </p>
+
+      <p class="conv-strong"
+         data-es="Masterclass Hypereikon (próximamente)"
+         data-en="Hypereikon Masterclass (coming soon)">
+        Masterclass Hypereikon (próximamente)
+      </p>
+
+      <p class="conv-strong"
+         data-es="Masterclass lilen (próximamente)"
+         data-en="lilen Masterclass (coming soon)">
+        Masterclass lilen (próximamente)
+      </p>
+
+      <p class="conv-strong">
+        ☪ <a target="_blank"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform"
+             data-es="Masterclass Javiera Electra"
+             data-en="Javiera Electra Masterclass">
+          Masterclass Javiera Electra
+        </a>
       </p>
 
     </div>
 
-  </section>
+    <p class="conv-description"
+       data-es="Talleres Raros presenta una serie de actividades gratuitas online y presenciales en el marco de su convocatoria 2026 en colaboración con PACÍFICA, programa de residencias y formación para personas FLINTA+ en la escena de la música electrónica, creado por los Goethe-Institut de Chile y Colombia y la Asociación Gremial IME Chile."
+       data-en="Talleres Raros presents a series of free online and in-person activities as part of its 2026 call in collaboration with PACÍFICA, a residency and training program for FLINTA+ people in the electronic music scene, created by the Goethe-Institut of Chile and Colombia and the IME Chile Trade Association.">
+      Talleres Raros presenta una serie de actividades gratuitas online y presenciales en el marco de su convocatoria 2026 en colaboración con PACÍFICA, programa de residencias y formación para personas FLINTA+ en la escena de la música electrónica, creado por los Goethe-Institut de Chile y Colombia y la Asociación Gremial IME Chile.
+    </p>
 
-  <!-- CONVOCATORIAS -->
-  <section class="scene" id="convocatorias">
+  </div>
+</section>
 
-    <div class="scene-scroll">
+<!-- PROYECTO -->
+<!-- PROYECTO -->
+<section class="scene" id="proyecto">
+  <div class="scene-scroll">
 
-      <h2 class="section-title"
-          data-es="CONVOCATORIAS"
-          data-en="CALLS">
-        CONVOCATORIAS
-      </h2>
+    <h2 class="section-title"
+        data-es="PROYECTO"
+        data-en="PROJECT">
+      PROYECTO
+    </h2>
 
-      <h3 class="conv-title"
-          data-es="CONVOCATORIA 2026"
-          data-en="2026 CALL">
-        CONVOCATORIA 2026
+    <p data-es="Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas."
+       data-en="Talleres Raros is a music education project developed in horizontal, accessible spaces outside traditional academic environments. Its pedagogical approach invites reflection and practice around the use of digital technologies in contemporary music composition and production.">
+      Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas.
+    </p>
+
+    <p data-es="Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos."
+       data-en="Directed and founded in 2019 by anthï and based in Chile, the project develops workshops and masterclasses that provide tools and perspectives to foster creative agency, creating a meeting space for multiple practices beyond specific musical genres.">
+      Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos.
+    </p>
+
+    <p data-es="Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea."
+       data-en="We intersect experimentation, collective learning, the creative potential of constraints and not-knowing-how, with a critical perspective on contemporary creation.">
+      Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea.
+    </p>
+
+    <p data-es="Orientamos una propuesta que amplíe el acceso a estas prácticas especialmente para la población LGBTTQIANB+."
+       data-en="We aim to expand access to these practices, especially for LGBTTQIANB+ communities.">
+      Orientamos una propuesta que amplíe el acceso a estas prácticas especialmente para la población LGBTTQIANB+.
+    </p>
+
+    <!-- EQUIPO DOCENTE -->
+    <div class="project-block">
+
+      <h3 class="subsection-title"
+          data-es="꧁ EQUIPO DOCENTE"
+          data-en="꧁ TEACHING TEAM">
+        ꧁ EQUIPO DOCENTE
       </h3>
 
-      <div class="conv-list">
-
-        <p class="conv-strong"
-           data-es="TALLERES RAROS ㄨ RESIDENCIA PACÍFICA"
-           data-en="TALLERES RAROS ㄨ PACÍFICA RESIDENCY">
-          TALLERES RAROS ㄨ RESIDENCIA PACÍFICA
-        </p>
-
-        <p class="conv-strong">
-          ☪ <a target="_blank"
-               href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform"
-               data-es="Taller de Producción para Personas Trans"
-               data-en="Production Workshop for Trans People">
-            Taller de Producción para Personas Trans
-          </a>
-        </p>
-
-        <p class="conv-strong"
-           data-es="Taller de Composición Postdigital"
-           data-en="Postdigital Composition Workshop">
-          Taller de Composición Postdigital
-        </p>
-
-        <p class="conv-strong"
-           data-es="Taller de Letras"
-           data-en="Lyrics Workshop">
-          Taller de Letras
-        </p>
-
-        <p class="conv-strong"
-           data-es="Taller de Autoproducción Musical"
-           data-en="Music Self-Production Workshop">
-          Taller de Autoproducción Musical
-        </p>
-
-        <p class="conv-strong"
-           data-es="Masterclass Hypereikon (próximamente)"
-           data-en="Hypereikon Masterclass (coming soon)">
-          Masterclass Hypereikon (próximamente)
-        </p>
-
-        <p class="conv-strong"
-           data-es="Masterclass lilen (próximamente)"
-           data-en="lilen Masterclass (coming soon)">
-          Masterclass lilen (próximamente)
-        </p>
-
-        <p class="conv-strong">
-          ☪ <a target="_blank"
-               href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform"
-               data-es="Masterclass Javiera Electra"
-               data-en="Javiera Electra Masterclass">
-            Masterclass Javiera Electra
-          </a>
-        </p>
-
-      </div>
-
-      <p class="conv-description"
-         data-es="Talleres Raros presenta una serie de actividades gratuitas online y presenciales en el marco de su convocatoria 2026 en colaboración con PACÍFICA, programa de residencias y formación para personas FLINTA+ en la escena de la música electrónica, creado por los Goethe-Institut de Chile y Colombia y la Asociación Gremial IME Chile."
-         data-en="Talleres Raros presents a series of free online and in-person activities as part of its 2026 call in collaboration with PACÍFICA, a residency and training program for FLINTA+ people in the electronic music scene, created by the Goethe-Institut of Chile and Colombia and the IME Chile Trade Association.">
-        Talleres Raros presenta una serie de actividades gratuitas online y presenciales en el marco de su convocatoria 2026 en colaboración con PACÍFICA, programa de residencias y formación para personas FLINTA+ en la escena de la música electrónica, creado por los Goethe-Institut de Chile y Colombia y la Asociación Gremial IME Chile.
+      <p>
+        <a target="_blank" href="https://anthi.neocities.org">anthï</a>
+        ✴︎
+        <a target="_blank" href="https://tatuara.net">Tatu Vergara</a>
       </p>
 
     </div>
 
-  </section>
+    <!-- INVITADES -->
+    <div class="project-block">
 
-  <!-- PROYECTO -->
-  <section class="scene" id="proyecto">
+      <h3 class="subsection-title"
+          data-es="꧁ DOCENTES INVITADES"
+          data-en="꧁ GUEST EDUCATORS">
+        ꧁ DOCENTES INVITADES
+      </h3>
 
-    <div class="scene-scroll">
-
-      <h2 class="section-title"
-          data-es="PROYECTO"
-          data-en="PROJECT">
-        PROYECTO
-      </h2>
-
-      <p data-es="Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas."
-         data-en="Talleres Raros is a music education project developed in horizontal, accessible spaces outside traditional academic environments. Its pedagogical approach invites reflection and practice around the use of digital technologies in contemporary music composition and production.">
-        Talleres Raros es un proyecto de enseñanza de la creación musical en espacios horizontales, accesibles y fuera de los ambientes académicos tradicionales. Su propuesta formativa invita a la reflexión y a la práctica en torno al uso de tecnologías digitales en la composición y producción musical contemporáneas.
+      <p data-es="2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon"
+         data-en="2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon">
+        2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon
       </p>
 
-      <p data-es="Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos."
-         data-en="Directed and founded in 2019 by anthï and based in Chile, the project implements workshops and masterclasses that provide tools and perspectives to foster creative agency, creating a meeting space for multiple practices beyond specific musical genres.">
-        Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entregan herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos.
+      <p data-es="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo"
+         data-en="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo">
+        2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo
       </p>
 
-      <p data-es="Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea."
-         data-en="We intersect experimentation, collective learning, the creative potential of constraints and not-knowing-how, with a critical perspective on contemporary creation.">
-        Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea.
+      <p data-es="2022 · Yaima Cat ✴︎ Niños Indigo"
+         data-en="2022 · Yaima Cat ✴︎ Niños Indigo">
+        2022 · Yaima Cat ✴︎ Niños Indigo
       </p>
 
-      <p data-es="Orientamos una propuesta que amplíe el acceso a estas prácticas especialmente para la población LGBTTQIANB+."
-         data-en="We aim to expand access to these practices, especially for LGBTTQIANB+ communities.">
-        Orientamos una propuesta que amplíe el acceso a estas prácticas especialmente para la población LGBTTQIANB+.
+      <p data-es="2021 · Dadalú ✴︎ Violeta Castillo"
+         data-en="2021 · Dadalú ✴︎ Violeta Castillo">
+        2021 · Dadalú ✴︎ Violeta Castillo
       </p>
 
-      <div class="project-block">
-
-        <h3 data-es="꧁ EQUIPO DOCENTE" data-en="꧁ TEACHING TEAM">
-          ꧁ EQUIPO DOCENTE
-        </h3>
-
-        <p>
-          <a target="_blank" href="https://anthi.neocities.org">anthï</a>
-          ✴︎
-          <a target="_blank" href="https://tatuara.net">Tatu Vergara</a>
-        </p>
-
-      </div>
-
-      <div class="project-block">
-
-        <h3 data-es="꧁ DOCENTES INVITADES" data-en="꧁ GUEST EDUCATORS">
-          ꧁ DOCENTES INVITADES
-        </h3>
-
-        <p data-es="2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon"
-           data-en="2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon">
-          2026 · Javiera Electra ✴︎ lilen ✴︎ Hypereikon
-        </p>
-
-        <p data-es="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo"
-           data-en="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo">
-          2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo
-        </p>
-
-        <p data-es="2022 · Yaima Cat ✴︎ Niños Indigo"
-           data-en="2022 · Yaima Cat ✴︎ Niños Indigo">
-          2022 · Yaima Cat ✴︎ Niños Indigo
-        </p>
-
-        <p data-es="2021 · Dadalú ✴︎ Violeta Castillo"
-           data-en="2021 · Dadalú ✴︎ Violeta Castillo">
-          2021 · Dadalú ✴︎ Violeta Castillo
-        </p>
-
-        <p data-es="2020 · vimvau"
-           data-en="2020 · vimvau">
-          2020 · vimvau
-        </p>
-
-      </div>
-
-      <div class="project-block">
-
-        <h3 data-es="DISEÑO GRÁFICO Y WEB" data-en="GRAPHIC & WEB DESIGN">
-          DISEÑO GRÁFICO Y WEB
-        </h3>
-
-        <p>
-          <a target="_blank"
-             href="https://instagram.com/inpar_"
-             data-es="@inpar"
-             data-en="@inpar">
-            @inpar
-          </a>
-        </p>
-
-      </div>
+      <p data-es="2020 · vimvau"
+         data-en="2020 · vimvau">
+        2020 · vimvau
+      </p>
 
     </div>
 
-  </section>
+    <!-- DISEÑO -->
+    <div class="project-block">
 
-  <!-- TALLERES -->
-  <section class="scene" id="talleres">
+      <h3 class="subsection-title"
+          data-es="DISEÑO GRÁFICO Y WEB"
+          data-en="GRAPHIC & WEB DESIGN">
+        DISEÑO GRÁFICO Y WEB
+      </h3>
 
-    <div class="scene-scroll">
-
-      <h2 class="section-title" data-es="TALLERES" data-en="WORKSHOPS">TALLERES</h2>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Autoproducción Musical"
-            data-en="Music Self-Production Workshop">
-          Taller de Autoproducción Musical
-        </h3>
-
-        <p data-es="Iniciación a la producción musical en formato digital de 4 meses de duración, que enfatiza la autodeterminación creativa, la exploración del error, el glitch y el uso de limitaciones como herramienta compositiva."
-           data-en="A 4-month introduction to digital music production focused on creative autonomy, experimentation, glitch aesthetics, and the use of limitations as a compositional tool.">
-          Iniciación a la producción musical en formato digital de 4 meses de duración...
-        </p>
-
-      </div>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Producción para Personas Trans"
-            data-en="Production Workshop for Trans People">
-          Taller de Producción para Personas Trans
-        </h3>
-
-        <p data-es="Espacio separatista de iniciación a la producción musical que plantea perspectivas críticas situadas desde identidades disidentes de género."
-           data-en="A safer, separatist space for music production offering a critical, situated perspective from gender-diverse identities.">
-          Espacio separatista de iniciación a la producción musical...
-        </p>
-
-      </div>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Composición Postdigital"
-            data-en="Postdigital Composition Workshop">
-          Taller de Composición Postdigital
-        </h3>
-
-        <p data-es="Laboratorio de creación sonora avanzado que entiende el computador como el instrumento más íntimo, explorando estrategias de composición que existen únicamente en entornos digitales."
-           data-en="An advanced sound creation lab that frames the computer as the most intimate instrument, exploring compositional strategies that exist only in digital environments.">
-          Laboratorio de creación sonora avanzado...
-        </p>
-
-      </div>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Creación Musical Digital"
-            data-en="Digital Music Creation Workshop">
-          Taller de Creación Musical Digital
-        </h3>
-
-        <p data-es="Iniciación a técnicas de composición específicas del entorno digital y el uso de herramientas de producción en un DAW."
-           data-en="An introduction to composition techniques specific to digital environments and the use of DAW production tools.">
-          Iniciación a técnicas de composición específicas...
-        </p>
-
-      </div>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Canciones Raras"
-            data-en="Strange Songs Workshop">
-          Taller de Canciones Raras
-        </h3>
-
-        <p data-es="Laboratorio de composición que habita las fisuras entre lo pop y lo experimental."
-           data-en="A composition lab that inhabits the cracks between pop and experimental music.">
-          Laboratorio de composición...
-        </p>
-
-      </div>
-
-      <div class="taller-item">
-
-        <h3 data-es="Taller de Letras"
-            data-en="Lyrics Workshop">
-          Taller de Letras
-        </h3>
-
-        <p data-es="Laboratorio de escritura en torno al juego, el lenguaje y los hallazgos inesperados, utilizando memoria digital y autoficción."
-           data-en="A writing lab focused on play, language, and unexpected discoveries, using digital memory and autofiction.">
-          Laboratorio de escritura en torno al juego...
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- COMPILADOS -->
-  <section class="scene" id="compilados">
-
-    <div class="scene-scroll">
-
-      <h2 class="section-title" data-es="COMPILADOS" data-en="RELEASES">COMPILADOS</h2>
-
-      <div class="release">
-        <span>TR011</span>
+      <p>
         <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011"
-           data-es="Me he perdido en muchas partes"
-           data-en="I got lost in many parts">
-          Me he perdido en muchas partes
+           href="https://instagram.com/inpar_"
+           data-es="@inpar"
+           data-en="@inpar">
+          @inpar
         </a>
-        <small>2025</small>
-      </div>
-
-      <div class="release">
-        <span>TR010</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010"
-           data-es="El viejo, la flor y la luz"
-           data-en="The old man, the flower and the light">
-          El viejo, la flor y la luz
-        </a>
-        <small>2024</small>
-      </div>
-
-      <div class="release">
-        <span>TR009</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009"
-           data-es="Super Sayonara"
-           data-en="Super Sayonara">
-          Super Sayonara
-        </a>
-        <small>2023</small>
-      </div>
-
-      <div class="release">
-        <span>TR008</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/martes-raro-tr008"
-           data-es="Martes raro"
-           data-en="Strange Tuesday">
-          Martes raro
-        </a>
-        <small>2023</small>
-      </div>
-
-      <div class="release">
-        <span>TR007</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007"
-           data-es="Creo que se volvió personal"
-           data-en="I think it got personal">
-          Creo que se volvió personal
-        </a>
-        <small>2022</small>
-      </div>
-
-      <div class="release">
-        <span>TR006</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006"
-           data-es="Subi Dubi"
-           data-en="Subi Dubi">
-          Subi Dubi
-        </a>
-        <small>2022</small>
-      </div>
-
-      <div class="release">
-        <span>TR005</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005"
-           data-es="Invítame un café (y hazme el amor)"
-           data-en="Invite me for coffee (and make love to me)">
-          Invítame un café (y hazme el amor)
-        </a>
-        <small>2021</small>
-      </div>
-
-      <div class="release">
-        <span>TR004</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004"
-           data-es="Ya, hazte famosa"
-           data-en="Go, get famous already">
-          Ya, hazte famosa
-        </a>
-        <small>2021</small>
-      </div>
-
-      <div class="release">
-        <span>TR003</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003"
-           data-es="Irresponsabilidad astral"
-           data-en="Astral irresponsibility">
-          Irresponsabilidad astral
-        </a>
-        <small>2020</small>
-      </div>
-
-      <div class="release">
-        <span>TR002</span>
-        <a target="_blank"
-           href="http://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002"
-           data-es="No puedo salir de esta pieza"
-           data-en="I can't get out of this room">
-          No puedo salir de esta pieza
-        </a>
-        <small>2020</small>
-      </div>
-
-      <div class="release">
-        <span>TR001</span>
-        <a target="_blank"
-           href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001"
-           data-es="Podi quedarte toda la vida en ese miedo"
-           data-en="You could stay forever in that fear">
-          Podi quedarte toda la vida en ese miedo
-        </a>
-        <small>2020</small>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- CONTACTO -->
-  <section class="scene" id="contacto">
-
-    <div class="scene-scroll">
-
-      <h2 class="section-title" data-es="CONTACTO" data-en="CONTACT">CONTACTO</h2>
-
-      <p data-es="stay ⋆ friends" data-en="stay ⋆ friends">
-        stay ⋆ friends
       </p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- TALLERES -->
+<section class="scene" id="talleres">
+  <div class="scene-scroll">
+
+    <h2 class="section-title"
+        data-es="TALLERES"
+        data-en="WORKSHOPS">
+      TALLERES
+    </h2>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Autoproducción Musical"
+          data-en="Music Self-Production Workshop">
+        Taller de Autoproducción Musical
+      </h3>
+
+      <p data-es="Iniciación a la producción musical en formato digital de 4 meses de duración, que enfatiza la autodeterminación creativa, la exploración del error, el glitch y el uso de limitaciones como herramienta compositiva."
+         data-en="A 4-month introduction to digital music production focused on creative autonomy, experimentation, glitch aesthetics, and the use of limitations as a compositional tool.">
+        Iniciación a la producción musical en formato digital de 4 meses de duración, que enfatiza la autodeterminación creativa, la exploración del error, el glitch y el uso de limitaciones como herramienta compositiva.
+      </p>
+
+    </div>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Producción para Personas Trans"
+          data-en="Production Workshop for Trans People">
+        Taller de Producción para Personas Trans
+      </h3>
+
+      <p data-es="Espacio separatista de iniciación a la producción musical que plantea perspectivas críticas situadas desde identidades disidentes de género."
+         data-en="A safer, separatist space for music production offering a critical, situated perspective from gender-diverse identities.">
+        Espacio separatista de iniciación a la producción musical que plantea perspectivas críticas situadas desde identidades disidentes de género.
+      </p>
+
+    </div>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Composición Postdigital"
+          data-en="Postdigital Composition Workshop">
+        Taller de Composición Postdigital
+      </h3>
+
+      <p data-es="Laboratorio de creación sonora avanzado que entiende el computador como el instrumento más íntimo, explorando estrategias de composición que existen únicamente en entornos digitales."
+         data-en="An advanced sound creation lab that frames the computer as the most intimate instrument, exploring compositional strategies that exist only in digital environments.">
+        Laboratorio de creación sonora avanzado que pone al computador como el “instrumento más íntimo”, explorando estrategias de composición que sólo existen en él.
+      </p>
+
+    </div>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Creación Musical Digital"
+          data-en="Digital Music Creation Workshop">
+        Taller de Creación Musical Digital
+      </h3>
+
+      <p data-es="Iniciación a técnicas de composición específicas del entorno digital y el uso de herramientas de producción en un DAW."
+         data-en="An introduction to composition techniques specific to digital environments and the use of DAW production tools.">
+        Iniciación a técnicas de composición específicas del entorno digital y las herramientas de producción de un DAW.
+      </p>
+
+    </div>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Canciones Raras"
+          data-en="Strange Songs Workshop">
+        Taller de Canciones Raras
+      </h3>
+
+      <p data-es="Laboratorio de composición que habita las fisuras entre lo pop y lo experimental."
+         data-en="A composition lab that inhabits the cracks between pop and experimental music.">
+        Laboratorio de composición que habita en las fisuras de las categorías de lo pop y lo experimental.
+      </p>
+
+    </div>
+
+    <div class="taller-item">
+
+      <h3 data-es="Taller de Letras"
+          data-en="Lyrics Workshop">
+        Taller de Letras
+      </h3>
+
+      <p data-es="Laboratorio de escritura en torno al juego, el lenguaje y los hallazgos inesperados, utilizando memoria digital y autoficción."
+         data-en="A writing lab focused on play, language, and unexpected discoveries, using digital memory and autofiction.">
+        Laboratorio de escritura en torno al juego y los hallazgos inesperados de nuestro propio lenguaje, utilizando la memoria digital y la autoficción.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- COMPILADOS -->
+    <section class="scene" id="compilados">
+      <div class="scene-scroll">
+        <h2 class="section-title"
+        data-es="COMPILADOS"
+        data-en="RELEASES">
+      COMPILADOS
+    </h2>
+
+        <div class="release-list">
+          <div class="release"><span>TR011</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">Me he perdido en muchas partes</a> <small>2025</small></div>
+          <div class="release"><span>TR010</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> <small>2024</small></div>
+          <div class="release"><span>TR009</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> <small>2023</small></div>
+          <div class="release"><span>TR008</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> <small>2023</small></div>
+          <div class="release"><span>TR007</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> <small>2022</small></div>
+          <div class="release"><span>TR006</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> <small>2022</small></div>
+          <div class="release"><span>TR005</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café (y hazme el amor)</a> <small>2021</small></div>
+          <div class="release"><span>TR004</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya, hazte famosa</a> <small>2021</small></div>
+          <div class="release"><span>TR003</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> <small>2020</small></div>
+          <div class="release"><span>TR002</span> <a target="_blank" href="http://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> <small>2020</small></div>
+          <div class="release"><span>TR001</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida en ese miedo</a> <small>2020</small></div>
+        </div>
+      </div>
+    </section>
+
+
+<!-- CONTACTO -->
+<section class="scene" id="contacto">
+  <div class="scene-scroll">
+
+    <h2 class="section-title"
+        data-es="CONTACTO"
+        data-en="CONTACT">
+      CONTACTO
+    </h2>
+
+    <p data-es="stay ⋆ friends"
+       data-en="stay ⋆ friends">
+      stay ⋆ friends
+    </p>
+
+    <div class="contact-links">
 
       <p>
         ✉ <a href="mailto:talleresraros@gmail.com">talleresraros@gmail.com</a>
@@ -538,11 +447,14 @@
 
     </div>
 
-  </section>
+  </div>
+</section>
 
-</main>
+  </main>
 
-<script src="script.js"></script>
+  <button id="scrollTopBtn">↑</button>
+
+  <script src="script.js"></script>
 
 </body>
 </html>

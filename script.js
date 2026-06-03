@@ -1,3 +1,7 @@
+/* =========================
+   CLICK FIX
+========================= */
+document.addEventListener("click", () => {}, { passive: true });
 
 /* =========================
    ELEMENTOS
@@ -5,90 +9,74 @@
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 const sidebar = document.querySelector(".sidebar");
+const mobileBtn = document.getElementById("mobile-menu-btn");
 const desktopToggle = document.getElementById("menuToggle");
-const langBtn = document.getElementById("langBtn");
 
 /* =========================
    SCENES SYSTEM
 ========================= */
 function showScene(id) {
-  let found = false;
-
-  scenes.forEach(scene => {
-    scene.classList.remove("active");
-  });
-
+  scenes.forEach(scene => scene.classList.remove("active"));
   const target = document.querySelector(id);
-
-  if (target) {
-    target.classList.add("active");
-    found = true;
-  }
-
-  if (!found) {
-    document.querySelector("#hero")?.classList.add("active");
-  }
+  if (target) target.classList.add("active");
 }
 
-/* =========================
-   NAV LINKS
-========================= */
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
+    showScene(link.getAttribute("href"));
 
-    const targetId = link.getAttribute("href");
-    showScene(targetId);
-
-    // cerrar menú (COHERENTE CON CSS: .sidebar.open)
+    sidebar?.classList.remove("active");
     sidebar?.classList.remove("open");
   });
 });
 
 /* =========================
-   MENU TOGGLE (SIDEBAR)
+   MOBILE MENU
 ========================= */
-function toggleSidebar(e) {
-  e?.stopPropagation();
-  sidebar?.classList.toggle("open");
+if (mobileBtn && sidebar) {
+  mobileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("active");
+  });
 }
 
-desktopToggle?.addEventListener("click", toggleSidebar);
+/* =========================
+   DESKTOP TOGGLE MENU
+========================= */
+if (desktopToggle && sidebar) {
+  desktopToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("open");
+  });
+}
 
 /* =========================
-   CLOSE ON ESC
+   CLOSE EVENTS
 ========================= */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
+    sidebar?.classList.remove("active");
     sidebar?.classList.remove("open");
   }
 });
 
-/* =========================
-   CLICK OUTSIDE SIDEBAR (MOBILE)
-========================= */
 document.addEventListener("click", (e) => {
-  if (!sidebar) return;
-
-  const isMobile = window.innerWidth <= 900;
-  if (!isMobile) return;
-
-  const clickedInside = sidebar.contains(e.target);
-  const clickedButton = e.target === desktopToggle;
-
-  if (!clickedInside && !clickedButton) {
-    sidebar.classList.remove("open");
+  if (window.innerWidth <= 900 && sidebar?.classList.contains("active")) {
+    if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
+      sidebar.classList.remove("active");
+    }
   }
 });
 
 /* =========================
-   HERO LETTER EFFECT
+   HERO TEXT EFFECT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = { x: 0, y: 0 };
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
   const states = Array.from(letters).map(letter => ({
     el: letter,
@@ -105,7 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-  }, { passive: true });
+  });
 
   function animate() {
     states.forEach(state => {
@@ -119,7 +107,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (dist < maxDist) {
         const force = 1 - dist / maxDist;
-
         state.tx = dx * force * 0.35;
         state.ty = dy * force * 0.35;
         state.trot = state.tx * 0.6;
@@ -150,27 +137,24 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   CURSOR EFFECT (SAFE)
+   CURSOR EFFECT
 ========================= */
 window.addEventListener("load", () => {
   setTimeout(() => {
     if (!window.cursoreffects?.rainbowCursor) return;
 
-    try {
-      new window.cursoreffects.rainbowCursor({
-        length: 20,
-        colors: ["#ba7dff", "#ff4ecd", "#00f0ff"]
-      });
-    } catch (err) {
-      console.warn("Cursor effect error:", err);
-    }
-  }, 800);
+    new window.cursoreffects.rainbowCursor({
+      length: 25,
+      colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
+    });
+  }, 500);
 });
 
 /* =========================
    LANGUAGE TOGGLE
 ========================= */
 let currentLang = "es";
+const btn = document.getElementById("langBtn");
 
 function setLanguage(lang) {
   document.querySelectorAll("[data-es]").forEach(el => {
@@ -178,15 +162,13 @@ function setLanguage(lang) {
     if (text) el.textContent = text;
   });
 
-  if (langBtn) {
-    langBtn.textContent = lang === "es" ? "EN" : "ES";
-  }
-
+  btn.textContent = lang === "es" ? "EN" : "ES";
   currentLang = lang;
+
   localStorage.setItem("lang", lang);
 }
 
-langBtn?.addEventListener("click", () => {
+btn?.addEventListener("click", () => {
   setLanguage(currentLang === "es" ? "en" : "es");
 });
 
