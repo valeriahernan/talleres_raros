@@ -181,265 +181,312 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //CURSOR//
 
+import {
+  Renderer,
+  Transform,
+  Program,
+  Mesh,
+  Vec2,
+  Post,
+  Geometry,
+  Texture
+} from "https://esm.sh/ogl";
 
+const vertex = /* glsl */ `
+  precision highp float;
 
-var colour="random"; // "random" can be replaced with any valid colour ie: "red"...
-var sparkles=100;// increase of decrease for number of sparkles falling
+  attribute vec2 uv;
+  attribute vec2 position;
+  attribute vec2 offset;
+  attribute vec3 color;
+  attribute float radius;
 
-var x=ox=400;
-var y=oy=300;
-var swide=800;
-var shigh=600;
-var sleft=sdown=0;
-var tiny=new Array();
-var star=new Array();
-var starv=new Array();
-var starx=new Array();
-var stary=new Array();
-var tinyx=new Array();
-var tinyy=new Array();
-var tinyv=new Array();
+  uniform vec2 uResolution;
 
-colours=new Array('#ff0000','#00ff00','#ffffff','#ff00ff','#ffa500','#ffff00','#00ff00','#ffffff','ff00ff')
+  varying vec2 vUv;
+  varying vec3 vColor;
 
-n = 10;
-y = 0;
-x = 0;
-n6=(document.getElementById&&!document.all);
-ns=(document.layers);
-ie=(document.all);
-d=(ns||ie)?'document.':'document.getElementById("';
-a=(ns||n6)?'':'all.';
-n6r=(n6)?'")':'';
-s=(ns)?'':'.style';
+  void main() {
+      vUv = uv;
+      vColor = color;
+      vec2 pos = position * radius;
+      vec2 aspect = vec2(uResolution.y / uResolution.x, 1.0);
+      pos *= aspect;
+      pos += offset;
+      gl_Position = vec4(pos, 0., 1.0);
+  }
+`;
 
-if (ns){
-	for (i = 0; i < n; i++)
-		document.write('<layer name="dots'+i+'" top=0 left=0 width='+i/2+' height='+i/2+' bgcolor=#ff0000></layer>');
+const fragment = /* glsl */ `
+precision highp float;
+
+varying vec2 vUv;
+varying vec3 vColor;
+
+void main() {
+    float dist = distance(vUv, vec2(0.5, 0.5));
+
+    if (dist > 0.5) {
+      discard;
+    }
+
+    vec3 color = vColor;
+
+    gl_FragColor = vec4(color, 1.0);
+}
+`;
+
+const compositeFragment = /* glsl */ `
+precision mediump float;
+
+uniform sampler2D tMap;
+uniform sampler2D tText;
+uniform vec2 uResolution;
+uniform vec2 uMouse;
+uniform float uTime;
+
+varying vec2 vUv;
+
+float boxSDF(vec2 p, vec2 b) {
+  vec2 d = abs(p) - b;
+  return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 }
 
-if (ie)
-	document.write('<div id="con" style="position:absolute;top:0px;left:0px"><div style="position:relative">');
+void main() {
+    vec2 uv = vUv;
+    vec2 m = uMouse * 0.03;
+    vec2 center = vec2(0.5, 0.5) + m;
+    vec2 halfSize = vec2(0.3, 0.35);
+    float dist = boxSDF(uv - center, halfSize);
+    float mask = step(0.0, -dist);
 
-if (ie||n6){
-	for (i = 0; i < n; i++)
-		document.write('<div id="dots'+i+'" style="position:absolute;top:0px;left:0px;width:'+i/2+'px;height:'+i/2+'px;background:#ff0000;font-size:'+i/2+'"></div>');
+    vec3 n = texture2D(tText, (uv - center + 0.5) * uResolution * 1.5 / 1024.).rgb;
+    vec2 displace = n.xy * 2.0 - 1.0;
+
+    uv += displace * 0.1 * mask;
+
+    vec4 c = texture2D(tMap, uv);
+
+    float alphaMask = smoothstep(0.0, 0.01, c.a);
+
+    float gray = dot(n, vec3(0.675, 0.72, 0.41));
+    vec3 grayColor = vec3(gray);
+
+    vec3 finalColor = mix(c.rgb, grayColor, mask * (1. - alphaMask));
+    
+    finalColor = mix(finalColor, 1. - grayColor, mask * alphaMask * 0.015);
+
+    gl_FragColor = vec4(finalColor, c.a);
 }
+`;
 
-if (ie)
-	document.write('</div></div>');
-(ns||n6)?window.captureEvents(Event.MOUSEMOVE):0;
+{
+  const renderer = new Renderer({
+    dpr: devicePixelRatio,
+    antialias: true,
+    alpha: false
+  });
+  const gl = renderer.gl;
+  const resolution = { value: new Vec2() };
+  const time = { value: 0 };
+  const bloomResolution = { value: new Vec2() };
+  document.querySelector("[data-app-container]").appendChild(gl.canvas);
+  gl.clearColor(255, 255, 255, 0);
 
-function Mouse(evnt){
+  const texture = new Texture(gl, {
+    wrapT: gl.REPEAT,
+    wrapR: gl.REPEAT,
+    wrapS: gl.REPEAT
+  });
+  const img = new Image();
+  img.onload = () => (texture.image = img);
+  img.crossOrigin = "";
+  img.src = "https://i.postimg.cc/zBTc6hnC/Glass-Vintage-001-normal.jpg";
 
-	y = (ns||n6)?evnt.pageY+4 - window.pageYOffset:event.y+4;
-	x = (ns||n6)?evnt.pageX+1:event.x+1;
+  const scene = new Transform();
+
+  function resize() {
+    const { innerWidth: width, innerHeight: height } = window;
+    renderer.setSize(width, height);
+
+    resolution.value.set(width, height);
+  }
+  window.addEventListener("resize", resize, false);
+
+  function generateRainbowColors(numColors) {
+    let colors = [];
+    for (let i = 0; i < numColors; i++) {
+      let h = i / numColors; // hue from 0 to 1
+      let s = 0.55; // full saturation
+      let v = 0.85; // full brightness
+      colors.push(hsvToRgb(h, s, v));
+    }
+    return colors;
+  }
+
+  // HSV to RGB conversion in JS
+  function hsvToRgb(h, s, v) {
+    let r, g, b;
+    let i = Math.floor(h * 6);
+    let f = h * 6 - i;
+    let p = v * (1 - s);
+    let q = v * (1 - f * s);
+    let t = v * (1 - (1 - f) * s);
+    switch (i % 6) {
+      case 0:
+        r = v;
+        g = t;
+        b = p;
+        break;
+      case 1:
+        r = q;
+        g = v;
+        b = p;
+        break;
+      case 2:
+        r = p;
+        g = v;
+        b = t;
+        break;
+      case 3:
+        r = p;
+        g = q;
+        b = v;
+        break;
+      case 4:
+        r = t;
+        g = p;
+        b = v;
+        break;
+      case 5:
+        r = v;
+        g = p;
+        b = q;
+        break;
+    }
+    return [r, g, b];
+  }
+
+  let colors = generateRainbowColors(50);
+  const count = colors.length;
+
+  const mouse = new Vec2();
+  const smoothMouse = new Vec2();
+  const offset = new Float32Array(count * 2).fill(-0.75);
+  const radius = new Float32Array(count);
+  const color = new Float32Array(count * 3);
+
+  const program = new Program(gl, {
+    vertex,
+    fragment,
+    uniforms: {
+      uResolution: resolution
+    }
+  });
+
+  colors.forEach((c, i) => {
+    color.set(c, i * 3);
+    radius[i] = 0.1;
+  });
+
+  const geometry = new Geometry(gl, {
+    position: {
+      size: 2,
+      data: new Float32Array([-1, 1, -1, -1, 1, 1, -1, -1, 1, -1, 1, 1])
+    },
+    uv: {
+      size: 2,
+      data: new Float32Array([0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1])
+    },
+    color: { instanced: 1, size: 3, data: color },
+    offset: { instanced: 1, size: 2, data: offset },
+    radius: { instanced: 1, size: 1, data: radius }
+  });
+
+  const mesh = new Mesh(gl, { geometry, program });
+
+  scene.addChild(mesh);
+
+  resize();
+
+  const postComposite = new Post(gl);
+  postComposite.addPass({
+    fragment: compositeFragment,
+    uniforms: {
+      uTime: time,
+      uMouse: { value: smoothMouse },
+      uResolution: resolution,
+      tText: { value: texture }
+    }
+  });
+
+  requestAnimationFrame(update);
+  function update(t) {
+    requestAnimationFrame(update);
+
+    time.value = t;
+
+    smoothMouse[0] += (mouse.x - smoothMouse[0]) * 0.1;
+    smoothMouse[1] += (mouse.y - smoothMouse[1]) * 0.1;
+
+    offset[0] += (mouse.x - offset[0]) * 0.2;
+    offset[1] += (mouse.y - offset[1]) * 0.2;
+
+    for (let i = 2; i < count * 2; i += 2) {
+      offset[i] += (offset[i - 2] - offset[i]) * 0.5;
+      offset[i + 1] += (offset[i - 1] - offset[i + 1]) * 0.5;
+    }
+
+    geometry.attributes.offset.needsUpdate = true;
+
+    postComposite.render({ scene });
+  }
+
+  function onMouseMove(e) {
+    mouse.set(
+      (e.clientX / gl.renderer.width) * 2 - 1,
+      (e.clientY / gl.renderer.height) * -2 + 1,
+      0
+    );
+  }
+
+  window.addEventListener(
+    "pointermove",
+    (e) => {
+      cancelManualMove();
+      onMouseMove(e);
+      window.addEventListener("pointermove", onMouseMove);
+    },
+    {
+      once: true
+    }
+  );
+
+  function onTouch(e) {
+    onMouseMove(e.touches[0]);
+  }
+  window.addEventListener("touchmove", onTouch);
+  window.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+
+    cancelManualMove();
+    onMouseMove(e.touches[0]);
+  });
+
+  let mID;
+  let tOffset = Math.random() * 1000;
+  function manualMouseMove(t) {
+    mID = requestAnimationFrame(manualMouseMove);
+
+    t *= 0.001;
+    t += tOffset;
+
+    mouse.x = Math.cos(t * 1.5) * Math.cos(t * 0.5);
+    mouse.y = Math.sin(t * 1.7) * Math.sin(t * 0.6);
+  }
+  function cancelManualMove() {
+    cancelAnimationFrame(mID);
+    mID = 0;
+  }
+  mID = requestAnimationFrame(manualMouseMove);
 }
-
-(ns)?window.onMouseMove=Mouse:document.onmousemove=Mouse;
-
-function animate(){
-
-	o=(ns||n6)?window.pageYOffset:0;
-
-	if (ie)con.style.top=document.body.scrollTop + 'px';
-
-	for (i = 0; i < n; i++){
-
-		var temp1 = eval(d+a+"dots"+i+n6r+s);
-
-		randcolours = colours[Math.floor(Math.random()*colours.length)];
-
-		(ns)?temp1.bgColor = randcolours:temp1.background = randcolours; 
-
-		if (i < n-1){
-
-			var temp2 = eval(d+a+"dots"+(i+1)+n6r+s);
-			temp1.top = parseInt(temp2.top) + 'px';
-			temp1.left = parseInt(temp2.left) + 'px';
-
-		} 
-		else{
-
-			temp1.top = y+o + 'px';
-			temp1.left = x + 'px';
-		}
-	}
-
-	setTimeout("animate()",10);
-}
-
-animate();
-
-window.onload=function() { if (document.getElementById) {
-	var i, rats, rlef, rdow;
-	for (var i=0; i<sparkles; i++) {
-		var rats=createDiv(3, 3);
-		rats.style.visibility="hidden";
-		rats.style.zIndex="999";
-		document.body.appendChild(tiny[i]=rats);
-		starv[i]=0;
-		tinyv[i]=0;
-		var rats=createDiv(5, 5);
-		rats.style.backgroundColor="transparent";
-		rats.style.visibility="hidden";
-		rats.style.zIndex="999";
-		var rlef=createDiv(1, 5);
-		var rdow=createDiv(5, 1);
-		rats.appendChild(rlef);
-		rats.appendChild(rdow);
-		rlef.style.top="2px";
-		rlef.style.left="0px";
-		rdow.style.top="0px";
-		rdow.style.left="2px";
-		document.body.appendChild(star[i]=rats);
-	}
-	set_width();
-	sparkle();
-}}
-
-function sparkle() {
-	var c;
-	if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
-		ox=x;
-		oy=y;
-		for (c=0; c<sparkles; c++) if (!starv[c]) {
-			star[c].style.left=(starx[c]=x)+"px";
-			star[c].style.top=(stary[c]=y+1)+"px";
-			star[c].style.clip="rect(0px, 5px, 5px, 0px)";
-			star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
-			star[c].style.visibility="visible";
-			starv[c]=50;
-			break;
-		}
-	}
-	for (c=0; c<sparkles; c++) {
-		if (starv[c]) update_star(c);
-		if (tinyv[c]) update_tiny(c);
-	}
-	setTimeout("sparkle()", 40);
-}
-
-function update_star(i) {
-	if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
-	if (starv[i]) {
-		stary[i]+=1+Math.random()*3;
-		starx[i]+=(i%5-2)/5;
-		if (stary[i]<shigh+sdown) {
-			star[i].style.top=stary[i]+"px";
-			star[i].style.left=starx[i]+"px";
-		}
-		else {
-			star[i].style.visibility="hidden";
-			starv[i]=0;
-			return;
-		}
-	}
-	else {
-		tinyv[i]=50;
-		tiny[i].style.top=(tinyy[i]=stary[i])+"px";
-		tiny[i].style.left=(tinyx[i]=starx[i])+"px";
-		tiny[i].style.width="2px";
-		tiny[i].style.height="2px";
-		tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
-		star[i].style.visibility="hidden";
-		tiny[i].style.visibility="visible"
-	}
-}
-
-function update_tiny(i) {
-	if (--tinyv[i]==25) {
-		tiny[i].style.width="1px";
-		tiny[i].style.height="1px";
-	}
-	if (tinyv[i]) {
-		tinyy[i]+=1+Math.random()*3;
-		tinyx[i]+=(i%5-2)/5;
-		if (tinyy[i]<shigh+sdown) {
-			tiny[i].style.top=tinyy[i]+"px";
-			tiny[i].style.left=tinyx[i]+"px";
-		}
-		else {
-			tiny[i].style.visibility="hidden";
-			tinyv[i]=0;
-			return;
-		}
-	}
-	else tiny[i].style.visibility="hidden";
-}
-
-document.onmousemove=mouse;
-function mouse(e) {
-	if (e) {
-		y=e.pageY;
-		x=e.pageX;
-	}
-	else {
-		set_scroll();
-		y=event.y+sdown;
-		x=event.x+sleft;
-	}
-}
-
-window.onscroll=set_scroll;
-function set_scroll() {
-	if (typeof(self.pageYOffset)=='number') {
-		sdown=self.pageYOffset;
-		sleft=self.pageXOffset;
-	}
-	else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
-		sdown=document.body.scrollTop;
-		sleft=document.body.scrollLeft;
-	}
-	else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
-		sleft=document.documentElement.scrollLeft;
-		sdown=document.documentElement.scrollTop;
-	}
-	else {
-		sdown=0;
-		sleft=0;
-	}
-}
-
-window.onresize=set_width;
-function set_width() {
-	var sw_min=999999;
-	var sh_min=999999;
-	if (document.documentElement && document.documentElement.clientWidth) {
-		if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
-		if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
-	}
-	if (typeof(self.innerWidth)=='number' && self.innerWidth) {
-		if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
-		if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
-	}
-	if (document.body.clientWidth) {
-		if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
-		if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
-	}
-	if (sw_min==999999 || sh_min==999999) {
-		sw_min=800;
-		sh_min=600;
-	}
-	swide=sw_min;
-	shigh=sh_min;
-}
-
-function createDiv(height, width) {
-	var div=document.createElement("div");
-	div.style.position="absolute";
-	div.style.height=height+"px";
-	div.style.width=width+"px";
-	div.style.overflow="hidden";
-	return (div);
-}
-
-function newColour() {
-	var c=new Array();
-	c[0]=255;
-	c[1]=Math.floor(Math.random()*256);
-	c[2]=Math.floor(Math.random()*(256-c[1]/2));
-	c.sort(function(){return (0.5 - Math.random());});
-	return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
-}
-// ]]>
