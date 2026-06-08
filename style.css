@@ -77,9 +77,9 @@ canvas {
 .nav-menu {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .nav-menu a {
