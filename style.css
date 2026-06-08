@@ -25,7 +25,6 @@
 /* ==========================================================================
    2. RESET & BASE STYLES
    ========================================================================== */
-
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +37,6 @@ body {
   overflow: hidden;
   height: 100vh;
   cursor: auto;
-  font-family: var(--font-sans);
 }
 
 canvas {
@@ -68,15 +66,13 @@ canvas {
 .logo img {
   width: 120px;
   display: block;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .nav-menu {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: auto;
-  margin-bottom: auto;
   gap: 12px;
 }
 
@@ -171,10 +167,10 @@ canvas {
   position: relative;
   z-index: 50;
   height: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
+  padding: 80px;
   font-family: var(--font-sans);
   pointer-events: none;
 }
@@ -192,7 +188,7 @@ canvas {
 }
 
 .hero-title span {
-  
+  display: inline-block;
   transition: transform var(--transition-fast), filter 0.2s ease-out;
   will-change: transform;
 }
@@ -207,7 +203,7 @@ canvas {
 }
 
 .hero-title .word:first-child {
-  margin-bottom: 15px; /* 👈 AQUÍ controlas el espacio */
+  margin-bottom: 5px; /* 👈 AQUÍ controlas el espacio */
 }
 .hero-title span:hover {
   filter: none !important;
