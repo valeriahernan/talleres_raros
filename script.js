@@ -139,6 +139,16 @@ window.addEventListener("DOMContentLoaded", () => {
 /* =========================
    CURSOR EFFECT
 ========================= */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    if (!window.cursoreffects?.rainbowCursor) return;
+
+    new window.cursoreffects.rainbowCursor({
+      length: 25,
+      colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
+    });
+  }, 500);
+});
 
 /* =========================
    LANGUAGE TOGGLE
