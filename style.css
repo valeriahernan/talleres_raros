@@ -530,6 +530,7 @@ canvas {
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999999;
+  display: none !important;
 }
 
 #cursorTrail {
