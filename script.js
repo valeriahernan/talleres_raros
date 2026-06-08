@@ -137,20 +137,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   CURSOR EFFECT
-========================= */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    if (!window.cursoreffects?.rainbowCursor) return;
-
-    new window.cursoreffects.rainbowCursor({
-      length: 25,
-      colors: ["#ba7dff", "#ff4ecd", "#00f0ff", "#ffffff"]
-    });
-  }, 500);
-});
-
-/* =========================
    LANGUAGE TOGGLE
 ========================= */
 let currentLang = "es";
@@ -175,4 +161,49 @@ btn?.addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("lang");
   if (saved) setLanguage(saved);
+});
+
+/* =========================
+   CUSTOM CURSOR
+========================= */
+const cursor = document.querySelector(".cursor");
+const follower = document.querySelector(".cursor-follower");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+let followerX = mouseX;
+let followerY = mouseY;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  cursor.style.left = mouseX + "px";
+  cursor.style.top = mouseY + "px";
+});
+
+function animateCursor() {
+  followerX += (mouseX - followerX) * 0.15;
+  followerY += (mouseY - followerY) * 0.15;
+
+  follower.style.left = followerX + "px";
+  follower.style.top = followerY + "px";
+
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+/* Hover links */
+document.querySelectorAll("a, button").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    follower.style.transform =
+      "translate(-50%, -50%) scale(1.8)";
+  });
+
+  el.addEventListener("mouseleave", () => {
+    follower.style.transform =
+      "translate(-50%, -50%) scale(1)";
+  });
 });
