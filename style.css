@@ -209,7 +209,7 @@ canvas {
 }
 
 .hero-title .word:first-child {
-  margin-bottom: 5px; /* 👈 AQUÍ controlas el espacio */
+  margin-bottom: 25px; /* 👈 AQUÍ controlas el espacio */
 }
 .hero-title span:hover {
   filter: none !important;
