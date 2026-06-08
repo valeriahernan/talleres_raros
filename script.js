@@ -166,44 +166,112 @@ window.addEventListener("DOMContentLoaded", () => {
 /* =========================
    CUSTOM CURSOR
 ========================= */
-const cursor = document.querySelector(".cursor");
-const follower = document.querySelector(".cursor-follower");
+/* =========================
+   GSAP CURSOR
+========================= */
 
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
+function initCursor() {
 
-let followerX = mouseX;
-let followerY = mouseY;
+  if (typeof gsap === "undefined") return;
 
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+  const cursorEl = document.querySelector(".cursor");
+  const cursorText = document.querySelector(".cursor-paragraph");
+  const cursorDot = document.getElementById("cursorDot");
 
-  cursor.style.left = mouseX + "px";
-  cursor.style.top = mouseY + "px";
-});
+  const trail = document.getElementById("cursorTrailPath");
 
-function animateCursor() {
-  followerX += (mouseX - followerX) * 0.15;
-  followerY += (mouseY - followerY) * 0.15;
+  let points = [];
 
-  follower.style.left = followerX + "px";
-  follower.style.top = followerY + "px";
+  const dotX = gsap.quickTo(cursorDot, "x", {
+    duration: 0.15,
+    ease: "power3.out"
+  });
 
-  requestAnimationFrame(animateCursor);
+  const dotY = gsap.quickTo(cursorDot, "y", {
+    duration: 0.15,
+    ease: "power3.out"
+  });
+
+  const cursorX = gsap.quickTo(cursorEl, "x", {
+    duration: 0.2,
+    ease: "power3.out"
+  });
+
+  const cursorY = gsap.quickTo(cursorEl, "y", {
+    duration: 0.2,
+    ease: "power3.out"
+  });
+
+  document.addEventListener("mousemove", e => {
+
+    dotX(e.clientX);
+    dotY(e.clientY);
+
+    cursorX(e.clientX + 12);
+    cursorY(e.clientY + 12);
+
+    points.push({
+      x: e.clientX,
+      y: e.clientY,
+      t: performance.now()
+    });
+
+    const now = performance.now();
+
+    points = points.filter(
+      p => now - p.t < 180
+    );
+
+    if (points.length > 20)
+      points = points.slice(-20);
+
+    if (points.length > 1) {
+
+      let d = `M ${points[0].x} ${points[0].y}`;
+
+      for (let i = 1; i < points.length; i++) {
+
+        const prev = points[i - 1];
+        const curr = points[i];
+
+        const mx = (prev.x + curr.x) / 2;
+        const my = (prev.y + curr.y) / 2;
+
+        d += ` Q ${prev.x} ${prev.y} ${mx} ${my}`;
+      }
+
+      trail.setAttribute("d", d);
+    }
+  });
+
+  document.querySelectorAll("a, button, h3").forEach(el => {
+
+    el.addEventListener("mouseenter", () => {
+
+      if (cursorText)
+        cursorText.textContent = "✦";
+
+      gsap.to(cursorEl, {
+        scale: 1.2,
+        duration: .2
+      });
+
+    });
+
+    el.addEventListener("mouseleave", () => {
+
+      if (cursorText)
+        cursorText.textContent = "";
+
+      gsap.to(cursorEl, {
+        scale: 1,
+        duration: .2
+      });
+
+    });
+
+  });
+
 }
 
-animateCursor();
-
-/* Hover links */
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("mouseenter", () => {
-    follower.style.transform =
-      "translate(-50%, -50%) scale(1.8)";
-  });
-
-  el.addEventListener("mouseleave", () => {
-    follower.style.transform =
-      "translate(-50%, -50%) scale(1)";
-  });
-});
+window.addEventListener("DOMContentLoaded", initCursor);
