@@ -136,6 +136,9 @@ window.addEventListener("DOMContentLoaded", () => {
   animate();
 });
 
+/* =========================
+   CURSOR EFFECT
+========================= */
 
 /* =========================
    LANGUAGE TOGGLE
