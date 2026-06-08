@@ -72,8 +72,8 @@ canvas {
 .nav-menu {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  width: 100%;
 }
 
 .nav-menu a {
@@ -177,7 +177,7 @@ canvas {
 
 .hero-title {
   color: var(--color-white);
-  font-size: clamp(2.2rem, 4.5vw, 5rem);
+  font-size: clamp(2rem, 4vw, 4.2rem);
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0.12em;
@@ -436,50 +436,169 @@ canvas {
 /* ==========================================================================
    8. MEDIA QUERIES (RESPONSIVE DEFAULTS)
    ========================================================================== */
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
 @media (max-width: 900px) {
+
+  body {
+    overflow: hidden;
+  }
+
+  /* =========================
+     MENU
+  ========================= */
+
+  .mobile-bar {
+    display: flex;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 10000000;
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+
+  #mobile-menu-btn {
+    all: unset;
+    cursor: pointer;
+
+    padding: 12px 18px;
+
+    background: rgba(17,17,17,.9);
+    color: white;
+
+    border-radius: 999px;
+
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  /* =========================
+     LANGUAGE
+  ========================= */
+
+  .lang-switch {
+    top: 14px;
+    right: 14px;
+    z-index: 10000001;
+  }
+
+  .lang-switch button {
+    min-width: 52px;
+    height: 42px;
+
+    padding: 0 14px;
+
+    background: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: 999px;
+
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  /* =========================
+     SIDEBAR
+  ========================= */
+
   .sidebar {
+    width: 280px;
+
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: var(--z-sidebar);
+    transition: transform .3s ease;
+
+    background: rgba(236,236,236,.98);
+    backdrop-filter: blur(14px);
+
+    padding-top: 90px;
   }
 
   .sidebar.active {
     transform: translateX(0);
   }
 
-  .mobile-bar {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 16px 20px;
-    background: var(--color-bg);
-    z-index: var(--z-mobile);
+  .logo img {
+    width: 110px;
+    margin-bottom: 30px;
   }
 
-  #mobile-menu-btn {
-    all: unset;
-    cursor: pointer;
-    font-weight: 700;
-    color: var(--color-primary);
+  .nav-menu {
+    gap: 18px;
   }
+
+  .nav-menu a {
+    font-size: 1rem;
+  }
+
+  /* =========================
+     LAYOUT
+  ========================= */
 
   .stage {
     margin-left: 0;
   }
 
   .scene-scroll {
-    padding: 90px 24px 40px;
+    padding: 90px 24px 50px;
   }
 
+  /* =========================
+     HERO
+  ========================= */
+
   .hero-content {
+    padding: 28px;
+    justify-content: center;
     align-items: flex-start;
   }
 
   .hero-title {
-    font-size: 20vw;
+    font-size: clamp(2rem, 12vw, 4rem);
+    line-height: 0.82;
+    letter-spacing: 0.08em;
+
+    max-width: 260px;
+
+    top: 0;
   }
+
+  .hero-sub {
+    margin-top: 16px;
+
+    max-width: 260px;
+
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  /* =========================
+     MODEL VIEWER
+  ========================= */
+
+  .glb-layer model-viewer {
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+
+  /* =========================
+     TITLES
+  ========================= */
+
+  .section-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+    margin-bottom: 35px;
+  }
+
+  /* =========================
+     TALLERES
+  ========================= */
 
   .taller-item p {
     opacity: 1;
@@ -487,7 +606,21 @@ canvas {
     transform: none;
   }
 
-  .glb-layer model-viewer {
-    pointer-events: auto;
+  /* =========================
+     RELEASES
+  ========================= */
+
+  .release {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* =========================
+     SCROLL BUTTON
+  ========================= */
+
+  #scrollTopBtn {
+    right: 16px;
+    bottom: 16px;
   }
 }
