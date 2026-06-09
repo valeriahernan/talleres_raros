@@ -185,11 +185,11 @@ canvas {
 }
 
 .hero-title {
-  color: var(--color-white);
+  color: var(--color-primary);
   font-family: var(--font-sans);
   font-size: clamp(2rem, 4vw, 4.2rem);
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 800;
+  font-style: oblique;
   letter-spacing: 0.09em;
   line-height: 1;
   max-width: 400px;
