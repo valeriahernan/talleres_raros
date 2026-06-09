@@ -189,8 +189,8 @@ canvas {
   font-size: clamp(2rem, 4vw, 4.2rem);
   font-weight: 700;
   font-style: italic;
-  letter-spacing: 0.12em;
-  line-height: 6.72;
+  letter-spacing: 0.09em;
+  line-height: 1.72;
   max-width: 400px;
   position: relative;
   top: 30px;
