@@ -143,6 +143,11 @@ body {
   height: 100vh;
 }
 
+.hero-title:hover span {
+  filter: none;
+  opacity: 1;
+}
+
 /* =========================
    MOBILE
 ========================= */

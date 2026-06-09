@@ -31,23 +31,19 @@ links.forEach(link => {
 let isMobile = window.innerWidth <= 900;
 let menuVisible = false;
 
-// activar menú
 function showMenu() {
   if (!menu) return;
   menu.classList.add("visible");
   menuVisible = true;
 }
 
-// ocultar menú
 function hideMenu() {
   if (!menu) return;
   menu.classList.remove("visible");
   menuVisible = false;
 }
 
-/* -------------------------
-   DESKTOP: esquina inferior izquierda
--------------------------- */
+/* DESKTOP HOT CORNER */
 function handleMouse(e) {
   if (isMobile) return;
 
@@ -57,25 +53,17 @@ function handleMouse(e) {
   const nearCorner =
     x < 260 && y > window.innerHeight - 220;
 
-  if (nearCorner) {
-    showMenu();
-  } else {
-    hideMenu();
-  }
+  if (nearCorner) showMenu();
+  else hideMenu();
 }
 
-/* -------------------------
-   MOBILE: toggle por tap en hotzone
--------------------------- */
+/* MOBILE TOGGLE */
 function handleTouch() {
   if (!isMobile) return;
 
   menuVisible ? hideMenu() : showMenu();
 }
 
-/* -------------------------
-   EVENTS
--------------------------- */
 window.addEventListener("mousemove", handleMouse);
 hotzone?.addEventListener("click", handleTouch);
 
@@ -85,20 +73,25 @@ window.addEventListener("resize", () => {
 });
 
 /* =========================
-   HERO TEXT EFFECT
+   HERO TEXT EFFECT (FIXED)
 ========================= */
 function initHeroEffect() {
-  const letters = document.querySelectorAll(".hero-title span");
+  const letters = [
+    ...document.querySelectorAll(".hero-title span")
+  ].filter(el => el.offsetParent !== null);
+
   if (!letters.length) return;
 
   let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 
-  const states = Array.from(letters).map(el => ({
+  const states = letters.map(el => ({
     el,
-    x: 0, y: 0,
+    x: 0,
+    y: 0,
     rot: 0,
     scale: 1,
-    tx: 0, ty: 0,
+    tx: 0,
+    ty: 0,
     trot: 0,
     tscale: 1
   }));
@@ -126,7 +119,9 @@ function initHeroEffect() {
         s.trot = s.tx * 0.6;
         s.tscale = 1 + f * 0.2;
       } else {
-        s.tx = s.ty = s.trot = 0;
+        s.tx = 0;
+        s.ty = 0;
+        s.trot = 0;
         s.tscale = 1;
       }
 
@@ -135,8 +130,9 @@ function initHeroEffect() {
       s.rot += (s.trot - s.rot) * 0.1;
       s.scale += (s.tscale - s.scale) * 0.1;
 
+      /* 🔥 FIX CRÍTICO: GPU + estabilidad */
       s.el.style.transform = `
-        translate(${s.x}px, ${s.y}px)
+        translate3d(${s.x}px, ${s.y}px, 0)
         rotate(${s.rot}deg)
         scale(${s.scale})
       `;
@@ -178,9 +174,12 @@ function initLanguage() {
 }
 
 /* =========================
-   INIT
+   INIT (FIX SEGURO)
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
-  initHeroEffect();
+  setTimeout(() => {
+    initHeroEffect();
+  }, 50);
+
   initLanguage();
 });
