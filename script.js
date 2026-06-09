@@ -1,192 +1,148 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================
+   ELEMENTOS
+========================= */
+const scenes = document.querySelectorAll(".scene");
+const links = document.querySelectorAll(".nav-menu a");
 
-  /* =========================
-     ELEMENTOS
-  ========================= */
-  const scenes = document.querySelectorAll(".scene");
-  const links = document.querySelectorAll(".nav-menu a");
+const menu = document.querySelector(".menu-container");
+const hotzone = document.querySelector(".menu-hotzone");
 
-  const menu = document.querySelector(".menu-container");
-  const hotzone = document.querySelector(".menu-hotzone");
+/* =========================
+   SCENES SYSTEM
+========================= */
+function showScene(id) {
+  scenes.forEach(scene => scene.classList.remove("active"));
+  const target = document.querySelector(id);
+  if (target) target.classList.add("active");
+}
 
-  const btn = document.getElementById("langBtn");
+links.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute("href");
+    showScene(targetId);
+  });
+});
 
-  /* =========================
-     SCENES SYSTEM
-  ========================= */
-  function showScene(id) {
-    scenes.forEach(scene => scene.classList.remove("active"));
-    const target = document.querySelector(id);
-    if (target) target.classList.add("active");
-  }
+/* =========================
+   MENU (INSTALACIÓN MODE)
+========================= */
 
-  links.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("href");
-      showScene(targetId);
-    });
+let isMobile = window.innerWidth <= 900;
+let menuVisible = false;
+
+function showMenu() {
+  if (!menu) return;
+  menu.classList.add("visible");
+  menuVisible = true;
+}
+
+function hideMenu() {
+  if (!menu) return;
+  menu.classList.remove("visible");
+  menuVisible = false;
+}
+
+/* DESKTOP */
+function handleMouse(e) {
+  if (isMobile) return;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  const nearCorner = x < 260 && y > window.innerHeight - 220;
+
+  if (nearCorner) showMenu();
+  else hideMenu();
+}
+
+/* MOBILE */
+function handleTouch() {
+  if (!isMobile) return;
+
+  menuVisible ? hideMenu() : showMenu();
+}
+
+/* EVENTS */
+window.addEventListener("mousemove", handleMouse);
+hotzone?.addEventListener("click", handleTouch);
+
+window.addEventListener("resize", () => {
+  isMobile = window.innerWidth <= 900;
+  hideMenu();
+});
+
+/* =========================
+   HERO LETTER EFFECT (FIXED)
+========================= */
+function initHeroEffect() {
+  const letters = document.querySelectorAll(".hero-title span");
+
+  if (!letters || letters.length === 0) return;
+
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+  const states = Array.from(letters).map(el => ({
+    el,
+    x: 0,
+    y: 0,
+    rot: 0,
+    scale: 1,
+    tx: 0,
+    ty: 0,
+    trot: 0,
+    tscale: 1
+  }));
+
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  /* =========================
-     MENU INSTALLATION MODE
-  ========================= */
+  function animate() {
+    states.forEach(s => {
+      const r = s.el.getBoundingClientRect();
 
-  let isMobile = window.innerWidth <= 900;
-  let menuVisible = false;
+      const dx = r.left + r.width / 2 - mouse.x;
+      const dy = r.top + r.height / 2 - mouse.y;
 
-  function showMenu() {
-    if (!menu) return;
-    menu.classList.add("visible");
-    menuVisible = true;
-  }
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const max = 180;
 
-  function hideMenu() {
-    if (!menu) return;
-    menu.classList.remove("visible");
-    menuVisible = false;
-  }
+      if (dist < max) {
+        const f = 1 - dist / max;
 
-  function handleMouse(e) {
-    if (isMobile) return;
+        s.tx = dx * f * 0.35;
+        s.ty = dy * f * 0.35;
+        s.trot = s.tx * 0.6;
+        s.tscale = 1 + f * 0.2;
+      } else {
+        s.tx = 0;
+        s.ty = 0;
+        s.trot = 0;
+        s.tscale = 1;
+      }
 
-    const x = e.clientX;
-    const y = e.clientY;
+      s.x += (s.tx - s.x) * 0.1;
+      s.y += (s.ty - s.y) * 0.1;
+      s.rot += (s.trot - s.rot) * 0.1;
+      s.scale += (s.tscale - s.scale) * 0.1;
 
-    const nearCorner =
-      x < 260 && y > window.innerHeight - 220;
-
-    if (nearCorner) showMenu();
-    else hideMenu();
-  }
-
-  function handleTouch() {
-    if (!isMobile) return;
-    menuVisible ? hideMenu() : showMenu();
-  }
-
-  window.addEventListener("mousemove", handleMouse);
-
-  if (hotzone) {
-    hotzone.addEventListener("click", handleTouch);
-  }
-
-  window.addEventListener("resize", () => {
-    isMobile = window.innerWidth <= 900;
-    hideMenu();
-  });
-
-  /* =========================
-     HERO TEXT EFFECT (SAFE)
-  ========================= */
-  function initHeroEffect() {
-    const letters = document.querySelectorAll(".hero-title span");
-    if (!letters || letters.length === 0) return;
-
-    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-    const states = Array.from(letters).map(el => ({
-      el,
-      x: 0,
-      y: 0,
-      rot: 0,
-      scale: 1,
-      tx: 0,
-      ty: 0,
-      trot: 0,
-      tscale: 1
-    }));
-
-    window.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      s.el.style.transform =
+        `translate(${s.x}px, ${s.y}px)
+         rotate(${s.rot}deg)
+         scale(${s.scale})`;
     });
 
-    function animate() {
-      states.forEach(s => {
-        const r = s.el.getBoundingClientRect();
-
-        const dx = r.left + r.width / 2 - mouse.x;
-        const dy = r.top + r.height / 2 - mouse.y;
-
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const max = 180;
-
-        if (dist < max) {
-          const f = 1 - dist / max;
-
-          s.tx = dx * f * 0.35;
-          s.ty = dy * f * 0.35;
-          s.trot = s.tx * 0.6;
-          s.tscale = 1 + f * 0.2;
-        } else {
-          s.tx = 0;
-          s.ty = 0;
-          s.trot = 0;
-          s.tscale = 1;
-        }
-
-        s.x += (s.tx - s.x) * 0.1;
-        s.y += (s.ty - s.y) * 0.1;
-        s.rot += (s.trot - s.rot) * 0.1;
-        s.scale += (s.tscale - s.scale) * 0.1;
-
-        s.el.style.transform = `
-          translate(${s.x}px, ${s.y}px)
-          rotate(${s.rot}deg)
-          scale(${s.scale})
-        `;
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
+    requestAnimationFrame(animate);
   }
 
-  /* =========================
-     LANGUAGE SYSTEM (SAFE)
-  ========================= */
-  let currentLang = "es";
+  animate();
+}
 
-  function setLanguage(lang) {
-    document.querySelectorAll("[data-es]").forEach(el => {
-      const text = el.getAttribute(`data-${lang}`);
-      if (text) el.textContent = text;
-    });
-
-    if (btn) {
-      btn.textContent = lang === "es" ? "EN" : "ES";
-    }
-
-    currentLang = lang;
-    localStorage.setItem("lang", lang);
-  }
-
-  function initLanguage() {
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      setLanguage(currentLang === "es" ? "en" : "es");
-    });
-
-    const saved = localStorage.getItem("lang");
-    if (saved) setLanguage(saved);
-  }
-
-  /* =========================
-     INIT (SAFE WRAPPED)
-  ========================= */
-  try {
-    initHeroEffect();
-  } catch (e) {
-    console.warn("Hero effect error:", e);
-  }
-
-  try {
-    initLanguage();
-  } catch (e) {
-    console.warn("Language error:", e);
-  }
-
+/* =========================
+   INIT (CRÍTICO)
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
+  initHeroEffect();
 });
