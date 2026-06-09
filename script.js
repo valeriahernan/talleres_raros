@@ -5,10 +5,6 @@
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
 
-const sidebar = document.querySelector(".sidebar");
-const mobileBtn = document.getElementById("mobile-menu-btn");
-const desktopToggle = document.getElementById("menuToggle");
-
 /* =========================
    SCENES SYSTEM
 ========================= */
@@ -24,54 +20,7 @@ links.forEach(link => {
 
     const targetId = link.getAttribute("href");
     showScene(targetId);
-
-    if (sidebar) {
-      sidebar.classList.remove("active");
-      sidebar.classList.remove("open");
-    }
   });
-});
-
-/* =========================
-   MOBILE MENU
-========================= */
-if (mobileBtn && sidebar) {
-  mobileBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("active");
-  });
-}
-
-/* =========================
-   DESKTOP TOGGLE MENU
-========================= */
-if (desktopToggle && sidebar) {
-  desktopToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("open");
-  });
-}
-
-/* =========================
-   CLOSE EVENTS
-========================= */
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && sidebar) {
-    sidebar.classList.remove("active");
-    sidebar.classList.remove("open");
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if (
-    window.innerWidth <= 900 &&
-    sidebar &&
-    sidebar.classList.contains("active")
-  ) {
-    if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
-      sidebar.classList.remove("active");
-    }
-  }
 });
 
 /* =========================
@@ -181,4 +130,38 @@ function initLanguage() {
 window.addEventListener("DOMContentLoaded", () => {
   initHeroEffect();
   initLanguage();
+});
+
+
+const menu = document.querySelector(".menu-container");
+const hotzone = document.querySelector(".menu-hotzone");
+
+let isMobile = window.innerWidth <= 900;
+
+// DESKTOP: mouse tracking
+function handleMouse(e) {
+  if (isMobile) return;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  const active = x < 300 && y > window.innerHeight - 250;
+
+  menu?.classList.toggle("visible", active);
+}
+
+// MOBILE: tap zone
+function handleTouch() {
+  if (!isMobile) return;
+
+  menu?.classList.toggle("visible");
+}
+
+// eventos
+window.addEventListener("mousemove", handleMouse);
+hotzone?.addEventListener("click", handleTouch);
+
+// update resize
+window.addEventListener("resize", () => {
+  isMobile = window.innerWidth <= 900;
 });

@@ -18,6 +18,9 @@
   --transition-slow: 0.35s ease;
 }
 
+/* =========================
+   RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +44,9 @@ canvas {
   pointer-events: none !important;
 }
 
+/* =========================
+   LOGO
+========================= */
 .site-logo {
   position: fixed;
   top: 24px;
@@ -52,28 +58,59 @@ canvas {
   width: 120px;
   display: block;
 }
-
-/* MENU DESPLEGABLE */
+/* =========================
+   MENU INSTALACIÓN MODE (CORREGIDO)
+========================= */
 
 .menu-container {
   position: fixed;
-  top: 24px;
-  left: 170px;
+  bottom: 24px;
+  left: 24px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+
+  transition: all 0.25s ease;
+
+  pointer-events: none;
   z-index: 999999;
-  padding-bottom: 220px; /* mantiene hover activo */
 }
 
+/* visible por JS */
+.menu-container.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* hotzone invisible */
+.menu-hotzone {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  width: 300px;
+  height: 250px;
+
+  z-index: 999998;
+  background: transparent;
+}
+
+/* label */
 .menu-label {
   color: var(--color-primary);
   font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 800;
-  cursor: pointer;
+  cursor: default;
 }
 
+/* dropdown */
 .nav-menu {
   position: absolute;
-  top: 28px;
+  bottom: 100%;
   left: 0;
 
   display: flex;
@@ -82,26 +119,23 @@ canvas {
 
   opacity: 0;
   visibility: hidden;
+  transform: translateY(10px);
 
-  transition: opacity .25s ease;
+  transition: all 0.25s ease;
 }
 
-.menu-container:hover .nav-menu {
+/* SOLO si está visible */
+.menu-container.visible .nav-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
 .nav-menu a {
-  display: inline-block;
-  width: fit-content;
-
   text-decoration: none;
   color: var(--color-primary);
-
   font-size: 1rem;
   font-weight: 700;
-
   transition: opacity 0.2s ease;
 }
 
@@ -109,6 +143,9 @@ canvas {
   opacity: 0.6;
 }
 
+/* =========================
+   STAGE / SCENES
+========================= */
 .stage {
   height: 100vh;
   position: relative;
@@ -135,6 +172,9 @@ canvas {
   font-family: var(--font-sans);
 }
 
+/* =========================
+   HERO
+========================= */
 .hero {
   position: relative;
   height: 100vh;
@@ -221,36 +261,9 @@ canvas {
   pointer-events: auto;
 }
 
-.conv-title {
-  color: var(--color-primary);
-  margin-bottom: 6px;
-  font-weight: 900;
-}
-
-.conv-subtitle {
-  margin-bottom: 18px !important;
-  opacity: 0.85;
-}
-
-.conv-list {
-  margin-bottom: 18px;
-}
-
-.conv-list p {
-  margin-bottom: 4px !important;
-  line-height: 1.4;
-}
-
-.conv-description {
-  margin-top: 24px;
-  max-width: 900px;
-  line-height: 1.7;
-}
-
-.conv-strong {
-  font-weight: 600;
-}
-
+/* =========================
+   SECTIONS
+========================= */
 .section-title {
   color: var(--color-primary);
   font-size: clamp(2rem, 4vw, 4rem);
@@ -273,6 +286,37 @@ canvas {
   opacity: 0.6;
 }
 
+/* =========================
+   CONVOCATORIAS
+========================= */
+.conv-title {
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  font-weight: 900;
+}
+
+.conv-list {
+  margin-bottom: 18px;
+}
+
+.conv-list p {
+  margin-bottom: 4px !important;
+  line-height: 1.4;
+}
+
+.conv-description {
+  margin-top: 24px;
+  max-width: 900px;
+  line-height: 1.7;
+}
+
+.conv-strong {
+  font-weight: 600;
+}
+
+/* =========================
+   PROYECTO
+========================= */
 .project-block {
   margin-top: 28px;
 }
@@ -289,7 +333,9 @@ canvas {
   margin-bottom: 2px;
 }
 
-/* Talleres */
+/* =========================
+   TALLERES
+========================= */
 .taller-item {
   margin-bottom: 28px;
   max-width: 900px;
@@ -315,7 +361,9 @@ canvas {
   transform: translateY(0);
 }
 
-/* FIX REAL */
+/* =========================
+   RELEASES
+========================= */
 .release-list {
   display: flex;
   flex-direction: column;
@@ -340,11 +388,11 @@ canvas {
 
 .release small {
   font-weight: 700;
-  opacity: 1;
-  text-align: right;
 }
 
-/* Contacto */
+/* =========================
+   CONTACTO
+========================= */
 #contacto .contact-links {
   gap: 12px;
 }
@@ -356,11 +404,6 @@ canvas {
 
 #contacto p {
   line-height: 1.4;
-}
-
-#contacto > .scene-scroll > p:first-of-type {
-  font-weight: 700;
-  margin-bottom: 12px;
 }
 
 #scrollTopBtn {
@@ -390,6 +433,9 @@ canvas {
   transform: translateY(-3px);
 }
 
+/* =========================
+   LANGUAGE
+========================= */
 .lang-switch {
   position: fixed;
   top: 20px;
@@ -414,70 +460,45 @@ canvas {
   color: var(--color-white);
 }
 
-.menu-container,
-.menu-container * {
-  pointer-events: auto !important;
-}
-
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 900px) {
 
   body {
     overflow: hidden;
   }
 
-  .mobile-bar {
-    display: flex;
-    position: fixed;
-    top: 14px;
-    left: 14px;
-    z-index: 10000000;
-  }
+ .menu-container {
+  bottom: 16px;
+  left: 16px;
+  position: fixed;
 
-  #mobile-menu-btn {
-    all: unset;
-    cursor: pointer;
-    padding: 12px 18px;
-    background: rgba(17, 17, 17, 0.9);
-    color: white;
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    font-weight: 800;
-  }
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
 
-  .lang-switch {
-    top: 14px;
-    right: 14px;
-  }
+.menu-container.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-  .lang-switch button {
-    min-width: 52px;
-    height: 42px;
-    padding: 0 14px;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 800;
-  }
+/* hotzone móvil = esquina inferior izquierda táctil */
+.menu-hotzone {
+  position: fixed;
+  left: 0;
+  bottom: 0;
 
-  .nav-menu {
-    position: absolute;
-    left: 0;
-    bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.25s ease;
-  }
+  width: 140px;
+  height: 140px;
 
-  .nav-menu a {
-    font-size: 1rem;
-  }
+  z-index: 999998;
+}
 
   .scene-scroll {
     padding: 90px 24px 50px;
@@ -521,5 +542,13 @@ canvas {
   #scrollTopBtn {
     right: 16px;
     bottom: 16px;
+  }
+
+  @media (hover: none) {
+    .menu-container:hover .nav-menu {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+    }
   }
 }
