@@ -1,5 +1,5 @@
 /* =========================
-   ELEMENTOS
+   ELEMENTOS BASE
 ========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
@@ -11,10 +11,7 @@ const hotzone = document.querySelector(".menu-hotzone");
    SCENES SYSTEM
 ========================= */
 function showScene(id) {
-  if (!scenes.length) return;
-
-  scenes.forEach(scene => scene.classList.remove("active"));
-
+  scenes.forEach(s => s.classList.remove("active"));
   const target = document.querySelector(id);
   if (target) target.classList.add("active");
 }
@@ -22,13 +19,13 @@ function showScene(id) {
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    const targetId = link.getAttribute("href");
-    showScene(targetId);
+    const id = link.getAttribute("href");
+    showScene(id);
   });
 });
 
 /* =========================
-   MENU SYSTEM
+   MENU (INSTALLATION MODE)
 ========================= */
 
 let isMobile = window.innerWidth <= 900;
@@ -46,28 +43,27 @@ function hideMenu() {
   menuVisible = false;
 }
 
-/* DESKTOP: hover zona esquina */
+/* DESKTOP: esquina inferior izquierda */
 function handleMouse(e) {
   if (isMobile) return;
 
   const x = e.clientX;
   const y = e.clientY;
 
-  const nearCorner =
-    x < 300 && y > window.innerHeight - 250;
+  const nearZone =
+    x < 280 &&
+    y > window.innerHeight - 260;
 
-  if (nearCorner) showMenu();
+  if (nearZone) showMenu();
   else hideMenu();
 }
 
 /* MOBILE: tap toggle */
 function handleTouch() {
   if (!isMobile) return;
-
   menuVisible ? hideMenu() : showMenu();
 }
 
-/* EVENTS */
 window.addEventListener("mousemove", handleMouse);
 hotzone?.addEventListener("click", handleTouch);
 
@@ -81,12 +77,11 @@ window.addEventListener("resize", () => {
 ========================= */
 function initHeroEffect() {
   const letters = document.querySelectorAll(".hero-title span");
-
-  if (!letters || letters.length === 0) return;
+  if (!letters.length) return;
 
   let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-  const states = Array.from(letters).map(el => ({
+  const state = Array.from(letters).map(el => ({
     el,
     x: 0,
     y: 0,
@@ -104,21 +99,21 @@ function initHeroEffect() {
   });
 
   function animate() {
-    states.forEach(s => {
+    state.forEach(s => {
       const r = s.el.getBoundingClientRect();
 
-      const dx = r.left + r.width / 2 - mouse.x;
-      const dy = r.top + r.height / 2 - mouse.y;
+      const dx = (r.left + r.width / 2) - mouse.x;
+      const dy = (r.top + r.height / 2) - mouse.y;
 
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const max = 180;
+      const maxDist = 180;
 
-      if (dist < max) {
-        const f = 1 - dist / max;
+      if (dist < maxDist) {
+        const f = 1 - dist / maxDist;
 
         s.tx = dx * f * 0.35;
         s.ty = dy * f * 0.35;
-        s.trot = s.tx * 0.6;
+        s.trot = s.tx * 0.5;
         s.tscale = 1 + f * 0.2;
       } else {
         s.tx = 0;
@@ -127,10 +122,10 @@ function initHeroEffect() {
         s.tscale = 1;
       }
 
-      s.x += (s.tx - s.x) * 0.1;
-      s.y += (s.ty - s.y) * 0.1;
-      s.rot += (s.trot - s.rot) * 0.1;
-      s.scale += (s.tscale - s.scale) * 0.1;
+      s.x += (s.tx - s.x) * 0.12;
+      s.y += (s.ty - s.y) * 0.12;
+      s.rot += (s.trot - s.rot) * 0.12;
+      s.scale += (s.tscale - s.scale) * 0.12;
 
       s.el.style.transform = `
         translate(${s.x}px, ${s.y}px)
@@ -146,7 +141,7 @@ function initHeroEffect() {
 }
 
 /* =========================
-   INIT SAFE
+   INIT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   initHeroEffect();
