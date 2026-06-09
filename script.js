@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const menu = document.querySelector(".menu-container");
   const hotzone = document.querySelector(".menu-hotzone");
 
+  const btn = document.getElementById("langBtn");
+
   /* =========================
      SCENES SYSTEM
   ========================= */
@@ -60,12 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleTouch() {
     if (!isMobile) return;
-
     menuVisible ? hideMenu() : showMenu();
   }
 
   window.addEventListener("mousemove", handleMouse);
-  hotzone?.addEventListener("click", handleTouch);
+
+  if (hotzone) {
+    hotzone.addEventListener("click", handleTouch);
+  }
 
   window.addEventListener("resize", () => {
     isMobile = window.innerWidth <= 900;
@@ -73,20 +77,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =========================
-     HERO LETTER EFFECT (FIXED)
+     HERO TEXT EFFECT (SAFE)
   ========================= */
   function initHeroEffect() {
     const letters = document.querySelectorAll(".hero-title span");
     if (!letters || letters.length === 0) return;
 
-    let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     const states = Array.from(letters).map(el => ({
       el,
-      x: 0, y: 0,
+      x: 0,
+      y: 0,
       rot: 0,
       scale: 1,
-      tx: 0, ty: 0,
+      tx: 0,
+      ty: 0,
       trot: 0,
       tscale: 1
     }));
@@ -138,6 +144,49 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
   }
 
-  initHeroEffect();
+  /* =========================
+     LANGUAGE SYSTEM (SAFE)
+  ========================= */
+  let currentLang = "es";
+
+  function setLanguage(lang) {
+    document.querySelectorAll("[data-es]").forEach(el => {
+      const text = el.getAttribute(`data-${lang}`);
+      if (text) el.textContent = text;
+    });
+
+    if (btn) {
+      btn.textContent = lang === "es" ? "EN" : "ES";
+    }
+
+    currentLang = lang;
+    localStorage.setItem("lang", lang);
+  }
+
+  function initLanguage() {
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      setLanguage(currentLang === "es" ? "en" : "es");
+    });
+
+    const saved = localStorage.getItem("lang");
+    if (saved) setLanguage(saved);
+  }
+
+  /* =========================
+     INIT (SAFE WRAPPED)
+  ========================= */
+  try {
+    initHeroEffect();
+  } catch (e) {
+    console.warn("Hero effect error:", e);
+  }
+
+  try {
+    initLanguage();
+  } catch (e) {
+    console.warn("Language error:", e);
+  }
 
 });
