@@ -7,6 +7,9 @@ const links = document.querySelectorAll(".nav-menu a");
 const menu = document.querySelector(".menu-container");
 const hotzone = document.querySelector(".menu-hotzone");
 
+let isMobile = window.innerWidth <= 900;
+let menuVisible = false;
+
 /* =========================
    SCENES SYSTEM
 ========================= */
@@ -21,16 +24,14 @@ links.forEach(link => {
     e.preventDefault();
     const targetId = link.getAttribute("href");
     showScene(targetId);
+
+    hideMenu();
   });
 });
 
 /* =========================
-   MENU INSTALLATION MODE
+   MENU SYSTEM (INSTALACIÓN)
 ========================= */
-
-let isMobile = window.innerWidth <= 900;
-let menuVisible = false;
-
 function showMenu() {
   if (!menu) return;
   menu.classList.add("visible");
@@ -43,21 +44,19 @@ function hideMenu() {
   menuVisible = false;
 }
 
-/* DESKTOP HOT CORNER */
+/* DESKTOP: esquina inferior izquierda */
 function handleMouse(e) {
   if (isMobile) return;
 
-  const x = e.clientX;
-  const y = e.clientY;
-
   const nearCorner =
-    x < 260 && y > window.innerHeight - 220;
+    e.clientX < 260 &&
+    e.clientY > window.innerHeight - 220;
 
   if (nearCorner) showMenu();
   else hideMenu();
 }
 
-/* MOBILE TOGGLE */
+/* MOBILE: toggle */
 function handleTouch() {
   if (!isMobile) return;
 
@@ -76,15 +75,12 @@ window.addEventListener("resize", () => {
    HERO TEXT EFFECT (FIXED)
 ========================= */
 function initHeroEffect() {
-  const letters = [
-    ...document.querySelectorAll(".hero-title span")
-  ].filter(el => el.offsetParent !== null);
-
+  const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-  const states = letters.map(el => ({
+  const states = Array.from(letters).map(el => ({
     el,
     x: 0,
     y: 0,
@@ -125,14 +121,13 @@ function initHeroEffect() {
         s.tscale = 1;
       }
 
-      s.x += (s.tx - s.x) * 0.1;
-      s.y += (s.ty - s.y) * 0.1;
-      s.rot += (s.trot - s.rot) * 0.1;
-      s.scale += (s.tscale - s.scale) * 0.1;
+      s.x += (s.tx - s.x) * 0.12;
+      s.y += (s.ty - s.y) * 0.12;
+      s.rot += (s.trot - s.rot) * 0.12;
+      s.scale += (s.tscale - s.scale) * 0.12;
 
-      /* 🔥 FIX CRÍTICO: GPU + estabilidad */
       s.el.style.transform = `
-        translate3d(${s.x}px, ${s.y}px, 0)
+        translate(${s.x}px, ${s.y}px)
         rotate(${s.rot}deg)
         scale(${s.scale})
       `;
@@ -174,12 +169,9 @@ function initLanguage() {
 }
 
 /* =========================
-   INIT (FIX SEGURO)
+   INIT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    initHeroEffect();
-  }, 50);
-
+  initHeroEffect();
   initLanguage();
 });
