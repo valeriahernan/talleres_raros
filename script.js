@@ -11,7 +11,10 @@ const hotzone = document.querySelector(".menu-hotzone");
    SCENES SYSTEM
 ========================= */
 function showScene(id) {
+  if (!scenes.length) return;
+
   scenes.forEach(scene => scene.classList.remove("active"));
+
   const target = document.querySelector(id);
   if (target) target.classList.add("active");
 }
@@ -25,7 +28,7 @@ links.forEach(link => {
 });
 
 /* =========================
-   MENU (INSTALACIÓN MODE)
+   MENU SYSTEM
 ========================= */
 
 let isMobile = window.innerWidth <= 900;
@@ -43,20 +46,21 @@ function hideMenu() {
   menuVisible = false;
 }
 
-/* DESKTOP */
+/* DESKTOP: hover zona esquina */
 function handleMouse(e) {
   if (isMobile) return;
 
   const x = e.clientX;
   const y = e.clientY;
 
-  const nearCorner = x < 260 && y > window.innerHeight - 220;
+  const nearCorner =
+    x < 300 && y > window.innerHeight - 250;
 
   if (nearCorner) showMenu();
   else hideMenu();
 }
 
-/* MOBILE */
+/* MOBILE: tap toggle */
 function handleTouch() {
   if (!isMobile) return;
 
@@ -128,10 +132,11 @@ function initHeroEffect() {
       s.rot += (s.trot - s.rot) * 0.1;
       s.scale += (s.tscale - s.scale) * 0.1;
 
-      s.el.style.transform =
-        `translate(${s.x}px, ${s.y}px)
-         rotate(${s.rot}deg)
-         scale(${s.scale})`;
+      s.el.style.transform = `
+        translate(${s.x}px, ${s.y}px)
+        rotate(${s.rot}deg)
+        scale(${s.scale})
+      `;
     });
 
     requestAnimationFrame(animate);
@@ -141,7 +146,7 @@ function initHeroEffect() {
 }
 
 /* =========================
-   INIT (CRÍTICO)
+   INIT SAFE
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   initHeroEffect();
