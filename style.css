@@ -92,8 +92,8 @@ canvas {
   color: var(--color-primary);
   font-size: 1.05rem;
   font-weight: 700;
-  padding-bottom: 6px;
-  margin-bottom: 15px; /* 👈 Agrega esto para separar los enlaces entre sí hacia abajo */
+  padding-bottom: 10px;
+  margin-bottom: 5px; /* 👈 Agrega esto para separar los enlaces entre sí hacia abajo */
 }
 
 .nav-menu a::after {
@@ -190,7 +190,7 @@ canvas {
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0.12em;
-  line-height: 0.72;
+  line-height: 6.72;
   max-width: 400px;
   position: relative;
   top: 30px;
@@ -204,7 +204,7 @@ canvas {
 
 .hero-title:hover span {
   filter: blur(1px);
-  opacity: .4;
+  opacity: 4;
 }
 
 .hero-title .word {
@@ -212,7 +212,7 @@ canvas {
 }
 
 .hero-title .word:first-child {
-  margin-bottom: 5px; /* 👈 AQUÍ controlas el espacio */
+  margin-bottom: 30px; /* 👈 AQUÍ controlas el espacio */
 }
 .hero-title span:hover {
   filter: none !important;
@@ -234,7 +234,7 @@ canvas {
 .conv-title {
   color: var(--color-primary);
   margin-bottom: 6px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .conv-subtitle {
@@ -253,7 +253,7 @@ canvas {
 
 .conv-description {
   margin-top: 24px;
-  max-width: 900px;
+  max-width: 700px;
   line-height: 1.7;
 }
 
@@ -265,7 +265,7 @@ canvas {
 .section-title {
   color: var(--color-primary);
   font-size: clamp(2rem, 4vw, 4rem);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .scene p {
