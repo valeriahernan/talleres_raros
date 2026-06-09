@@ -225,6 +225,6 @@ function createDrop(x, y) {
 }
 
 function randomColor() {
-  const colors = ["#ba7dff", "#ff7bd1", "#6edfd5", "#d87aae"];
+  const colors = ["#ba7dff", "#ff7bd1", "#ba7dff", "#d87aae"];
   return colors[Math.floor(Math.random() * colors.length)];
 }
