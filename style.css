@@ -186,7 +186,7 @@ canvas {
 
 .hero-title {
   color: var(--color-white);
-  font-family: var(--font-sans);
+  font-family: "MuseoModerno", sans-serif;
   font-size: clamp(2rem, 4vw, 4.2rem);
   font-weight: 700;
   font-style: italic;
