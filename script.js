@@ -1,8 +1,5 @@
-let isMobile = window.innerWidth <= 900;
 
-window.addEventListener("resize", () => {
-  isMobile = window.innerWidth <= 900;
-});
+const isMobile = window.matchMedia("(max-width: 900px)").matches;
 /* =========================
    CLICK FIX
 ========================= */
@@ -292,25 +289,4 @@ function createDrop(x, y) {
 function randomColor() {
   const colors = ["#ba7dff", "#8f7bffbb"];
   return colors[Math.floor(Math.random() * colors.length)];
-}
-
-if (!isMobile) {
-  const cursor = document.querySelector(".custom-cursor");
-  const symbols = ["♫","⋆","｡","♪","𝄢˚","♬","ﾟ","❀"];
-
-  let lastTime = 0;
-  const delay = 90;
-
-  document.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-
-    const now = Date.now();
-    if (now - lastTime > delay) {
-      createDrop(e.clientX, e.clientY);
-      lastTime = now;
-    }
-  });
-
-  function createDrop(x, y) { /* igual que lo tienes */ }
 }
