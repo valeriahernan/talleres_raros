@@ -3,13 +3,10 @@
 ========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
-
 const menu = document.querySelector(".menu-container");
 const hotzone = document.querySelector(".menu-hotzone");
-
 let isMobile = window.innerWidth <= 900;
 let menuVisible = false;
-
 /* =========================
    SCENES SYSTEM
 ========================= */
@@ -32,6 +29,7 @@ links.forEach(link => {
 /* =========================
    MENU SYSTEM (INSTALACIÓN)
 ========================= */
+
 function showMenu() {
   if (!menu) return;
   menu.classList.add("visible");
@@ -43,6 +41,29 @@ function hideMenu() {
   menu.classList.remove("visible");
   menuVisible = false;
 }
+
+/* DESKTOP ZONE (mouse esquina inferior izquierda) */
+window.addEventListener("mousemove", (e) => {
+  if (isMobile) return;
+
+  const nearCorner =
+    e.clientX < 260 &&
+    e.clientY > window.innerHeight - 220;
+
+  if (nearCorner) showMenu();
+  else hideMenu();
+});
+
+/* MOBILE: tap toggle */
+window.addEventListener("click", () => {
+  if (!isMobile) return;
+  menuVisible ? hideMenu() : showMenu();
+});
+
+window.addEventListener("resize", () => {
+  isMobile = window.innerWidth <= 900;
+  hideMenu();
+});
 
 /* DESKTOP: esquina inferior izquierda */
 function handleMouse(e) {
