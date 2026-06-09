@@ -658,5 +658,5 @@ body {
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  mix-blend-mode: soft-light;
+  mix-blend-mode: hue;
 }
