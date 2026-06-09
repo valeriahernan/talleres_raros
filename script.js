@@ -1,13 +1,10 @@
-/* =========================
-   CLICK FIX
-========================= */
-document.addEventListener("click", () => {}, { passive: true });
 
 /* =========================
    ELEMENTOS
 ========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
+
 const sidebar = document.querySelector(".sidebar");
 const mobileBtn = document.getElementById("mobile-menu-btn");
 const desktopToggle = document.getElementById("menuToggle");
@@ -24,10 +21,14 @@ function showScene(id) {
 links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    showScene(link.getAttribute("href"));
 
-    sidebar?.classList.remove("active");
-    sidebar?.classList.remove("open");
+    const targetId = link.getAttribute("href");
+    showScene(targetId);
+
+    if (sidebar) {
+      sidebar.classList.remove("active");
+      sidebar.classList.remove("open");
+    }
   });
 });
 
@@ -55,14 +56,18 @@ if (desktopToggle && sidebar) {
    CLOSE EVENTS
 ========================= */
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    sidebar?.classList.remove("active");
-    sidebar?.classList.remove("open");
+  if (e.key === "Escape" && sidebar) {
+    sidebar.classList.remove("active");
+    sidebar.classList.remove("open");
   }
 });
 
 document.addEventListener("click", (e) => {
-  if (window.innerWidth <= 900 && sidebar?.classList.contains("active")) {
+  if (
+    window.innerWidth <= 900 &&
+    sidebar &&
+    sidebar.classList.contains("active")
+  ) {
     if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
       sidebar.classList.remove("active");
     }
@@ -72,11 +77,14 @@ document.addEventListener("click", (e) => {
 /* =========================
    HERO TEXT EFFECT
 ========================= */
-window.addEventListener("DOMContentLoaded", () => {
+function initHeroEffect() {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  let mouse = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2
+  };
 
   const states = Array.from(letters).map(letter => ({
     el: letter,
@@ -134,11 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   animate();
-});
-
-/* =========================
-   CURSOR EFFECT
-========================= */
+}
 
 /* =========================
    LANGUAGE TOGGLE
@@ -152,17 +156,29 @@ function setLanguage(lang) {
     if (text) el.textContent = text;
   });
 
-  btn.textContent = lang === "es" ? "EN" : "ES";
-  currentLang = lang;
+  if (btn) {
+    btn.textContent = lang === "es" ? "EN" : "ES";
+  }
 
+  currentLang = lang;
   localStorage.setItem("lang", lang);
 }
 
-btn?.addEventListener("click", () => {
-  setLanguage(currentLang === "es" ? "en" : "es");
-});
+function initLanguage() {
+  if (!btn) return;
 
-window.addEventListener("DOMContentLoaded", () => {
+  btn.addEventListener("click", () => {
+    setLanguage(currentLang === "es" ? "en" : "es");
+  });
+
   const saved = localStorage.getItem("lang");
   if (saved) setLanguage(saved);
+}
+
+/* =========================
+   INIT
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
+  initHeroEffect();
+  initLanguage();
 });

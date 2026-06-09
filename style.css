@@ -1,30 +1,23 @@
-/* ==========================================================================
-   1. VARIABLES & TOKENS
-   ========================================================================== */
 :root {
   --color-bg: #ececec;
   --color-text: #111;
   --color-primary: #ba7dff;
   --color-white: #ffffff;
-  
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-geist: 'Geist Mono', monospace;
-  --font-sans: 'Urbanist', sans-serif;
-  
+
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-geist: "Geist Mono", monospace;
+  --font-sans: "Urbanist", sans-serif;
+
   --z-canvas: 1;
   --z-stage: 1;
   --z-lang: 9999;
-  --z-sidebar: 999999;
   --z-mobile: 9999999;
-  
+
   --transition-fast: 0.15s ease-out;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.35s ease;
 }
 
-/* ==========================================================================
-   2. RESET & BASE STYLES
-   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -48,78 +41,80 @@ canvas {
   pointer-events: none !important;
 }
 
-/* ==========================================================================
-   3. LAYOUT & STRUCTURE (SIDEBAR, STAGE, NAVIGATION)
-   ========================================================================== */
-.sidebar {
+.site-logo {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 220px;
-  height: 100vh;
-  padding: 60px;
-  z-index: var(--z-sidebar);
-  pointer-events: auto !important;
-  font-family: var(--font-sans);
+  top: 24px;
+  left: 24px;
+  z-index: 999999;
 }
 
-.logo {
-  width: 100%;
-  text-align: center;
-}
-
-.logo img {
+.site-logo img {
   width: 120px;
   display: block;
-  margin: 0 auto 40px;
+}
+
+/* MENU DESPLEGABLE */
+
+.menu-container {
+  position: fixed;
+  top: 24px;
+  left: 170px;
+  z-index: 999999;
+  padding-bottom: 220px; /* mantiene hover activo */
+}
+
+.menu-label {
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .nav-menu {
+  position: absolute;
+  top: 28px;
+  left: 0;
+
   display: flex;
   flex-direction: column;
-  align-items: left;
-  width: 100%;
-  text-align: left;
+  gap: 12px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity .25s ease;
+}
+
+.menu-container:hover .nav-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .nav-menu a {
-  position: relative;
   display: inline-block;
   width: fit-content;
+
   text-decoration: none;
   color: var(--color-primary);
-  font-size: 1.05rem;
+
+  font-size: 1rem;
   font-weight: 700;
-  padding-bottom: 6px;
+
+  transition: opacity 0.2s ease;
 }
 
-.nav-menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 2px;
-  width: 100%;
-  height: 3px;
-  background: var(--color-primary);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.nav-menu a:hover::after {
-  transform: scaleX(1);
+.nav-menu a:hover {
+  opacity: 0.6;
 }
 
 .stage {
-  margin-left: 220px;
   height: 100vh;
   position: relative;
   z-index: var(--z-stage);
 }
 
-/* ==========================================================================
-   4. SCENES & VIEWS
-   ========================================================================== */
 .scene {
   position: absolute;
   inset: 0;
@@ -140,9 +135,6 @@ canvas {
   font-family: var(--font-sans);
 }
 
-/* ==========================================================================
-   5. HERO COMPONENT
-   ========================================================================== */
 .hero {
   position: relative;
   height: 100vh;
@@ -158,7 +150,7 @@ canvas {
 .glb-layer model-viewer {
   width: 100%;
   height: 100%;
-  pointer-events: auto !important;
+  pointer-events: auto;
 }
 
 .hero-vignette {
@@ -166,7 +158,11 @@ canvas {
   inset: 0;
   z-index: 20;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(214,214,214,.10), var(--color-bg));
+  background: radial-gradient(
+    circle,
+    rgba(214, 214, 214, 0.1),
+    var(--color-bg)
+  );
 }
 
 .hero-content {
@@ -201,7 +197,13 @@ canvas {
 
 .hero-title:hover span {
   filter: blur(1px);
-  opacity: .4;
+  opacity: 0.4;
+}
+
+.hero-title span:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: translateY(-10px) scale(1.2) rotate(-8deg);
 }
 
 .hero-title .word {
@@ -209,12 +211,7 @@ canvas {
 }
 
 .hero-title .word:first-child {
-  margin-bottom: 25px; /* 👈 AQUÍ controlas el espacio */
-}
-.hero-title span:hover {
-  filter: none !important;
-  opacity: 1 !important;
-  transform: translateY(-10px) scale(1.2) rotate(-8deg);
+  margin-bottom: 25px;
 }
 
 .hero-sub {
@@ -224,10 +221,6 @@ canvas {
   pointer-events: auto;
 }
 
-/* ==========================================================================
-   6. INNER COMPONENTS & SECTIONS
-   ========================================================================== */
-/* Convocatorias */
 .conv-title {
   color: var(--color-primary);
   margin-bottom: 6px;
@@ -258,7 +251,6 @@ canvas {
   font-weight: 600;
 }
 
-/* Textos Generales */
 .section-title {
   color: var(--color-primary);
   font-size: clamp(2rem, 4vw, 4rem);
@@ -278,10 +270,9 @@ canvas {
 }
 
 .scene a:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
-/* Proyectos */
 .project-block {
   margin-top: 28px;
 }
@@ -324,12 +315,18 @@ canvas {
   transform: translateY(0);
 }
 
-/* Compilados (Releases) */
+/* FIX REAL */
+.release-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .release {
   display: flex;
   gap: 16px;
   align-items: center;
-  font-weight: 1200;
+  font-weight: 900;
 }
 
 .release span {
@@ -345,10 +342,6 @@ canvas {
   font-weight: 700;
   opacity: 1;
   text-align: right;
-}
-
-.release-list {
-  gap: 12px;
 }
 
 /* Contacto */
@@ -370,15 +363,6 @@ canvas {
   margin-bottom: 12px;
 }
 
-/* ==========================================================================
-   7. UI INTERACTIVE CONTROLS
-   ========================================================================== */
-/* Mobile Bar (Hidden by default) */
-.mobile-bar {
-  display: none;
-}
-
-/* Scroll Top Button */
 #scrollTopBtn {
   position: fixed;
   right: 24px;
@@ -392,7 +376,6 @@ canvas {
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  z-index: var(--z-sidebar);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-normal), transform var(--transition-normal);
@@ -407,7 +390,6 @@ canvas {
   transform: translateY(-3px);
 }
 
-/* Language Switch */
 .lang-switch {
   position: fixed;
   top: 20px;
@@ -432,28 +414,16 @@ canvas {
   color: var(--color-white);
 }
 
-/* Pointer Events Overrides */
-.sidebar *,
-.mobile-bar,
-.mobile-bar * {
+.menu-container,
+.menu-container * {
   pointer-events: auto !important;
 }
 
-/* ==========================================================================
-   8. MEDIA QUERIES (RESPONSIVE DEFAULTS)
-   ========================================================================== */
-/* ==========================================================================
-   MOBILE
-   ========================================================================== */
 @media (max-width: 900px) {
 
   body {
     overflow: hidden;
   }
-
-  /* =========================
-     MENU
-  ========================= */
 
   .mobile-bar {
     display: flex;
@@ -461,155 +431,81 @@ canvas {
     top: 14px;
     left: 14px;
     z-index: 10000000;
-    width: auto;
-    padding: 0;
-    background: transparent;
   }
 
   #mobile-menu-btn {
     all: unset;
     cursor: pointer;
-
     padding: 12px 18px;
-
-    background: rgba(17,17,17,.9);
+    background: rgba(17, 17, 17, 0.9);
     color: white;
-
     border-radius: 999px;
-
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
   }
-
-  /* =========================
-     LANGUAGE
-  ========================= */
 
   .lang-switch {
     top: 14px;
     right: 14px;
-    z-index: 10000001;
   }
 
   .lang-switch button {
     min-width: 52px;
     height: 42px;
-
     padding: 0 14px;
-
     background: var(--color-primary);
     color: white;
-
     border: none;
     border-radius: 999px;
-
     font-size: 0.8rem;
     font-weight: 800;
   }
 
-  /* =========================
-     SIDEBAR
-  ========================= */
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 220px;
-  height: 100vh;
-  padding: 30px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  z-index: var(--z-sidebar);
-  pointer-events: auto !important;
-  font-family: var(--font-sans);
-}
-
-  .sidebar.active {
-    transform: translateX(0);
-  }
-
-  .logo img {
-    width: 110px;
-    margin-bottom: 30px;
-  }
-
   .nav-menu {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
     gap: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
   }
 
   .nav-menu a {
     font-size: 1rem;
   }
 
-  /* =========================
-     LAYOUT
-  ========================= */
-
-  .stage {
-    margin-left: 0;
-  }
-
   .scene-scroll {
     padding: 90px 24px 50px;
   }
 
-  /* =========================
-     HERO
-  ========================= */
-
   .hero-content {
     padding: 28px;
-    justify-content: center;
-    align-items: flex-start;
   }
 
   .hero-title {
     font-size: clamp(2rem, 12vw, 4rem);
     line-height: 0.82;
     letter-spacing: 0.08em;
-
     max-width: 260px;
-
     top: 0;
   }
 
   .hero-sub {
     margin-top: 16px;
-
     max-width: 260px;
-
     font-size: 0.78rem;
     line-height: 1.6;
   }
-
-  /* =========================
-     MODEL VIEWER
-  ========================= */
-
-  .glb-layer model-viewer {
-    width: 100%;
-    height: 100%;
-    pointer-events: auto;
-  }
-
-  /* =========================
-     TITLES
-  ========================= */
 
   .section-title {
     font-size: clamp(2rem, 10vw, 3rem);
     margin-bottom: 35px;
   }
-
-  /* =========================
-     TALLERES
-  ========================= */
 
   .taller-item p {
     opacity: 1;
@@ -617,18 +513,10 @@ canvas {
     transform: none;
   }
 
-  /* =========================
-     RELEASES
-  ========================= */
-
   .release {
     flex-wrap: wrap;
     gap: 8px;
   }
-
-  /* =========================
-     SCROLL BUTTON
-  ========================= */
 
   #scrollTopBtn {
     right: 16px;
