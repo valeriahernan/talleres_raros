@@ -80,7 +80,7 @@ canvas {
   align-items: left;
   width: 100%;
   text-align: left;
-  margin-top: 40px; /* 👈 Agrega esto. Ajusta el número para bajarlo más o menos */
+  margin-top: 0px; /* 👈 Agrega esto. Ajusta el número para bajarlo más o menos */
 }
 
 
