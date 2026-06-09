@@ -136,9 +136,6 @@ window.addEventListener("DOMContentLoaded", () => {
   animate();
 });
 
-/* =========================
-   CURSOR EFFECT
-========================= */
 
 /* =========================
    LANGUAGE TOGGLE
@@ -166,3 +163,74 @@ window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("lang");
   if (saved) setLanguage(saved);
 });
+
+
+
+/* =========================
+   CURSOR EFFECT
+========================= */
+
+const cursor = document.querySelector(".custom-cursor");
+
+const symbols = [
+  "♫", "⋆", "｡", "♪", "₊˚", "♬", "ﾟ", "."
+];
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+
+  createMusicSparkle(e.clientX, e.clientY);
+});
+
+function createMusicSparkle(x, y) {
+  const el = document.createElement("div");
+
+  el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+  el.style.position = "fixed";
+  el.style.left = x + "px";
+  el.style.top = y + "px";
+  el.style.fontSize = (Math.random() * 14 + 10) + "px";
+  el.style.color = randomColor();
+  el.style.pointerEvents = "none";
+  el.style.zIndex = "99998";
+  el.style.transform = "translate(-50%, -50%)";
+
+  document.body.appendChild(el);
+
+  const angle = Math.random() * Math.PI * 2;
+  const velocity = Math.random() * 2 + 0.5;
+
+  let life = 0;
+
+  function animate() {
+    life++;
+
+    const dx = Math.cos(angle) * velocity * life;
+    const dy = Math.sin(angle) * velocity * life - life * 0.2;
+
+    el.style.left = x + dx + "px";
+    el.style.top = y + dy + "px";
+    el.style.opacity = 1 - life / 50;
+
+    if (life < 50) {
+      requestAnimationFrame(animate);
+    } else {
+      el.remove();
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function randomColor() {
+  const colors = [
+    "#ba7dff",
+    "#ffffff",
+    "#ff7bd1",
+    "#7df9ff",
+    "#ffd36e"
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
