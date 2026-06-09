@@ -31,11 +31,12 @@
     <img src="images/talleresraros.png" alt="Talleres Raros">
   </div>
 
-  <div class="menu-hotzone"></div>
+  <!-- MENU BUTTON -->
+  <button class="menu-hotzone" aria-label="menu toggle"></button>
 
-<div class="menu-container">
-  <div class="menu-label">MENU</div>
-  
+  <div class="menu-container">
+    <div class="menu-label">MENU</div>
+
     <nav class="nav-menu">
       <a href="#hero" data-es="INICIO" data-en="HOME">INICIO</a>
       <a href="#convocatorias" data-es="CONVOCATORIAS" data-en="CALLS">CONVOCATORIAS</a>
@@ -44,7 +45,6 @@
       <a href="#compilados" data-es="COMPILADOS" data-en="RELEASES">COMPILADOS</a>
       <a href="#contacto" data-es="CONTACTO" data-en="CONTACT">CONTACTO</a>
     </nav>
-
   </div>
 
   <main class="stage">
@@ -57,8 +57,10 @@
           src="GLB/3Dtalleres.glb"
           camera-controls
           auto-rotate
-          exposure="2"
-          shadow-intensity="2"
+          exposure="1.2"
+          shadow-intensity="1"
+          loading="lazy"
+          interaction-prompt="none"
           style="width:100%;height:100%;">
         </model-viewer>
       </div>
@@ -93,7 +95,7 @@
 
         <h3 class="conv-title"
             data-es="CONVOCATORIA 2026"
-            data-en="2026 CALL">
+            data-en="CONVOCATORIA 2026">
           CONVOCATORIA 2026
         </h3>
 
@@ -101,12 +103,12 @@
 
           <p class="conv-strong"
              data-es="TALLERES RAROS ㄨ RESIDENCIA PACÍFICA"
-             data-en="TALLERES RAROS ㄨ PACÍFICA RESIDENCY">
+             data-en="TALLERES RAROS ㄨ RESIDENCIA PACÍFICA">
             TALLERES RAROS ㄨ RESIDENCIA PACÍFICA
           </p>
 
           <p class="conv-strong">
-            ☪ <a target="_blank"
+            ☪ <a target="_blank" rel="noopener noreferrer"
                  href="https://docs.google.com/forms/d/e/1FAIpQLSfCcLttSyabZ31Wc8tcAZKHeIik0VByX-0bzUR9I9cycrIlkQ/viewform"
                  data-es="Taller de Producción para Personas Trans"
                  data-en="Music production Workshop for Trans People">
@@ -145,7 +147,7 @@
           </p>
 
           <p class="conv-strong">
-            ☪ <a target="_blank"
+            ☪ <a target="_blank" rel="noopener noreferrer"
                  href="https://docs.google.com/forms/d/e/1FAIpQLSev_zyuNmh5XCcIlSYKthn6pR-0-S3QzBYghIMP9RIiqlJfbw/viewform"
                  data-es="Masterclass Javiera Electra"
                  data-en="Javiera Electra Masterclass">
@@ -210,76 +212,6 @@ This project is funded by the National Music Development Fund (Fondo para el Fom
           Dirigido y fundado en 2019 por anthï y con sede en Chile, el proyecto implementa talleres y masterclasses que entreguen herramientas y perspectivas para incentivar la agencia creativa, en un espacio de encuentro de prácticas múltiples más allá de géneros musicales específicos. Interseccionamos experimentación, aprendizaje colectivo, el potencial creativo de las limitaciones y del no-saber-hacer, con una mirada crítica en torno a la creación contemporánea. Orientamos una propuesta que amplíe el acceso de estas prácticas especialmente para la población LGBTTQIANB+.
         </p>
 
-        <div class="project-block">
-
-          <h3 class="subsection-title"
-              data-es="꧁ EQUIPO DOCENTE"
-              data-en="꧁ TEACHING TEAM">
-            ꧁ EQUIPO DOCENTE
-          </h3>
-
-          <p>
-            <a target="_blank" href="https://anthi.neocities.org">Anthï</a>
-            ✴︎
-            <a target="_blank" href="https://tatuara.net">Tatu Vergara</a>
-          </p>
-
-        </div>
-
-        <div class="project-block">
-
-          <h3 class="subsection-title"
-              data-es="꧁ DOCENTES INVITADES"
-              data-en="꧁ GUEST EDUCATORS">
-            ꧁ DOCENTES INVITADES
-          </h3>
-
-          <p data-es="2026 · Javiera Electra ✴︎ Lilen ✴︎ Hypereikon"
-             data-en="2026 · Javiera Electra ✴︎ Lilen ✴︎ Hypereikon">
-            2026 · Javiera Electra ✴︎ Lilen ✴︎ Hypereikon
-          </p>
-
-          <p data-es="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo"
-             data-en="2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo">
-            2025 · Dadalú ✴︎ DJ Daddy Yonqui ✴︎ Violeta Castillo
-          </p>
-
-          <p data-es="2022 · Yaima Cat ✴︎ Niñosindigo"
-             data-en="2022 · Yaima Cat ✴︎ Niñosindigo">
-            2022 · Yaima Cat ✴︎ Niñosindigo
-          </p>
-
-          <p data-es="2021 · Dadalú ✴︎ Violeta Castillo"
-             data-en="2021 · Dadalú ✴︎ Violeta Castillo">
-            2021 · Dadalú ✴︎ Violeta Castillo
-          </p>
-
-          <p data-es="2020 · Vimvau"
-             data-en="2020 · Vimvau">
-            2020 · Vimvau
-          </p>
-
-        </div>
-
-        <div class="project-block">
-
-          <h3 class="subsection-title"
-              data-es="DISEÑO GRÁFICO Y WEB"
-              data-en="GRAPHIC & WEB DESIGN">
-            DISEÑO GRÁFICO Y WEB
-          </h3>
-
-          <p>
-            <a target="_blank"
-               href="https://instagram.com/inpar_"
-               data-es="@inpar"
-               data-en="@inpar">
-              @inpar
-            </a>
-          </p>
-
-        </div>
-
       </div>
     </section>
 
@@ -315,7 +247,7 @@ This project is funded by the National Music Development Fund (Fondo para el Fom
           </h3>
 
           <p data-es="Espacio separatista de iniciación a la producción que plantea perspectivas críticas y prácticas de la producción específicas para las identidades disidentes de género."
-             data-en="A separatist, introductory music production space that confronts critical perspectives and production practices specific to trans and gender-diverse identities. ">
+             data-en="A separatist, introductory music production space that confronts critical perspectives and production practices specific to trans and gender-diverse identities.">
             Espacio separatista de iniciación a la producción que plantea perspectivas críticas y prácticas de la producción específicas para las identidades disidentes de género.
           </p>
 
@@ -343,7 +275,7 @@ This project is funded by the National Music Development Fund (Fondo para el Fom
           </h3>
 
           <p data-es="Iniciación a técnicas de composición específicas del entorno digital y las herramientas de producción de un DAW."
-             data-en="An introduction to composition techniques specific to the digital environment and the production tools available within a DAW. ">
+             data-en="An introduction to composition techniques specific to the digital environment and the production tools available within a DAW.">
             Iniciación a técnicas de composición específicas del entorno digital y las herramientas de producción de un DAW.
           </p>
 
@@ -391,63 +323,63 @@ This project is funded by the National Music Development Fund (Fondo para el Fom
         </h2>
 
         <div class="release-list">
-          <div class="release"><span>TR011</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">Me he perdido en muchas partes</a> <small>2025</small></div>
-          <div class="release"><span>TR010</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> <small>2024</small></div>
-          <div class="release"><span>TR009</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> <small>2023</small></div>
-          <div class="release"><span>TR008</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> <small>2023</small></div>
-          <div class="release"><span>TR007</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> <small>2022</small></div>
-          <div class="release"><span>TR006</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> <small>2022</small></div>
-          <div class="release"><span>TR005</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café (y hazme el amor)</a> <small>2021</small></div>
-          <div class="release"><span>TR004</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya, hazte famosa</a> <small>2021</small></div>
-          <div class="release"><span>TR003</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> <small>2020</small></div>
-          <div class="release"><span>TR002</span> <a target="_blank" href="http://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> <small>2020</small></div>
-          <div class="release"><span>TR001</span> <a target="_blank" href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida en ese miedo</a> <small>2020</small></div>
+          <div class="release"><span>TR011</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/me-he-perdido-en-muchas-partes-tr011">Me he perdido en muchas partes</a> <small>2025</small></div>
+          <div class="release"><span>TR010</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/el-viejo-la-flor-y-la-luz-tr010">El viejo, la flor y la luz</a> <small>2024</small></div>
+          <div class="release"><span>TR009</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/super-sayonara-tr009">Super Sayonara</a> <small>2023</small></div>
+          <div class="release"><span>TR008</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/martes-raro-tr008">Martes raro</a> <small>2023</small></div>
+          <div class="release"><span>TR007</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/creo-que-se-volvi-personal-tr007">Creo que se volvió personal</a> <small>2022</small></div>
+          <div class="release"><span>TR006</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/subi-dubi-tr006">Subi Dubi</a> <small>2022</small></div>
+          <div class="release"><span>TR005</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/inv-tame-un-caf-y-hazme-el-amor-tr005">Invítame un café (y hazme el amor)</a> <small>2021</small></div>
+          <div class="release"><span>TR004</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/ya-hazte-famosa-tr004">Ya, hazte famosa</a> <small>2021</small></div>
+          <div class="release"><span>TR003</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/irresponsabilidad-astral-tr003">Irresponsabilidad astral</a> <small>2020</small></div>
+          <div class="release"><span>TR002</span> <a target="_blank" rel="noopener noreferrer" href="http://talleresraros.bandcamp.com/album/no-puedo-salir-de-esta-pieza-tr002">No puedo salir de esta pieza</a> <small>2020</small></div>
+          <div class="release"><span>TR001</span> <a target="_blank" rel="noopener noreferrer" href="https://talleresraros.bandcamp.com/album/podi-quedarte-toda-la-vida-en-ese-miedo-tr001">Podi quedarte toda la vida en ese miedo</a> <small>2020</small></div>
         </div>
 
       </div>
     </section>
 
-<!-- CONTACTO -->
-<section class="scene" id="contacto">
-  <div class="scene-scroll">
+    <!-- CONTACTO -->
+    <section class="scene" id="contacto">
+      <div class="scene-scroll">
 
-    <h2 class="section-title"
-        data-es="CONTACTO"
-        data-en="CONTACT">
-      CONTACTO
-    </h2>
+        <h2 class="section-title"
+            data-es="CONTACTO"
+            data-en="CONTACT">
+          CONTACTO
+        </h2>
 
-    <p data-es="stay ⋆ friends"
-       data-en="stay ⋆ friends">
-      stay ⋆ friends
-    </p>
+        <p data-es="stay ⋆ friends"
+           data-en="stay ⋆ friends">
+          stay ⋆ friends
+        </p>
 
-    <div class="contact-links">
+        <div class="contact-links">
 
-      <p>✉ <a href="mailto:talleresraros@gmail.com">talleresraros@gmail.com</a></p>
+          <p>✉ <a href="mailto:talleresraros@gmail.com">talleresraros@gmail.com</a></p>
 
-      <p>
-        @ <a target="_blank"
-             href="https://www.instagram.com/talleresraros/"
-             data-es="TALLERESRAROS"
-             data-en="TALLERESRAROS">
-          TALLERESRAROS
-        </a>
-      </p>
+          <p>
+            @ <a target="_blank" rel="noopener noreferrer"
+                 href="https://www.instagram.com/talleresraros/">
+              TALLERESRAROS
+            </a>
+          </p>
 
-      <p>
-        ✧ <a target="_blank"
-             href="https://talleresraros.bandcamp.com/"
-             data-es="BANDCAMP"
-             data-en="BANDCAMP">
-          BANDCAMP
-        </a>
-      </p>
+          <p>
+            ✧ <a target="_blank" rel="noopener noreferrer"
+                 href="https://talleresraros.bandcamp.com/">
+              BANDCAMP
+            </a>
+          </p>
 
-    </div>
+        </div>
 
-  </div>
-</section>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
