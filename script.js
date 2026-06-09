@@ -172,13 +172,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const cursor = document.querySelector(".custom-cursor");
 
-const symbols = ["♫", "⋆", "｡", "♪", "𝄢˚", "♬", "ﾟ", "❀", "♫", "⋆", "✴︎", "♪", "✧˚", "♬", "✴︎", "✩"];
+const symbols = [
+  "♫", "⋆", "｡", "♪", "𝄢˚", "♬", "ﾟ", "❀",
+  "♫", "⋆", "✴︎", "♪", "✧˚", "♬", "✴︎", "✩"
+];
+
+// 🔥 control de cantidad de partículas
+let lastTime = 0;
+const delay = 90; // ↑ más alto = menos partículas
 
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 
-  createDrop(e.clientX, e.clientY);
+  const now = Date.now();
+
+  if (now - lastTime > delay) {
+    createDrop(e.clientX, e.clientY);
+    lastTime = now;
+  }
 });
 
 function createDrop(x, y) {
@@ -200,21 +212,23 @@ function createDrop(x, y) {
   let posY = y;
   let posX = x;
 
-  const drift = (Math.random() - 0.5) * 1.5; // leve movimiento lateral
-  const speed = Math.random() * 0.4 + 1;      // caída
+  const drift = (Math.random() - 0.5) * 1.2; // menos caos
+  const speed = Math.random() * 0.8 + 0.3;   // caída suave
 
   let opacity = 1;
 
   function fall() {
     posY += speed;
     posX += drift;
-    opacity -= 0.01;
+
+    // 🌫️ fade más suave
+    opacity *= 0.95;
 
     el.style.top = posY + "px";
     el.style.left = posX + "px";
     el.style.opacity = opacity;
 
-    if (opacity > 0 && posY < window.innerHeight) {
+    if (opacity > 0 && posY < window.innerHeight + 200) {
       requestAnimationFrame(fall);
     } else {
       el.remove();
