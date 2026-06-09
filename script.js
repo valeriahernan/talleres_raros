@@ -227,10 +227,6 @@ function createMusicSparkle(x, y) {
 function randomColor() {
   const colors = [
     "#ba7dff",
-    "#ffffff",
-    "#ff7bd1",
-    "#7df9ff",
-    "#ffd36e"
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 }
