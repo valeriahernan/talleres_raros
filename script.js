@@ -101,14 +101,12 @@ function initHeroEffect() {
 
   let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-  const states = Array.from(letters).map(el => ({
+  const states = [...letters].map(el => ({
     el,
-    x: 0,
-    y: 0,
+    x: 0, y: 0,
     rot: 0,
     scale: 1,
-    tx: 0,
-    ty: 0,
+    tx: 0, ty: 0,
     trot: 0,
     tscale: 1
   }));
@@ -122,8 +120,8 @@ function initHeroEffect() {
     states.forEach(s => {
       const r = s.el.getBoundingClientRect();
 
-      const dx = r.left + r.width / 2 - mouse.x;
-      const dy = r.top + r.height / 2 - mouse.y;
+      const dx = (r.left + r.width / 2) - mouse.x;
+      const dy = (r.top + r.height / 2) - mouse.y;
 
       const dist = Math.sqrt(dx * dx + dy * dy);
       const max = 180;
@@ -136,16 +134,14 @@ function initHeroEffect() {
         s.trot = s.tx * 0.6;
         s.tscale = 1 + f * 0.2;
       } else {
-        s.tx = 0;
-        s.ty = 0;
-        s.trot = 0;
+        s.tx = s.ty = s.trot = 0;
         s.tscale = 1;
       }
 
-      s.x += (s.tx - s.x) * 0.12;
-      s.y += (s.ty - s.y) * 0.12;
-      s.rot += (s.trot - s.rot) * 0.12;
-      s.scale += (s.tscale - s.scale) * 0.12;
+      s.x += (s.tx - s.x) * 0.1;
+      s.y += (s.ty - s.y) * 0.1;
+      s.rot += (s.trot - s.rot) * 0.1;
+      s.scale += (s.tscale - s.scale) * 0.1;
 
       s.el.style.transform = `
         translate(${s.x}px, ${s.y}px)
