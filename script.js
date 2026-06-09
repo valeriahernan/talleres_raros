@@ -25,66 +25,120 @@ links.forEach(link => {
 });
 
 /* =========================
+   MENU INSTALLATION MODE
+========================= */
+
+let isMobile = window.innerWidth <= 900;
+let menuVisible = false;
+
+// activar menú
+function showMenu() {
+  if (!menu) return;
+  menu.classList.add("visible");
+  menuVisible = true;
+}
+
+// ocultar menú
+function hideMenu() {
+  if (!menu) return;
+  menu.classList.remove("visible");
+  menuVisible = false;
+}
+
+/* -------------------------
+   DESKTOP: esquina inferior izquierda
+-------------------------- */
+function handleMouse(e) {
+  if (isMobile) return;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  const nearCorner =
+    x < 260 && y > window.innerHeight - 220;
+
+  if (nearCorner) {
+    showMenu();
+  } else {
+    hideMenu();
+  }
+}
+
+/* -------------------------
+   MOBILE: toggle por tap en hotzone
+-------------------------- */
+function handleTouch() {
+  if (!isMobile) return;
+
+  menuVisible ? hideMenu() : showMenu();
+}
+
+/* -------------------------
+   EVENTS
+-------------------------- */
+window.addEventListener("mousemove", handleMouse);
+hotzone?.addEventListener("click", handleTouch);
+
+window.addEventListener("resize", () => {
+  isMobile = window.innerWidth <= 900;
+  hideMenu();
+});
+
+/* =========================
    HERO TEXT EFFECT
 ========================= */
 function initHeroEffect() {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2
-  };
+  let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 
-  const states = Array.from(letters).map(letter => ({
-    el: letter,
-    x: 0,
-    y: 0,
+  const states = Array.from(letters).map(el => ({
+    el,
+    x: 0, y: 0,
     rot: 0,
     scale: 1,
-    tx: 0,
-    ty: 0,
+    tx: 0, ty: 0,
     trot: 0,
     tscale: 1
   }));
 
-  document.addEventListener("mousemove", (e) => {
+  window.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
   });
 
   function animate() {
-    states.forEach(state => {
-      const rect = state.el.getBoundingClientRect();
+    states.forEach(s => {
+      const r = s.el.getBoundingClientRect();
 
-      const dx = rect.left + rect.width / 2 - mouse.x;
-      const dy = rect.top + rect.height / 2 - mouse.y;
+      const dx = r.left + r.width / 2 - mouse.x;
+      const dy = r.top + r.height / 2 - mouse.y;
+
       const dist = Math.sqrt(dx * dx + dy * dy);
+      const max = 180;
 
-      const maxDist = 180;
+      if (dist < max) {
+        const f = 1 - dist / max;
 
-      if (dist < maxDist) {
-        const force = 1 - dist / maxDist;
-        state.tx = dx * force * 0.35;
-        state.ty = dy * force * 0.35;
-        state.trot = state.tx * 0.6;
-        state.tscale = 1 + force * 0.2;
+        s.tx = dx * f * 0.35;
+        s.ty = dy * f * 0.35;
+        s.trot = s.tx * 0.6;
+        s.tscale = 1 + f * 0.2;
       } else {
-        state.tx = 0;
-        state.ty = 0;
-        state.trot = 0;
-        state.tscale = 1;
+        s.tx = s.ty = s.trot = 0;
+        s.tscale = 1;
       }
 
-      state.x += (state.tx - state.x) * 0.1;
-      state.y += (state.ty - state.y) * 0.1;
-      state.rot += (state.trot - state.rot) * 0.1;
-      state.scale += (state.tscale - state.scale) * 0.1;
+      s.x += (s.tx - s.x) * 0.1;
+      s.y += (s.ty - s.y) * 0.1;
+      s.rot += (s.trot - s.rot) * 0.1;
+      s.scale += (s.tscale - s.scale) * 0.1;
 
-      state.el.style.transform = `
-        translate(${state.x}px, ${state.y}px)
-        rotate(${state.rot}deg)
-        scale(${state.scale})
+      s.el.style.transform = `
+        translate(${s.x}px, ${s.y}px)
+        rotate(${s.rot}deg)
+        scale(${s.scale})
       `;
     });
 
@@ -106,9 +160,7 @@ function setLanguage(lang) {
     if (text) el.textContent = text;
   });
 
-  if (btn) {
-    btn.textContent = lang === "es" ? "EN" : "ES";
-  }
+  if (btn) btn.textContent = lang === "es" ? "EN" : "ES";
 
   currentLang = lang;
   localStorage.setItem("lang", lang);
@@ -126,49 +178,9 @@ function initLanguage() {
 }
 
 /* =========================
-   MENU INSTALLATION SYSTEM
-========================= */
-
-function initMenuInstallation() {
-  if (!menu) return;
-
-  let isMobile = window.innerWidth <= 900;
-
-  function updateMenuDesktop(e) {
-    if (isMobile) return;
-
-    const x = e.clientX;
-    const y = e.clientY;
-
-    const active = x < 300 && y > window.innerHeight - 250;
-
-    menu.classList.toggle("visible", active);
-  }
-
-  function toggleMobileMenu() {
-    if (!isMobile) return;
-    menu.classList.toggle("visible");
-  }
-
-  window.addEventListener("mousemove", updateMenuDesktop);
-
-  if (hotzone) {
-    hotzone.addEventListener("click", toggleMobileMenu);
-  }
-
-  window.addEventListener("resize", () => {
-    isMobile = window.innerWidth <= 900;
-
-    // reset visual state al cambiar modo
-    menu.classList.remove("visible");
-  });
-}
-
-/* =========================
    INIT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
   initHeroEffect();
   initLanguage();
-  initMenuInstallation();
 });
