@@ -190,7 +190,7 @@ canvas {
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0.09em;
-  line-height: 1.72;
+  line-height: 1;
   max-width: 400px;
   position: relative;
   top: 30px;
@@ -212,7 +212,7 @@ canvas {
 }
 
 .hero-title .word:first-child {
-  margin-bottom: 30px; /* 👈 AQUÍ controlas el espacio */
+  margin-bottom: 5px; /* 👈 AQUÍ controlas el espacio */
 }
 .hero-title span:hover {
   filter: none !important;
