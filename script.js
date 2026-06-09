@@ -201,7 +201,7 @@ function createDrop(x, y) {
   let posX = x;
 
   const drift = (Math.random() - 0.5) * 1.5; // leve movimiento lateral
-  const speed = Math.random() * 1.5 + 1;      // caída
+  const speed = Math.random() * 0.4 + 1;      // caída
 
   let opacity = 1;
 
@@ -225,6 +225,6 @@ function createDrop(x, y) {
 }
 
 function randomColor() {
-  const colors = ["#ba7dff", "#ff7bd1", "#ba7dff", "#d87aae"];
+  const colors = ["#ba7dff", "#ff7bd1"];
   return colors[Math.floor(Math.random() * colors.length)];
 }
