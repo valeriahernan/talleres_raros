@@ -6,17 +6,17 @@
   --color-text: #111;
   --color-primary: #ba7dff;
   --color-white: #ffffff;
-  
+
   --font-mono: 'IBM Plex Mono', monospace;
   --font-geist: 'Geist Mono', monospace;
   --font-sans: 'Urbanist', sans-serif;
-  
+
   --z-canvas: 1;
   --z-stage: 1;
   --z-lang: 9999;
   --z-sidebar: 999999;
   --z-mobile: 9999999;
-  
+
   --transition-fast: 0.15s ease-out;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.35s ease;
@@ -34,8 +34,8 @@
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
   cursor: auto;
 }
 
@@ -49,7 +49,7 @@ canvas {
 }
 
 /* ==========================================================================
-   3. LAYOUT & STRUCTURE (SIDEBAR, STAGE, NAVIGATION)
+   3. LAYOUT & STRUCTURE
    ========================================================================== */
 .sidebar {
   position: fixed;
@@ -77,12 +77,10 @@ canvas {
 .nav-menu {
   display: flex;
   flex-direction: column;
-  align-items: left;
   width: 100%;
   text-align: left;
-  margin-top: 50px; /* 👈 Agrega esto. Ajusta el número para bajarlo más o menos */
+  margin-top: 50px;
 }
-
 
 .nav-menu a {
   position: relative;
@@ -93,7 +91,7 @@ canvas {
   font-size: 1.05rem;
   font-weight: 700;
   padding-bottom: 10px;
-  margin-bottom: 5px; /* 👈 Agrega esto para separar los enlaces entre sí hacia abajo */
+  margin-bottom: 5px;
 }
 
 .nav-menu a::after {
@@ -121,7 +119,7 @@ canvas {
 }
 
 /* ==========================================================================
-   4. SCENES & VIEWS
+   4. SCENES
    ========================================================================== */
 .scene {
   position: absolute;
@@ -144,7 +142,7 @@ canvas {
 }
 
 /* ==========================================================================
-   5. HERO COMPONENT
+   5. HERO
    ========================================================================== */
 .hero {
   position: relative;
@@ -186,7 +184,6 @@ canvas {
 
 .hero-title {
   color: var(--color-primary);
-  font-family: var(--font-sans);
   font-size: clamp(2rem, 4vw, 4.2rem);
   font-weight: 800;
   font-style: oblique;
@@ -205,64 +202,18 @@ canvas {
 
 .hero-title:hover span {
   filter: blur(1px);
-  opacity: 4;
+  opacity: 0.4;
 }
 
-.hero-title .word {
-  display: block;
-}
-
-.hero-title .word:first-child {
-  margin-bottom: 5px; /* 👈 AQUÍ controlas el espacio */
-}
 .hero-title span:hover {
   filter: none !important;
   opacity: 1 !important;
   transform: translateY(-10px) scale(1.2) rotate(-8deg);
 }
 
-.hero-sub {
-  margin-top: 24px;
-  max-width: 520px;
-  line-height: 1.8;
-  pointer-events: auto;
-}
-
 /* ==========================================================================
-   6. INNER COMPONENTS & SECTIONS
+   6. COMPONENTS
    ========================================================================== */
-/* Convocatorias */
-.conv-title {
-  color: var(--color-primary);
-  margin-bottom: 6px;
-  font-weight: 700;
-}
-
-.conv-subtitle {
-  margin-bottom: 18px !important;
-  opacity: 0.85;
-}
-
-.conv-list {
-  margin-bottom: 18px;
-}
-
-.conv-list p {
-  margin-bottom: 4px !important;
-  line-height: 1.4;
-}
-
-.conv-description {
-  margin-top: 24px;
-  max-width: 700px;
-  line-height: 1.7;
-}
-
-.conv-strong {
-  font-weight: 600;
-}
-
-/* Textos Generales */
 .section-title {
   color: var(--color-primary);
   font-size: clamp(2rem, 4vw, 4rem);
@@ -278,140 +229,15 @@ canvas {
 .scene a {
   color: var(--color-primary);
   text-decoration: none;
-  transition: opacity var(--transition-normal);
-}
-
-.scene a:hover {
-  opacity: .6;
-}
-
-/* Proyectos */
-.project-block {
-  margin-top: 28px;
-}
-
-.subsection-title {
-  color: var(--color-primary);
-  font-weight: 900;
-  margin-bottom: 4px;
-}
-
-.project-block p {
-  font-weight: 700;
-  line-height: 1.35;
-  margin-bottom: 2px;
-}
-
-/* Talleres */
-.taller-item {
-  margin-bottom: 28px;
-  max-width: 900px;
-}
-
-.taller-item h3 {
-  color: var(--color-primary);
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.taller-item p {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transform: translateY(-6px);
-  transition: all var(--transition-slow);
-}
-
-.taller-item:hover p {
-  opacity: 1;
-  max-height: 500px;
-  transform: translateY(0);
-}
-
-/* Compilados (Releases) */
-.release {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  font-weight: 1200;
-}
-
-.release span {
-  font-weight: 900;
-  opacity: 1;
-}
-
-.release a {
-  font-weight: 700;
-}
-
-.release small {
-  font-weight: 700;
-  opacity: 1;
-  text-align: right;
-}
-
-.release-list {
-  gap: 12px;
-}
-
-/* Contacto */
-#contacto .contact-links {
-  gap: 12px;
-}
-
-#contacto .contact-links p,
-#contacto .contact-links a {
-  font-weight: 900;
-}
-
-#contacto p {
-  line-height: 1.4;
-}
-
-#contacto > .scene-scroll > p:first-of-type {
-  font-weight: 700;
-  margin-bottom: 12px;
 }
 
 /* ==========================================================================
-   7. UI INTERACTIVE CONTROLS
+   7. INTERACTIVE UI
    ========================================================================== */
-/* Mobile Bar (Hidden by default) */
 .mobile-bar {
   display: none;
 }
 
-/* Scroll Top Button */
-#scrollTopBtn {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  z-index: var(--z-sidebar);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
-}
-
-#scrollTopBtn.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#scrollTopBtn:hover {
-  transform: translateY(-3px);
-}
-
-/* Language Switch */
 .lang-switch {
   position: fixed;
   top: 20px;
@@ -423,138 +249,69 @@ canvas {
   background: transparent;
   border: 2px solid var(--color-primary);
   color: var(--color-primary);
-  font-weight: 700;
-  font-size: 0.9rem;
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition: all var(--transition-normal);
-}
-
-.lang-switch button:hover {
-  background: var(--color-primary);
-  color: var(--color-white);
-}
-
-/* Pointer Events Overrides */
-.sidebar *,
-.mobile-bar,
-.mobile-bar * {
-  pointer-events: auto !important;
 }
 
 /* ==========================================================================
-   8. MEDIA QUERIES (RESPONSIVE DEFAULTS)
-   ========================================================================== */
-/* ==========================================================================
-   MOBILE
+   8. MOBILE
    ========================================================================== */
 @media (max-width: 900px) {
 
   body {
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
-  /* =========================
-     MENU
-  ========================= */
-
+  /* MENU */
   .mobile-bar {
     display: flex;
     position: fixed;
     top: 14px;
     left: 14px;
     z-index: 10000000;
-    width: auto;
-    padding: 0;
-    background: transparent;
   }
 
   #mobile-menu-btn {
     all: unset;
     cursor: pointer;
-
     padding: 12px 18px;
-
     background: rgba(17,17,17,.9);
     color: white;
-
     border-radius: 999px;
-
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
   }
 
-  /* =========================
-     LANGUAGE
-  ========================= */
-
+  /* LANG */
   .lang-switch {
     top: 14px;
     right: 14px;
-    z-index: 10000001;
   }
 
   .lang-switch button {
-    min-width: 52px;
-    height: 42px;
-
-    padding: 0 14px;
-
     background: var(--color-primary);
     color: white;
-
     border: none;
     border-radius: 999px;
-
-    font-size: 0.8rem;
-    font-weight: 800;
   }
 
-  /* =========================
-     SIDEBAR
-  ========================= */
+  /* SIDEBAR (DRAWER REAL) */
+  .sidebar {
+    width: 85%;
+    max-width: 320px;
+    padding: 30px;
 
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 220px;
-  height: 100vh;
-  padding: 30px;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  z-index: var(--z-sidebar);
-  pointer-events: auto !important;
-  font-family: var(--font-sans);
-}
+    background: var(--color-bg);
+  }
 
   .sidebar.active {
     transform: translateX(0);
   }
 
-  .logo img {
-    width: 110px;
-    margin-bottom: 30px;
-  }
-
-  .nav-menu {
-    gap: 18px;
-  }
-
-  .nav-menu a {
-    font-size: 1rem;
-  }
-
-  /* =========================
-     LAYOUT
-  ========================= */
-
+  /* STAGE */
   .stage {
     margin-left: 0;
   }
@@ -563,90 +320,34 @@ canvas {
     padding: 90px 24px 50px;
   }
 
-  /* =========================
-     HERO
-  ========================= */
-
+  /* HERO */
   .hero-content {
     padding: 28px;
-    justify-content: center;
-    align-items: flex-start;
   }
 
   .hero-title {
     font-size: clamp(2rem, 12vw, 4rem);
-    line-height: 0.82;
-    letter-spacing: 0.08em;
-
     max-width: 260px;
-
     top: 0;
   }
 
-  .hero-sub {
-    margin-top: 16px;
-
-    max-width: 260px;
-
-    font-size: 0.78rem;
-    line-height: 1.6;
+  /* CURSOR OFF */
+  .custom-cursor {
+    display: none;
   }
 
-  /* =========================
-     MODEL VIEWER
-  ========================= */
-
-  .glb-layer model-viewer {
-    width: 100%;
-    height: 100%;
-    pointer-events: auto;
-  }
-
-  /* =========================
-     TITLES
-  ========================= */
-
-  .section-title {
-    font-size: clamp(2rem, 10vw, 3rem);
-    margin-bottom: 35px;
-  }
-
-  /* =========================
-     TALLERES
-  ========================= */
-
-  .taller-item p {
-    opacity: 1;
-    max-height: none;
-    transform: none;
-  }
-
-  /* =========================
-     RELEASES
-  ========================= */
-
-  .release {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  /* =========================
-     SCROLL BUTTON
-  ========================= */
-
-  #scrollTopBtn {
-    right: 16px;
-    bottom: 16px;
+  body {
+    cursor: auto;
   }
 }
 
-
-  /* =========================
-      CUSTOM CURSOR
-  ========================= */
-
-body {
-  cursor: none;
+/* ==========================================================================
+   9. CURSOR (DESKTOP ONLY)
+   ========================================================================== */
+@media (min-width: 901px) {
+  body {
+    cursor: none;
+  }
 }
 
 .custom-cursor {
