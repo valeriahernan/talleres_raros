@@ -1,17 +1,23 @@
+/* =========================
+   CLICK FIX
+========================= */
+document.addEventListener("click", () => {}, { passive: true });
+
+/* =========================
+   ELEMENTOS
+========================= */
 const scenes = document.querySelectorAll(".scene");
 const links = document.querySelectorAll(".nav-menu a");
+const sidebar = document.querySelector(".sidebar");
+const mobileBtn = document.getElementById("mobile-menu-btn");
+const desktopToggle = document.getElementById("menuToggle");
 
-const menu = document.querySelector(".menu-container");
-const hotzone = document.querySelector(".menu-hotzone");
-
-let isMobile = window.innerWidth <= 900;
-let menuVisible = false;
-
-/* SCENES */
+/* =========================
+   SCENES SYSTEM
+========================= */
 function showScene(id) {
-  scenes.forEach(s => s.classList.remove("active"));
-
-  const target = document.querySelector(id.startsWith("#") ? id : `#${id}`);
+  scenes.forEach(scene => scene.classList.remove("active"));
+  const target = document.querySelector(id);
   if (target) target.classList.add("active");
 }
 
@@ -19,97 +25,144 @@ links.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     showScene(link.getAttribute("href"));
+
+    sidebar?.classList.remove("active");
+    sidebar?.classList.remove("open");
   });
 });
 
-/* MENU */
-function showMenu() {
-  menu?.classList.add("visible");
-  menuVisible = true;
+/* =========================
+   MOBILE MENU
+========================= */
+if (mobileBtn && sidebar) {
+  mobileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("active");
+  });
 }
 
-function hideMenu() {
-  menu?.classList.remove("visible");
-  menuVisible = false;
+/* =========================
+   DESKTOP TOGGLE MENU
+========================= */
+if (desktopToggle && sidebar) {
+  desktopToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("open");
+  });
 }
 
-/* DESKTOP hover zone */
-function handleMouse(e) {
-  if (isMobile) return;
-
-  const nearCorner =
-    e.clientX < 250 && e.clientY > window.innerHeight - 200;
-
-  nearCorner ? showMenu() : hideMenu();
-}
-
-/* MOBILE toggle */
-function toggleMenu() {
-  if (!isMobile) return;
-  menuVisible ? hideMenu() : showMenu();
-}
-
-/* EVENTS */
-window.addEventListener("mousemove", handleMouse);
-
-hotzone?.addEventListener("click", toggleMenu);
-
-window.addEventListener("resize", () => {
-  isMobile = window.innerWidth <= 900;
-  hideMenu();
+/* =========================
+   CLOSE EVENTS
+========================= */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    sidebar?.classList.remove("active");
+    sidebar?.classList.remove("open");
+  }
 });
 
-/* HERO EFFECT */
-function initHero() {
+document.addEventListener("click", (e) => {
+  if (window.innerWidth <= 900 && sidebar?.classList.contains("active")) {
+    if (!sidebar.contains(e.target) && e.target !== mobileBtn) {
+      sidebar.classList.remove("active");
+    }
+  }
+});
+
+/* =========================
+   HERO TEXT EFFECT
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
-  let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-  const states = [...letters].map(el => ({
-    el, x: 0, y: 0, rot: 0, scale: 1
+  const states = Array.from(letters).map(letter => ({
+    el: letter,
+    x: 0,
+    y: 0,
+    rot: 0,
+    scale: 1,
+    tx: 0,
+    ty: 0,
+    trot: 0,
+    tscale: 1
   }));
 
-  window.addEventListener("mousemove", (e) => {
+  document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
   });
 
   function animate() {
-    states.forEach(s => {
-      const r = s.el.getBoundingClientRect();
+    states.forEach(state => {
+      const rect = state.el.getBoundingClientRect();
 
-      const dx = r.left + r.width / 2 - mouse.x;
-      const dy = r.top + r.height / 2 - mouse.y;
-
+      const dx = rect.left + rect.width / 2 - mouse.x;
+      const dy = rect.top + rect.height / 2 - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const max = 180;
 
-      let tx = 0, ty = 0, trot = 0, tscale = 1;
+      const maxDist = 180;
 
-      if (dist < max) {
-        const f = 1 - dist / max;
-        tx = dx * f * 0.3;
-        ty = dy * f * 0.3;
-        trot = tx * 0.5;
-        tscale = 1 + f * 0.2;
+      if (dist < maxDist) {
+        const force = 1 - dist / maxDist;
+        state.tx = dx * force * 0.35;
+        state.ty = dy * force * 0.35;
+        state.trot = state.tx * 0.6;
+        state.tscale = 1 + force * 0.2;
+      } else {
+        state.tx = 0;
+        state.ty = 0;
+        state.trot = 0;
+        state.tscale = 1;
       }
 
-      s.x += (tx - s.x) * 0.1;
-      s.y += (ty - s.y) * 0.1;
-      s.rot += (trot - s.rot) * 0.1;
-      s.scale += (tscale - s.scale) * 0.1;
+      state.x += (state.tx - state.x) * 0.1;
+      state.y += (state.ty - state.y) * 0.1;
+      state.rot += (state.trot - state.rot) * 0.1;
+      state.scale += (state.tscale - state.scale) * 0.1;
 
-      s.el.style.transform =
-        `translate(${s.x}px,${s.y}px) rotate(${s.rot}deg) scale(${s.scale})`;
+      state.el.style.transform = `
+        translate(${state.x}px, ${state.y}px)
+        rotate(${state.rot}deg)
+        scale(${state.scale})
+      `;
     });
 
     requestAnimationFrame(animate);
   }
 
   animate();
+});
+
+/* =========================
+   CURSOR EFFECT
+========================= */
+
+/* =========================
+   LANGUAGE TOGGLE
+========================= */
+let currentLang = "es";
+const btn = document.getElementById("langBtn");
+
+function setLanguage(lang) {
+  document.querySelectorAll("[data-es]").forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if (text) el.textContent = text;
+  });
+
+  btn.textContent = lang === "es" ? "EN" : "ES";
+  currentLang = lang;
+
+  localStorage.setItem("lang", lang);
 }
 
+btn?.addEventListener("click", () => {
+  setLanguage(currentLang === "es" ? "en" : "es");
+});
+
 window.addEventListener("DOMContentLoaded", () => {
-  initHero();
+  const saved = localStorage.getItem("lang");
+  if (saved) setLanguage(saved);
 });
