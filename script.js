@@ -212,7 +212,7 @@ function createDrop(x, y) {
   let posY = y;
   let posX = x;
 
-  const drift = (Math.random() - 0.5) * 1.2; // menos caos
+  const drift = (Math.random() - 0.5) * 0.2; // menos caos
   const speed = Math.random() * 0.8 + 0.3;   // caída suave
 
   let opacity = 1;
