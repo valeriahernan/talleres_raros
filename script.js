@@ -172,18 +172,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const cursor = document.querySelector(".custom-cursor");
 
-const symbols = [
-  "♫", "⋆", "｡", "♪", "₊˚", "♬", "ﾟ", "."
-];
+const symbols = ["♫", "⋆", "｡", "♪", "₊˚", "♬", "ﾟ", "."];
 
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 
-  createMusicSparkle(e.clientX, e.clientY);
+  createDrop(e.clientX, e.clientY);
 });
 
-function createMusicSparkle(x, y) {
+function createDrop(x, y) {
   const el = document.createElement("div");
 
   el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
@@ -191,7 +189,7 @@ function createMusicSparkle(x, y) {
   el.style.position = "fixed";
   el.style.left = x + "px";
   el.style.top = y + "px";
-  el.style.fontSize = (Math.random() * 14 + 10) + "px";
+  el.style.fontSize = (Math.random() * 16 + 10) + "px";
   el.style.color = randomColor();
   el.style.pointerEvents = "none";
   el.style.zIndex = "99998";
@@ -199,34 +197,34 @@ function createMusicSparkle(x, y) {
 
   document.body.appendChild(el);
 
-  const angle = Math.random() * Math.PI * 2;
-  const velocity = Math.random() * 2 + 0.5;
+  let posY = y;
+  let posX = x;
 
-  let life = 0;
+  const drift = (Math.random() - 0.5) * 1.5; // leve movimiento lateral
+  const speed = Math.random() * 1.5 + 1;      // caída
 
-  function animate() {
-    life++;
+  let opacity = 1;
 
-    const dx = Math.cos(angle) * velocity * life;
-    const dy = Math.sin(angle) * velocity * life - life * 0.2;
+  function fall() {
+    posY += speed;
+    posX += drift;
+    opacity -= 0.01;
 
-    el.style.left = x + dx + "px";
-    el.style.top = y + dy + "px";
-    el.style.opacity = 1 - life / 50;
+    el.style.top = posY + "px";
+    el.style.left = posX + "px";
+    el.style.opacity = opacity;
 
-    if (life < 50) {
-      requestAnimationFrame(animate);
+    if (opacity > 0 && posY < window.innerHeight) {
+      requestAnimationFrame(fall);
     } else {
       el.remove();
     }
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(fall);
 }
 
 function randomColor() {
-  const colors = [
-    "#ba7dff",
-  ];
+  const colors = ["#ba7dff", "#ff7bd1", "#6edfd5", "#d87aae"];
   return colors[Math.floor(Math.random() * colors.length)];
 }
