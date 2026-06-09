@@ -68,60 +68,107 @@ document.addEventListener("click", (e) => {
     }
   }
 });
-
-/* =========================
-   HERO TEXT EFFECT
-========================= */
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
 
   let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  let isScatter = false;
 
-  const states = Array.from(letters).map(letter => ({
-    el: letter,
-    x: 0,
-    y: 0,
-    rot: 0,
-    scale: 1,
-    tx: 0,
-    ty: 0,
-    trot: 0,
-    tscale: 1
-  }));
+  const states = Array.from(letters).map(letter => {
+    const rect = letter.getBoundingClientRect();
+
+    return {
+      el: letter,
+
+      // posición base (IMPORTANTE)
+      baseX: 0,
+      baseY: 0,
+
+      // posición actual
+      x: 0,
+      y: 0,
+      rot: 0,
+      scale: 1,
+
+      // targets
+      tx: 0,
+      ty: 0,
+      trot: 0,
+      tscale: 1
+    };
+  });
 
   document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
   });
 
+  // 💣 FUNCIÓN DE EXPLOSIÓN
+  function scatterLetters() {
+    isScatter = true;
+
+    states.forEach(state => {
+      const x = (Math.random() - 0.5) * window.innerWidth * 1.5;
+      const y = (Math.random() - 0.5) * window.innerHeight * 1.5;
+      const rot = (Math.random() - 0.5) * 720;
+
+      state.tx = x;
+      state.ty = y;
+      state.trot = rot;
+      state.tscale = 1;
+    });
+  }
+
+  // 🔁 volver a orden
+  function resetLetters() {
+    isScatter = false;
+
+    states.forEach(state => {
+      state.tx = 0;
+      state.ty = 0;
+      state.trot = 0;
+      state.tscale = 1;
+    });
+  }
+
+  // 👉 ejemplo: click en hero activa explosión
+  document.querySelector(".hero-title").addEventListener("click", () => {
+    if (!isScatter) scatterLetters();
+    else resetLetters();
+  });
+
   function animate() {
     states.forEach(state => {
       const rect = state.el.getBoundingClientRect();
 
-      const dx = rect.left + rect.width / 2 - mouse.x;
-      const dy = rect.top + rect.height / 2 - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      // 💡 solo aplica mouse effect si NO está en scatter
+      if (!isScatter) {
+        const dx = rect.left + rect.width / 2 - mouse.x;
+        const dy = rect.top + rect.height / 2 - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-      const maxDist = 180;
+        const maxDist = 180;
 
-      if (dist < maxDist) {
-        const force = 1 - dist / maxDist;
-        state.tx = dx * force * 0.35;
-        state.ty = dy * force * 0.35;
-        state.trot = state.tx * 0.6;
-        state.tscale = 1 + force * 0.2;
-      } else {
-        state.tx = 0;
-        state.ty = 0;
-        state.trot = 0;
-        state.tscale = 1;
+        if (dist < maxDist) {
+          const force = 1 - dist / maxDist;
+          state.tx = dx * force * 0.35;
+          state.ty = dy * force * 0.35;
+          state.trot = state.tx * 0.6;
+          state.tscale = 1 + force * 0.2;
+        } else {
+          state.tx *= 0.9;
+          state.ty *= 0.9;
+          state.trot *= 0.9;
+          state.tscale = 1;
+        }
       }
 
-      state.x += (state.tx - state.x) * 0.1;
-      state.y += (state.ty - state.y) * 0.1;
-      state.rot += (state.trot - state.rot) * 0.1;
-      state.scale += (state.tscale - state.scale) * 0.1;
+      // easing
+      state.x += (state.tx - state.x) * 0.08;
+      state.y += (state.ty - state.y) * 0.08;
+      state.rot += (state.trot - state.rot) * 0.08;
+      state.scale += (state.tscale - state.scale) * 0.08;
 
       state.el.style.transform = `
         translate(${state.x}px, ${state.y}px)
@@ -135,7 +182,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   animate();
 });
-
 
 /* =========================
    LANGUAGE TOGGLE
