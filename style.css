@@ -9,8 +9,10 @@
   --font-sans: "Urbanist", sans-serif;
 
   --z-canvas: 1;
-  --z-stage: 1;
-  --z-lang: 9999;
+  --z-stage: 2;
+  --z-menu: 9999;
+  --z-logo: 99999;
+  --z-lang: 999999;
 
   --transition-fast: 0.15s ease-out;
   --transition-normal: 0.25s ease;
@@ -40,17 +42,62 @@ body {
   position: fixed;
   top: 24px;
   left: 24px;
-  z-index: 999999;
+  z-index: var(--z-logo);
 }
 
 .site-logo img {
   width: 120px;
+  display: block;
 }
 
 /* =========================
-   MENU BASE (INSTALACIÓN)
+   STAGE / SCENES
 ========================= */
+.stage {
+  height: 100vh;
+  position: relative;
+  z-index: var(--z-stage);
+}
 
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-title {
+  position: relative;
+}
+
+.hero-title span {
+  display: inline-block; /* 🔥 CRÍTICO para JS */
+  will-change: transform;
+}
+
+.hero-title:hover span {
+  filter: blur(1px);
+  opacity: 0.4;
+}
+
+/* =========================
+   MENU (INSTALACIÓN MODE)
+========================= */
 .menu-container {
   position: fixed;
   bottom: 24px;
@@ -63,7 +110,7 @@ body {
   transition: all 0.25s ease;
 
   pointer-events: none;
-  z-index: 999999;
+  z-index: var(--z-menu);
 }
 
 .menu-container.visible {
@@ -73,7 +120,7 @@ body {
   pointer-events: auto;
 }
 
-/* hotzone base (desktop grande) */
+/* hotzone (IMPORTANTE: no bloquear UI) */
 .menu-hotzone {
   position: fixed;
   left: 0;
@@ -82,8 +129,16 @@ body {
   width: 300px;
   height: 250px;
 
-  z-index: 999998;
+  z-index: 10; /* 🔥 BAJO para no romper interacción */
+  pointer-events: auto;
   background: transparent;
+}
+
+/* label */
+.menu-label {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  color: var(--color-primary);
 }
 
 /* dropdown */
@@ -116,36 +171,12 @@ body {
 }
 
 /* =========================
-   SCENES
+   SCROLL SCENES (si usas contenido largo)
 ========================= */
-.stage {
+.scene-scroll {
   height: 100vh;
-}
-
-.scene {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-slow);
-}
-
-.scene.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* =========================
-   HERO
-========================= */
-.hero {
-  position: relative;
-  height: 100vh;
-}
-
-.hero-title:hover span {
-  filter: none;
-  opacity: 1;
+  overflow-y: auto;
+  padding: 80px;
 }
 
 /* =========================
@@ -158,7 +189,6 @@ body {
     left: 16px;
   }
 
-  /* hotzone más pequeña en mobile */
   .menu-hotzone {
     width: 140px;
     height: 140px;
@@ -168,16 +198,18 @@ body {
     padding: 90px 24px;
   }
 
-  .menu-container:hover .nav-menu {
-    opacity: 0;
-    visibility: hidden;
+  .hero-title span {
+    display: inline-block;
   }
 }
 
-/* disable hover on touch */
+/* =========================
+   TOUCH FIX (evita hover bugs)
+========================= */
 @media (hover: none) {
   .menu-container:hover .nav-menu {
     opacity: 0;
     visibility: hidden;
+    transform: translateY(10px);
   }
 }
