@@ -172,7 +172,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const cursor = document.querySelector(".custom-cursor");
 
-const symbols = ["♫", "⋆", "｡", "♪", "₊˚", "♬", "ﾟ", "."];
+const symbols = ["♫", "⋆", "｡", "♪", "𝄢˚", "♬", "ﾟ", "❀", "♫", "⋆", "✴︎", "♪", "✧˚", "♬", "✴︎", "✩"];
 
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
