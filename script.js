@@ -1,5 +1,7 @@
 
-const isMobile = window.matchMedia("(max-width: 900px)").matches;
+const isMobile = window.matchMedia(
+  "(hover: none), (pointer: coarse), (max-width:900px)"
+).matches;
 /* =========================
    CLICK FIX
 ========================= */
@@ -73,6 +75,7 @@ document.addEventListener("click", (e) => {
 window.addEventListener("DOMContentLoaded", () => {
   const letters = document.querySelectorAll(".hero-title span");
   if (!letters.length) return;
+  if (isMobile) return;
 
   let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   let isScatter = false;
