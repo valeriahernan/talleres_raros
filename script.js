@@ -2,6 +2,13 @@
 const isMobile = window.matchMedia(
   "(hover: none), (pointer: coarse), (max-width:900px)"
 ).matches;
+
+const heroModel = document.getElementById("heroModel");
+
+if (heroModel && !isMobile) {
+    heroModel.src = heroModel.dataset.src;
+}
+
 /* =========================
    CLICK FIX
 ========================= */
