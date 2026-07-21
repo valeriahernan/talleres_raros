@@ -326,8 +326,8 @@ margin-bottom:20px;
 .video-layer model-viewer{
 width:60vw;
 height:60vw;
-max-width:280px;
-max-height:280px;
+max-width:380px;
+max-height:380px;
 }
 
 .hero-content{
@@ -352,7 +352,7 @@ font-size:.85rem;
 }
 }
 
-/* SMALL PHONES */
+/* SMALL ANDROID */
 @media(max-width:420px){
 .hero-title{
 font-size:2.2rem;
@@ -499,7 +499,7 @@ gap:14px;
 font-weight:800;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVO PARA CASI TODO TIPO DE FORMATO */
 @media(max-width:900px){
 
 .section-title{
@@ -681,7 +681,7 @@ transform:none;
 
 }
 
-/* PHONES */
+/* PHONES ANDROIR */
 @media(max-width:600px){
 
 .scene-scroll{
@@ -710,7 +710,7 @@ gap:16px;
 
 }
 
-/* VERY SMALL DEVICES */
+/* SUPER TINY DEVICES */
 @media(max-width:380px){
 
 .hero-title{
@@ -727,7 +727,7 @@ font-size:.88rem;
 
 }
 
-/* LARGE DESKTOP */
+/* LARGEEE DESKTOP PANTALLA */
 @media(min-width:1600px){
 
 .hero-content{
