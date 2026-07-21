@@ -505,11 +505,51 @@ font-weight:800;
 }
 
 .contact-intro{
-    color:#e69abd;
-    font-size:2rem;
+    font-family:"Urbanist", sans-serif;
+    font-size:2.8rem;
     font-weight:900;
-    letter-spacing:.05em;
-    margin-bottom:30px;
+    color:#111;
+    letter-spacing:-1px;
+    transition:0.3s ease;
+}
+
+
+.contact-intro:hover{
+
+    background:linear-gradient(
+        90deg,
+        #ce3434,
+        #ff915e,
+        #fcfc5e,
+        #76db76,
+        #9ee7e7,
+        #87aadf,
+        #d497e4,
+        #ce3434
+    );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation: rainbowText 2s linear infinite;
+
+}
+
+
+@keyframes rainbowText{
+
+    from{
+        background-position:0%;
+    }
+
+    to{
+        background-position:300%;
+    }
+
 }
 /* RESPONSIVO PARA CASI TODO TIPO DE FORMATO */
 @media(max-width:900px){
