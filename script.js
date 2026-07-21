@@ -299,22 +299,34 @@ function randomColor() {
 
 const video = document.getElementById("heroVideo");
 
-if(video){
+if (video) {
 
     video.pause();
-    video.currentTime = 0;
 
-    video.addEventListener("pointerdown",()=>{
+    video.addEventListener("loadedmetadata", () => {
 
-        video.currentTime = 0;
-        video.play();
+        let targetTime = 0;
+        let currentTime = 0;
 
-    });
+        document.addEventListener("mousemove", (e) => {
 
-    video.addEventListener("ended",()=>{
+            const progress = e.clientX / window.innerWidth;
 
-        video.pause();
-        video.currentTime = 0;
+            targetTime = progress * video.duration;
+
+        });
+
+        function animateVideo() {
+
+            currentTime += (targetTime - currentTime) * 0.08;
+
+            video.currentTime = currentTime;
+
+            requestAnimationFrame(animateVideo);
+
+        }
+
+        animateVideo();
 
     });
 
