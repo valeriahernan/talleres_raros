@@ -9,6 +9,8 @@
 --sidebar-width:220px;
 --radius:14px;
 --transition:.3s ease;
+--section-gap:32px;
+--item-gap:18px;
 }
 
 /* RESET */
@@ -420,87 +422,114 @@ max-width:700px;
 line-height:1.8;
 
 
-}/* PROYECTO */
+}
+/* ==========================
+   PROYECTO
+========================== */
 
 .project-block{
-    margin-top:34px;
+
+    margin-top:var(--section-gap);
     transition:transform .35s ease;
+
 }
+
 
 .project-block:hover{
-    transform:translateX(12px);
+
+    transform:translateX(10px);
+
 }
+
 
 .subsection-title{
+
     color:var(--color-primary);
     font-weight:900;
-    margin-bottom:10px;
-    transition:color .3s ease;
-}
-
-.project-block:hover .subsection-title{
-    color:#ba7dff;
+    font-size:1.2rem;
+    margin-bottom:12px;
+    transition:.3s ease;
 
 }
+
 
 .project-block p{
+
     font-weight:700;
-    line-height:1.55;
-    transition:color .3s ease;
+    line-height:1.6;
+    margin-bottom:12px;
 }
 
-.project-block:hover p{
-    color:#ba7dff;
-}
+
+
+/* LINKS */
 
 .project-block a{
-    transition:color .3s ease;
+
+    color:var(--color-primary);
+    transition:.3s ease;
+
 }
+
 
 .project-block a:hover{
-    color:#ba7dff;
+
+    opacity:.6;
+
 }
 
-/* HOVER ARCOIRIS */
-.hover-rainbow{
-    transition:0.3s ease;
-}
 
-.hover-rainbow:hover .subsection-title,
+/* ==========================
+   RAINBOW HOVER
+========================== */
+
+
+.hover-rainbow:hover h3,
 .hover-rainbow:hover p,
 .hover-rainbow:hover a{
-    background:linear-gradient(
-        90deg,
-        #ff0080,
-        #ff8c00,
-        #ffff00,
-        #00ff85,
-        #00c3ff,
-        #8c00ff,
-        #ff0080
-    );
 
-    background-size:300%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:rainbowMove 3s linear infinite;
+
+background:linear-gradient(
+90deg,
+#ff0080,
+#ff8c00,
+#ffff00,
+#00ff85,
+#00c3ff,
+#8c00ff,
+#ff0080
+);
+
+
+background-size:300%;
+
+-webkit-background-clip:text;
+background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+animation:rainbowMove 3s linear infinite;
+
 }
+
+
 
 @keyframes rainbowMove{
 
-    from{
-        background-position:0%;
-    }
-    to{
-        background-position:300%;
-    }
+from{
+background-position:0%;
 }
 
+to{
+background-position:300%;
+}
+
+}
 /* TALLERES */
 .taller-item{
-margin-bottom:34px;
+margin-bottom:var(--section-gap);
 max-width:760px;
+
 }
 
 .taller-item h3{
@@ -529,41 +558,37 @@ transform:none;
 /* RELEASES */
 
 .release-list{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
 }
 
+
 .release{
-
-    display:grid;
-    grid-template-columns:60px auto 55px;
-    align-items:baseline;
-    column-gap:12px;
-    font-weight:700;
-
+display:grid;
+grid-template-columns:60px 1fr 60px;
+align-items:baseline;
+column-gap:10px;
+font-weight:700;
 }
 
 
 .release span{
-
-    font-weight:700;
+font-weight:800;
 }
 
 
 .release a{
-
-    font-weight:700;
+font-weight:800;
 }
 
 
 .release small{
-
-    font-weight:700;
-    opacity:.7;
-    text-align:left;
-
+font-weight:800;
+opacity:.7;
+text-align:left;
 }
+
 /* CONTACTO */
 .contact-links{
 display:flex;
@@ -577,11 +602,10 @@ font-weight:800;
 
 .contact-intro{
     font-family:"Urbanist", sans-serif;
-    font-size:2.8rem;
+    font-size:clamp(2rem,4vw,3rem);
     font-weight:900;
-    color:#e4dcdc;
     letter-spacing:-1px;
-    transition:0.3s ease;
+    color:#e4dcdc;
 }
 
 
