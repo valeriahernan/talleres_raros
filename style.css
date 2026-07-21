@@ -427,11 +427,9 @@ line-height:1.8;
     transition:transform .35s ease;
 }
 
-
 .project-block:hover{
     transform:translateX(12px);
 }
-
 
 .subsection-title{
     color:var(--color-primary);
@@ -440,12 +438,10 @@ line-height:1.8;
     transition:color .3s ease;
 }
 
-
 .project-block:hover .subsection-title{
     color:#ba7dff;
 
 }
-
 
 .project-block p{
     font-weight:700;
@@ -453,22 +449,53 @@ line-height:1.8;
     transition:color .3s ease;
 }
 
-
 .project-block:hover p{
     color:#ba7dff;
 }
-
 
 .project-block a{
     transition:color .3s ease;
 }
 
-
 .project-block a:hover{
     color:#ba7dff;
 }
 
+/* HOVER ARCOIRIS */
+.hover-rainbow{
+    transition:0.3s ease;
+}
 
+.hover-rainbow:hover .subsection-title,
+.hover-rainbow:hover p,
+.hover-rainbow:hover a{
+    background:linear-gradient(
+        90deg,
+        #ff0080,
+        #ff8c00,
+        #ffff00,
+        #00ff85,
+        #00c3ff,
+        #8c00ff,
+        #ff0080
+    );
+
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:rainbowMove 3s linear infinite;
+}
+
+@keyframes rainbowMove{
+
+    from{
+        background-position:0%;
+    }
+    to{
+        background-position:300%;
+    }
+}
 
 /* TALLERES */
 .taller-item{
