@@ -442,3 +442,11 @@ location.reload();
 }
 
 });
+
+const talleres=document.querySelectorAll(".taller-item");
+
+talleres.forEach(taller=>{
+taller.addEventListener("click",()=>{
+taller.classList.toggle("active");
+});
+});
