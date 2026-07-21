@@ -473,24 +473,25 @@ gap:18px;
 }
 
 .release{
-display:grid;
-grid-template-columns:90px 1fr 60px;
-align-items:center;
-gap:14px;
+
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
 }
 
 .release span{
-font-weight:900;
-color:var(--color-primary);
+    min-width:60px;
 }
+
 
 .release a{
-font-weight:700;
+    flex:0 1 auto;
 }
 
+
 .release small{
-text-align:right;
-font-weight:700;
+    margin-left:auto;
+    opacity:.6;
 }
 
 /* CONTACTO */
