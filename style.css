@@ -466,34 +466,45 @@ transform:none;
 }
 
 /* RELEASES */
+
 .release-list{
-display:flex;
-flex-direction:column;
-gap:18px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
 .release{
 
     display:flex;
     align-items:baseline;
-    gap:1rem;
+    gap:0.8rem;
+    font-weight:700;
+
 }
 
 .release span{
-    min-width:60px;
+
+    min-width:55px;
+    font-weight:700;
+
 }
 
 
 .release a{
+
     flex:0 1 auto;
+    font-weight:700;
+
 }
 
 
 .release small{
-    margin-left:auto;
-    opacity:.6;
-}
 
+    margin-left:0.8rem;
+    opacity:.7;
+    font-weight:700;
+
+}
 /* CONTACTO */
 .contact-links{
 display:flex;
