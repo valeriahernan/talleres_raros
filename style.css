@@ -508,7 +508,7 @@ font-weight:800;
     font-family:"Urbanist", sans-serif;
     font-size:2.8rem;
     font-weight:900;
-    color:#111;
+    color:#e4dcdc;
     letter-spacing:-1px;
     transition:0.3s ease;
 }
@@ -522,9 +522,9 @@ font-weight:800;
         #ff915e,
         #fcfc5e,
         #76db76,
-        #9ee7e7,
-        #87aadf,
-        #d497e4,
+        #64c2c5,
+        #6890cc,
+        #c258a2,
         #ce3434
     );
 
@@ -536,8 +536,9 @@ font-weight:800;
     -webkit-text-fill-color:transparent;
 
     animation: rainbowText 2s linear infinite;
-
 }
+
+
 
 
 @keyframes rainbowText{
