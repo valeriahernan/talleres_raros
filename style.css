@@ -398,13 +398,13 @@ opacity:.6;
     margin-bottom:8px;
     font-weight:800;
 }
-
 .conv-list{
 display:flex;
 flex-direction:column;
 gap:10px;
 margin-bottom:26px;
 }
+
 .conv-strong_abierta{
     font-weight:800;
     color:#ba7dff;
@@ -504,6 +504,13 @@ gap:14px;
 font-weight:800;
 }
 
+.contact-intro{
+    color:#43b38d;
+    font-size:2rem;
+    font-weight:900;
+    letter-spacing:.05em;
+    margin-bottom:30px;
+}
 /* RESPONSIVO PARA CASI TODO TIPO DE FORMATO */
 @media(max-width:900px){
 
