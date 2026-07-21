@@ -418,23 +418,57 @@ margin-bottom:26px;
 .conv-description{
 max-width:700px;
 line-height:1.8;
+
+
+}/* PROYECTO */
+
+.project-block{
+    margin-top:34px;
+    transition:transform .35s ease;
 }
 
-/* PROYECTO */
-.project-block{
-margin-top:34px;
+
+.project-block:hover{
+    transform:translateX(12px);
 }
+
 
 .subsection-title{
-color:var(--color-primary);
-font-weight:900;
-margin-bottom:10px;
+    color:var(--color-primary);
+    font-weight:900;
+    margin-bottom:10px;
+    transition:color .3s ease;
 }
 
-.project-block p{
-font-weight:700;
-line-height:1.55;
+
+.project-block:hover .subsection-title{
+    color:#ba7dff;
+
 }
+
+
+.project-block p{
+    font-weight:700;
+    line-height:1.55;
+    transition:color .3s ease;
+}
+
+
+.project-block:hover p{
+    color:#ba7dff;
+}
+
+
+.project-block a{
+    transition:color .3s ease;
+}
+
+
+.project-block a:hover{
+    color:#ba7dff;
+}
+
+
 
 /* TALLERES */
 .taller-item{
