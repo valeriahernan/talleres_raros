@@ -405,12 +405,18 @@ gap:10px;
 margin-bottom:26px;
 }
 
-.conv-strong{
-font-weight:700;
+.conv-strong_abierta{
+    font-weight:800;
+    color:#ba7dff;
 }
 
+.conv-strong_cerrada{
+    font-weight:700;
+    color:#999;
+    opacity:.6;
+}
 .conv-description{
-max-width:760px;
+max-width:700px;
 line-height:1.8;
 }
 
@@ -552,7 +558,7 @@ gap:18px;
 /* UI */
 #mobile-menu-btn{
 border:none;
-background:#111;
+background:#43b38d;
 color:#fff;
 border-radius:999px;
 padding:.8rem 1rem;
@@ -597,7 +603,7 @@ height:52px;
 border:none;
 border-radius:50%;
 background:var(--color-primary);
-color:#fff;
+color:#43b38d;
 font-size:1.5rem;
 font-weight:900;
 cursor:pointer;
