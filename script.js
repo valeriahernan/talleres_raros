@@ -453,58 +453,31 @@ taller.classList.toggle("active");
 
 
 
-/*SCROLL PARA ARRIBA*/
-const scrollTopBtn=document.getElementById("scrollTopBtn");
+/*SCROLL PARA ARRIBA*//* 
+========================= */
+
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+if(scrollTopBtn){
 
 window.addEventListener("scroll",()=>{
 
-if(window.scrollY>window.innerHeight){
-scrollTopBtn.classList.add("visible");
-}else{
-scrollTopBtn.classList.remove("visible");
-}
-
-});
-
-
-const scrollTopBtn=document.getElementById("scrollTopBtn");
-const scrollContainers=document.querySelectorAll(".scene-scroll");
-
-
-scrollContainers.forEach(container=>{
-
-container.addEventListener("scroll",()=>{
-
-if(container.scrollTop>300){
-scrollTopBtn.classList.add("visible");
-}else{
-scrollTopBtn.classList.remove("visible");
-}
-
-});
-
+    if(window.scrollY > 500){
+        scrollTopBtn.classList.add("visible");
+    }else{
+        scrollTopBtn.classList.remove("visible");
+    }
 
 });
 
 
 scrollTopBtn.addEventListener("click",()=>{
 
-const activeScene=document.querySelector(".scene.active .scene-scroll");
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
-if(activeScene){
-
-activeScene.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}else{
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
 });
 
 }
-
-});
