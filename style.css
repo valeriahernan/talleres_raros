@@ -322,14 +322,13 @@ margin-top:50px;
 margin-bottom:20px;
 }
 
-.video-layer video,
-.video-layer model-viewer{
-width:60vw;
-height:60vw;
-max-width:380px;
-max-height:380px;
+.video-layer video, .video-layer model-viewer {
+    width: 85vw;          /* Ocupa el 85% del ancho de la pantalla móvil */
+    height: 85vw;         /* Mantiene la proporción cuadrada */
+    max-width: 450px;     /* Evita que se corte en móviles grandes o tablets */
+    max-height: 450px;    
+    object-fit: cover;    /* Opcional: asegura que el video llene el espacio sin deformarse */
 }
-
 .hero-content{
 position:relative;
 width:100%;
