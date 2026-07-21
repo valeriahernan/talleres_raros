@@ -57,16 +57,21 @@
     <!-- HERO -->
     <section class="scene active hero" id="hero">
 
-      <div class="glb-layer">
-<model-viewer
-    id="heroModel"
-    data-src="GLB/3Dtalleres.glb"
-    camera-controls
-    auto-rotate
-    exposure="2"
-    shadow-intensity="2"
-    style="width:100%;height:100%;">
-</model-viewer>
+      <div class="video-layer">
+
+    <video
+        id="heroVideo"
+        playsinline
+        preload="metadata"
+        disablepictureinpicture>
+
+        <source src="VIDEO/talleres.mp4" type="video/mp4">
+
+    </video>
+
+</div>
+
+
       </div>
 
       <div class="hero-vignette"></div>

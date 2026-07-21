@@ -3,11 +3,7 @@ const isMobile = window.matchMedia(
   "(hover: none), (pointer: coarse), (max-width:900px)"
 ).matches;
 
-const heroModel = document.getElementById("heroModel");
 
-if (heroModel && !isMobile) {
-    heroModel.src = heroModel.dataset.src;
-}
 
 /* =========================
    CLICK FIX
@@ -299,4 +295,27 @@ function createDrop(x, y) {
 function randomColor() {
   const colors = ["#ba7dff", "#8f7bffbb"];
   return colors[Math.floor(Math.random() * colors.length)];
+}
+
+const video = document.getElementById("heroVideo");
+
+if(video){
+
+    video.pause();
+    video.currentTime = 0;
+
+    video.addEventListener("pointerdown",()=>{
+
+        video.currentTime = 0;
+        video.play();
+
+    });
+
+    video.addEventListener("ended",()=>{
+
+        video.pause();
+        video.currentTime = 0;
+
+    });
+
 }
