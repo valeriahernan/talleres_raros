@@ -481,3 +481,44 @@ scrollTopBtn.addEventListener("click",()=>{
 });
 
 }
+
+/* =========================
+   VIDEO CONTROL MOUSE
+========================= */
+
+const heroVideo = document.getElementById("heroVideo");
+
+if(heroVideo){
+
+let mouseTimer;
+let isPlaying = false;
+
+
+document.addEventListener("mousemove",()=>{
+
+
+    // si estaba pausado, reproducir
+    if(!isPlaying){
+
+        heroVideo.play();
+        isPlaying = true;
+
+    }
+
+
+    // reiniciar contador de quietud
+    clearTimeout(mouseTimer);
+
+
+    mouseTimer = setTimeout(()=>{
+
+        heroVideo.pause();
+        isPlaying = false;
+
+    },500);
+
+
+});
+
+
+}
