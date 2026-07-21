@@ -475,34 +475,32 @@ transform:none;
 
 .release{
 
-    display:flex;
+    display:grid;
+    grid-template-columns:60px auto 55px;
     align-items:baseline;
-    gap:0.8rem;
+    column-gap:12px;
     font-weight:700;
 
 }
 
+
 .release span{
 
-    min-width:55px;
     font-weight:700;
-
 }
 
 
 .release a{
 
-    flex:0 1 auto;
     font-weight:700;
-
 }
 
 
 .release small{
 
-    margin-left:0.8rem;
-    opacity:.7;
     font-weight:700;
+    opacity:.7;
+    text-align:left;
 
 }
 /* CONTACTO */
