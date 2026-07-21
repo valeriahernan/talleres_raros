@@ -505,7 +505,7 @@ font-weight:800;
 }
 
 .contact-intro{
-    color:#43b38d;
+    color:#e69abd;
     font-size:2rem;
     font-weight:900;
     letter-spacing:.05em;
@@ -610,7 +610,7 @@ height:52px;
 border:none;
 border-radius:50%;
 background:var(--color-primary);
-color:#43b38d;
+color:#e69abd;
 font-size:1.5rem;
 font-weight:900;
 cursor:pointer;
