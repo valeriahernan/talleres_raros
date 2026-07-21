@@ -243,7 +243,7 @@ const symbols=[
 if(cursor&&!isMobile){
 
 let lastTime=0;
-const delay=90;
+const delay=80;
 
 
 document.addEventListener("mousemove",e=>{
@@ -297,7 +297,7 @@ function fall(){
 posY+=speed;
 posX+=drift;
 
-opacity*=.95;
+opacity*=.97;
 
 el.style.top=posY+"px";
 el.style.left=posX+"px";
