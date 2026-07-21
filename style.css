@@ -393,9 +393,10 @@ opacity:.6;
 
 /* CONVOCATORIAS */
 .conv-title{
-color:var(--color-primary);
-font-weight:800;
-margin-bottom:10px;
+    color:var(--color-primary);
+    font-size:1.2rem;
+    margin-bottom:8px;
+    font-weight:800;
 }
 
 .conv-list{
@@ -404,7 +405,6 @@ flex-direction:column;
 gap:10px;
 margin-bottom:26px;
 }
-
 .conv-strong_abierta{
     font-weight:800;
     color:#ba7dff;
